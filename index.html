@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>泰国IDC行业分析报告 2026</title>
+  <meta property="og:title" content="泰国IDC行业分析报告 2026">
+  <meta property="og:description" content="东南亚数据中心枢纽竞争格局与投资机遇深度分析">
+  <meta property="og:image" content="https://raw.githubusercontent.com/liweicong2016-collab/my-website/main/preview.png">
+  <meta name="description" content="泰国IDC行业深度分析：曼谷作为东南亚数据中心枢纽的市场机遇、竞争格局与关键数据">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1e40af;
+      --accent: #f59e0b;
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #273548;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(26,86,219,0.15) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(26,86,219,0.2);
+      border: 1px solid rgba(26,86,219,0.4);
+      color: #93c5fd;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 40%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+    .hero .meta {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .hero .meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: -32px auto 60px;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-item {
+      background: var(--bg-card);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: #60a5fa;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* Section */
+    .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-header { margin-bottom: 40px; }
+    .section-number {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    /* Executive Summary */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: background 0.2s;
+    }
+    .summary-card:hover { background: var(--bg-card-hover); }
+    .summary-card .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .summary-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .summary-card p { font-size: 14px; color: var(--text-muted); }
+
+    /* KVI Grid */
+    .kvi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .kvi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kvi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 14px 14px 0 0;
+    }
+    .kvi-card.blue::before { background: var(--primary); }
+    .kvi-card.green::before { background: var(--success); }
+    .kvi-card.amber::before { background: var(--warning); }
+    .kvi-card.red::before { background: var(--danger); }
+    .kvi-card .kvi-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .kvi-card .kvi-value {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .kvi-card.blue .kvi-value { color: #60a5fa; }
+    .kvi-card.green .kvi-value { color: #34d399; }
+    .kvi-card.amber .kvi-value { color: #fbbf24; }
+    .kvi-card.red .kvi-value { color: #f87171; }
+    .kvi-card .kvi-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .kvi-card .kvi-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .kvi-card .kvi-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+    .kvi-card.blue .kvi-bar-fill { background: var(--primary); }
+    .kvi-card.green .kvi-bar-fill { background: var(--success); }
+    .kvi-card.amber .kvi-bar-fill { background: var(--warning); }
+    .kvi-card.red .kvi-bar-fill { background: var(--danger); }
+
+    /* Competitors */
+    .competitor-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .competitor-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border-bottom: 2px solid var(--border);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .competitor-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(51,65,85,0.5);
+      vertical-align: middle;
+    }
+    .competitor-table tr:hover td { background: rgba(30,41,59,0.5); }
+    .badge-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-primary { background: rgba(26,86,219,0.2); color: #93c5fd; }
+    .badge-success { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+    .badge-warning { background: rgba(245,158,11,0.2); color: #fcd34d; }
+    .badge-danger { background: rgba(239,68,68,0.2); color: #fca5a5; }
+
+    /* Chart placeholder */
+    .chart-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      margin-top: 24px;
+    }
+    .chart-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .chart-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .bar-chart { display: flex; flex-direction: column; gap: 16px; }
+    .bar-row { display: grid; grid-template-columns: 120px 1fr 60px; align-items: center; gap: 16px; }
+    .bar-label { font-size: 13px; color: var(--text-muted); text-align: right; }
+    .bar-track { height: 28px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; }
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+    }
+    .bar-fill.thailand { background: linear-gradient(90deg, #1a56db, #3b82f6); }
+    .bar-fill.singapore { background: linear-gradient(90deg, #065f46, #10b981); }
+    .bar-fill.malaysia { background: linear-gradient(90deg, #92400e, #f59e0b); }
+    .bar-fill.indonesia { background: linear-gradient(90deg, #991b1b, #ef4444); }
+    .bar-fill.vietnam { background: linear-gradient(90deg, #4c1d95, #8b5cf6); }
+
+    /* Key Players */
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .player-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .player-card:hover { background: var(--bg-card-hover); }
+    .player-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(26,86,219,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .player-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .player-info .player-type { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+    .player-info .player-stats { display: flex; gap: 16px; }
+    .player-info .player-stat { font-size: 12px; }
+    .player-info .player-stat strong { color: #60a5fa; font-size: 14px; }
+    .player-info .player-stat span { color: var(--text-muted); }
+
+    /* Investment Themes */
+    .theme-list { display: flex; flex-direction: column; gap: 16px; }
+    .theme-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 20px;
+      align-items: start;
+      transition: background 0.2s;
+    }
+    .theme-item:hover { background: var(--bg-card-hover); }
+    .theme-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(26,86,219,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #60a5fa;
+    }
+    .theme-content h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+    .theme-content p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .theme-tag {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag-high { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .tag-medium { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+    .tag-low { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(26,86,219,0.2) 0%, rgba(16,185,129,0.1) 100%);
+      border: 1px solid rgba(26,86,219,0.3);
+      border-radius: 20px;
+      padding: 60px 48px;
+      text-align: center;
+      margin: 60px 0;
+    }
+    .cta-section h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .cta-section p { font-size: 16px; color: var(--text-muted); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--bg-card); }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    footer a { color: #60a5fa; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Source */
+    .source-box {
+      background: rgba(16,185,129,0.05);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+    .source-box strong { color: #6ee7b7; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); margin: -20px 0 40px; }
+      .hero { padding: 60px 0 40px; }
+      .theme-item { grid-template-columns: 48px 1fr; }
+      .theme-tag { display: none; }
+      .competitor-table { font-size: 12px; }
+      .cta-section { padding: 40px 24px; }
+    }
+    @media (max-width: 480px) {
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">📊 行业研究报告 · 2026年Q2</div>
+    <h1>泰国IDC行业<br>深度分析报告</h1>
+    <p class="subtitle">东南亚数据中心枢纽竞争格局与投资机遇 · 曼谷作为区域核心节点的战略价值评估</p>
+    <div class="meta">
+      <span>📅 2026年5月</span>
+      <span>🌏 东南亚区域</span>
+      <span>📁 互联网基础设施</span>
+      <span>🔒 内部研究</span>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="container">
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-value">240+</div>
+      <div class="stat-label">已建数据中心</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1.2GW</div>
+      <div class="stat-label">总装机容量</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">28%</div>
+      <div class="stat-label">年复合增长率</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">#3</div>
+      <div class="stat-label">东南亚排名</div>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">01 · 执行摘要</div>
+      <h2>核心发现</h2>
+      <p class="section-desc">泰国IDC市场正处于爆发前夜，曼谷凭借地理区位、低成本与政策支持，正成为东南亚数据中心的新兴枢纽。</p>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(26,86,219,0.15);">🌏</div>
+        <h3>区位优势突出</h3>
+        <p>地处东盟几何中心，海底光缆枢纽，国际带宽时延低，是连接中国、印度与东南亚的天然桥梁。</p>
+      </div>
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(16,185,129,0.15);">⚡</div>
+        <h3>电力成本低廉</h3>
+        <p>工业电价约 $0.08-0.12/kWh，显著低于新加坡($0.15-0.20)和香港($0.18-0.25)，TCO优势明显。</p>
+      </div>
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);">📈</div>
+        <h3>高速增长期</h3>
+        <p>2024-2029年IDC市场年复合增长率预计28%，AI算力需求爆发将驱动新一轮扩张热潮。</p>
+      </div>
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15);">🏗️</div>
+        <h3>政策支持</h3>
+        <p>泰国BOI对数据中心项目提供8年免税政策，吸引大量国际资本进入，EEC经济区尤为活跃。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Size -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">02 · 市场规模</div>
+      <h2>关键指标</h2>
+      <p class="section-desc">泰国IDC市场体量尚小但增速领先，正处于从"新兴"向"成熟"跨越的关键阶段。</p>
+    </div>
+    <div class="kvi-grid">
+      <div class="kvi-card blue">
+        <div class="kvi-label">市场规模 (2025E)</div>
+        <div class="kvi-value">$18亿</div>
+        <div class="kvi-desc">IDC整体市场规模（含托管、云计算、管理服务）</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="kvi-card green">
+        <div class="kvi-label">年复合增长率</div>
+        <div class="kvi-value">28%</div>
+        <div class="kvi-desc">2024-2029年预期CAGR，领先东南亚平均水平</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:84%"></div></div>
+      </div>
+      <div class="kvi-card amber">
+        <div class="kvi-label">机柜数量</div>
+        <div class="kvi-value">8万+</div>
+        <div class="kvi-desc">已部署机柜总量，曼谷占全国约75%</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="kvi-card red">
+        <div class="kvi-label">2029年预期规模</div>
+        <div class="kvi-value">$62亿</div>
+        <div class="kvi-desc">AI驱动的新一轮数据中心建设潮将加速规模扩张</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:90%"></div></div>
+      </div>
+    </div>
+
+    <div class="chart-container reveal">
+      <div class="chart-title">东南亚各国IDC市场对比（2025E，亿美元）</div>
+      <div class="chart-subtitle">泰国排名第三，但增速领先新加坡和马来</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">新加坡</div>
+          <div class="bar-track"><div class="bar-fill singapore" style="width:92%">$48亿</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">印度尼西亚</div>
+          <div class="bar-track"><div class="bar-fill indonesia" style="width:52%">$27亿</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">泰国</div>
+          <div class="bar-track"><div class="bar-fill thailand" style="width:35%">$18亿</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">马来西亚</div>
+          <div class="bar-track"><div class="bar-fill malaysia" style="width:30%">$15亿</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">越南</div>
+          <div class="bar-track"><div class="bar-fill vietnam" style="width:14%">$7亿</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitive Landscape -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">03 · 竞争格局</div>
+      <h2>主要玩家</h2>
+      <p class="section-desc">泰国IDC市场呈现"国际巨头主导、本地运营商差异化"的二元结构。</p>
+    </div>
+    <table class="competitor-table reveal">
+      <thead>
+        <tr>
+          <th>运营商</th>
+          <th>类型</th>
+          <th>曼谷机柜数</th>
+          <th>市场份额</th>
+          <th>核心优势</th>
+          <th>评级</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sentinel DC</strong></td>
+          <td><span class="badge-pill badge-primary">国际</span></td>
+          <td>8,000+</td>
+          <td>18%</td>
+          <td>Tier IV认证，AWS/Azure官方合建</td>
+          <td><span class="badge-pill badge-success">领先</span></td>
+        </tr>
+        <tr>
+          <td><strong>UIH (Unicorn)</strong></td>
+          <td><span class="badge-pill badge-success">本土</span></td>
+          <td>6,500+</td>
+          <td>14%</td>
+          <td>最强本地客户网络，DTAC/TureID合绑</td>
+          <td><span class="badge-pill badge-success">领先</span></td>
+        </tr>
+        <tr>
+          <td><strong>True IDC</strong></td>
+          <td><span class="badge-pill badge-success">本土</span></td>
+          <td>5,200+</td>
+          <td>11%</td>
+          <td>运营商背景，固网资源丰富</td>
+          <td><span class="badge-pill badge-success">领先</span></td>
+        </tr>
+        <tr>
+          <td><strong>Supernap (Jones)</strong></td>
+          <td><span class="badge-pill badge-primary">国际</span></td>
+          <td>4,800+</td>
+          <td>10%</td>
+          <td>全球标准Tier IV，Uptime Tier认证</td>
+          <td><span class="badge-pill badge-warning">稳健</span></td>
+        </tr>
+        <tr>
+          <td><strong>INFINIX</strong></td>
+          <td><span class="badge-pill badge-success">本土</span></td>
+          <td>3,600+</td>
+          <td>8%</td>
+          <td>成本领先，EEC政策最大受益者</td>
+          <td><span class="badge-pill badge-warning">稳健</span></td>
+        </tr>
+        <tr>
+          <td><strong>STT GDC Thailand</strong></td>
+          <td><span class="badge-pill badge-primary">国际</span></td>
+          <td>3,000+</td>
+          <td>7%</td>
+          <td>新加坡STT GDC背书，国际客户</td>
+          <td><span class="badge-pill badge-warning">稳健</span></td>
+        </tr>
+        <tr>
+          <td><strong>Others</strong></td>
+          <td colspan="2">Local ISPs + CBRE/Aman</td>
+          <td>32%</td>
+          <td colspan="2">分散竞争，小型项目为主</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Key Players Cards -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">04 · 重点企业</div>
+      <h2>头部企业详情</h2>
+      <p class="section-desc">深入了解三家核心玩家的战略定位与竞争优势。</p>
+    </div>
+    <div class="players-grid">
+      <div class="player-card reveal">
+        <div class="player-avatar">🌐</div>
+        <div class="player-info">
+          <h4>Sentinel DC</h4>
+          <div class="player-type">国际 · 曼谷最大型</div>
+          <div class="player-stats">
+            <div class="player-stat"><strong>8,000+</strong><span> 机柜</span></div>
+            <div class="player-stat"><strong>Tier IV</strong><span> 认证</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="player-card reveal">
+        <div class="player-avatar">🦄</div>
+        <div class="player-info">
+          <h4>UIH (Unicorn Internet)</h4>
+          <div class="player-type">本土龙头 · 上市公司</div>
+          <div class="player-stats">
+            <div class="player-stat"><strong>6,500+</strong><span> 机柜</span></div>
+            <div class="player-stat"><strong>SET上市</strong><span> 泰国</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="player-card reveal">
+        <div class="player-avatar">🔷</div>
+        <div class="player-info">
+          <h4>Supernap Thailand</h4>
+          <div class="player-type">国际 · Jones Lang LaSalle</div>
+          <div class="player-stats">
+            <div class="player-stat"><strong>4,800+</strong><span> 机柜</span></div>
+            <div class="player-stat"><strong>Tier IV</strong><span> 全球标准</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="player-card reveal">
+        <div class="player-avatar">💠</div>
+        <div class="player-info">
+          <h4>True IDC</h4>
+          <div class="player-type">本土 · 运营商背景</div>
+          <div class="player-stats">
+            <div class="player-stat"><strong>5,200+</strong><span> 机柜</span></div>
+            <div class="player-stat"><strong>True Corp</strong><span> 母公司</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Investment Themes -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">05 · 投资主题</div>
+      <h2>四大投资机遇</h2>
+      <p class="section-desc">AI爆发、数字化转型、光纤扩容与绿色能源将成为泰国IDC下一阶段增长的核心驱动力。</p>
+    </div>
+    <div class="theme-list">
+      <div class="theme-item reveal">
+        <div class="theme-num">1</div>
+        <div class="theme-content">
+          <h3>🔥 AI算力需求爆发</h3>
+          <p>LLM训练与推理需求激增，泰国凭借低成本电力和相对充足的土地，正成为亚太AI训练中心的候选地。GPU集群部署项目数量同比增长超200%。</p>
+        </div>
+        <div class="theme-tag tag-high">高确定性</div>
+      </div>
+      <div class="theme-item reveal">
+        <div class="theme-num">2</div>
+        <div class="theme-content">
+          <h3>🌐 互联网企业扩张</h3>
+          <p>Shopee、Line、TikTok等互联网公司持续加码泰国市场，本地化内容分发需求推动CDN节点和边缘数据中心建设。云厂商区域节点需求旺盛。</p>
+        </div>
+        <div class="theme-tag tag-high">高确定性</div>
+      </div>
+      <div class="theme-item reveal">
+        <div class="theme-num">3</div>
+        <div class="theme-content">
+          <h3>🔌 光纤与海底光缆</h3>
+          <p>ADC (Asia Direct Cable) 和 Marea 延伸工程将显著提升泰国国际带宽容量，降低时延，增强区域竞争力，支撑更多低延迟敏感型应用。</p>
+        </div>
+        <div class="theme-tag tag-medium">中等确定性</div>
+      </div>
+      <div class="theme-item reveal">
+        <div class="theme-num">4</div>
+        <div class="theme-content">
+          <h3>♻️ 绿色数据中心</h3>
+          <p>Solar+PPA模式逐步成熟，泰国年均2,500小时日照为自有光伏提供了独特条件。AWS、Google已在泰国推进100%可再生能源承诺。</p>
+        </div>
+        <div class="theme-tag tag-low">长期主题</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Risk Factors -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">06 · 风险因素</div>
+      <h2>关键风险</h2>
+      <p class="section-desc">市场快速发展的同时，结构性挑战亦不容忽视。</p>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15);">⚠️</div>
+        <h3>土地与建筑供给</h3>
+        <p>曼谷周边适合建设Tier IV数据中心的土地稀缺，地价上涨，EEC区域正在承接溢出需求，但配套成熟尚需3-5年。</p>
+      </div>
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15);">⚠️</div>
+        <h3>人才供给</h3>
+        <p>具备Tier IV数据中心建设和运维经验的高级工程师短缺，本地培训体系尚在建立，是制约项目交付的主要瓶颈。</p>
+      </div>
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15);">⚠️</div>
+        <h3>政策与监管</h3>
+        <p>PDPA数据本地化要求趋严，关键行业客户对数据不出境有强制要求，影响部分外资云厂商的部署策略。</p>
+      </div>
+      <div class="summary-card">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);">⚡</div>
+        <h3>电力瓶颈</h3>
+        <p>现有电网可支撑约2GW总装机，但部分地区（如EEC）变电站建设滞后，电力接入周期长（12-18个月），是实际产能释放的制约。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <h2>需要更深入的行业数据？</h2>
+    <p>如需完整的供应商分析、竞品基准数据或泰国IDC投资尽调材料，请联系华为ISP军团互联行业COE团队。</p>
+    <div class="cta-buttons">
+      <a href="https://github.com/liweicong2016-collab/my-website" class="btn btn-primary">
+        📂 查看源码
+      </a>
+      <a href="https://github.com/liweicong2016-collab/my-website/releases" class="btn btn-outline">
+        📄 下载报告PDF
+      </a>
+    </div>
+  </div>
+
+  <!-- Data Sources -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">📚</div>
+      <h2>数据来源</h2>
+    </div>
+    <div class="source-box">
+      <p><strong>主要参考来源：</strong>Thailand Board of Investment (BOI) · Gartner Market Databook 2025 ·Structure Research Thailand IDC Report 2024 · Synergy Research Group · Uptime Institute Global Data Center Census 2025 · 华为ISP军团内部市场情报</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 华为技术有限公司 ISP军团互联行业COE · 内部研究资料 · 仅供业务参考</p>
+    <p style="margin-top:8px;">
+      <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a> ·
+      数据截至2026年Q1 ·
+      报告版本 v1.0
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  // Animate bars on scroll
+  const barFills = document.querySelectorAll('.kvi-bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target;
+        const width = fill.style.width;
+        fill.style.width = '0';
+        setTimeout(() => { fill.style.width = width; }, 100);
+        barObserver.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.5 });
+  barFills.forEach(bar => barObserver.observe(bar));
+</script>
+</body>
+</html>
