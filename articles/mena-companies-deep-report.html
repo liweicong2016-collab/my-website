@@ -3,355 +3,277 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>中东互联网独角兽深度报告：6家企业万亿估值背后的ICT版图</title>
-<meta name="description" content="">
+<title>MENA AI Companies Deep Report: 中东AI市场深度洞察</title>
+<meta name="description" content="MENA地区AI市场深度洞察：主要公司、基础设施现状、投资机会与竞争格局。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bis-bg:#070b14;--bis-card:#0d1321;--bis-card2:#111827;--bis-border:#1e2d45;
-  --bis-text:#e8eaf0;--bis-muted:#94a3b8;--bis-accent:#60a5fa;
-  --bis-accent-soft:rgba(26,86,219,.18);--bis-red:#f87171;
-  --bis-red-soft:rgba(239,68,68,.15);--bis-orange:#fbbf24;
-  --bis-orange-soft:rgba(245,158,11,.15);--bis-green:#34d399;
-  --bis-green-soft:rgba(16,185,129,.15);--bis-purple:#a78bfa;
-  --bis-purple-soft:rgba(139,92,246,.15);--bis-yellow:#fcd34d;
-  --bis-yellow-soft:rgba(212,160,23,.15);
-}
-.awrap *{box-sizing:border-box}
-.awrap{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;color:var(--bis-text);line-height:1.7;font-size:16px;background:var(--bis-bg);min-height:100vh}
-.awrap a{color:var(--bis-accent);text-decoration:none}
-.awrap a:hover{opacity:.8}
-.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--bis-border);padding:0 40px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#a78bfa;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#a78bfa,#38bdf8,#f59e0b);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
 .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.t3{font-size:15px;font-weight:800;color:var(--bis-text);display:flex;align-items:center;gap:8px;text-decoration:none}
-.d{width:7px;height:7px;border-radius:50%;background:var(--bis-accent);box-shadow:0 0 8px var(--bis-accent)}
-.t4{display:flex;align-items:center;gap:6px;color:var(--bis-muted);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-.t4:hover{color:var(--bis-text)}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#a78bfa;box-shadow:0 0 8px #a78bfa}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
 .c{max-width:860px;margin:0 auto;padding:0 24px 80px}
-footer{padding:40px 0;border-top:1px solid var(--bis-border);text-align:center;font-size:13px;color:var(--bis-muted)}
-footer a{color:var(--bis-accent);text-decoration:none}
-footer a:hover{text-decoration:underline}
-.bis-hero{background:linear-gradient(135deg,rgba(26,86,219,.18) 0%,rgba(139,92,246,.1) 100%);border:1px solid rgba(26,86,219,.3);border-radius:16px;padding:32px 28px;margin:48px 0 32px}
-.bis-hero .tag{display:inline-block;background:var(--bis-red);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
-.bis-hero h1{font-size:clamp(22px,4.5vw,36px);line-height:1.3;margin:0 0 12px;font-weight:800;background:linear-gradient(135deg,#fff 50%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.bis-hero .subtitle{font-size:14.5px;color:var(--bis-muted);margin:0;line-height:1.5}
-.bis-hero .date{font-size:12px;color:var(--bis-muted);margin-top:12px}
-.bis-alert{background:var(--bis-red-soft);border-left:4px solid var(--bis-red);padding:14px 18px;border-radius:0 10px 10px 0;margin:20px 0;font-size:15px;color:var(--bis-red)}
-.bis-alert strong{color:var(--bis-red)}
-.bis-section{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:14px;padding:24px 22px;margin:20px 0;transition:background .25s}
-.bis-section:hover{background:var(--bis-card2)}
-.bis-section h2{font-size:19px;font-weight:700;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--bis-border);color:var(--bis-text);display:flex;align-items:center;gap:10px}
-.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:var(--bis-accent);color:#fff;width:28px;height:28px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
-.bis-section p{margin:0 0 12px;color:var(--bis-text)}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#a78bfa;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#a78bfa;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
 .bis-section p:last-child{margin-bottom:0}
 .bis-section strong{color:#fff}
-.bis-section ul{padding-left:20px;margin:10px 0}
-.bis-section li{margin-bottom:5px;color:var(--bis-text)}
-.bis-timeline{position:relative;padding-left:24px}
-.bis-timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--bis-border)}
-.bis-tl-item{position:relative;margin-bottom:18px;padding-left:6px}
-.bis-tl-item:last-child{margin-bottom:0}
-.bis-tl-item::before{content:'';position:absolute;left:-20px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bis-accent);border:2px solid var(--bis-bg);box-shadow:0 0 0 2px var(--bis-accent)}
-.bis-tl-item .tl-date{font-size:13px;font-weight:700;color:var(--bis-accent);margin-bottom:3px}
-.bis-tl-item .tl-text{font-size:14.5px;color:var(--bis-text)}
-.bis-tl-item.highlight::before{background:var(--bis-red);box-shadow:0 0 0 2px var(--bis-red)}
-.bis-tl-item.highlight .tl-date{color:var(--bis-red)}
-.bis-flags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
-.bis-flag{background:var(--bis-accent-soft);color:var(--bis-accent);font-size:12.5px;padding:5px 12px;border-radius:16px;border:1px solid rgba(26,86,219,.3)}
-.bis-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;border-radius:8px}
-.bis-table{width:100%;border-collapse:collapse;font-size:14px}
-.bis-table th,.bis-table td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--bis-border)}
-.bis-table th{background:rgba(26,86,219,.1);font-weight:700;color:var(--bis-accent);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
-.bis-table tr:hover td{background:rgba(30,41,59,.5)}
-.bis-tag-r{background:var(--bis-red-soft);color:var(--bis-red);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-tag-n{background:var(--bis-orange-soft);color:var(--bis-orange);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-tag-m{background:var(--bis-green-soft);color:var(--bis-green);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0 0}
-.bis-card{background:var(--bis-card2);border:1px solid var(--bis-border);border-radius:12px;padding:18px 14px;text-align:center;transition:transform .2s,box-shadow .2s}
-.bis-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.bis-card .val{font-size:26px;font-weight:800;color:var(--bis-accent);display:block;margin-bottom:6px}
-.bis-card .lab{font-size:12.5px;color:var(--bis-muted)}
-.bis-card.red .val{color:var(--bis-red)}.bis-card.green .val{color:var(--bis-green)}.bis-card.purple .val{color:var(--bis-purple)}
-.bis-impact{border-radius:10px;padding:14px 16px;margin:12px 0;border:1px solid}
-.bis-impact.short{background:var(--bis-red-soft);border-color:rgba(239,68,68,.3)}
-.bis-impact.mid{background:var(--bis-orange-soft);border-color:rgba(245,158,11,.3)}
-.bis-impact.long{background:var(--bis-green-soft);border-color:rgba(16,185,129,.3)}
-.bis-impact h3{margin:0 0 6px;font-size:15px;font-weight:700}
-.bis-impact.short h3{color:var(--bis-red)}.bis-impact.mid h3{color:var(--bis-orange)}.bis-impact.long h3{color:var(--bis-green)}
-.bis-impact p{margin:0;font-size:14px;color:var(--bis-text)}
-.bis-signal{background:var(--bis-purple-soft);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:16px 18px;margin:14px 0}
-.bis-signal h3{margin:0 0 10px;font-size:15px;color:var(--bis-purple);font-weight:700}
-.bis-signal ul{margin:0;padding-left:18px;font-size:14px;color:var(--bis-text)}
-.bis-signal li{margin-bottom:5px}
-.bis-punchline{background:linear-gradient(135deg,rgba(239,68,68,.12) 0%,rgba(245,158,11,.08) 100%);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:20px;margin:18px 0}
-.bis-punchline h2{font-size:17px;color:var(--bis-red);margin:0 0 12px;padding:0;border:0;font-weight:800}
-.bis-punchline ul{padding-left:18px;font-size:14.5px;margin:0;color:var(--bis-text)}
-.bis-punchline li{margin-bottom:6px}
-.bis-quote{background:var(--bis-card2);border-left:3px solid var(--bis-accent);padding:14px 16px;font-style:italic;font-size:14.5px;color:var(--bis-muted);border-radius:0 8px 8px 0;margin:14px 0}
-.bis-foot{text-align:center;color:var(--bis-muted);font-size:12.5px;margin:32px 0 12px;padding-top:20px;border-top:1px solid var(--bis-border)}
-.article-body h1{font-size:clamp(22px,4.5vw,36px);font-weight:800;margin:48px 0 20px;background:linear-gradient(135deg,#fff 50%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.3}
-.article-body h2{font-size:clamp(18px,3.5vw,26px);font-weight:700;margin:36px 0 16px;color:var(--bis-text);padding-bottom:10px;border-bottom:1px solid var(--bis-border)}
-.article-body h3{font-size:20px;font-weight:600;margin:28px 0 12px;color:var(--bis-text)}
-.article-body h4{font-size:17px;font-weight:600;margin:20px 0 10px;color:var(--bis-text)}
-.article-body p{margin:0 0 14px;color:var(--bis-text);line-height:1.75}
-.article-body ul,.article-body ol{padding-left:22px;margin:0 0 14px}
-.article-body li{margin-bottom:6px;color:var(--bis-text)}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(139,92,246,.15);border-left:4px solid #a78bfa;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#a78bfa}
+.signal{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#a78bfa;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(56,189,248,.06));border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#a78bfa;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #a78bfa;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#a78bfa;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.cyan .val{color:#38bdf8}.bis-card.orange .val{color:#fbbf24}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(139,92,246,.08);font-weight:700;color:#a78bfa;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(139,92,246,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(139,92,246,.06),rgba(56,189,248,.05));border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#a78bfa;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(139,92,246,.08);color:#a78bfa;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
 .article-body strong{color:#fff}
-.article-body em{color:var(--bis-muted)}
-.article-body blockquote{background:var(--bis-card);border-left:3px solid var(--bis-accent);padding:14px 18px;margin:16px 0;border-radius:0 8px 8px 0;font-style:italic;color:var(--bis-muted)}
-.article-body table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-.article-body th{background:rgba(26,86,219,.12);color:var(--bis-accent);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--bis-border);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
-.article-body td{padding:11px 12px;border-bottom:1px solid var(--bis-border);color:var(--bis-text)}
-.article-body tr:hover td{background:rgba(30,41,59,.4)}
-.article-body code{background:rgba(26,86,219,.12);color:var(--bis-accent);padding:2px 6px;border-radius:4px;font-size:13px}
-.article-body pre{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
-.article-body pre code{background:none;color:var(--bis-text);padding:0;font-size:13px}
-.article-body img{max-width:100%;border-radius:10px;margin:16px 0;border:1px solid var(--bis-border)}
-.article-body hr{border:none;border-top:1px solid var(--bis-border);margin:28px 0}
-.article-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
-.article-meta span{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--bis-muted)}
-.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.atag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:var(--bis-accent);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600}
-.ftrnote{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--bis-muted);margin-top:16px}
-.ftrnote strong{color:var(--bis-green)}
-@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.bis-hero{padding:24px 18px}.article-body{font-size:15px}}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #a78bfa;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(139,92,246,.05);border:1px solid rgba(139,92,246,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#a78bfa}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#a78bfa;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-<div class="awrap">
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
-<div class="c">
-<div class="article-body">
-<h1>中东互联网独角兽深度报告：6家企业万亿估值背后的ICT版图</h1>
-<p><strong>作者：Tech Observer | 2025年11月</strong></p>
-<blockquote>
-<p>本报告深入分析中东及北非（MENA）地区6家最具代表性的互联网独角兽企业——Careem、Noon、Shahid、Souq/Amazon、Talabat、Yalla——覆盖财务表现、ICT投入、云服务架构、数据中心策略及最新战略动向。6家企业总估值超过150亿美元，业务覆盖出行、电商、流媒体、外卖、社交娱乐等多个领域。</p>
-</blockquote>
-<hr />
-<h2>一、Careem：Uber系超级应用的云优先战略</h2>
-<p><strong>估值：31亿美元（Uber收购价） | 总部：迪拜 | 覆盖：15国120城</strong></p>
-<h3>核心发现</h3>
-<ul>
-<li><strong>超级应用战略</strong>：2021年启动，整合出行、外卖、支付（Careem Pay）、即时配送</li>
-<li><strong>e&amp;战略投资</strong>：2023年获阿联酋电信集团4亿美元投资，加速超级应用业务扩张</li>
-<li><strong>多云架构</strong>：800+微服务，主要基于AWS + GCP</li>
-<li><strong>AI驱动</strong>：欺诈检测（AWS Neptune图数据库）、需求预测、个性化推荐</li>
-<li><strong>云优先策略</strong>：不自建数据中心，充分利用AWS/GCP中东（巴林、阿联酋）基础设施</li>
-<li><strong>2025年营收预计超28亿美元</strong></li>
-</ul>
-<h3>技术架构</h3>
-<pre class="codehilite"><code>AWS (核心) + GCP (大数据分析)
-└── 800+ 微服务
-    ├── AI/ML (GCP BigQuery)
-    ├── 支付 (Careem Pay)
-    └── 物流追踪
-</code></pre>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
 
-<hr />
-<h2>二、Noon：10亿美元帝国的Azure云转型</h2>
-<p><strong>估值：10亿美元+ | 总部：迪拜 | 覆盖：阿联酋、沙特、埃及</strong></p>
-<h3>核心发现</h3>
-<ul>
-<li><strong>创始背景</strong>：Emaar创始人阿拉巴尔联合沙特主权财富基金（PIF），2016年获10亿美元初始投资</li>
-<li><strong>业务生态</strong>：Noon.com + Noon Food + Noon Minutes（15分钟快送）+ Noon Pay</li>
-<li><strong>云服务</strong>：Noon Payments核心业务已迁移至Microsoft Azure</li>
-<li><strong>2025年GMV预计50-70亿美元，接近盈利</strong></li>
-<li><strong>双重上市计划</strong>：未来18-24个月内在沙特和阿联酋IPO</li>
-<li><strong>自动驾驶配送</strong>：2025年11月在阿布扎比启动试点</li>
-</ul>
-<h3>财务亮点</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>年度GMV</td>
-<td>50-70亿美元</td>
-</tr>
-<tr>
-<td>增长率</td>
-<td>30%-50%年均</td>
-</tr>
-<tr>
-<td>目标市场</td>
-<td>阿联酋、沙特、埃及</td>
-</tr>
-<tr>
-<td>ICT投入占比</td>
-<td>15%-25%运营支出</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>三、Shahid：MBC集团流媒体野心的云端支撑</h2>
-<p><strong>母公司：MBC Group（沙特PIF控股）| 总部：迪拜 | 覆盖：22个阿拉伯国家</strong></p>
-<h3>核心发现</h3>
-<ul>
-<li><strong>市场地位</strong>：中东及北非地区最大的阿拉伯语VOD平台</li>
-<li><strong>内容优势</strong>：拥有MBC集团全部广播电视内容独家版权，海量阿拉伯语原生内容</li>
-<li><strong>沙特定位</strong>：作为沙特"2030愿景"数字娱乐战略核心，获得PIF强力支持</li>
-<li><strong>多云策略</strong>：主要使用AWS + CDN加速，支撑大规模视频流</li>
-<li><strong>用户规模</strong>：付费订阅用户持续增长，沙特用户占比超40%</li>
-</ul>
-<hr />
-<h2>四、Souq → Amazon.ae：亚马逊的中东棋局</h2>
-<p><strong>母公司：Amazon（NASDAQ: AMZN）| 收购价：5.75亿美元（2017年）</strong></p>
-<h3>核心发现</h3>
-<ul>
-<li><strong>历史地位</strong>：Souq.com被誉为"中东亚马逊"，2005年创立，是中东最早的电商平台之一</li>
-<li><strong>亚马逊收购</strong>：2017年以5.75亿美元收购，随后品牌重塑为Amazon.ae/.sa/.eg</li>
-<li><strong>技术整合</strong>：全面接入AWS，利用亚马逊技术栈升级物流、支付、推荐系统</li>
-<li><strong>FBA（Fulfillment by Amazon）</strong>：引入亚马逊成熟物流体系，大幅提升配送体验</li>
-<li><strong>AWS中东基础设施</strong>：Amazon.ae深度依赖AWS中东（巴林）区域</li>
-</ul>
-<h3>技术优势</h3>
-<pre class="codehilite"><code>亚马逊技术赋能：
-├── AWS (云基础设施)
-├── DynamoDB (数据库)
-├── SageMaker (AI推荐)
-└──物流网络（FBA）
-</code></pre>
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1546410536-bb8ddd804b3e?w=1200&q=80" alt="MENA">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">MENA · Deep Report · 2026</span>
+    <h1>MENA AI Companies Deep Report</h1>
+    <p class="subtitle">MENA地区AI市场深度洞察：主要公司、基础设施现状、投资机会与竞争格局 — 谁在布局中东AI版图？</p>
+    <div class="hero-meta">
+      <span>📅 2026-06</span>
+      <span>⏱ ~12 min read</span>
+      <span>🏷️ MENA · 中东AI · AI投资 · 地缘政治 · 算力</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">MENA</span>
+      <span class="tag-pill">中东AI</span>
+      <span class="tag-pill">AI投资</span>
+      <span class="tag-pill">地缘政治</span>
+      <span class="tag-pill">AI算力</span>
+      <span class="tag-pill">主权基金</span>
+    </div>
+  </div>
+</div>
 
-<hr />
-<h2>五、Talabat：海湾外卖大战的技术底座</h2>
-<p><strong>母公司：Delivery Hero（法兰克福上市）| 总部：科威特 | 覆盖：6国</strong></p>
-<h3>核心发现</h3>
-<ul>
-<li>** Delivery Hero子公司**：2020年被欧洲外卖巨头Delivery Hero收购</li>
-<li><strong>技术栈</strong>：主要基于AWS构建，微服务架构，支持高并发订单处理</li>
-<li><strong>市场覆盖</strong>：科威特、沙特、阿联酋、卡塔尔、巴林、阿曼</li>
-<li><strong>骑手网络</strong>：在海湾六国运营超过10万名骑手</li>
-<li><strong>快速扩张</strong>：通过并购整合本地外卖平台，形成海湾外卖垄断地位</li>
-</ul>
-<hr />
-<h2>六、Yalla：盈利奇迹背后的技术驱动</h2>
-<p><strong>NYSE: YALA | 总部：迪拜 | 2020年上市（中东首家美股上市的独角兽）</strong></p>
-<h3>核心发现</h3>
-<ul>
-<li><strong>独特商业模式</strong>：语音社交（Yalla）+ 游戏社交（Yalla Ludo），专注阿拉伯市场</li>
-<li><strong>惊人盈利</strong>：净利润率常年保持40%以上，2024年营收超3亿美元</li>
-<li><strong>轻资产技术</strong>：主要基于AWS构建，无需重资产物流基础设施</li>
-<li><strong>本地化深度</strong>：产品完全针对阿拉伯用户设计，支持Arabic NLP</li>
-<li><strong>2024年净利润超1.2亿美元</strong></li>
-</ul>
-<h3>财务表现</h3>
-<table>
-<thead>
-<tr>
-<th>年份</th>
-<th>营收</th>
-<th>净利润</th>
-<th>净利率</th>
-</tr>
-</thead>
+<div class="callout fade-up">
+  ⚠️ <strong>核心判断</strong>：MENA地区正在成为全球AI竞争的新战场。美国芯片管制创造了区域性算力供给缺口，中国、中东、东亚资本正在填补这个真空。沙特、阿联酋、卡塔尔、以色列、土耳其的AI布局各有特色。
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>MENA AI全景：谁在布局</h2>
+<p>MENA（Middle East and North Africa，中东和北非）是全球地缘政治最复杂的区域之一，也是AI竞争的新热点。2024-2026年，大国博弈、芯片管制、主权基金资本正在重塑这个地区的AI格局。</p>
+<div class="bis-grid">
+  <div class="bis-card cyan"><span class="val">$100B+</span><span class="lab">沙特大主权基金规模</span></div>
+  <div class="bis-card green"><span class="val">G42</span><span class="lab">阿联酋AI核心公司</span></div>
+  <div class="bis-card orange"><span class="val">200+</span><span class="lab">G42投资组合公司</span></div>
+  <div class="bis-card purple"><span class="val">$40B</span><span class="lab">沙特AI投资目标</span></div>
+</div>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=80" alt="Middle East" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：中东城市 — 地缘政治的焦点，AI竞争的新战场 © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>阿联酋：G42主导的AI战略</h2>
+<p>G42（Group 42）是阿联酋AI布局的核心，背靠阿布扎比主权基金（Mubadala等），已发展为MENA地区最大的AI公司。</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>公司/实体</th><th>国家</th><th>AI重点领域</th></tr></thead>
 <tbody>
-<tr>
-<td>2022</td>
-<td>2.4亿美元</td>
-<td>0.9亿美元</td>
-<td>37.5%</td>
-</tr>
-<tr>
-<td>2023</td>
-<td>2.8亿美元</td>
-<td>1.1亿美元</td>
-<td>39.3%</td>
-</tr>
-<tr>
-<td>2024</td>
-<td>3.1亿美元</td>
-<td>1.25亿美元</td>
-<td>40.3%</td>
-</tr>
+<tr><td><strong>G42</strong></td><td>阿联酋</td><td>AI基础设施、云计算、医疗AI、政府AI</td></tr>
+<tr><td><span class="tg tg-m">Presight</span></td><td>阿联酋</td><td>数据分析、AI政府解决方案</td></tr>
+<tr><td><span class="tg tg-m">Core42</span></td><td>阿联酋</td><td>主权AI云、国家AI基础设施</td></tr>
+<tr><td><span class="tg tg-m">AI71</span></td><td>阿联酋</td><td>多模态AI、对话AI</td></tr>
 </tbody>
 </table>
-<hr />
-<h2>七、MENA互联网企业ICT共性分析</h2>
-<h3>云服务商分布</h3>
-<table>
-<thead>
-<tr>
-<th>云服务商</th>
-<th>主要客户</th>
-<th>数据中心位置</th>
-</tr>
-</thead>
+</div>
+<div class="signal">
+<h3>🔍 G42的战略特点</h3>
+<ul>
+  <li><strong>主权AI路线</strong>：G42坚持数据主权优先，所有AI基础设施必须运行在阿联酋主权云上</li>
+  <li><strong>全球合作</strong>：与微软深度合作（微软投资G42 $1.5B），同时从中国厂商（华为等）采购芯片</li>
+  <li><strong>医疗AI先行</strong>：G42 Healthcare已成为阿联酋最大医疗AI公司，新冠期间的检测能力全球领先</li>
+  <li><strong>美国出口管制压力</strong>：2024年美国加强对G42的芯片出口审查，要求其切断与中国厂商的联系</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>沙特：国家AI战略与主权基金</h2>
+<p>沙特的AI战略由沙特数据与AI局（SDAIA）主导，目标是到2030年成为AI领域全球前20强。</p>
+<div class="bis-grid">
+  <div class="bis-card orange"><span class="val">$40B</span><span class="lab">沙特AI目标投资</span></div>
+  <div class="bis-card cyan"><span class="val">PIF</span><span class="lab">沙特公共投资基金</span></div>
+  <div class="bis-card green"><span class="val"> Aramco</span><span class="lab"> Ventures AI投资</span></div>
+  <div class="bis-card purple"><span class="val">NEOM</span><span class="lab">AI驱动超大型项目</span></div>
+</div>
+<div class="punchline">
+<h3>🏜️ 沙特的AI战略重点</h3>
+<ul>
+  <li><strong>NEOM项目</strong>：全球最大AI驱动城市项目之一，规划中大量使用AI基础设施</li>
+  <li><strong>PIF主权基金</strong>：已投资多家全球AI公司，包括OpenAI的RM轮</li>
+  <li><strong>芯片采购多元化</strong>：沙特是全球少数明确寻求AI芯片采购多元化的国家，既从美国也从中东友好国家采购</li>
+  <li><strong>数据主权</strong>：要求所有政府AI数据必须存储在沙特境内服务器</li>
+</ul>
+</div>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Data center" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI数据中心 — MENA地区算力竞争的核心基础设施 © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>卡塔尔与科威特：低调但有影响力的玩家</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>国家</th><th>核心AI实体</th><th>AI投资策略</th></tr></thead>
 <tbody>
-<tr>
-<td>AWS</td>
-<td>Careem, Talabat, Yalla, Amazon.ae</td>
-<td>巴林（中东）</td>
-</tr>
-<tr>
-<td>Microsoft Azure</td>
-<td>Noon (Payments), Shahid</td>
-<td>阿联酋</td>
-</tr>
-<tr>
-<td>Google Cloud</td>
-<td>Careem (BigQuery)</td>
-<td>阿联酋</td>
-</tr>
+<tr><td><span class="tg tg-m">卡塔尔</span></td><td>Qatar Investment Authority (QIA)</td><td>通过主权基金投资全球AI公司，重点在欧洲和东南亚</td></tr>
+<tr><td><span class="tg tg-m">科威特</span></td><td>Kuwait Investment Authority (KIA)</td><td>保守型配置，正在增加科技股配置</td></tr>
+<tr><td><span class="tg tg-p">以色列</span></td><td>创新局（CIE）、Israel Innovation Fund</td><td>网络安全AI最强，军工AI全球领先</td></tr>
+<tr><td><span class="tg tg-n">土耳其</span></td><td>TUBITAK、ASELSAN</td><td>国防AI快速崛起，有较强的AI研发传统</td></tr>
 </tbody>
 </table>
-<h3>关键趋势</h3>
-<ol>
-<li><strong>多云策略</strong>：头部企业普遍采用2-3家云服务商，避免单点依赖</li>
-<li><strong>云优先（Cloud-First）</strong>：除Yalla外，主要企业均选择不自建数据中心</li>
-<li><strong>AI驱动</strong>：所有企业均在推荐、欺诈检测、需求预测等领域深度应用AI</li>
-<li><strong>出海与中国</strong>：Noon进入中国市场，Talabat/Yalla关注海湾本地化</li>
-</ol>
-<hr />
-<h2>八、我的MENA观察</h2>
-<p><em>以下内容基于实地考察与行业交流。</em></p>
-<p><img alt="日本办公室窗外" src="/images/photo1.jpg" /></p>
-<p>MENA互联网市场是一个"政策驱动大于市场驱动"的特殊存在。沙特PIF的强势布局，让Shahid和Noon获得了其他国家无法想象的资本支持。而Yalla的盈利奇迹则证明，本地化做到极致，即使不依赖融资也能活得很好。</p>
-<p><img alt="MENA 城市天际线" src="/images/photo2.jpg" />
-<img alt="MENA照片3" src="/images/photo3.jpg" />
-<img alt="MENA照片4" src="/images/photo4.jpg" />
-<img alt="MENA照片5" src="/images/photo5.jpg" />
-<img alt="MENA照片6" src="/images/photo6.jpg" /></p>
-<p><em>以上照片为作者在MENA区域实地拍摄</em></p>
-<p><img alt="Levi个人照片 - 日本办公室一瞥" src="/images/photo-user-1.jpg" />
-<img alt="Levi个人照片 - 日常工作" src="/images/photo-user-2.jpg" /></p>
-<p>反观中国出海企业，在MENA区域的成功案例多集中在游戏（如米哈游、腾讯）和新能源（如Temu、SHEIN），纯互联网平台仍面临本地化壁垒。AWS和Azure的垄断性优势，也让中国云厂商的机会集中在混合云场景。</p>
-<hr />
-<h2>关于本报告</h2>
-<p>本报告数据来源于各公司公开信息、创始人访谈、行业研究报告及公开融资记录。时间截至2025年11月。</p>
-<p><strong>相关企业</strong>：Careem (Uber), Noon (Emaar+PIF), MBC Group, Amazon, Delivery Hero, Yalla Group</p>
-<hr />
-<p><em>封面图片：Photo by Unsplash</em></p>
 </div>
-<div class="tag-row"><span class="atag">MENA</span><span class="atag">中东</span><span class="atag">独角兽</span><span class="atag">云计算</span><span class="atag">电商</span></div>
-<div class="ftrnote"><strong>数据来源：</strong>本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
 </div>
-<footer><div class="c" style="max-width:860px"><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></div></footer>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>芯片管制与MENA AI竞争</h2>
+<p>美国芯片出口管制是MENA AI竞争格局的最大变量。2022年以来，A100/H100被管制，2024年H20也被加入管制清单。这对MENA地区产生了深远影响。</p>
+<div class="signal">
+<h3>�hambra🛰️ 芯片管制对MENA的影响</h3>
+<ul>
+  <li><strong>美国盟友体系内国家</strong>（阿联酋、以色列）：美国允许出口但施加限制条件（如要求G42减少中国合作）</li>
+  <li><strong>中立国家</strong>（沙特、卡塔尔）：美国默许其从其他国家采购芯片，但要求不转让给中国</li>
+  <li><strong>中国厂商的机会</strong>：华为Ascend系列在MENA找到了新市场，中国GPU初创公司也将MENA作为海外首站</li>
+  <li><strong>区域性算力平台</strong>：MENA的芯片管制创造了区域性算力供给缺口，具备GPU资源的IDC可以在这里获得溢价</li>
+</ul>
 </div>
-<script>
-(function(){
-  var els = document.querySelectorAll('.bis-section,.bis-card,.bis-hero,.bis-alert,.bis-signal,.bis-punchline,.bis-impact,.article-body h2,.article-body h3,.article-body blockquote');
-  els.forEach(function(el){
-    el.style.opacity='0';
-    el.style.transform='translateY(18px)';
-    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
-  });
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.06, rootMargin:'0px 0px -30px 0px'});
-  els.forEach(function(el){ obs.observe(el); });
-})();
-</script>
-<script src="../main.js"></script>
-</body></html>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>投资机会与风险</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>方向</th><th>机会</th><th>风险</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">AI数据中心</span></td><td>MENA地区GPU算力供给不足，具备GPU资源的IDC可以获得稳定溢价</td><td>美国芯片管制的不确定性；地缘政治风险</td></tr>
+<tr><td><span class="tg tg-n">政府AI项目</span></td><td>沙特、阿联酋政府在AI上的投入力度大，预算充足</td><td>付款周期长；政府关系驱动型市场</td></tr>
+<tr><td><span class="tg tg-p">主权AI云</span></td><td>G42 Core42等主权AI云快速发展，需要大量基础设施</td><td>进入门槛高；需要本地合作伙伴</td></tr>
+<tr><td><span class="tg tg-r">AI应用层</span></td><td>医疗AI（阿联酋）、政府AI效率工具（沙特NEOM）需求旺盛</td><td>数据主权要求限制技术选型</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>G42（阿联酋）是MENA AI的核心</strong>，但面临美国出口管制压力，正在寻求芯片采购多元化</li>
+    <li><strong>沙特PIF是全球最活跃的主权AI投资者</strong>，通过NEOM项目和对外投资两条腿走路</li>
+    <li><strong>美国芯片管制创造了区域性算力供给缺口</strong>，具备GPU资源的IDC可以获得稳定溢价</li>
+    <li><strong>中国AI厂商正在将MENA作为海外首站</strong>，华为Ascend系列在MENA找到了新市场</li>
+    <li><strong>MENA AI竞争是中美AI竞争的延伸</strong>，看懂大国博弈才能看懂MENA机会</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=80" alt="Tech" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI技术基础设施 — MENA地区AI竞争的核心资产 © Unsplash</figcaption>
+</figure>
+
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="middle-east-article.html"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Southeast Asia IDC"><div class="rel-card-body"><h4>中东资本、东南亚算力</h4><p>三重窗口叠加下的东南亚IDC机会，中东资本避险需求+AI推理算力爆发+电力成本优势</p><span class="rel-card-tag">IDC</span></div></a>
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI accelerator"><div class="rel-card-body"><h4>国产AI加速器生态实战观察</h4><p>6841个模型在头部国产NPU上跑通，量化栈+推理框架已就位</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>国内MaaS大战2026</h4><p>Coding模型Q1涨价83%同时调用量增400%，视频模型单月收入破10亿</p><span class="rel-card-tag">MaaS</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>数据来源</strong>：本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
