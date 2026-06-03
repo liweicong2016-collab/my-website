@@ -185,16 +185,14 @@
     footer .footer-links a { color:var(--text-secondary); font-size:13px; }
     footer .footer-links a:hover { color:var(--text-primary); }
 
+    /* SCROLL ANIMATIONS */
+    .fade-up { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+    .fade-up.visible { opacity:1; transform:none; }
+    .article-item { transition-delay:.05s; }
+
     /* BACK TO TOP */
-    .back-top {
-      position:fixed; bottom:32px; right:32px;
-      width:44px; height:44px; border-radius:12px;
-      background:var(--bg-card); border:1px solid var(--border);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer; color:var(--text-muted); font-size:18px;
-      transition:all .2s; opacity:0;
-    }
-    .back-top.visible { opacity:1; }
+    .back-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; border-radius:12px; background:var(--bg-card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-muted); font-size:18px; transition:all .2s; opacity:0; pointer-events:none; }
+    .back-top.visible { opacity:1; pointer-events:auto; }
     .back-top:hover { background:var(--bg-card-hover); color:var(--text-primary); }
 
     /* MOBILE */
@@ -289,17 +287,6 @@
 
       <div class="article-item">
         <div class="article-date">2026-06-02</div>
-        <div class="article-title"><a href="articles/bis-china-ai-chip-2026.html">BIS封堵中国AI芯片境外子公司采购漏洞：2026年5月31日新规全解析</a></div>
-        <div class="article-tags">
-          <span class="article-tag">AI芯片</span>
-          <span class="article-tag">BIS</span>
-          <span class="article-tag">出口管制</span>
-        </div>
-        <div class="article-arrow">→</div>
-      </div>
-
-      <div class="article-item">
-        <div class="article-date">2026-06-02</div>
         <div class="article-title"><a href="articles/domestic-maas-token-wars-2026.html">国内MaaS大战2026：Token经济的两条战线</a></div>
         <div class="article-tags">
           <span class="article-tag">MaaS</span>
@@ -382,6 +369,12 @@
 <div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.article-item,.featured-report,.section').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+
   // Back to top
   const btn = document.getElementById('backTop');
   window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); });
