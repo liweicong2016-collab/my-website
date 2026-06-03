@@ -8,313 +8,280 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bis-bg:#070b14;--bis-card:#0d1321;--bis-card2:#111827;--bis-border:#1e2d45;
-  --bis-text:#e8eaf0;--bis-muted:#94a3b8;--bis-accent:#60a5fa;
-  --bis-accent-soft:rgba(26,86,219,.18);--bis-red:#f87171;
-  --bis-red-soft:rgba(239,68,68,.15);--bis-orange:#fbbf24;
-  --bis-orange-soft:rgba(245,158,11,.15);--bis-green:#34d399;
-  --bis-green-soft:rgba(16,185,129,.15);--bis-purple:#a78bfa;
-  --bis-purple-soft:rgba(139,92,246,.15);--bis-yellow:#fcd34d;
-  --bis-yellow-soft:rgba(212,160,23,.15);
-}
-.awrap *{box-sizing:border-box}
-.awrap{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;color:var(--bis-text);line-height:1.7;font-size:16px;background:var(--bis-bg);min-height:100vh}
-.awrap a{color:var(--bis-accent);text-decoration:none}
-.awrap a:hover{opacity:.8}
-.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--bis-border);padding:0 40px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#fbbf24,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
 .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.t3{font-size:15px;font-weight:800;color:var(--bis-text);display:flex;align-items:center;gap:8px;text-decoration:none}
-.d{width:7px;height:7px;border-radius:50%;background:var(--bis-accent);box-shadow:0 0 8px var(--bis-accent)}
-.t4{display:flex;align-items:center;gap:6px;color:var(--bis-muted);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-.t4:hover{color:var(--bis-text)}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#fbbf24;box-shadow:0 0 8px #fbbf24}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
 .c{max-width:860px;margin:0 auto;padding:0 24px 80px}
-footer{padding:40px 0;border-top:1px solid var(--bis-border);text-align:center;font-size:13px;color:var(--bis-muted)}
-footer a{color:var(--bis-accent);text-decoration:none}
-footer a:hover{text-decoration:underline}
-.bis-hero{background:linear-gradient(135deg,rgba(26,86,219,.18) 0%,rgba(139,92,246,.1) 100%);border:1px solid rgba(26,86,219,.3);border-radius:16px;padding:32px 28px;margin:48px 0 32px}
-.bis-hero .tag{display:inline-block;background:var(--bis-red);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
-.bis-hero h1{font-size:clamp(22px,4.5vw,36px);line-height:1.3;margin:0 0 12px;font-weight:800;background:linear-gradient(135deg,#fff 50%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.bis-hero .subtitle{font-size:14.5px;color:var(--bis-muted);margin:0;line-height:1.5}
-.bis-hero .date{font-size:12px;color:var(--bis-muted);margin-top:12px}
-.bis-alert{background:var(--bis-red-soft);border-left:4px solid var(--bis-red);padding:14px 18px;border-radius:0 10px 10px 0;margin:20px 0;font-size:15px;color:var(--bis-red)}
-.bis-alert strong{color:var(--bis-red)}
-.bis-section{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:14px;padding:24px 22px;margin:20px 0;transition:background .25s}
-.bis-section:hover{background:var(--bis-card2)}
-.bis-section h2{font-size:19px;font-weight:700;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--bis-border);color:var(--bis-text);display:flex;align-items:center;gap:10px}
-.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:var(--bis-accent);color:#fff;width:28px;height:28px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
-.bis-section p{margin:0 0 12px;color:var(--bis-text)}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#fbbf24;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);color:#fbbf24;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fbbf24,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
 .bis-section p:last-child{margin-bottom:0}
 .bis-section strong{color:#fff}
-.bis-section ul{padding-left:20px;margin:10px 0}
-.bis-section li{margin-bottom:5px;color:var(--bis-text)}
-.bis-timeline{position:relative;padding-left:24px}
-.bis-timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--bis-border)}
-.bis-tl-item{position:relative;margin-bottom:18px;padding-left:6px}
-.bis-tl-item:last-child{margin-bottom:0}
-.bis-tl-item::before{content:'';position:absolute;left:-20px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bis-accent);border:2px solid var(--bis-bg);box-shadow:0 0 0 2px var(--bis-accent)}
-.bis-tl-item .tl-date{font-size:13px;font-weight:700;color:var(--bis-accent);margin-bottom:3px}
-.bis-tl-item .tl-text{font-size:14.5px;color:var(--bis-text)}
-.bis-tl-item.highlight::before{background:var(--bis-red);box-shadow:0 0 0 2px var(--bis-red)}
-.bis-tl-item.highlight .tl-date{color:var(--bis-red)}
-.bis-flags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
-.bis-flag{background:var(--bis-accent-soft);color:var(--bis-accent);font-size:12.5px;padding:5px 12px;border-radius:16px;border:1px solid rgba(26,86,219,.3)}
-.bis-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;border-radius:8px}
-.bis-table{width:100%;border-collapse:collapse;font-size:14px}
-.bis-table th,.bis-table td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--bis-border)}
-.bis-table th{background:rgba(26,86,219,.1);font-weight:700;color:var(--bis-accent);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
-.bis-table tr:hover td{background:rgba(30,41,59,.5)}
-.bis-tag-r{background:var(--bis-red-soft);color:var(--bis-red);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-tag-n{background:var(--bis-orange-soft);color:var(--bis-orange);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-tag-m{background:var(--bis-green-soft);color:var(--bis-green);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0 0}
-.bis-card{background:var(--bis-card2);border:1px solid var(--bis-border);border-radius:12px;padding:18px 14px;text-align:center;transition:transform .2s,box-shadow .2s}
-.bis-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.bis-card .val{font-size:26px;font-weight:800;color:var(--bis-accent);display:block;margin-bottom:6px}
-.bis-card .lab{font-size:12.5px;color:var(--bis-muted)}
-.bis-card.red .val{color:var(--bis-red)}.bis-card.green .val{color:var(--bis-green)}.bis-card.purple .val{color:var(--bis-purple)}
-.bis-impact{border-radius:10px;padding:14px 16px;margin:12px 0;border:1px solid}
-.bis-impact.short{background:var(--bis-red-soft);border-color:rgba(239,68,68,.3)}
-.bis-impact.mid{background:var(--bis-orange-soft);border-color:rgba(245,158,11,.3)}
-.bis-impact.long{background:var(--bis-green-soft);border-color:rgba(16,185,129,.3)}
-.bis-impact h3{margin:0 0 6px;font-size:15px;font-weight:700}
-.bis-impact.short h3{color:var(--bis-red)}.bis-impact.mid h3{color:var(--bis-orange)}.bis-impact.long h3{color:var(--bis-green)}
-.bis-impact p{margin:0;font-size:14px;color:var(--bis-text)}
-.bis-signal{background:var(--bis-purple-soft);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:16px 18px;margin:14px 0}
-.bis-signal h3{margin:0 0 10px;font-size:15px;color:var(--bis-purple);font-weight:700}
-.bis-signal ul{margin:0;padding-left:18px;font-size:14px;color:var(--bis-text)}
-.bis-signal li{margin-bottom:5px}
-.bis-punchline{background:linear-gradient(135deg,rgba(239,68,68,.12) 0%,rgba(245,158,11,.08) 100%);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:20px;margin:18px 0}
-.bis-punchline h2{font-size:17px;color:var(--bis-red);margin:0 0 12px;padding:0;border:0;font-weight:800}
-.bis-punchline ul{padding-left:18px;font-size:14.5px;margin:0;color:var(--bis-text)}
-.bis-punchline li{margin-bottom:6px}
-.bis-quote{background:var(--bis-card2);border-left:3px solid var(--bis-accent);padding:14px 16px;font-style:italic;font-size:14.5px;color:var(--bis-muted);border-radius:0 8px 8px 0;margin:14px 0}
-.bis-foot{text-align:center;color:var(--bis-muted);font-size:12.5px;margin:32px 0 12px;padding-top:20px;border-top:1px solid var(--bis-border)}
-.article-body h1{font-size:clamp(22px,4.5vw,36px);font-weight:800;margin:48px 0 20px;background:linear-gradient(135deg,#fff 50%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.3}
-.article-body h2{font-size:clamp(18px,3.5vw,26px);font-weight:700;margin:36px 0 16px;color:var(--bis-text);padding-bottom:10px;border-bottom:1px solid var(--bis-border)}
-.article-body h3{font-size:20px;font-weight:600;margin:28px 0 12px;color:var(--bis-text)}
-.article-body h4{font-size:17px;font-weight:600;margin:20px 0 10px;color:var(--bis-text)}
-.article-body p{margin:0 0 14px;color:var(--bis-text);line-height:1.75}
-.article-body ul,.article-body ol{padding-left:22px;margin:0 0 14px}
-.article-body li{margin-bottom:6px;color:var(--bis-text)}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(239,68,68,.15);border-left:4px solid #f87171;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f87171}
+.signal{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#fbbf24;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(239,68,68,.06));border:1px solid rgba(251,191,36,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#fbbf24;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #fbbf24;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#fbbf24;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(251,191,36,.08);font-weight:700;color:#fbbf24;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(251,191,36,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(251,191,36,.06),rgba(239,68,68,.05));border:1px solid rgba(251,191,36,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#fbbf24;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(251,191,36,.08);color:#fbbf24;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
 .article-body strong{color:#fff}
-.article-body em{color:var(--bis-muted)}
-.article-body blockquote{background:var(--bis-card);border-left:3px solid var(--bis-accent);padding:14px 18px;margin:16px 0;border-radius:0 8px 8px 0;font-style:italic;color:var(--bis-muted)}
-.article-body table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-.article-body th{background:rgba(26,86,219,.12);color:var(--bis-accent);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--bis-border);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
-.article-body td{padding:11px 12px;border-bottom:1px solid var(--bis-border);color:var(--bis-text)}
-.article-body tr:hover td{background:rgba(30,41,59,.4)}
-.article-body code{background:rgba(26,86,219,.12);color:var(--bis-accent);padding:2px 6px;border-radius:4px;font-size:13px}
-.article-body pre{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
-.article-body pre code{background:none;color:var(--bis-text);padding:0;font-size:13px}
-.article-body img{max-width:100%;border-radius:10px;margin:16px 0;border:1px solid var(--bis-border)}
-.article-body hr{border:none;border-top:1px solid var(--bis-border);margin:28px 0}
-.article-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
-.article-meta span{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--bis-muted)}
-.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.atag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:var(--bis-accent);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600}
-.ftrnote{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--bis-muted);margin-top:16px}
-.ftrnote strong{color:var(--bis-green)}
-@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.bis-hero{padding:24px 18px}.article-body{font-size:15px}}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #fbbf24;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#fbbf24}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#fbbf24;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-<div class="awrap">
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
-<div class="c">
-<div class="article-body">
-<p><img alt="数据中心与算力集群" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&amp;q=80" />
-<em>算力基础设施：资本的新宠，东南亚的新故事</em></p>
-<hr />
-<h2>开头</h2>
-<p>今年3月，我翻了一份关于东南亚数据中心的研究报告。</p>
-<p>报告很长，结论很清晰，但让我真正停下来的不是那些数字——而是一个看似不相关的事实：</p>
-<p><strong>中东的主权财富基金，正在大规模重新配置资产。</strong></p>
-<p>沙特公共投资基金、科威特投资局、卡塔尔投资局、阿布扎比投资局——这些名字以前很少出现在东南亚科技地产的语境里，但现在，它们开始出现在曼谷的谈判桌上了。</p>
-<p>这意味着什么？</p>
-<hr />
-<h2>一、中东资本为什么要走</h2>
-<p>2026年初，中东的地缘局势让很多人睡不着觉。</p>
-<p>伊朗与多国之间的紧张关系持续升级，地区安全性明显下降。这不是第一次中东资本大规模外流——历史上每次区域冲突，都会伴随一轮资本避险迁移。</p>
-<p>但这一次有个新变量：</p>
-<p><strong>东南亚不再只是"承接"的角色，它正在成为一个有主动吸引力的目的地。</strong></p>
-<p>为什么？几个原因叠加在一起：</p>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" alt="Middle East">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Geopolitics · IDC · 2026</span>
+    <h1>中东资本、东南亚算力：一场正在发生的产业迁移</h1>
+    <p class="subtitle">当沙特的钱开始寻找新加坡以外的出口，泰国悄悄成了那个答案 — 三重窗口叠加下的东南亚IDC机会</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-02</span>
+      <span>⏱ ~10 min read</span>
+      <span>🏷️ 中东资本 · 东南亚IDC · Token Factory · 地缘政治</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">中东资本</span>
+      <span class="tag-pill">东南亚IDC</span>
+      <span class="tag-pill">Token Factory</span>
+      <span class="tag-pill">地缘政治</span>
+      <span class="tag-pill">AI算力</span>
+    </div>
+  </div>
+</div>
+
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>：东南亚IDC向AI算力平台的转型，本质上是三重窗口叠加的机会 — <strong>中东资本避险需求 + AI推理算力爆发 + 东南亚电力成本优势</strong> — 这个窗口预计会持续3-5年。
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>中东资本为什么要走</h2>
+<p>2026年初，中东的地缘局势让很多人睡不着觉。伊朗与多国之间的紧张关系持续升级，地区安全性明显下降。这不是第一次中东资本大规模外流——历史上每次区域冲突，都会伴随一轮资本避险迁移。</p>
+<p>但这一次有个新变量：<strong>东南亚不再只是"承接"的角色，它正在成为一个有主动吸引力的目的地。</strong></p>
+<div class="bis-grid">
+  <div class="bis-card cyan"><span class="val">4-6%</span><span class="lab">东南亚GDP增速 2024-2026</span></div>
+  <div class="bis-card green"><span class="val">40-55%</span><span class="lab">泰国相对新加坡成本优势</span></div>
+  <div class="bis-card"><span class="val">$0.12</span><span class="lab">泰国工业电价/kWh</span></div>
+  <div class="bis-card purple"><span class="val">8年</span><span class="lab">泰国BOI税收豁免</span></div>
+</div>
+<div class="punchline">
+<h3>🌏 东南亚成为目的地的五个原因</h3>
 <ul>
-<li>政治相对稳定：泰国、越南、印尼没有卷入主要地缘冲突</li>
-<li>经济增长稳健：2024-2026年东南亚GDP增速维持在4%-6%</li>
-<li>数字经济政策友好：泰国的BOI免税政策、马来西亚的多媒体超级走廊、新加坡的智慧国家计划</li>
-<li>劳动力成本优势：相比中东（撇开能源补贴）和新加坡，东南亚的综合运营成本明显更低</li>
-<li>华人商业网络：曼谷、雅加达、胡志明的华人商业社区为中东阿拉伯资本提供了天然的文化桥梁</li>
+  <li><strong>政治相对稳定</strong>：泰国、越南、印尼没有卷入主要地缘冲突</li>
+  <li><strong>经济增长稳健</strong>：2024-2026年东南亚GDP增速维持在4%-6%</li>
+  <li><strong>数字经济政策友好</strong>：泰国的BOI免税政策、马来西亚的多媒体超级走廊、新加坡的智慧国家计划</li>
+  <li><strong>劳动力成本优势</strong>：相比中东（撇开能源补贴）和新加坡，东南亚的综合运营成本明显更低</li>
+  <li><strong>华人商业网络</strong>：曼谷、雅加达、胡志明的华人商业社区为中东阿拉伯资本提供了天然的文化桥梁</li>
 </ul>
-<p>一个做中东家族办公室投资的朋友告诉我："现在中东的UHNWI（超高净值个人）最焦虑的不是收益率，是'我的资产在哪里过夜最安全'。"</p>
-<p>答案正在从伦敦、新加坡，转向曼谷、雅加达。</p>
-<hr />
-<h2>二、东南亚IDC：三个数字说清楚市场</h2>
-<p>很多人问：东南亚数据中心的市场到底有多大？</p>
-<p>几个关键数字：</p>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
+</div>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1546410536-bb8ddd804b3e?w=900&q=80" alt="Middle East city" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：中东城市天际线 — 资本正在重新寻找安全的落脚点 © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>东南亚IDC市场：三个数字说清楚</h2>
+<p>很多人问：东南亚数据中心的市场到底有多大？几个关键数字：</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>指标</th><th>数据</th></tr></thead>
 <tbody>
-<tr>
-<td>泰国IDC市场2025E</td>
-<td>$14.5亿-18.9亿美元</td>
-</tr>
-<tr>
-<td>泰国IDC市场2030E</td>
-<td>$31.9亿-62.9亿美元</td>
-</tr>
-<tr>
-<td>年复合增长率</td>
-<td>12%-28%</td>
-</tr>
-<tr>
-<td>泰国相对新加坡的成本优势</td>
-<td>低40%-55%</td>
-</tr>
+<tr><td>泰国IDC市场2025E</td><td><strong>$14.5亿-18.9亿美元</strong></td></tr>
+<tr><td>泰国IDC市场2030E</td><td><strong>$31.9亿-62.9亿美元</strong></td></tr>
+<tr><td>年复合增长率</td><td><strong>12%-28%</strong></td></tr>
+<tr><td>泰国相对新加坡的成本优势</td><td><strong>低40%-55%</strong></td></tr>
 </tbody>
 </table>
-<p>这些数字背后有一个更重要的趋势：AI工作负载正在重塑东南亚数据中心的商业逻辑。</p>
-<p>传统的IDC模式是"机柜出租"——按千瓦时收费，用户自己装服务器。</p>
-<p>但现在，一个新的范式正在出现：Token Factory。</p>
-<p>黄仁勋在2025年提出了这个概念，本质上是说：数据中心不再只是"放服务器的地方"，而是生产AI推理结果的工厂。</p>
-<p>每一次LLM的推理请求——输入加输出Token——都是工厂的产品。</p>
-<p>衡量效率的核心指标，从"机柜出租率"变成了"每瓦特Token产出"和"每Token收入"。</p>
-<p>这个转变，对东南亚意味着什么？</p>
-<hr />
-<h2>三、电力成本套利：东南亚真正的优势</h2>
-<p>说到数据中心的竞争力，电价是一个核心变量。</p>
+</div>
+<p>这些数字背后有一个更重要的趋势：<strong>AI工作负载正在重塑东南亚数据中心的商业逻辑</strong>。</p>
+<div class="signal">
+<h3>🎬 从机柜出租到Token Factory</h3>
+<ul>
+  <li><strong>传统IDC</strong>：按千瓦时收费，"机柜出租"模式</li>
+  <li><strong>Token Factory</strong>：黄仁勋2025年概念，本质是生产AI推理结果的工厂</li>
+  <li><strong>衡量指标转变</strong>：从"机柜出租率" → "每瓦特Token产出"和"每Token收入"</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>电力成本套利：东南亚真正的优势</h2>
 <p>东南亚主要市场的工业电价对比：</p>
-<ul>
-<li>泰国：约$0.12/kWh</li>
-<li>新加坡：约$0.28/kWh</li>
-<li>印尼：约$0.06-0.08/kWh</li>
-<li>越南：约$0.07-0.09/kWh</li>
-</ul>
-<p>泰国的电价不是最低的，但综合来看，它的套利空间最扎实。</p>
-<p>表面上，中东的电价更低（阿联酋和沙特约$0.05-0.08/kWh），但实际算账时有几个因素必须考虑：</p>
-<p><strong>第一：PUE的差距。</strong></p>
-<p>中东是沙漠气候，夏季最高可达50°C。普通风冷数据中心的PUE在1.8-2.2之间——也就是说，你每花1度电在计算上，还要额外花0.8-1.2度电在冷却上。</p>
-<p>泰国的热带气候（年均28-32°C）虽然也热，但可以通过自然冷却辅助，将PUE控制在1.5左右。如果上液冷，PUE可以降到1.2-1.3。</p>
-<p>算下来，<strong>泰国的实际电力成本反而可能比中东更低</strong>——前提是你愿意投资液冷改造。</p>
-<p><strong>第二：政策稳定性。</strong></p>
-<p>中东的能源补贴随时可以调整，沙特2023年就把能源补贴砍了一刀。这种政策不确定性对于需要5-10年规划的长期资产来说，是致命的。</p>
-<p>泰国的BOI税收豁免（8年企业所得税）是白纸黑字的，稳定性高得多。</p>
-<p><strong>结论：泰国真正的优势不是某一单项指标，而是一个综合包——电价中等但稳定、气候适合冷却、BOI激励力度大、地理位置辐射整个东南亚。</strong></p>
-<hr />
-<h2>四、Token Factory的经济账：真的能赚钱吗</h2>
-<p>这是大家最关心的问题，也是最容易被夸大的地方。</p>
-<p>我尽量客观地算一下：</p>
-<p><strong>基准假设：</strong></p>
-<ul>
-<li>GPU型号：H100 SXM（80GB HBM3）</li>
-<li>泰国工业电价：$0.12/kWh</li>
-<li>PUE：1.5（风冷+自然冷却）</li>
-<li>GPU功耗：700W TDP</li>
-</ul>
-<p><strong>单卡日经济模型（70%利用率）：</strong></p>
-<p>收入端：</p>
-<ul>
-<li>H100推理吞吐量（优化后）：约1,000-2,000 Tokens/秒</li>
-<li>日处理Token量：8,640万-1.73亿Tokens</li>
-<li>每百万Token定价：$0.40（GPT-4等效市场报价）</li>
-<li><strong>日收入：约$2,420</strong></li>
-</ul>
-<p>成本端：</p>
-<ul>
-<li>GPU云租成本（70%利用率）：$33.7/日</li>
-<li>电力成本：$3.0/日</li>
-<li>带宽+存储+运维摊销：约$5-10/日</li>
-<li><strong>总成本：约$42-50/日</strong></li>
-</ul>
-<p><strong>单卡日净收益：约$2,370-$2,380</strong></p>
-<p><strong>年化单卡净收益：约$86万</strong></p>
-<p>当然，这是一个高度理想化的模型。实际运营中，利用率不会一直维持在70%，GPU的采购价格也会有波动，而且你还需要考虑到冷却改造的投资摊销。</p>
-<p>但这个数字说明了方向：Token Factory的商业逻辑是成立的，关键是规模和管理。</p>
-<hr />
-<h2>五、谁在入场</h2>
-<p>这份报告里有一些案例值得说说，虽然我隐去了具体的公司名称。</p>
-<p><strong>第一个案例：一家从中国IDC起家的算力平台</strong>——它从2019年开始主动转型，增加AI客户比例，在数据中心设计中预留高功率密度（30kW+每柜），支持GPU集群部署。到2024年，它的AI相关收入占比从15%提升到了35%。</p>
-<p>这类转型的核心，说到底就两件事：提前设计电力密度，以及提前跟AI客户建立关系。</p>
-<p><strong>第二个案例：一家东南亚超大规模IDC运营商</strong>——背后有顶级PE和主权基金支持，专注超大规模客户。它的策略很简单：大规模拿地、标准化设计、快速建设。单个数据中心园区的建设周期可以压缩到12-18个月，客户留存率超过95%。</p>
-<p>超大规模客户的长期合同（10-15年）是稳定的现金流来源，标准化是快速扩张的基础——这两个逻辑放在一起，效果就被放大了。</p>
-<p><strong>第三个案例：一家印尼的数据中心运营商</strong>——它在2025年与当地最大的电信运营商成立了合资公司，规划了一个500MW的AI数据中心园区，核心是建设可再生能源驱动、高功率密度+先进液冷的设施。</p>
-<p>与本地顶级运营商成立合资公司，是快速获取本地客户资源的有效路径，这个道理不难理解，但在东南亚这种关系驱动型市场里，它的价值被放大了。</p>
-<hr />
-<h2>六、最现实的风险是什么</h2>
-<p>乐观的话说了很多，但有几个风险必须正面对待：</p>
-<p><strong>第一：美国芯片出口管制。</strong></p>
-<p>这是对东南亚IDC转型最具颠覆性的单一风险。</p>
-<p>2022年10月，A100/H100被列入出口管制清单。2023年10月，H800（中国特供版）、L40S被纳入。2024年，连H20（中国特供版H100）也被加入了管制范围。</p>
-<p>高端GPU的采购渠道正在收窄，采购成本在上升，合规风险在增加。对于任何计划在东南亚部署GPU集群的IDC来说，建立内部出口合规体系是必须的。</p>
-<p><strong>第二：泰国电网扩容速度。</strong></p>
-<p>AI负载的特点是高密度、持续性强。一栋2,000柜的数据中心，电力需求可能高达20-30MW。而泰国目前的电网扩容速度能否跟上这个需求，是个现实问题。</p>
-<p>变电站建设周期、PEA/MEA的接入流程，都是需要提前规划的变量。</p>
-<p><strong>第三：竞争加剧。</strong></p>
-<p>当所有人都看到东南亚的机会，新加坡的巨头们也在加速布局。Equinix、STT GDC这些全球性玩家，拥有更强的资本、更成熟的运营体系、更多的主流云商直连协议。</p>
-<p>泰国本土IDC的差异化优势必须建立在成本、本地化关系、政策利用这几个维度上，否则会陷入被动。</p>
-<hr />
-<h2>七、我的判断</h2>
-<p>回顾这份报告，最核心的结论是：</p>
-<p>东南亚IDC向AI算力平台的转型，本质上是一个三重窗口叠加的机会——中东资本避险需求、AI推理算力爆发、东南亚电力成本优势——这个窗口预计会持续3-5年。</p>
-<p>但"机遇"和"成功"之间，隔着执行。</p>
-<p>有几个条件决定了这个转型能否成功：</p>
-<ol>
-<li>
-<p><strong>电力密度设计</strong>：新建或改造时必须考虑30kW+每柜的承载能力，否则未来会受限于基础设施</p>
-</li>
-<li>
-<p><strong>GPU资源锁定</strong>：在供应链紧张之前建立GPU采购渠道，是最被低估的战略动作</p>
-</li>
-<li>
-<p><strong>客户关系的提前建立</strong>：AI客户的合同通常更长期（5-7年），有助于稳定现金流，但需要提前6-12个月开始建立信任</p>
-</li>
-<li>
-<p><strong>合规体系</strong>：出口管制风险是真实的，需要有专人负责</p>
-</li>
-<li>
-<p><strong>液冷改造</strong>：这不是可选项，而是必选项——PUE的差距会直接影响单位经济模型的竞争力</p>
-</li>
-</ol>
-<hr />
-<h2>结语</h2>
-<p>写完这篇，我最大的感受是：东南亚IDC的故事，本质上是一个关于"在哪里部署算力最划算"的选择题。</p>
-<p>资本的流向在变，竞争的核心在变，衡量一个数据中心价值的标准也在变。</p>
-<p>传统IDC看机柜出租率。</p>
-<p>Token Factory看每瓦特Token产出。</p>
-<p>这是一个全新的游戏规则，谁先理解，谁就先拿到入场券。</p>
-<hr />
-<p><em>数据来源：Mordor Intelligence、GlobeNewsWire、Arizton、Wood Mackenzie及公开市场数据。部分数字为行业估算，仅供方向参考。</em></p>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">$0.12</span><span class="lab">泰国/kWh</span></div>
+  <div class="bis-card red"><span class="val">$0.28</span><span class="lab">新加坡/kWh</span></div>
+  <div class="bis-card green"><span class="val">$0.06-0.08</span><span class="lab">印尼/kWh</span></div>
+  <div class="bis-card purple"><span class="val">$0.07-0.09</span><span class="lab">越南/kWh</span></div>
 </div>
-<div class="tag-row"></div>
-<div class="ftrnote"><strong>数据来源：</strong>本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
+<div class="punchline">
+<h3>⚡ 泰国 vs 中东：为什么实际电力成本反而更低</h3>
+<ul>
+  <li><strong>PUE差距</strong>：中东沙漠气候夏季最高50°C，普通风冷PUE 1.8-2.2；泰国热带气候PUE可控制在1.5，液冷可降至1.2-1.3</li>
+  <li><strong>政策稳定性</strong>：中东能源补贴随时可调，沙特2023年曾砍一刀；泰国BOI税收豁免8年，白纸黑字</li>
+  <li><strong>综合包优势</strong>：电价中等但稳定 + 气候适合冷却 + BOI激励力度大 + 地理位置辐射整个东南亚</li>
+</ul>
 </div>
-<footer><div class="c" style="max-width:860px"><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></div></footer>
 </div>
-<script>
-(function(){
-  var els = document.querySelectorAll('.bis-section,.bis-card,.bis-hero,.bis-alert,.bis-signal,.bis-punchline,.bis-impact,.article-body h2,.article-body h3,.article-body blockquote');
-  els.forEach(function(el){
-    el.style.opacity='0';
-    el.style.transform='translateY(18px)';
-    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
-  });
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.06, rootMargin:'0px 0px -30px 0px'});
-  els.forEach(function(el){ obs.observe(el); });
-})();
-</script>
-<script src="../main.js"></script>
-</body></html>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Data center" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI数据中心 — Token Factory的核心基础设施 © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>Token Factory经济账：真的能赚钱吗</h2>
+<p><strong>基准假设</strong>：H100 SXM（80GB HBM3），泰国工业电价$0.12/kWh，PUE 1.5，GPU功耗700W TDP，70%利用率。</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>项目</th><th>数据</th></tr></thead>
+<tbody>
+<tr><td>日收入（约70%利用率）</td><td><strong>~$2,420/卡</strong></td></tr>
+<tr><td>日成本（GPU租+电+带宽）</td><td><strong>~$42-50/卡</strong></td></tr>
+<tr><td>单卡日净收益</td><td><strong>~$2,370-2,380/卡</strong></td></tr>
+<tr><td>年化单卡净收益</td><td><strong>~$86万/卡</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="quote">注：这是高度理想化模型。实际运营中利用率不会一直维持在70%，GPU采购价格也有波动，且需考虑冷却改造投资摊销。方向是对的，细节需要具体项目具体测算。</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>谁在入场</h2>
+<div class="signal">
+<h3>🏢 三类玩家的入场策略</h3>
+<ul>
+  <li><strong>中国IDC起家的算力平台</strong>（2019年开始转型）：提前设计电力密度（30kW+/柜），支持GPU集群部署；2024年AI相关收入占比从15%→35%</li>
+  <li><strong>东南亚超大规模IDC运营商</strong>（顶级PE+主权基金支持）：大规模拿地 + 标准化设计 + 快速建设，单园区建设周期压缩到12-18个月，客户留存率>95%</li>
+  <li><strong>印尼数据中心运营商</strong>（2025年新动作）：与当地最大电信运营商成立合资公司，规划500MW AI数据中心园区，可再生能源驱动 + 高功率密度 + 先进液冷</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>最现实的风险</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>风险</th><th>说明</th><th>应对策略</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-r">美国芯片出口管制</span></td><td>2022年A100/H100，2023年H800/L40S，2024年H20陆续被管制</td><td>建立内部出口合规体系</td></tr>
+<tr><td><span class="tg tg-n">泰国电网扩容速度</span></td><td>2,000柜数据中心电力需求20-30MW，变电站建设周期不可忽视</td><td>提前12-18个月规划电网接入</td></tr>
+<tr><td><span class="tg tg-p">竞争加剧</span></td><td>Equinix、STT GDC等全球性玩家布局泰国，本土IDC差异化压力增大</td><td>成本+本地化关系+政策利用三维度构建护城河</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>三重窗口叠加</strong>：中东资本避险 + AI推理算力爆发 + 东南亚电力成本优势，这个窗口预计持续3-5年</li>
+    <li><strong>泰国是核心目的地</strong>：综合包优势最扎实 — 电价中等但稳定、气候适合冷却、BOI激励力度大、地理位置辐射整个东南亚</li>
+    <li><strong>Token Factory商业逻辑成立</strong>：H100在70%利用率下单卡年化净收益约$86万，关键是规模和管理</li>
+    <li><strong>转型成功的五个条件</strong>：电力密度设计（30kW+/柜）+ GPU资源锁定 + 客户关系提前建立 + 合规体系 + 液冷改造</li>
+    <li><strong>机遇和成功之间隔着执行</strong>：所有人都看到机会，本土IDC的差异化优势必须建立在成本、本地化关系、政策利用这几个维度上</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=80" alt="Server" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI服务器集群 — 东南亚IDC向Token Factory转型的核心资产 © Unsplash</figcaption>
+</figure>
+
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI accelerator"><div class="rel-card-body"><h4>国产AI加速器生态实战观察</h4><p>6841个模型在头部国产NPU上跑通，量化栈+推理框架已就位</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token"><div class="rel-card-body"><h4>Token经济这一年</h4><p>从2025年初的1.2%到2026年的61%，中国开源模型在OpenRouter上的份额爆炸式增长</p><span class="rel-card-tag">Token Economy</span></div></a>
+<a class="rel-card" href="china-internet-ai-capabilities-2025.html"><img src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=600&q=80" alt="China AI"><div class="rel-card-body"><h4>2025中国互联网头部企业AI能力深度洞察</h4><p>字节跳动、阿里巴巴、腾讯、幻方——从AI at Work、AI in Products、Building AI SOTA三大维度拆解</p><span class="rel-card-tag">Deep Report</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>数据来源</strong>：Mordor Intelligence、GlobeNewsWire、Arizton、Wood Mackenzie及公开市场数据。部分数字为行业估算，仅供方向参考。</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>

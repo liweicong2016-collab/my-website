@@ -3,440 +3,277 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2025中国互联网头部企业AI能力三维度深度洞察</title>
-<meta name="description" content="字节跳动、阿里巴巴、腾讯、美团、京东、快手、小红书、幻方——从AI at Work、AI in Products、Building AI SOTA三大维度拆解中国互联网头部企业的AI能力版图。">
+<title>2025中国互联网头部企业AI能力深度洞察</title>
+<meta name="description" content="字节跳动、阿里巴巴、腾讯、幻方——从AI at Work、AI in Products、Building AI SOTA三大维度拆解2025年中国互联网AI能力。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bis-bg:#070b14;--bis-card:#0d1321;--bis-card2:#111827;--bis-border:#1e2d45;--bis-text:#e8eaf0;--bis-muted:#94a3b8;--bis-accent:#38bdf8;--bis-accent2:#f59e0b;--bis-accent-soft:rgba(56,189,248,.12);--bis-red:#f87171;--bis-green:#34d399;--bis-purple:#a78bfa;--bis-orange:#fbbf24}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bis-bg);color:var(--bis-text);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
-a{color:var(--bis-accent);text-decoration:none}
-a:hover{opacity:.8}
-.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--bis-border);padding:0 40px}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
 .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.t3{font-size:15px;font-weight:800;color:var(--bis-text);display:flex;align-items:center;gap:8px;text-decoration:none}
-.d{width:7px;height:7px;border-radius:50%;background:var(--bis-accent);box-shadow:0 0 8px var(--bis-accent)}
-.t4{display:flex;align-items:center;gap:6px;color:var(--bis-muted);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-.t4:hover{color:var(--bis-text)}
-.h{background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(56,189,248,.12),transparent 70%),var(--bis-bg);padding:80px 40px 64px;text-align:center}
-.h2{max-width:760px;margin:0 auto}
-.h2 .label{display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--bis-accent);background:var(--bis-accent-soft);border:1px solid rgba(56,189,248,.25);padding:4px 12px;border-radius:999px;margin-bottom:20px}
-.h2 h1{font-size:clamp(26px,4vw,42px);font-weight:800;line-height:1.2;margin-bottom:16px;background:linear-gradient(135deg,var(--bis-text) 60%,var(--bis-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.h2 .sub{font-size:17px;color:var(--bis-muted);margin-bottom:28px}
-.h2 .meta{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--bis-muted)}
-.h2 .meta span{display:flex;align-items:center;gap:5px}
-.c{max-width:740px;margin:0 auto;padding:48px 24px 80px}
-.c h2{font-size:22px;font-weight:800;margin:48px 0 20px;color:var(--bis-text);border-left:3px solid var(--bis-accent);padding-left:14px}
-.c h3{font-size:17px;font-weight:700;margin:32px 0 12px;color:var(--bis-text)}
-.c p{margin-bottom:16px;color:var(--bis-muted)}
-.c p:last-child{margin-bottom:0}
-.c ul,.c ol{margin:0 0 20px 20px;color:var(--bis-muted)}
-.c li{margin-bottom:10px}
-.c li strong{color:var(--bis-text)}
-.c blockquote{border:1px solid var(--bis-border);border-left:3px solid var(--bis-accent);background:var(--bis-card);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;font-size:15px;color:var(--bis-muted);font-style:italic}
-.c .highlight{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(245,158,11,.06));border:1px solid var(--bis-border);border-radius:10px;padding:24px;margin:32px 0}
-.c .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.c .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;background:var(--bis-accent-soft);color:var(--bis-accent);border:1px solid rgba(56,189,248,.2)}
-.c .tag.orange{background:rgba(245,158,11,.12);color:var(--bis-orange);border-color:rgba(245,158,11,.2)}
-.c .tag.green{background:rgba(52,211,153,.12);color:var(--bis-green);border-color:rgba(52,211,153,.2)}
-.c .tag.purple{background:rgba(167,139,250,.12);color:var(--bis-purple);border-color:rgba(167,139,250,.2)}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
-.card{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:10px;padding:18px}
-.card .card-tag{font-size:11px;font-weight:800;color:var(--bis-accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.card h4{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--bis-text)}
-.card p{font-size:13px;color:var(--bis-muted);margin:0}
-.tbl{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
-.tbl th{background:var(--bis-card);color:var(--bis-accent);font-weight:700;padding:10px 14px;text-align:left;border-bottom:1px solid var(--bis-border)}
-.tbl td{padding:10px 14px;border-bottom:1px solid rgba(30,45,69,.5);color:var(--bis-muted);vertical-align:top}
-.tbl tr:last-child td{border-bottom:none}
-.tbl .co{color:var(--bis-accent);font-weight:600}
-.tbl .co2{color:var(--bis-orange);font-weight:600}
-footer{background:linear-gradient(180deg,rgba(13,19,33,.35),rgba(7,11,20,.96));border-top:1px solid var(--bis-border);padding:32px 40px;text-align:center}
-footer p{color:var(--bis-muted);font-size:13px}
-footer a{color:var(--bis-accent)}
-@media(max-width:768px){.grid-3{grid-template-columns:1fr}.h{padding:60px 20px 48px}.t{padding:0 20px}.c{padding:40px 16px 60px}}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#38bdf8;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:#38bdf8;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(239,68,68,.15);border-left:4px solid #f87171;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f87171}
+.signal{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#a78bfa;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(245,158,11,.06));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#38bdf8;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #38bdf8;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#38bdf8;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.orange .val{color:#fbbf24}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(56,189,248,.08);font-weight:700;color:#38bdf8;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(56,189,248,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(245,158,11,.05));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#38bdf8;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(56,189,248,.08);color:#38bdf8;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #38bdf8;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#38bdf8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
+<link rel="stylesheet" href="../main.css">
 </head>
 <body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
 
-<nav class="t">
-  <div class="t2">
-    <a class="t3" href="../index.html"><span class="d"></span>Livius</a>
-    <div style="display:flex;gap:20px">
-      <a class="t4" href="../index.html">首页</a>
-      <a class="t4" href="https://github.com/liweicong2016-collab" target="_blank">GitHub</a>
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=1200&q=80" alt="China AI">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Deep Report · 2025</span>
+    <h1>2025中国互联网头部企业AI能力深度洞察</h1>
+    <p class="subtitle">字节跳动、阿里巴巴、腾讯、幻方——从AI at Work、AI in Products、Building AI SOTA三大维度拆解2025年中国互联网AI能力</p>
+    <div class="hero-meta">
+      <span>📅 2025-06</span>
+      <span>⏱ ~15 min read</span>
+      <span>🏷️ 中国AI · 字节跳动 · 阿里巴巴 · 腾讯 · DeepSeek</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">中国AI</span>
+      <span class="tag-pill">字节跳动</span>
+      <span class="tag-pill">阿里巴巴</span>
+      <span class="tag-pill">腾讯</span>
+      <span class="tag-pill">DeepSeek</span>
+      <span class="tag-pill">大模型</span>
     </div>
   </div>
-</nav>
-
-<header class="h">
-  <div class="h2">
-    <span class="label">深度报告</span>
-    <h1>2025中国互联网头部企业AI能力三维度深度洞察</h1>
-    <p class="sub">字节跳动 · 阿里巴巴 · 腾讯 · 美团 · 京东 · 快手 · 小红书 · 幻方</p>
-    <div class="meta">
-      <span>📊 深度分析</span>
-      <span>🕐 2026-06-04</span>
-      <span>⏱ 约 12 分钟阅读</span>
-    </div>
-  </div>
-</header>
-
-<div class="c article-body">
-
-<h2>执行摘要</h2>
-
-<p>中国互联网头部企业正在经历一场以 AI 为核心驱动力的深刻转型。本报告选取<strong>字节跳动、阿里巴巴、腾讯、美团、京东、快手、小红书及幻方</strong>八家企业，从三大维度系统性分析其 AI 能力与应用策略：</p>
-
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0">
-  <div class="card">
-    <div class="card-tag">AI at Work</div>
-    <h4>企业内部效率革命</h4>
-    <p>智能助手、客服自动化、编程辅助、市场内容生成——AI 重塑企业办公与运营流程</p>
-  </div>
-  <div class="card">
-    <div class="card-tag">AI in Products</div>
-    <h4>产品深度嵌入</h4>
-    <p>推荐系统升级、内容生态重构、搜索智能化——AI 成为产品竞争力的核心变量</p>
-  </div>
-  <div class="card">
-    <div class="card-tag">Building AI SOTA</div>
-    <h4>前沿模型创新</h4>
-    <p>大模型训练、开源生态、推理优化、社区建设——技术护城河的深度较量</p>
-  </div>
 </div>
 
-<blockquote>本报告所有信息均来自公开资料（财报、发布会、技术论文、权威媒体报道），综合整理分析，数据截至 2025 年末至 2026 年初。</blockquote>
-
----
-
-<h2>一、AI at Work — 企业内部效率革命</h2>
-
-<h3>1.1 智能助手：知识型工作的自动化</h3>
-
-<p>各头部公司均已部署基于 LLM 的内部智能助手，覆盖以下核心场景：</p>
-
-<ul>
-  <li><strong>周报 / 财报摘要</strong>：自动提取关键数据，生成结构化摘要，将人工整理时间从小时级压缩至分钟级</li>
-  <li><strong>邮件与文档草稿</strong>：市场公关、法务合规等部门使用 AI 生成对外沟通初稿</li>
-  <li><strong>会议纪要 & 知识问答</strong>：基于内部知识库的语义检索，回答员工关于政策、流程、技术的各类问题</li>
-</ul>
-
-<div class="highlight">
-  <div class="tag-row">
-    <span class="tag">字节跳动</span>
-    <span class="tag orange">阿里巴巴</span>
-    <span class="tag green">腾讯</span>
-  </div>
-  <p style="margin-top:12px;font-size:15px;color:var(--bis-muted)">字节自研「Coze 平台」对外提供 AI 应用构建能力，内部同时运行定制化助手；阿里钉钉全面集成通义千问；腾讯企业微信+腾讯文档体系引入 AI 辅助功能。</p>
+<div class="callout fade-up">
+  ⚠️ <strong>核心框架</strong>：评估中国互联网头部企业的AI能力，从三个维度入手 — <strong>AI at Work（内部运营提效）、AI in Products（产品智能化）、Building AI SOTA（自主研发SOTA模型）</strong>。
 </div>
 
-<h3>1.2 智能客服：从问答到自主决策</h3>
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>评估框架：三个维度</h2>
+<p>本文对字节跳动、阿里巴巴、腾讯、幻方的AI能力进行系统评估，采用以下三维框架：</p>
+<div class="bis-grid">
+  <div class="bis-card cyan"><span class="val">A</span><span class="lab">AI at Work<br>内部运营提效</span></div>
+  <div class="bis-card green"><span class="val">P</span><span class="lab">AI in Products<br>产品智能化</span></div>
+  <div class="bis-card purple"><span class="val">S</span><span class="lab">Building SOTA<br>自研SOTA模型</span></div>
+</div>
+<p>三个维度互补：AI at Work决定运营效率，AI in Products决定用户价值，Building SOTA决定技术护城河和长期竞争力。</p>
+</div>
 
-<p>阿里、京东、腾讯的智能客服已从「关键词匹配」演进至「多轮对话 + 自主决策」阶段：</p>
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1524413849857-06fe4765a4be?w=900&q=80" alt="China city" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：中国互联网科技集群 — AI竞争的核心地理 © Unsplash</figcaption>
+</figure>
 
-<ul>
-  <li><strong>订单全流程覆盖</strong>：咨询、修改地址、退换货、投诉处理均可由 AI 完成首轮接待</li>
-  <li><strong>意图识别与分流</strong>：大模型理解用户情绪与核心诉求，将复杂case 精准转人工</li>
-  <li><strong>24×7 不间断</strong>：高峰期承接 80%+ 的基础咨询量，显著降低人工成本</li>
-</ul>
-
-<h3>1.3 编程辅助：工程生产力的重塑</h3>
-
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>字节跳动：AI in Products最强</h2>
+<div class="tbl-wrap">
 <table class="tbl">
-  <thead>
-    <tr>
-      <th>企业</th>
-      <th>AI 编程产品</th>
-      <th>核心能力</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="co">字节跳动</td>
-      <td>Trae IDE（AI Native）</td>
-      <td>自动代码生成、补全、逻辑优化、调试辅助，支持多语言</td>
-    </tr>
-    <tr>
-      <td class="co">阿里巴巴</td>
-      <td>通义灵码（内部+商用）</td>
-      <td>深度代码补全、代码审查、Bug 定位，集成阿里云工具链</td>
-    </tr>
-    <tr>
-      <td class="co">腾讯</td>
-      <td>腾讯云 AI 代码助手</td>
-      <td>基于混元大模型，覆盖研发全流程，提升工程师人效</td>
-    </tr>
-  </tbody>
+<thead><tr><th>维度</th><th>评估</th><th>代表案例</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">AI at Work</span></td><td>⭐⭐⭐⭐</td><td>AI辅助内容创作、自动翻译、智能推荐优化</td></tr>
+<tr><td><span class="tg tg-r">AI in Products</span></td><td>⭐⭐⭐⭐⭐</td><td>豆包（AI助手）、AI视频生成、翻译机、智能客服</td></tr>
+<tr><td><span class="tg tg-p">Building SOTA</span></td><td>⭐⭐⭐</td><td>云雀大模型（doubao-pro）、视频生成模型</td></tr>
+</tbody>
 </table>
-
-<h3>1.4 市场与创意内容生成（AIGC）</h3>
-
-<p>快手、阿里、小红书等平台型公司已大规模使用 AIGC 提升创意产能：</p>
-
+</div>
+<div class="signal">
+<h3>🔍 字节跳动的AI优势</h3>
 <ul>
-  <li><strong>广告文案生成</strong>：输入商品卖点 + 目标人群，AI 输出多版本投放文案，A/B 测试效率提升 3-5 倍</li>
-  <li><strong>短视频脚本</strong>：快手可灵（Kling）系列模型支持从文字描述到视频内容的端到端生成</li>
-  <li><strong>营销素材批量生产</strong>：阿里妈妈（Alimama）AI 创意平台每日生成数百万张营销banner</li>
+  <li><strong>豆包App</strong>：国内用户量最大的AI助手之一，与抖音/TikTok生态深度整合</li>
+  <li><strong>AI视频生成</strong>：即梦AI、可灵AI在短视频内容创作中大规模应用</li>
+  <li><strong>AI翻译</strong>：全球化内容创作的核心工具，覆盖190+国家市场</li>
 </ul>
-
----
-
-<h2>二、AI in Products — 产品形态的生成式升级</h2>
-
-<h3>2.1 推荐系统：从排序算法到「会话编排」</h3>
-
-<p>传统推荐系统的「点击率预估 + 排序优化」范式正在被大模型深度改写：</p>
-
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0">
-  <div class="card">
-    <div class="card-tag">美团 MTGR</div>
-    <h4>生活服务推荐重构</h4>
-    <p>大模型用于长期兴趣建模、跨场景意图推理，实现「推荐即服务」</p>
-  </div>
-  <div class="card">
-    <div class="card-tag">快手 OneRec</div>
-    <h4>短视频会话推荐</h4>
-    <p>多模态大模型理解视频语义，实现更深层次的内容-用户匹配</p>
-  </div>
+</div>
 </div>
 
-<h3>2.2 抖音 & TikTok：AI 驱动的创作生态</h3>
-
-<p>字节跳动的 AI 产品嵌入已形成完整矩阵：</p>
-
-<ul>
-  <li><strong>Doubao（豆包）</strong>：国内 AI 助手，MAU 快速增长，深度集成抖音社交关系链</li>
-  <li><strong>AI 特效 & 滤镜</strong>：剪映/CapCut 的 AI 视频生成特效，降低用户创作门槛</li>
-  <li><strong>AI 脚本推荐</strong>：创作者上传素材，AI 推荐剪辑方案、配乐、文案</li>
-</ul>
-
-<h3>2.3 小红书：AI 搜索与内容理解</h3>
-
-<p>小红书将大模型应用于：</p>
-
-<ul>
-  <li><strong>AI 搜索（点点）</strong>：理解用户自然语言查询，提供对话式搜索结果</li>
-  <li><strong>内容安全与风控</strong>：AI 识别违规内容、虚假种草，保护社区生态</li>
-  <li><strong>智能标签 & 推荐</strong>：图文笔记的语义理解精度大幅提升</li>
-</ul>
-
-<h3>2.4 京东 & 美团：电商与本地生活的 AI 升级</h3>
-
-<ul>
-  <li><strong>京东言犀大模型</strong>：赋能京东客服、物流调度、供应链预测</li>
-  <li><strong>美团无人机 & 自动配送</strong>：AI 路径规划与实时决策，支撑即时配送网络</li>
-  <li><strong>智能营销投放</strong>：AI 优化广告投放 ROI，实时竞价策略自动化</li>
-</ul>
-
----
-
-<h2>三、Building AI SOTA — 前沿模型创新竞赛</h2>
-
-<h3>3.1 主要玩家核心模型一览</h3>
-
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>阿里巴巴：Building SOTA最强</h2>
+<div class="tbl-wrap">
 <table class="tbl">
-  <thead>
-    <tr>
-      <th>企业</th>
-      <th>代表模型</th>
-      <th>架构特点</th>
-      <th>核心竞争力</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="co">阿里巴巴</td>
-      <td>Qwen2.5 系列</td>
-      <td>MoE（Mixture of Experts）</td>
-      <td>ModelScope 开源生态，国际开发者社区影响力大</td>
-    </tr>
-    <tr>
-      <td class="co">字节跳动</td>
-      <td>Doubao-1.5-Pro</td>
-      <td>稀疏 MoE + 推理优化</td>
-      <td>Seed Thinking 推理精度，企业级 API 服务</td>
-    </tr>
-    <tr>
-      <td class="co">幻方（DeepSeek）</td>
-      <td>DeepSeek-V3 / DeepSeek-R1</td>
-      <td>高效 MoE + 强化学习</td>
-      <td>MATH/CodeForces SOTA，训练成本显著低于竞品</td>
-    </tr>
-    <tr>
-      <td class="co">腾讯</td>
-      <td>混元（Hunyuan）</td>
-      <td>超大规模 Dense + MoE 双轨</td>
-      <td>微信 / QQ 场景深度定制，社交 AI 差异化</td>
-    </tr>
-    <tr>
-      <td class="co">快手</td>
-      <td>Kling（可灵）系列</td>
-      <td>多模态（文本→视频）</td>
-      <td>视频生成 SOTA，内容生态商业化路径清晰</td>
-    </tr>
-  </tbody>
+<thead><tr><th>维度</th><th>评估</th><th>代表案例</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">AI at Work</span></td><td>⭐⭐⭐⭐⭐</td><td>通义钉钉（AI办公）、淘宝客服AI、运营智能化</td></tr>
+<tr><td><span class="tg tg-r">AI in Products</span></td><td>⭐⭐⭐⭐</td><td>通义千问APP、淘宝AI购物助理、优酷AI内容推荐</td></tr>
+<tr><td><span class="tg tg-p">Building SOTA</span></td><td>⭐⭐⭐⭐⭐</td><td>Qwen系列开源模型、Qwen-VL多模态、Qwen-Coder代码模型</td></tr>
+</tbody>
 </table>
-
-<h3>3.2 深度解析：幻方 DeepSeek 的技术破局</h3>
-
-<p>幻方量化旗下的 DeepSeek 是 2025-2026 年最受关注的中国 AI 公司：</p>
-
+</div>
+<div class="punchline">
+<h3>🏆 阿里巴巴的核心优势</h3>
 <ul>
-  <li><strong>极低训练成本</strong>：DeepSeek-V3 训练成本据报道仅约 600 万美元，远低于 GPT-4 级别的投入</li>
-  <li><strong>MATH Benchmark SOTA</strong>：数学推理能力与 o1 持平，引发国际关注</li>
-  <li><strong>开源策略</strong>：模型权重完全开源，推动全球开发者社区参与</li>
-  <li><strong>推理优化</strong>：MLA（Multi-head Latent Attention）+ DeepSeekMoE 架构，显著降低推理 FLOPs</li>
+  <li><strong>Qwen系列</strong>：全球顶级开源模型系列，Qwen3、Qwen-VL、Qwen-Coder在开源社区影响巨大</li>
+  <li><strong>阿里云百炼</strong>：国内最完整的MaaS平台之一，支持200+模型API</li>
+  <li><strong>通义千问</strong>：国内率先开源千亿参数模型的厂商，形成强大开发者生态</li>
 </ul>
-
-<h3>3.3 阿里巴巴 Qwen：开源生态的领导者</h3>
-
-<p>Qwen 系列是中国开源大模型生态最成功的案例：</p>
-
-<ul>
-  <li><strong>ModelScope</strong>：国内最大模型开源社区，汇聚数十万开发者</li>
-  <li><strong>多语言覆盖</strong>：中英双语为主，同时支持 20+ 语言的对话与推理</li>
-  <li><strong>企业级落地</strong>：阿里云百炼平台提供 Qwen API 服务，覆盖数千家企业客户</li>
-</ul>
-
-<h3>3.4 字节 Doubao：产品驱动的模型迭代</h3>
-
-<p>字节的 AI 战略以「产品-模型」双向驱动为特色：</p>
-
-<ul>
-  <li><strong>豆包 AI 助手</strong>：MAU 在国内 AI 助手产品中排名前列</li>
-  <li><strong>API 平台（Coze）</strong>：低代码 AI 应用构建，开发者生态快速扩张</li>
-  <li><strong>Seed Thinking</strong>：内部推理优化技术，用于提升 Doubao 在复杂任务上的表现</li>
-</ul>
-
----
-
-<h2>四、关键趋势洞察</h2>
-
-<div class="highlight">
-  <h3 style="margin-top:0;color:var(--bis-accent)">🤖 趋势一：AI 深度融合主营业务</h3>
-  <p>AI 不再是独立的技术项目，而是深入到<strong>推荐、广告、搜索、运营</strong>等核心业务线，成为产品竞争力的核心变量。模型能力直接决定商业化效率。</p>
+</div>
 </div>
 
-<div class="highlight">
-  <h3 style="margin-top:0;color:var(--bis-accent)">🚀 趋势二：从追赶到局部引领</h3>
-  <p>幻方 DeepSeek、阿里 Qwen 在特定任务上已达到国际 SOTA 水平。<strong>中国企业在推理优化、MoE 架构、开源生态</strong>等方向形成差异化竞争力。</p>
-</div>
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Data center" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI数据中心 — 大模型训练的基础设施 © Unsplash</figcaption>
+</figure>
 
-<div class="highlight">
-  <h3 style="margin-top:0;color:var(--bis-accent)">🛡️ 趋势三：技术生态护城河</h3>
-  <p>通过<strong>模型开源、API 平台、开发者社区</strong>等方式，头部企业正在构建「云+模型+应用」三位一体的 AI 生态护城河，后来者难以逾越。</p>
-</div>
-
-<div class="highlight">
-  <h3 style="margin-top:0;color:var(--bis-accent)">🔮 趋势四：多模态与 Agent 是下一战</h3>
-  <p>快手 Kling 视频生成、字节多模态理解、腾讯混元多模态——<strong>多模态 AI 和智能 Agent 系统</strong>将成为 2026-2027 年技术与产业融合的核心战场。</p>
-</div>
-
----
-
-<h2>五、企业 AI 能力综合评分</h2>
-
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>腾讯：AI at Work最强</h2>
+<div class="tbl-wrap">
 <table class="tbl">
-  <thead>
-    <tr>
-      <th>企业</th>
-      <th>AI at Work</th>
-      <th>AI in Products</th>
-      <th>Building SOTA</th>
-      <th>综合评估</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="co">字节跳动</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td class="co2">第一梯队</td>
-    </tr>
-    <tr>
-      <td class="co">阿里巴巴</td>
-      <td>⭐⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐⭐</td>
-      <td class="co2">第一梯队</td>
-    </tr>
-    <tr>
-      <td class="co">幻方（DeepSeek）</td>
-      <td>⭐⭐⭐</td>
-      <td>⭐⭐</td>
-      <td>⭐⭐⭐⭐⭐</td>
-      <td class="co2">模型黑马</td>
-    </tr>
-    <tr>
-      <td class="co">腾讯</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td class="co2">第一梯队</td>
-    </tr>
-    <tr>
-      <td class="co">快手</td>
-      <td>⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td class="co2">第二梯队</td>
-    </tr>
-    <tr>
-      <td class="co">美团</td>
-      <td>⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐</td>
-      <td class="co2">第二梯队</td>
-    </tr>
-    <tr>
-      <td class="co">京东</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐⭐</td>
-      <td>⭐⭐⭐</td>
-      <td class="co2">第二梯队</td>
-    </tr>
-    <tr>
-      <td class="co">小红书</td>
-      <td>⭐⭐⭐</td>
-      <td>⭐⭐⭐⭐</td>
-      <td>⭐⭐</td>
-      <td class="co2">快速增长中</td>
-    </tr>
-  </tbody>
+<thead><tr><th>维度</th><th>评估</th><th>代表案例</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">AI at Work</span></td><td>⭐⭐⭐⭐⭐</td><td>腾讯云AI、微信AI助手、腾讯会议AI、企业微信AI</td></tr>
+<tr><td><span class="tg tg-r">AI in Products</span></td><td>⭐⭐⭐⭐</td><td>微信AI搜索、QQ AI、腾讯文档AI助手</td></tr>
+<tr><td><span class="tg tg-p">Building SOTA</span></td><td>⭐⭐⭐</td><td>混元大模型（Hunyuan）、腾讯元宝APP</td></tr>
+</tbody>
 </table>
-
-<p style="margin-top:12px;font-size:13px;color:var(--bis-muted)">评分说明：⭐ 数量代表相对能力强度，综合性评估基于公开资料综合判断，数据截至 2025-2026 年。评分仅供参考，不构成任何投资建议。</p>
-
----
-
-<h2>结语</h2>
-
-<p>2025 年的中国互联网 AI 竞争已进入深水区。字节跳动以「产品-模型」双轮驱动稳居龙头；阿里巴巴靠开源生态和云服务构建护城河；幻方 DeepSeek 以极低训练成本杀出重围；腾讯、快手、美团、京东、小红书各凭场景优势占据一席之地。</p>
-
-<p>多模态生成、智能 Agent、端侧部署、推理效率——这些关键词将定义下一阶段竞争格局。唯一确定的是：<strong>没有 AI 能力的企业，将在五年内失去主流市场的参赛资格</strong>。</p>
-
-<div class="tag-row" style="margin-top:32px">
-  <span class="tag">字节跳动</span>
-  <span class="tag orange">阿里巴巴</span>
-  <span class="tag green">腾讯</span>
-  <span class="tag purple">DeepSeek</span>
-  <span class="tag">快手</span>
-  <span class="tag">美团</span>
-  <span class="tag">京东</span>
-  <span class="tag">小红书</span>
-  <span class="tag">大模型</span>
-  <span class="tag">AI SOTA</span>
-  <span class="tag">开源生态</span>
+</div>
+<div class="signal">
+<h3>🔍 腾讯的AI策略</h3>
+<ul>
+  <li><strong>混元大模型</strong>：腾讯自研千亿参数模型，已接入微信搜一搜、腾讯文档等核心产品</li>
+  <li><strong>腾讯云MaaS</strong>：基于混元打造的企业级AI服务，覆盖金融、政务、教育等行业</li>
+  <li><strong>微信AI</strong>：国内最大IM平台引入AI，最新推出微信AI搜索和元宝助手</li>
+</ul>
+</div>
 </div>
 
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>幻方/DeepSeek：神秘黑马</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>维度</th><th>评估</th><th>代表案例</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">AI at Work</span></td><td>⭐⭐</td><td>量化交易AI（内部）</td></tr>
+<tr><td><span class="tg tg-r">AI in Products</span></td><td>⭐⭐⭐⭐</td><td>DeepSeek API（全球爆火）、DeepSeek开源模型</td></tr>
+<tr><td><span class="tg tg-p">Building SOTA</span></td><td>⭐⭐⭐⭐⭐</td><td>DeepSeek-R1（全球最强推理模型之一）、DeepSeek-V3</td></tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<h3>🌟 DeepSeek为什么震动全球AI行业</h3>
+<ul>
+  <li><strong>DeepSeek-R1</strong>：2025年初发布，推理能力与OpenAI o1持平，引发全球开发者关注</li>
+  <li><strong>开源+高性能</strong>：开源模型权重，允许任何人自由使用和微调</li>
+  <li><strong>成本革命</strong>：API价格仅为GPT-4的1/50，引发全球AI价格战</li>
+  <li><strong>MIT许可</strong>：可商用、可微调，彻底改变了全球AI竞争格局</li>
+</ul>
+</div>
 </div>
 
-<footer>
-  <p>© 2026 Livius · AI · Compute · Southeast Asia · All research for reference only</p>
-</footer>
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>字节跳动</strong>：AI in Products最强，豆包+AI视频是杀手级应用</li>
+    <li><strong>阿里巴巴</strong>：Building SOTA最强，Qwen系列是全球开源社区的核心资产</li>
+    <li><strong>腾讯</strong>：AI at Work最强，企业级AI服务覆盖最广</li>
+    <li><strong>幻方/DeepSeek</strong>：神秘黑马，DeepSeek-R1震动全球，打破OpenAI神话</li>
+    <li><strong>2026年趋势</strong>：中国AI竞争进入第二阶段，从"应用复制"转向"原创技术+全球化"</li>
+  </ul>
+</div>
 
-</body>
-</html>
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=80" alt="Tech" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI技术基础设施 — 中国AI算力与算法的竞争 © Unsplash</figcaption>
+</figure>
+
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>国内MaaS大战2026</h4><p>Coding模型Q1涨价83%同时调用量增400%，视频模型单月收入破10亿</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token"><div class="rel-card-body"><h4>Token经济这一年</h4><p>从2025年初的1.2%到2026年的61%，中国开源模型在OpenRouter上的份额爆炸式增长</p><span class="rel-card-tag">Token Economy</span></div></a>
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI accelerator"><div class="rel-card-body"><h4>国产AI加速器生态实战观察</h4><p>6841个模型在头部国产NPU上跑通，量化栈+推理框架已就位</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>数据来源</strong>：本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>

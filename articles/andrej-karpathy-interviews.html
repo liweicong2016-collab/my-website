@@ -3,396 +3,256 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrej Karpathy 访谈与演讲全记录</title>
-<meta name="description" content="">
+<title>Andrej Karpathy Interviews &amp; Talks Complete Record</title>
+<meta name="description" content="Comprehensive record of Andrej Karpathy interviews, talks, and presentations across podcasts, conferences, and media from 2015-2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bis-bg:#070b14;--bis-card:#0d1321;--bis-card2:#111827;--bis-border:#1e2d45;
-  --bis-text:#e8eaf0;--bis-muted:#94a3b8;--bis-accent:#60a5fa;
-  --bis-accent-soft:rgba(26,86,219,.18);--bis-red:#f87171;
-  --bis-red-soft:rgba(239,68,68,.15);--bis-orange:#fbbf24;
-  --bis-orange-soft:rgba(245,158,11,.15);--bis-green:#34d399;
-  --bis-green-soft:rgba(16,185,129,.15);--bis-purple:#a78bfa;
-  --bis-purple-soft:rgba(139,92,246,.15);--bis-yellow:#fcd34d;
-  --bis-yellow-soft:rgba(212,160,23,.15);
-}
-.awrap *{box-sizing:border-box}
-.awrap{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;color:var(--bis-text);line-height:1.7;font-size:16px;background:var(--bis-bg);min-height:100vh}
-.awrap a{color:var(--bis-accent);text-decoration:none}
-.awrap a:hover{opacity:.8}
-.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--bis-border);padding:0 40px}
-.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-.t3{font-size:15px;font-weight:800;color:var(--bis-text);display:flex;align-items:center;gap:8px;text-decoration:none}
-.d{width:7px;height:7px;border-radius:50%;background:var(--bis-accent);box-shadow:0 0 8px var(--bis-accent)}
-.t4{display:flex;align-items:center;gap:6px;color:var(--bis-muted);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-.t4:hover{color:var(--bis-text)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2,max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
 .c{max-width:860px;margin:0 auto;padding:0 24px 80px}
-footer{padding:40px 0;border-top:1px solid var(--bis-border);text-align:center;font-size:13px;color:var(--bis-muted)}
-footer a{color:var(--bis-accent);text-decoration:none}
-footer a:hover{text-decoration:underline}
-.bis-hero{background:linear-gradient(135deg,rgba(26,86,219,.18) 0%,rgba(139,92,246,.1) 100%);border:1px solid rgba(26,86,219,.3);border-radius:16px;padding:32px 28px;margin:48px 0 32px}
-.bis-hero .tag{display:inline-block;background:var(--bis-red);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
-.bis-hero h1{font-size:clamp(22px,4.5vw,36px);line-height:1.3;margin:0 0 12px;font-weight:800;background:linear-gradient(135deg,#fff 50%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.bis-hero .subtitle{font-size:14.5px;color:var(--bis-muted);margin:0;line-height:1.5}
-.bis-hero .date{font-size:12px;color:var(--bis-muted);margin-top:12px}
-.bis-alert{background:var(--bis-red-soft);border-left:4px solid var(--bis-red);padding:14px 18px;border-radius:0 10px 10px 0;margin:20px 0;font-size:15px;color:var(--bis-red)}
-.bis-alert strong{color:var(--bis-red)}
-.bis-section{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:14px;padding:24px 22px;margin:20px 0;transition:background .25s}
-.bis-section:hover{background:var(--bis-card2)}
-.bis-section h2{font-size:19px;font-weight:700;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--bis-border);color:var(--bis-text);display:flex;align-items:center;gap:10px}
-.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:var(--bis-accent);color:#fff;width:28px;height:28px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
-.bis-section p{margin:0 0 12px;color:var(--bis-text)}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#a78bfa;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:#a78bfa;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
 .bis-section p:last-child{margin-bottom:0}
 .bis-section strong{color:#fff}
-.bis-section ul{padding-left:20px;margin:10px 0}
-.bis-section li{margin-bottom:5px;color:var(--bis-text)}
-.bis-timeline{position:relative;padding-left:24px}
-.bis-timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--bis-border)}
-.bis-tl-item{position:relative;margin-bottom:18px;padding-left:6px}
-.bis-tl-item:last-child{margin-bottom:0}
-.bis-tl-item::before{content:'';position:absolute;left:-20px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bis-accent);border:2px solid var(--bis-bg);box-shadow:0 0 0 2px var(--bis-accent)}
-.bis-tl-item .tl-date{font-size:13px;font-weight:700;color:var(--bis-accent);margin-bottom:3px}
-.bis-tl-item .tl-text{font-size:14.5px;color:var(--bis-text)}
-.bis-tl-item.highlight::before{background:var(--bis-red);box-shadow:0 0 0 2px var(--bis-red)}
-.bis-tl-item.highlight .tl-date{color:var(--bis-red)}
-.bis-flags{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
-.bis-flag{background:var(--bis-accent-soft);color:var(--bis-accent);font-size:12.5px;padding:5px 12px;border-radius:16px;border:1px solid rgba(26,86,219,.3)}
-.bis-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;border-radius:8px}
-.bis-table{width:100%;border-collapse:collapse;font-size:14px}
-.bis-table th,.bis-table td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--bis-border)}
-.bis-table th{background:rgba(26,86,219,.1);font-weight:700;color:var(--bis-accent);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
-.bis-table tr:hover td{background:rgba(30,41,59,.5)}
-.bis-tag-r{background:var(--bis-red-soft);color:var(--bis-red);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-tag-n{background:var(--bis-orange-soft);color:var(--bis-orange);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-tag-m{background:var(--bis-green-soft);color:var(--bis-green);padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0 0}
-.bis-card{background:var(--bis-card2);border:1px solid var(--bis-border);border-radius:12px;padding:18px 14px;text-align:center;transition:transform .2s,box-shadow .2s}
-.bis-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.bis-card .val{font-size:26px;font-weight:800;color:var(--bis-accent);display:block;margin-bottom:6px}
-.bis-card .lab{font-size:12.5px;color:var(--bis-muted)}
-.bis-card.red .val{color:var(--bis-red)}.bis-card.green .val{color:var(--bis-green)}.bis-card.purple .val{color:var(--bis-purple)}
-.bis-impact{border-radius:10px;padding:14px 16px;margin:12px 0;border:1px solid}
-.bis-impact.short{background:var(--bis-red-soft);border-color:rgba(239,68,68,.3)}
-.bis-impact.mid{background:var(--bis-orange-soft);border-color:rgba(245,158,11,.3)}
-.bis-impact.long{background:var(--bis-green-soft);border-color:rgba(16,185,129,.3)}
-.bis-impact h3{margin:0 0 6px;font-size:15px;font-weight:700}
-.bis-impact.short h3{color:var(--bis-red)}.bis-impact.mid h3{color:var(--bis-orange)}.bis-impact.long h3{color:var(--bis-green)}
-.bis-impact p{margin:0;font-size:14px;color:var(--bis-text)}
-.bis-signal{background:var(--bis-purple-soft);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:16px 18px;margin:14px 0}
-.bis-signal h3{margin:0 0 10px;font-size:15px;color:var(--bis-purple);font-weight:700}
-.bis-signal ul{margin:0;padding-left:18px;font-size:14px;color:var(--bis-text)}
-.bis-signal li{margin-bottom:5px}
-.bis-punchline{background:linear-gradient(135deg,rgba(239,68,68,.12) 0%,rgba(245,158,11,.08) 100%);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:20px;margin:18px 0}
-.bis-punchline h2{font-size:17px;color:var(--bis-red);margin:0 0 12px;padding:0;border:0;font-weight:800}
-.bis-punchline ul{padding-left:18px;font-size:14.5px;margin:0;color:var(--bis-text)}
-.bis-punchline li{margin-bottom:6px}
-.bis-quote{background:var(--bis-card2);border-left:3px solid var(--bis-accent);padding:14px 16px;font-style:italic;font-size:14.5px;color:var(--bis-muted);border-radius:0 8px 8px 0;margin:14px 0}
-.bis-foot{text-align:center;color:var(--bis-muted);font-size:12.5px;margin:32px 0 12px;padding-top:20px;border-top:1px solid var(--bis-border)}
-.article-body h1{font-size:clamp(22px,4.5vw,36px);font-weight:800;margin:48px 0 20px;background:linear-gradient(135deg,#fff 50%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.3}
-.article-body h2{font-size:clamp(18px,3.5vw,26px);font-weight:700;margin:36px 0 16px;color:var(--bis-text);padding-bottom:10px;border-bottom:1px solid var(--bis-border)}
-.article-body h3{font-size:20px;font-weight:600;margin:28px 0 12px;color:var(--bis-text)}
-.article-body h4{font-size:17px;font-weight:600;margin:20px 0 10px;color:var(--bis-text)}
-.article-body p{margin:0 0 14px;color:var(--bis-text);line-height:1.75}
-.article-body ul,.article-body ol{padding-left:22px;margin:0 0 14px}
-.article-body li{margin-bottom:6px;color:var(--bis-text)}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(139,92,246,.15);border-left:4px solid #a78bfa;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#a78bfa}
+.signal{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#38bdf8;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(56,189,248,.06));border:1px solid rgba(167,139,246,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#a78bfa;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.quote{background:#111827;border-left:4px solid #38bdf8;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(167,139,250,.08);font-weight:700;color:#a78bfa;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(167,139,250,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(167,139,250,.06),rgba(56,189,248,.05));border:1px solid rgba(167,139,246,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#a78bfa;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(167,139,250,.08);color:#a78bfa;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
 .article-body strong{color:#fff}
-.article-body em{color:var(--bis-muted)}
-.article-body blockquote{background:var(--bis-card);border-left:3px solid var(--bis-accent);padding:14px 18px;margin:16px 0;border-radius:0 8px 8px 0;font-style:italic;color:var(--bis-muted)}
-.article-body table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-.article-body th{background:rgba(26,86,219,.12);color:var(--bis-accent);font-weight:700;padding:10px 12px;text-align:left;border-bottom:2px solid var(--bis-border);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
-.article-body td{padding:11px 12px;border-bottom:1px solid var(--bis-border);color:var(--bis-text)}
-.article-body tr:hover td{background:rgba(30,41,59,.4)}
-.article-body code{background:rgba(26,86,219,.12);color:var(--bis-accent);padding:2px 6px;border-radius:4px;font-size:13px}
-.article-body pre{background:var(--bis-card);border:1px solid var(--bis-border);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
-.article-body pre code{background:none;color:var(--bis-text);padding:0;font-size:13px}
-.article-body img{max-width:100%;border-radius:10px;margin:16px 0;border:1px solid var(--bis-border)}
-.article-body hr{border:none;border-top:1px solid var(--bis-border);margin:28px 0}
-.article-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
-.article-meta span{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--bis-muted)}
-.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.atag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:var(--bis-accent);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600}
-.ftrnote{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--bis-muted);margin-top:16px}
-.ftrnote strong{color:var(--bis-green)}
-@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.bis-hero{padding:24px 18px}.article-body{font-size:15px}}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #a78bfa;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(139,92,246,.05);border:1px solid rgba(139,92,246,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#a78bfa}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#38bdf8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-<div class="awrap">
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
-<div class="c">
-<div class="article-body">
-<h1>Andrej Karpathy 访谈与演讲全记录</h1>
-<p><strong>作者：AI Observer | 2026年5月</strong></p>
-<blockquote>
-<p>Andrej Karpathy 是人工智能领域的知名研究员、工程师和教育家，曾任 Tesla AI 高级总监、OpenAI 创始成员，并创立了 AI 教育公司 Eureka Labs。本文全面汇总了他在播客、会议演讲、媒体专访等不同平台的访谈和演讲记录。</p>
-</blockquote>
-<hr />
-<h2>播客访谈 (Podcasts)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">访谈标题 / 主题</th>
-<th style="text-align: left;">日期</th>
-<th style="text-align: left;">平台 / 主持人</th>
-<th style="text-align: left;">链接</th>
-</tr>
-</thead>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80" alt="Andrej Karpathy">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Deep Dive · 2026</span>
+    <h1>Andrej Karpathy Interviews &amp; Talks Complete Record</h1>
+    <p class="subtitle">A comprehensive record of Andrej Karpathy's interviews, talks, and presentations across podcasts, conferences, and media platforms from 2015 to 2026.</p>
+    <div class="hero-meta">
+      <span>📅 2026-06</span>
+      <span>⏱ ~15 min read</span>
+      <span>🏷️ AI · Deep Learning · Tesla · OpenAI</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">AI</span>
+      <span class="tag-pill">Andrej Karpathy</span>
+      <span class="tag-pill">Deep Learning</span>
+      <span class="tag-pill">Tesla</span>
+      <span class="tag-pill">OpenAI</span>
+      <span class="tag-pill">LLM</span>
+    </div>
+  </div>
+</div>
+
+<div class="callout fade-up">
+  <strong>About Andrej Karpathy</strong> — AI researcher, engineer, educator; former Tesla AI Sr. Director, OpenAI founding member, Eureka Labs founder. Known for Neural Networks: Zero to Hero series (millions of learners), State of GPT (Microsoft Build 2023), Software 3.0 thesis.
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=900&q=80" alt="AI research" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: AI research & neural networks — Karpathy's core domain © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>Podcast Interviews</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Title / Topic</th><th>Date</th><th>Platform / Host</th><th>Link</th></tr></thead>
 <tbody>
-<tr>
-<td style="text-align: left;">Andrej Karpathy on Code Agents, AutoResearch, and the Loopy Era of AI</td>
-<td style="text-align: left;">2026年3月20日</td>
-<td style="text-align: left;">No Priors (Sarah Guo &amp; Elad Gil)</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=kwSVtQ7dziU">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">AGI is still a decade away (We're summoning ghosts, not building animals)</td>
-<td style="text-align: left;">2025年10月17日</td>
-<td style="text-align: left;">Dwarkesh Podcast (Dwarkesh Patel)</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=lXUZvyajciY">YouTube</a> / <a href="https://www.dwarkesh.com/p/andrej-karpathy">Website</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">How AI Empowers</td>
-<td style="text-align: left;">2025年4月13日</td>
-<td style="text-align: left;">The AI Daily Brief</td>
-<td style="text-align: left;"><a href="https://podcasts.apple.com/us/podcast/andrej-karpathy-on-how-ai-empowers/id1680633614?i=1000703402507">Apple Podcasts</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI Megaclusters</td>
-<td style="text-align: left;">2025年2月2日</td>
-<td style="text-align: left;">Lex Fridman Podcast #459</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=_1f-o0nqpEI">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">With Andrej Karpathy from OpenAI and Tesla</td>
-<td style="text-align: left;">2024年9月5日</td>
-<td style="text-align: left;">No Priors Ep. 80</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=hM_h0UA7upI">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Tesla AI, Self-Driving, Optimus, Aliens, and AGI</td>
-<td style="text-align: left;">2022年10月29日</td>
-<td style="text-align: left;">Lex Fridman Podcast #333</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=cdiD-9MMpb0">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Andrej Karpathy on the visionary AI in Tesla's autonomous driving</td>
-<td style="text-align: left;">2021年3月22日</td>
-<td style="text-align: left;">The Robot Brains Podcast (Pieter Abbeel)</td>
-<td style="text-align: left;"><a href="https://open.spotify.com/episode/0IuwH7eTZ3TQBfU8XsMaRr">Spotify</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Heroes of Deep Learning: Andrew Ng interviews Andrej Karpathy</td>
-<td style="text-align: left;">2017年8月8日</td>
-<td style="text-align: left;">DeepLearning.AI</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=_au3yw46lcg">YouTube</a></td>
-</tr>
+<tr><td>Code Agents, AutoResearch, and the Loopy Era of AI</td><td>2026-03-20</td><td>No Priors (Sarah Guo & Elad Gil)</td><td><a href="https://www.youtube.com/watch?v=kwSVtQ7dziU">YouTube</a></td></tr>
+<tr><td>AGI is still a decade away (We're summoning ghosts, not building animals)</td><td>2025-10-17</td><td>Dwarkesh Podcast (Dwarkesh Patel)</td><td><a href="https://www.youtube.com/watch?v=lXUZvyajciY">YouTube</a></td></tr>
+<tr><td>How AI Empowers</td><td>2025-04-13</td><td>The AI Daily Brief</td><td><a href="https://podcasts.apple.com/us/podcast/andrej-karpathy-on-how-ai-empowers/id1680633614?i=1000703402507">Apple Podcasts</a></td></tr>
+<tr><td>DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI Megaclusters</td><td>2025-02-02</td><td>Lex Fridman Podcast #459</td><td><a href="https://www.youtube.com/watch?v=_1f-o0nqpEI">YouTube</a></td></tr>
+<tr><td>With Andrej Karpathy from OpenAI and Tesla</td><td>2024-09-05</td><td>No Priors Ep. 80</td><td><a href="https://www.youtube.com/watch?v=hM_h0UA7upI">YouTube</a></td></tr>
+<tr><td>Tesla AI, Self-Driving, Optimus, Aliens, and AGI</td><td>2022-10-29</td><td>Lex Fridman Podcast #333</td><td><a href="https://www.youtube.com/watch?v=cdiD-9MMpb0">YouTube</a></td></tr>
+<tr><td>Andrej Karpathy on visionary AI in Tesla's autonomous driving</td><td>2021-03-22</td><td>The Robot Brains Podcast (Pieter Abbeel)</td><td><a href="https://open.spotify.com/episode/0IuwH7eTZ3TQBfU8XsMaRr">Spotify</a></td></tr>
+<tr><td>Heroes of Deep Learning: Andrew Ng interviews Andrej Karpathy</td><td>2017-08-08</td><td>DeepLearning.AI</td><td><a href="https://www.youtube.com/watch?v=_au3yw46lcg">YouTube</a></td></tr>
 </tbody>
 </table>
-<hr />
-<h2>会议演讲与公开讲座 (Keynotes &amp; Talks)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">演讲标题 / 主题</th>
-<th style="text-align: left;">日期</th>
-<th style="text-align: left;">会议 / 平台</th>
-<th style="text-align: left;">链接</th>
-</tr>
-</thead>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>Keynotes &amp; Conference Talks</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Title / Topic</th><th>Date</th><th>Conference</th><th>Link</th></tr></thead>
 <tbody>
-<tr>
-<td style="text-align: left;">Software Is Changing (Again) / Software 3.0</td>
-<td style="text-align: left;">2025年6月17日</td>
-<td style="text-align: left;">YC AI Startup School</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ">YouTube</a> / <a href="https://www.ycombinator.com/library/MW-andrej-karpathy-software-is-changing-again">Y Combinator</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">CUDA Mode Keynote</td>
-<td style="text-align: left;">2024年10月3日</td>
-<td style="text-align: left;">GPU Mode IRL Hackathon</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=aR6CzM0x-g0">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Keynote at UC Berkeley AI Hackathon</td>
-<td style="text-align: left;">2024年7月4日</td>
-<td style="text-align: left;">UC Berkeley AI Hackathon</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=3oCFHE9x0As">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">State of GPT</td>
-<td style="text-align: left;">2023年5月23日</td>
-<td style="text-align: left;">Microsoft Build</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=bZQun8Y4L2A">YouTube</a> / <a href="https://karpathy.ai/stateofgpt.pdf">Slides</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Tesla AI Day 2021 (Tesla Vision)</td>
-<td style="text-align: left;">2021年8月19日</td>
-<td style="text-align: left;">Tesla AI Day</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=j0z4FweCy4M&amp;t=2900">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">AI for Full Self-Driving</td>
-<td style="text-align: left;">2021年6月20日</td>
-<td style="text-align: left;">CVPR 2021 (WAD Keynote)</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=g6bOwQdCJrc">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Tesla Autonomy Day (Autopilot/FSD Architecture)</td>
-<td style="text-align: left;">2019年4月22日</td>
-<td style="text-align: left;">Tesla Autonomy Day</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=Ucp0TTmvqOE&amp;t=6678">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Multi-Task Learning in the Wilderness</td>
-<td style="text-align: left;">2019年6月15日</td>
-<td style="text-align: left;">ICML 2019</td>
-<td style="text-align: left;"><a href="https://slideslive.com/38917690/multitask-learning-in-the-wilderness">SlidesLive</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">PyTorch at Tesla</td>
-<td style="text-align: left;">2019年10月10日</td>
-<td style="text-align: left;">PyTorch Developer Conference</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=oBklltKXtDE">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Building the Software 2.0 Stack</td>
-<td style="text-align: left;">2018年5月</td>
-<td style="text-align: left;">Spark-AI Summit / TRAIN AI</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=y57wwucbXR8">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Deep Learning for Computer Vision</td>
-<td style="text-align: left;">2016年9月24日</td>
-<td style="text-align: left;">Bay Area Deep Learning School</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=u6aEYuemt0M">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">NVIDIA GTC Keynote (with Jensen Huang)</td>
-<td style="text-align: left;">2015年3月</td>
-<td style="text-align: left;">NVIDIA GTC</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=8AnV7xAvpLQ&amp;t=4m15s">YouTube</a></td>
-</tr>
+<tr><td>Software Is Changing (Again) / Software 3.0</td><td>2025-06-17</td><td>YC AI Startup School</td><td><a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ">YouTube</a></td></tr>
+<tr><td>CUDA Mode Keynote</td><td>2024-10-03</td><td>GPU Mode IRL Hackathon</td><td><a href="https://www.youtube.com/watch?v=aR6CzM0x-g0">YouTube</a></td></tr>
+<tr><td>Keynote at UC Berkeley AI Hackathon</td><td>2024-07-04</td><td>UC Berkeley AI Hackathon</td><td><a href="https://www.youtube.com/watch?v=3oCFHE9x0As">YouTube</a></td></tr>
+<tr><td>State of GPT</td><td>2023-05-23</td><td>Microsoft Build</td><td><a href="https://www.youtube.com/watch?v=bZQun8Y4L2A">YouTube</a> / <a href="https://karpathy.ai/stateofgpt.pdf">Slides</a></td></tr>
+<tr><td>Tesla AI Day 2021 (Tesla Vision)</td><td>2021-08-19</td><td>Tesla AI Day</td><td><a href="https://www.youtube.com/watch?v=j0z4FweCy4M">YouTube</a></td></tr>
+<tr><td>AI for Full Self-Driving</td><td>2021-06-20</td><td>CVPR 2021 (WAD Keynote)</td><td><a href="https://www.youtube.com/watch?v=g6bOwQdCJrc">YouTube</a></td></tr>
+<tr><td>Tesla Autonomy Day (Autopilot/FSD Architecture)</td><td>2019-04-22</td><td>Tesla Autonomy Day</td><td><a href="https://www.youtube.com/watch?v=Ucp0TTmvqOE">YouTube</a></td></tr>
+<tr><td>Multi-Task Learning in the Wilderness</td><td>2019-06-15</td><td>ICML 2019</td><td><a href="https://slideslive.com/38917690/multitask-learning-in-the-wilderness">SlidesLive</a></td></tr>
+<tr><td>PyTorch at Tesla</td><td>2019-10-10</td><td>PyTorch Developer Conference</td><td><a href="https://www.youtube.com/watch?v=oBklltKXtDE">YouTube</a></td></tr>
+<tr><td>Building the Software 2.0 Stack</td><td>2018-05</td><td>Spark-AI Summit / TRAIN AI</td><td><a href="https://www.youtube.com/watch?v=y57wwucbXR8">YouTube</a></td></tr>
+<tr><td>Deep Learning for Computer Vision</td><td>2016-09-24</td><td>Bay Area Deep Learning School</td><td><a href="https://www.youtube.com/watch?v=u6aEYuemt0M">YouTube</a></td></tr>
 </tbody>
 </table>
-<hr />
-<h2>YouTube 个人频道教育系列 (Educational Series)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">视频标题</th>
-<th style="text-align: left;">发布日期</th>
-<th style="text-align: left;">链接</th>
-</tr>
-</thead>
+</div>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=900&q=80" alt="Deep learning" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: Neural network architecture — the foundation of Karpathy's work © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>YouTube Educational Series</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Video Title</th><th>Date</th><th>Link</th></tr></thead>
 <tbody>
-<tr>
-<td style="text-align: left;">How I use LLMs</td>
-<td style="text-align: left;">2025年2月</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=EWvNQjAaOHw">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Deep Dive into LLMs like ChatGPT</td>
-<td style="text-align: left;">2025年2月</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=7xTGNNLPyMI">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">[1hr Talk] Intro to Large Language Models</td>
-<td style="text-align: left;">2023年11月22日</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Neural Networks: Zero to Hero (Playlist)</td>
-<td style="text-align: left;">持续更新</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">YouTube Playlist</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Let's build GPT: from scratch, in code, spelled out</td>
-<td style="text-align: left;">2023年1月</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY">YouTube</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">CS231n: Convolutional Neural Networks for Visual Recognition</td>
-<td style="text-align: left;">2016年</td>
-<td style="text-align: left;"><a href="https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC">YouTube Playlist</a></td>
-</tr>
+<tr><td>How I use LLMs</td><td>2025-02</td><td><a href="https://www.youtube.com/watch?v=EWvNQjAaOHw">YouTube</a></td></tr>
+<tr><td>Deep Dive into LLMs like ChatGPT</td><td>2025-02</td><td><a href="https://www.youtube.com/watch?v=7xTGNNLPyMI">YouTube</a></td></tr>
+<tr><td>[1hr Talk] Intro to Large Language Models</td><td>2023-11-22</td><td><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">YouTube</a></td></tr>
+<tr><td>Neural Networks: Zero to Hero (Playlist)</td><td>Ongoing</td><td><a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">YouTube Playlist</a></td></tr>
+<tr><td>Let's build GPT: from scratch, in code, spelled out</td><td>2023-01</td><td><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY">YouTube</a></td></tr>
+<tr><td>CS231n: Convolutional Neural Networks for Visual Recognition</td><td>2016</td><td><a href="https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC">YouTube Playlist</a></td></tr>
 </tbody>
 </table>
-<hr />
-<h2>媒体专访与文字访谈 (Media &amp; Text Interviews)</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">文章标题 / 主题</th>
-<th style="text-align: left;">日期</th>
-<th style="text-align: left;">媒体 / 平台</th>
-<th style="text-align: left;">链接</th>
-</tr>
-</thead>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>Media &amp; Text Interviews</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Title / Topic</th><th>Date</th><th>Media</th><th>Link</th></tr></thead>
 <tbody>
-<tr>
-<td style="text-align: left;">OpenAI cofounder says he hasn't written a line of code in months and is in a 'state of psychosis'</td>
-<td style="text-align: left;">2026年3月21日</td>
-<td style="text-align: left;">Fortune</td>
-<td style="text-align: left;"><a href="https://fortune.com/2026/03/21/andrej-karpathy-openai-cofounder-ai-agents-coding-state-of-psychosis-openclaw/">Fortune</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Innovator Under 35: Andrej Karpathy</td>
-<td style="text-align: left;">2020年</td>
-<td style="text-align: left;">MIT Technology Review</td>
-<td style="text-align: left;"><a href="https://www.technologyreview.com/innovator/andrej-karpathy/">MIT Tech Review</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">This Guy Beat Google's Super-Smart AI—But It Wasn't Easy</td>
-<td style="text-align: left;">2015年1月21日</td>
-<td style="text-align: left;">Wired</td>
-<td style="text-align: left;"><a href="https://www.wired.com/2015/01/karpathy/">Wired</a></td>
-</tr>
+<tr><td>OpenAI cofounder says he hasn't written a line of code in months and is in a 'state of psychosis'</td><td>2026-03-21</td><td>Fortune</td><td><a href="https://fortune.com/2026/03/21/andrej-karpathy-openai-cofounder-ai-agents-coding-state-of-psychosis-openclaw/">Fortune</a></td></tr>
+<tr><td>Innovator Under 35: Andrej Karpathy</td><td>2020</td><td>MIT Technology Review</td><td><a href="https://www.technologyreview.com/innovator/andrej-karpathy/">MIT Tech Review</a></td></tr>
+<tr><td>This Guy Beat Google's Super-Smart AI—But It Wasn't Easy</td><td>2015-01-21</td><td>Wired</td><td><a href="https://www.wired.com/2015/01/karpathy/">Wired</a></td></tr>
 </tbody>
 </table>
-<hr />
-<h2>关于 Andrej Karpathy</h2>
-<p>Andrej Karpathy 是人工智能领域最具影响力的研究者之一：</p>
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Insights from Karpathy</h3>
+  <ul>
+    <li><strong>AGI Timeline</strong>: "AGI is still a decade away — we're summoning ghosts, not building animals." — Dwarkesh Podcast 2025</li>
+    <li><strong>Software 3.0</strong>: Neural networks as new programming paradigm; training replaces coding</li>
+    <li><strong>First-mover advantage</strong>: Users who use good models become extremely loyal — "Cinderella Glass Shoe Effect"</li>
+    <li><strong>Education mission</strong>: Neural Networks: Zero to Hero teaches millions; Eureka Labs aims for AI-native education</li>
+    <li><strong>Code Agents</strong>: 2026 focus on AI that writes and executes code autonomously</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80" alt="AI chips" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: Hardware infrastructure enabling modern AI research © Unsplash</figcaption>
+</figure>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>Karpathy's Core Beliefs &amp; Contributions</h2>
+<div class="punchline">
+<h3>🎯 Career Summary</h3>
 <ul>
-<li><strong>OpenAI 创始成员</strong>（2015-2017），参与 GPT-1/GPT-2 早期研发</li>
-<li><strong>Tesla AI 高级总监</strong>（2017-2022），主导 Autopilot/FSD 计算机视觉架构</li>
-<li><strong>Eureka Labs 创始人</strong>，致力于 AI 原生教育产品</li>
-<li><strong>顶级 AI 教育者</strong>，其 Neural Networks: Zero to Hero 系列视频影响数百万学习者</li>
+  <li><strong>OpenAI Founding Member</strong> (2015-2017), contributed to GPT-1/GPT-2 early R&amp;D</li>
+  <li><strong>Tesla AI Sr. Director</strong> (2017-2022), led Autopilot/FSD computer vision architecture</li>
+  <li><strong>Eureka Labs Founder</strong>, building AI-native education products</li>
+  <li><strong>Top AI educator</strong>: Neural Networks: Zero to Hero series influenced millions of learners</li>
 </ul>
-<p><strong>核心观点摘录：</strong></p>
-<blockquote>
-<p>"AGI is still a decade away — we're summoning ghosts, not building animals." — 2025年10月 Dwarkesh Podcast</p>
-<p>"Software is changing again" — Software 3.0 时代，神经网络成为新的编程范式</p>
-</blockquote>
-<hr />
-<p><em>数据来源：<a href="https://karpathy.ai/">Andrej Karpathy 个人网站</a>、YouTube、各大播客平台及新闻媒体。</em></p>
 </div>
-<div class="tag-row"><span class="atag">AI</span><span class="atag">Andrej Karpathy</span><span class="atag">大模型</span><span class="atag">Tesla</span><span class="atag">OpenAI</span><span class="atag">深度学习</span></div>
-<div class="ftrnote"><strong>数据来源：</strong>本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
+<blockquote>"Software is changing again" — Software 3.0 era, neural networks as new programming paradigm</blockquote>
 </div>
-<footer><div class="c" style="max-width:860px"><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></div></footer>
+
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="china-internet-ai-capabilities-2025.html"><img src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=600&q=80" alt="China AI"><div class="rel-card-body"><h4>China Internet AI Capabilities 2025</h4><p>ByteDance, Alibaba, Tencent, DeepSeek - AI at Work, AI in Products, Building AI SOTA</p><span class="rel-card-tag">Deep Report</span></div></a>
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI accelerator"><div class="rel-card-body"><h4>Domestic AI Accelerator Ecosystem</h4><p>6841 models on domestic NPU, full quantization stack ready</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token economy"><div class="rel-card-body"><h4>Token Economy 2026</h4><p>From 1.2% to 61% market share on OpenRouter in 18 months</p><span class="rel-card-tag">Token Economy</span></div></a>
 </div>
-<script>
-(function(){
-  var els = document.querySelectorAll('.bis-section,.bis-card,.bis-hero,.bis-alert,.bis-signal,.bis-punchline,.bis-impact,.article-body h2,.article-body h3,.article-body blockquote');
-  els.forEach(function(el){
-    el.style.opacity='0';
-    el.style.transform='translateY(18px)';
-    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
-  });
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.06, rootMargin:'0px 0px -30px 0px'});
-  els.forEach(function(el){ obs.observe(el); });
-})();
-</script>
-<script src="../main.js"></script>
-</body></html>
+</div>
+
+<div class="ftrnote"><strong>Data sources</strong>: Andrej Karpathy's personal site (karpathy.ai), YouTube, major podcast platforms, and news media. Data current as of 2026-06.</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
