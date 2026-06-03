@@ -1,54 +1,421 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>国内MaaS大战2026：Token经济的两条战线</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#070b14;--bg2:#0d1321;--bg3:#111827;--txt:#e8eaf0;--txt2:#94a3b8;--brd:#1e2d45;--p:#1a56db}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;font-size:16px}
-    a{color:#60a5fa;text-decoration:none}a:hover{opacity:.8}
-    .t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);padding:0 40px}
-    .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-    .t3{font-size:15px;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:8px;text-decoration:none}
-    .d{width:7px;height:7px;border-radius:50%;background:var(--p);box-shadow:0 0 8px var(--p)}
-    .t4{display:flex;align-items:center;gap:6px;color:var(--txt2);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-    .t4:hover{color:var(--txt)}
-    .c{max-width:800px;margin:0 auto;padding:60px 24px}
-    .h{padding:80px 0 40px;border-bottom:1px solid var(--brd);margin-bottom:48px}
-    .b{display:inline-block;background:rgba(26,86,219,.2);border:1px solid rgba(26,86,219,.4);color:#93c5fd;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:16px}
-    h1{font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;background:linear-gradient(135deg,#fff 40%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .m{font-size:13px;color:var(--txt2);display:flex;gap:16px;flex-wrap:wrap}
-    .m span{display:flex;align-items:center;gap:4px}
-    .prox{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;padding:40px;margin-bottom:32px}
-    .prox h2{font-size:20px;font-weight:700;margin-bottom:16px}
-    .prox p{color:var(--txt2);font-size:15px;line-height:1.7}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
-    .tag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:#93c5fd;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600}
-    ft{padding:40px 0;border-top:1px solid var(--brd);text-align:center;font-size:13px;color:var(--txt2)}
-    ft a{color:#60a5fa;text-decoration:none}
-    @media(max-width:768px){.t{padding:0 20px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国内 MaaS 大战 2026：Token 经济的两条战线</title>
+<meta name="description" content="2026 年国内 MaaS 业务深度观察：某头部视频云 2026 目标同比翻 10 倍至 150 亿元，视频模型单月收入破 10 亿；Coding 模型 Q1 涨价 83% 同时调用量增 400%。Coding 与视频模型已成赚钱主战场，LLM 通用赛道被地板价击穿。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+/* === Dark Mode Injection === */
+:root {
+  --bis-bg: #070b14;
+  --bis-card: #0d1321;
+  --bis-card2: #111827;
+  --bis-border: #1e2d45;
+  --bis-text: #e8eaf0;
+  --bis-muted: #94a3b8;
+  --bis-accent: #60a5fa;
+  --bis-accent-soft: rgba(26,86,219,0.18);
+  --bis-red: #f87171;
+  --bis-red-soft: rgba(239,68,68,0.15);
+  --bis-orange: #fbbf24;
+  --bis-orange-soft: rgba(245,158,11,0.15);
+  --bis-green: #34d399;
+  --bis-green-soft: rgba(16,185,129,0.15);
+  --bis-purple: #a78bfa;
+  --bis-purple-soft: rgba(139,92,246,0.15);
+  --bis-yellow: #fcd34d;
+  --bis-yellow-soft: rgba(212,160,23,0.15);
+}
+[data-aos] { opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-aos].aos-animate { opacity: 1; }
+[data-aos="fade-up"] { transform: translateY(24px); }
+[data-aos="fade-up"].aos-animate { transform: translateY(0); }
+[data-aos="fade-left"] { transform: translateX(24px); }
+[data-aos="fade-left"].aos-animate { transform: translateX(0); }
+[data-aos="zoom-in"] { transform: scale(0.94); }
+[data-aos="zoom-in"].aos-animate { transform: scale(1); }
+
+
+  .article-wrap * { box-sizing: border-box; }
+  .article-wrap { font-family: 'Inter','Noto Sans SC',-apple-system,sans-serif; color: var(--bis-text); line-height: 1.7; font-size: 16px; background: var(--bis-bg); min-height: 100vh; }
+  .article-wrap a { color: var(--bis-accent); text-decoration: none; }
+  .article-wrap a:hover { opacity: 0.8; }
+  .t { position: sticky; top: 0; z-index: 100; background: rgba(7,11,20,.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--bis-border); padding: 0 40px; }
+  .t2 { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .t3 { font-size: 15px; font-weight: 800; color: var(--bis-text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .d { width: 7px; height: 7px; border-radius: 50%; background: var(--bis-accent); box-shadow: 0 0 8px var(--bis-accent); }
+  .t4 { display: flex; align-items: center; gap: 6px; color: var(--bis-muted); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s; }
+  .t4:hover { color: var(--bis-text); }
+  .c { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+  .bis-hero { background: linear-gradient(135deg, rgba(26,86,219,.18) 0%, rgba(139,92,246,.1) 100%); border: 1px solid rgba(26,86,219,.3); border-radius: 16px; padding: 32px 28px; margin: 48px 0 32px; }
+  .bis-hero .tag { display: inline-block; background: var(--bis-red); color: #fff; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; letter-spacing: .5px; }
+  .bis-hero h1 { font-size: clamp(22px,4.5vw,36px); line-height: 1.3; margin: 0 0 12px; font-weight: 800; background: linear-gradient(135deg,#fff 50%,#93c5fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .bis-hero .subtitle { font-size: 14.5px; color: var(--bis-muted); margin: 0; line-height: 1.5; }
+  .bis-hero .date { font-size: 12px; color: var(--bis-muted); margin-top: 12px; }
+  .bis-alert { background: var(--bis-red-soft); border-left: 4px solid var(--bis-red); padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 20px 0; font-size: 15px; color: var(--bis-red); }
+  .bis-alert strong { color: var(--bis-red); }
+  .bis-section { background: var(--bis-card); border: 1px solid var(--bis-border); border-radius: 14px; padding: 24px 22px; margin: 20px 0; transition: background .25s; }
+  .bis-section:hover { background: var(--bis-card2); }
+  .bis-section h2 { font-size: 19px; font-weight: 700; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--bis-border); color: var(--bis-text); display: flex; align-items: center; gap: 10px; }
+  .bis-section h2 .num { display: inline-flex; align-items: center; justify-content: center; background: var(--bis-accent); color: #fff; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .bis-section p { margin: 0 0 12px; color: var(--bis-text); }
+  .bis-section p:last-child { margin-bottom: 0; }
+  .bis-section strong { color: #fff; }
+  .bis-section ul { padding-left: 20px; margin: 10px 0; }
+  .bis-section li { margin-bottom: 5px; color: var(--bis-text); }
+  .bis-timeline { position: relative; padding-left: 24px; }
+  .bis-timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--bis-border); }
+  .bis-tl-item { position: relative; margin-bottom: 18px; padding-left: 6px; }
+  .bis-tl-item:last-child { margin-bottom: 0; }
+  .bis-tl-item::before { content: ''; position: absolute; left: -20px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--bis-accent); border: 2px solid var(--bis-bg); box-shadow: 0 0 0 2px var(--bis-accent); }
+  .bis-tl-item .tl-date { font-size: 13px; font-weight: 700; color: var(--bis-accent); margin-bottom: 3px; }
+  .bis-tl-item .tl-text { font-size: 14.5px; color: var(--bis-text); }
+  .bis-tl-item.highlight::before { background: var(--bis-red); box-shadow: 0 0 0 2px var(--bis-red); }
+  .bis-tl-item.highlight .tl-date { color: var(--bis-red); }
+  .bis-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  .bis-flag { background: var(--bis-accent-soft); color: var(--bis-accent); font-size: 12.5px; padding: 5px 12px; border-radius: 16px; border: 1px solid rgba(26,86,219,.3); }
+  .bis-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
+  .bis-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .bis-table th, .bis-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--bis-border); }
+  .bis-table th { background: rgba(26,86,219,.1); font-weight: 700; color: var(--bis-accent); font-size: 12.5px; text-transform: uppercase; letter-spacing: .5px; }
+  .bis-table tr:hover td { background: rgba(30,41,59,.5); }
+  .bis-tag-r { background: var(--bis-red-soft); color: var(--bis-red); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-n { background: var(--bis-orange-soft); color: var(--bis-orange); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-m { background: var(--bis-green-soft); color: var(--bis-green); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0 0; }
+  .bis-card { background: var(--bis-card2); border: 1px solid var(--bis-border); border-radius: 12px; padding: 18px 14px; text-align: center; transition: transform .2s, box-shadow .2s; }
+  .bis-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .bis-card .val { font-size: 26px; font-weight: 800; color: var(--bis-accent); display: block; margin-bottom: 6px; }
+  .bis-card .lab { font-size: 12.5px; color: var(--bis-muted); }
+  .bis-card.red .val { color: var(--bis-red); }
+  .bis-card.green .val { color: var(--bis-green); }
+  .bis-card.purple .val { color: var(--bis-purple); }
+  .bis-impact { border-radius: 10px; padding: 14px 16px; margin: 12px 0; border: 1px solid; }
+  .bis-impact.short { background: var(--bis-red-soft); border-color: rgba(239,68,68,.3); }
+  .bis-impact.mid { background: var(--bis-orange-soft); border-color: rgba(245,158,11,.3); }
+  .bis-impact.long { background: var(--bis-green-soft); border-color: rgba(16,185,129,.3); }
+  .bis-impact h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .bis-impact.short h3 { color: var(--bis-red); }
+  .bis-impact.mid h3 { color: var(--bis-orange); }
+  .bis-impact.long h3 { color: var(--bis-green); }
+  .bis-impact p { margin: 0; font-size: 14px; color: var(--bis-text); }
+  .bis-signal { background: var(--bis-purple-soft); border: 1px solid rgba(139,92,246,.3); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+  .bis-signal h3 { margin: 0 0 10px; font-size: 15px; color: var(--bis-purple); font-weight: 700; }
+  .bis-signal ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--bis-text); }
+  .bis-signal li { margin-bottom: 5px; }
+  .bis-punchline { background: linear-gradient(135deg, rgba(239,68,68,.12) 0%, rgba(245,158,11,.08) 100%); border: 1px solid rgba(239,68,68,.25); border-radius: 12px; padding: 20px; margin: 18px 0; }
+  .bis-punchline h2 { font-size: 17px; color: var(--bis-red); margin: 0 0 12px; padding: 0; border: 0; font-weight: 800; }
+  .bis-punchline ul { padding-left: 18px; font-size: 14.5px; margin: 0; color: var(--bis-text); }
+  .bis-punchline li { margin-bottom: 6px; }
+  .bis-quote { background: var(--bis-card2); border-left: 3px solid var(--bis-accent); padding: 14px 16px; font-style: italic; font-size: 14.5px; color: var(--bis-muted); border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .bis-foot { text-align: center; color: var(--bis-muted); font-size: 12.5px; margin: 32px 0 12px; padding-top: 20px; border-top: 1px solid var(--bis-border); }
+  .article-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
+  .article-meta span { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--bis-muted); }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .atag { background: rgba(26,86,219,.15); border: 1px solid rgba(26,86,219,.3); color: var(--bis-accent); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+  footer { padding: 40px 0; border-top: 1px solid var(--bis-border); text-align: center; font-size: 13px; color: var(--bis-muted); }
+  footer a { color: var(--bis-accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 768px) { .t { padding: 0 20px; } .c { padding: 0 16px 60px; } .bis-hero { padding: 24px 18px; } .article-wrap { font-size: 15px; } }
+
+</style>
 </head>
 <body>
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
+<div class="article-wrap">
+<div class="t"><div class="t2"><a href="index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="index.html" class="t4">← 返回首页</a></div></div>
 <div class="c">
-  <div class="h">
-    <div class="b">2026-06-02</div>
-    <h1>国内MaaS大战2026：Token经济的两条战线</h1>
-    <div class="m"><span>📝 技术分析</span><span>🌏 AI · 算力</span></div>
+<div class="bis-hero">
+  <span class="tag">行业观察 · 2026-06</span>
+  <h1>国内 MaaS 大战 2026：Token 经济的两条战线</h1>
+  <p class="subtitle">某头部视频云 2026 营收目标 150 亿 / Coding 模型涨价 83% 同时调用量增 400% / LLM 通用赛道已被地板价击穿</p>
+  <p class="date">2026-06-02 · 行业观察</p>
+</div>
+
+<div class="bis-alert">
+⚠️ <strong>2026 年行业共识已经清晰</strong>：做出顶尖模型 = 拉高 Token 消耗 + 客户付费意愿的最好方式。LLM 通用赛道已饱和，<strong>Coding（代码模型）+ 视频模型</strong>成为两条赚钱主战场。本文基于 2026/6/3 公开行业报道还原 MaaS 业务全貌。
+</div>
+
+<!-- ============ MOD-01 一图速览 ============ -->
+<div class="bis-section">
+<h2><span class="num">1</span>一图速览 — 2026 MaaS 战场数据</h2>
+
+<div class="bis-grid">
+  <div class="bis-card">
+    <span class="val">150<span style="font-size:14px">亿</span></span>
+    <span class="lab">某头部视频云 2026 营收目标</span>
   </div>
-  <div class="prox">
-    <h2>文章简介</h2>
-    <p>本文为 Tech Blog 文章摘要展示页。完整文章请访问：<a href="https://liweicong2016-collab.github.io/tech-blog/" target="_blank">Livius's Tech Pulse</a></p>
-    <p style="margin-top:12px;">本文为技术分析报告，涵盖了MaaS、Token经济与国产AI相关领域的深度研究与观察。</p>
+  <div class="bis-card red">
+    <span class="val">10×</span>
+    <span class="lab">2026 目标 ÷ 2025 实际</span>
   </div>
-  <div class="tags">
-    <span class="tag">MaaS</span><span class="tag">Token经济</span><span class="tag">国产AI</span>
+  <div class="bis-card green">
+    <span class="val">+83%</span>
+    <span class="lab">Coding 模型 Q1 涨价幅度</span>
+  </div>
+  <div class="bis-card purple">
+    <span class="val">+400%</span>
+    <span class="lab">Coding 模型 Q1 调用量</span>
+  </div>
+  <div class="bis-card">
+    <span class="val">10<span style="font-size:14px">亿+</span></span>
+    <span class="lab">某视频模型单月收入</span>
+  </div>
+  <div class="bis-card red">
+    <span class="val">~40%</span>
+    <span class="lab">Token 月度增速</span>
   </div>
 </div>
-<footer><div class="c" style="max-width:800px"><p>© 2026 Livius · AI · Compute · Southeast Asia</p></div></footer>
+
+<p><strong>核心信号</strong>：当一家公司能把模型价格<strong>涨 83%</strong>而调用量<strong>同时增长 400%</strong>，意味着"提价不掉量"在头部 AI 模型上成立 — 这与互联网时代"先免费后涨价"的逻辑完全相反。</p>
+</div>
+
+<!-- ============ MOD-02 视频模型线 ============ -->
+<div class="bis-section">
+<h2><span class="num">2</span>战线一：视频模型 — 某头部视频云 150 亿目标</h2>
+
+<p>某头部视频云 2026 年 4 月将 MaaS 业务营收目标上调至 <strong>150 亿元</strong>，几乎每月都在上调（2025 年底原目标仅 100 亿元）。</p>
+
+<div class="bis-table-wrap">
+<table class="bis-table">
+  <thead>
+    <tr>
+      <th>指标</th>
+      <th>数据</th>
+      <th>时点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2025 年全年实际 MaaS 收入</td>
+      <td><strong>~15 亿元</strong></td>
+      <td>2025 全年</td>
+    </tr>
+    <tr>
+      <td>2026 年 MaaS 营收目标</td>
+      <td><strong>150 亿元</strong>（去年 10 倍）</td>
+      <td>2026/4 上调</td>
+    </tr>
+    <tr>
+      <td>2025 年底原目标</td>
+      <td>100 亿元</td>
+      <td>2025/12</td>
+    </tr>
+    <tr>
+      <td>Token 日均消耗量月度增速</td>
+      <td><strong>~40%</strong></td>
+      <td>2026 截至当前</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="bis-signal">
+<h3>🎬 某视频模型（代号：模型甲）的爆发</h3>
+<ul>
+  <li><strong>单月收入已超 10 亿元</strong>，仍在爬升期</li>
+  <li>2026/2/10 发布 → 春节排队 10 小时 → 开启"白名单 + 年框 + 满血版"商业化</li>
+  <li>全球视频模型市场份额<strong>第 2</strong>（仅次于某海外巨头）</li>
+  <li>Artificial Analysis Video Arena Elo 1269，超越海外顶尖视频模型</li>
+  <li>短剧行业渗透率<strong>~95%</strong>（"短剧从业者很难不是模型甲用户"）</li>
+  <li>2026 目标：全球第 1</li>
+</ul>
+</div>
+</div>
+
+<!-- ============ MOD-03 Coding 模型线 ============ -->
+<div class="bis-section">
+<h2><span class="num">3</span>战线二：Coding 模型 — 某创业公司 Q1 涨价 83%</h2>
+
+<p>2026 年 Q1，<strong>某头部 Coding 创业公司（代号：公司 X）</strong>的接口调用价格累计提升约 <strong>83%</strong>，但 API 调用量<strong>仍增长 400%</strong>。</p>
+
+<div class="bis-table-wrap">
+<table class="bis-table">
+  <thead>
+    <tr>
+      <th>Coding 战场关键数据（2026 Q1）</th>
+      <th>数值</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>接口调用价格涨幅</td>
+      <td><strong>+83%</strong></td>
+      <td>多次调价累计</td>
+    </tr>
+    <tr>
+      <td>API 调用量增长</td>
+      <td><strong>+400%</strong></td>
+      <td>价格上涨但量没掉</td>
+    </tr>
+    <tr>
+      <td>缓存命中 Token 价格</td>
+      <td>接近海外头部模型 A</td>
+      <td>国产首次核心场景价格对齐</td>
+    </tr>
+    <tr>
+      <td>Coding 能力</td>
+      <td>国内头部水平</td>
+      <td>是涨价的底气</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="bis-punchline">
+<h2>💡 "提价不掉量"在头部 AI 模型上成立</h2>
+<ul>
+  <li>✅ 涨价 83% 的同时，调用量增长 400%</li>
+  <li>✅ 这是国产大模型首次在<strong>核心场景</strong>与海外头部厂商实现价格对齐</li>
+  <li>✅ 战略选择：2024 年就押注类 Anthropic 路线（专注重模型智能 + Coding）</li>
+  <li>✅ 数据来源：公司 X CEO 在 2026 Q1 财报电话会议披露</li>
+</ul>
+</div>
+</div>
+
+<!-- ============ MOD-04 某头部综合云 MaaS 组织升级 ============ -->
+<div class="bis-section">
+<h2><span class="num">4</span>某头部综合云的 MaaS 组织升级</h2>
+
+<p>2025 年开始，某头部综合云（代号：公司 B）陆续成立<strong>数个新 MaaS 销售团队</strong>，与原直销团队合作打单。</p>
+
+<div class="bis-signal">
+<h3>🏢 销售组织三阶段进化路径</h3>
+<ul>
+  <li><strong>阶段一：传统云销售</strong> — 卖 CPU/存储/带宽资源</li>
+  <li><strong>阶段二：MaaS 销售</strong> — 卖 Token / 模型 API（公司 B 当前所在阶段）</li>
+  <li><strong>阶段三：Agent 销售</strong> — 卖业务能力 / 卖场景解决方案（未来方向）</li>
+</ul>
+</div>
+
+<p><strong>MaaS 销售团队核心任务</strong>：</p>
+<ul>
+  <li>挖掘企业使用场景</li>
+  <li>推动企业客户把 Agent 能力使用起来</li>
+  <li><strong>增加 Token 消耗</strong>（这是 KPI）</li>
+</ul>
+</div>
+
+<!-- ============ MOD-05 竞争格局 ============ -->
+<div class="bis-section">
+<h2><span class="num">5</span>竞争格局 — 三类玩家在 Coding 战场厮杀</h2>
+
+<div class="bis-table-wrap">
+<table class="bis-table">
+  <thead>
+    <tr>
+      <th>阵营</th>
+      <th>代表玩家（脱敏）</th>
+      <th>2026 动作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="bis-tag-r">大厂云服务</span></td>
+      <td>公司 A（视频云）、公司 B（综合云）、公司 C（综合云）</td>
+      <td>推出 Coding Plan，加大销售</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-m">AI 创业公司</span></td>
+      <td>公司 X（Coding 头部）、公司 Y、公司 Z</td>
+      <td>Coding Plan + 模型迭代</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-n">运营商阵营</span></td>
+      <td>未点名</td>
+      <td>陆续推出 Coding Plan</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>共同打法</strong>：先用相对低价格吸引用户进入生意范围 → 大量消耗 Token → 后期提价。</p>
+
+<div class="bis-quote">
+"Token 大战，如今已经清晰地划分为两条战线：一条是 Coding（代码）模型，另一条则是视频模型。相比拥挤的 LLM 模型赛道里各家公司已经把模型打到地板价，头部的 Coding 和视频模型依然拥有一定的议价权，尤其是视频模型。" —— 2026 行业共识
+</div>
+</div>
+
+<!-- ============ MOD-06 灰姑娘水晶鞋效应 ============ -->
+<div class="bis-section">
+<h2><span class="num">6</span>理论："灰姑娘水晶鞋效应"</h2>
+
+<p>2025 年底，海外 API 服务商 OpenRouter 提出一个理论：</p>
+
+<div class="bis-punchline">
+<h2>👠 灰姑娘水晶鞋效应</h2>
+<p style="font-size:15.5px;line-height:1.7;margin:0">
+<strong>AI 模型发布第一个月进来的用户，比后来用户留存率更高</strong>。因为当用户用到效果好的模型，就会像灰姑娘穿上水晶鞋一样，产生<strong>极高忠诚度</strong>，并且把业务<strong>深度绑定</strong>在这个模型上。
+</p>
+</div>
+
+<p><strong>战略含义</strong>：</p>
+<ul>
+  <li>先发优势 + 早期用户 = 长期护城河</li>
+  <li>解释了为什么大厂敢"先低价圈用户"</li>
+  <li>解释了为什么 Coding 模型能涨价不掉量（用户已被绑定）</li>
+  <li>解释了为什么某视频模型 95% 渗透短剧行业后形成事实标准</li>
+</ul>
+</div>
+
+<!-- ============ MOD-07 一句话总结 + 数据局限 ============ -->
+<div class="bis-section">
+<h2><span class="num">7</span>结论与数据局限</h2>
+
+<div class="bis-punchline">
+<h2>🎯 一句话总结</h2>
+<p style="font-size:16px;line-height:1.7;margin:0">
+<strong>2026 年 MaaS 战场已分裂为 Coding + 视频两条线</strong>，头部公司能涨价 83% 同时调用量增 400%，说明头部 AI 模型已具备<strong>"提价不掉量"</strong>的护城河；视频模型依靠 95% 行业渗透形成事实标准，营收爆发可期；<strong>LLM 通用赛道已被地板价击穿</strong>，未来属于顶尖模型 + 行业渗透。
+</p>
+</div>
+
+<div class="bis-signal">
+<h3>📊 数据局限（必读）</h3>
+<ul>
+  <li>本文数字均来自 2026/6/3 公开行业报道，未做交叉验证</li>
+  <li>各家 MaaS 营收口径定义可能不同（各头部云 + 各 Coding 模型公司各自解释）</li>
+  <li>"单月超 10 亿"、"~95% 渗透"等数据为媒体报道，未审计</li>
+  <li>决策引用需进一步核实，建议结合各家财报与行业白皮书</li>
+  <li>公司名按公开博客脱敏规则隐去，仅保留模型代号称谓与数字</li>
+</ul>
+</div>
+
+<div class="bis-foot">
+<p>数据来源：2026/6/3 行业媒体公开报道 · 撰写：Tech Observer</p>
+</div>
+
+</div>
+<div class="tag-row"><span class="atag">["MaaS</span><span class="atag">Token经济</span><span class="atag">国产AI</span><span class="atag">云计算</span><span class="atag">大模型</span><span class="atag">推理</span><span class="atag">GitCode</span><span class="atag">开源大模型"]</span></div>
+</div>
+<footer>
+  <div class="c" style="max-width:860px">
+    <p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p>
+  </div>
+</footer>
+</div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.bis-section, .bis-card, .bis-hero, .bis-alert, .bis-signal, .bis-punchline, .bis-impact, .bis-timeline .bis-tl-item');
+  els.forEach(function(el){
+    el.setAttribute('data-aos', 'fade-up');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
 </body></html>

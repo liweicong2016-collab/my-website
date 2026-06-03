@@ -1,54 +1,352 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Token经济这一年：我们真的在见证一场定价革命吗？</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#070b14;--bg2:#0d1321;--bg3:#111827;--txt:#e8eaf0;--txt2:#94a3b8;--brd:#1e2d45;--p:#1a56db}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;font-size:16px}
-    a{color:#60a5fa;text-decoration:none}a:hover{opacity:.8}
-    .t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);padding:0 40px}
-    .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-    .t3{font-size:15px;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:8px;text-decoration:none}
-    .d{width:7px;height:7px;border-radius:50%;background:var(--p);box-shadow:0 0 8px var(--p)}
-    .t4{display:flex;align-items:center;gap:6px;color:var(--txt2);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-    .t4:hover{color:var(--txt)}
-    .c{max-width:800px;margin:0 auto;padding:60px 24px}
-    .h{padding:80px 0 40px;border-bottom:1px solid var(--brd);margin-bottom:48px}
-    .b{display:inline-block;background:rgba(26,86,219,.2);border:1px solid rgba(26,86,219,.4);color:#93c5fd;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:16px}
-    h1{font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;background:linear-gradient(135deg,#fff 40%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .m{font-size:13px;color:var(--txt2);display:flex;gap:16px;flex-wrap:wrap}
-    .m span{display:flex;align-items:center;gap:4px}
-    .prox{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;padding:40px;margin-bottom:32px}
-    .prox h2{font-size:20px;font-weight:700;margin-bottom:16px}
-    .prox p{color:var(--txt2);font-size:15px;line-height:1.7}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
-    .tag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:#93c5fd;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600}
-    ft{padding:40px 0;border-top:1px solid var(--brd);text-align:center;font-size:13px;color:var(--txt2)}
-    ft a{color:#60a5fa;text-decoration:none}
-    @media(max-width:768px){.t{padding:0 20px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token经济这一年：我们真的在见证一场定价革命吗？</title>
+<meta name="description" content="从2025年初的1.2%到2026年的61%，中国开源模型在OpenRouter上的份额爆炸式增长，背后是价格崩塌、需求暴增和一场关于'Token究竟值多少钱'的全球大辩论。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+/* === Dark Mode Injection === */
+:root {
+  --bis-bg: #070b14;
+  --bis-card: #0d1321;
+  --bis-card2: #111827;
+  --bis-border: #1e2d45;
+  --bis-text: #e8eaf0;
+  --bis-muted: #94a3b8;
+  --bis-accent: #60a5fa;
+  --bis-accent-soft: rgba(26,86,219,0.18);
+  --bis-red: #f87171;
+  --bis-red-soft: rgba(239,68,68,0.15);
+  --bis-orange: #fbbf24;
+  --bis-orange-soft: rgba(245,158,11,0.15);
+  --bis-green: #34d399;
+  --bis-green-soft: rgba(16,185,129,0.15);
+  --bis-purple: #a78bfa;
+  --bis-purple-soft: rgba(139,92,246,0.15);
+  --bis-yellow: #fcd34d;
+  --bis-yellow-soft: rgba(212,160,23,0.15);
+}
+[data-aos] { opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-aos].aos-animate { opacity: 1; }
+[data-aos="fade-up"] { transform: translateY(24px); }
+[data-aos="fade-up"].aos-animate { transform: translateY(0); }
+[data-aos="fade-left"] { transform: translateX(24px); }
+[data-aos="fade-left"].aos-animate { transform: translateX(0); }
+[data-aos="zoom-in"] { transform: scale(0.94); }
+[data-aos="zoom-in"].aos-animate { transform: scale(1); }
+
+
+  .article-wrap * { box-sizing: border-box; }
+  .article-wrap { font-family: 'Inter','Noto Sans SC',-apple-system,sans-serif; color: var(--bis-text); line-height: 1.7; font-size: 16px; background: var(--bis-bg); min-height: 100vh; }
+  .article-wrap a { color: var(--bis-accent); text-decoration: none; }
+  .article-wrap a:hover { opacity: 0.8; }
+  .t { position: sticky; top: 0; z-index: 100; background: rgba(7,11,20,.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--bis-border); padding: 0 40px; }
+  .t2 { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .t3 { font-size: 15px; font-weight: 800; color: var(--bis-text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .d { width: 7px; height: 7px; border-radius: 50%; background: var(--bis-accent); box-shadow: 0 0 8px var(--bis-accent); }
+  .t4 { display: flex; align-items: center; gap: 6px; color: var(--bis-muted); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s; }
+  .t4:hover { color: var(--bis-text); }
+  .c { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+  .bis-hero { background: linear-gradient(135deg, rgba(26,86,219,.18) 0%, rgba(139,92,246,.1) 100%); border: 1px solid rgba(26,86,219,.3); border-radius: 16px; padding: 32px 28px; margin: 48px 0 32px; }
+  .bis-hero .tag { display: inline-block; background: var(--bis-red); color: #fff; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; letter-spacing: .5px; }
+  .bis-hero h1 { font-size: clamp(22px,4.5vw,36px); line-height: 1.3; margin: 0 0 12px; font-weight: 800; background: linear-gradient(135deg,#fff 50%,#93c5fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .bis-hero .subtitle { font-size: 14.5px; color: var(--bis-muted); margin: 0; line-height: 1.5; }
+  .bis-hero .date { font-size: 12px; color: var(--bis-muted); margin-top: 12px; }
+  .bis-alert { background: var(--bis-red-soft); border-left: 4px solid var(--bis-red); padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 20px 0; font-size: 15px; color: var(--bis-red); }
+  .bis-alert strong { color: var(--bis-red); }
+  .bis-section { background: var(--bis-card); border: 1px solid var(--bis-border); border-radius: 14px; padding: 24px 22px; margin: 20px 0; transition: background .25s; }
+  .bis-section:hover { background: var(--bis-card2); }
+  .bis-section h2 { font-size: 19px; font-weight: 700; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--bis-border); color: var(--bis-text); display: flex; align-items: center; gap: 10px; }
+  .bis-section h2 .num { display: inline-flex; align-items: center; justify-content: center; background: var(--bis-accent); color: #fff; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .bis-section p { margin: 0 0 12px; color: var(--bis-text); }
+  .bis-section p:last-child { margin-bottom: 0; }
+  .bis-section strong { color: #fff; }
+  .bis-section ul { padding-left: 20px; margin: 10px 0; }
+  .bis-section li { margin-bottom: 5px; color: var(--bis-text); }
+  .bis-timeline { position: relative; padding-left: 24px; }
+  .bis-timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--bis-border); }
+  .bis-tl-item { position: relative; margin-bottom: 18px; padding-left: 6px; }
+  .bis-tl-item:last-child { margin-bottom: 0; }
+  .bis-tl-item::before { content: ''; position: absolute; left: -20px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--bis-accent); border: 2px solid var(--bis-bg); box-shadow: 0 0 0 2px var(--bis-accent); }
+  .bis-tl-item .tl-date { font-size: 13px; font-weight: 700; color: var(--bis-accent); margin-bottom: 3px; }
+  .bis-tl-item .tl-text { font-size: 14.5px; color: var(--bis-text); }
+  .bis-tl-item.highlight::before { background: var(--bis-red); box-shadow: 0 0 0 2px var(--bis-red); }
+  .bis-tl-item.highlight .tl-date { color: var(--bis-red); }
+  .bis-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  .bis-flag { background: var(--bis-accent-soft); color: var(--bis-accent); font-size: 12.5px; padding: 5px 12px; border-radius: 16px; border: 1px solid rgba(26,86,219,.3); }
+  .bis-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
+  .bis-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .bis-table th, .bis-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--bis-border); }
+  .bis-table th { background: rgba(26,86,219,.1); font-weight: 700; color: var(--bis-accent); font-size: 12.5px; text-transform: uppercase; letter-spacing: .5px; }
+  .bis-table tr:hover td { background: rgba(30,41,59,.5); }
+  .bis-tag-r { background: var(--bis-red-soft); color: var(--bis-red); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-n { background: var(--bis-orange-soft); color: var(--bis-orange); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-m { background: var(--bis-green-soft); color: var(--bis-green); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0 0; }
+  .bis-card { background: var(--bis-card2); border: 1px solid var(--bis-border); border-radius: 12px; padding: 18px 14px; text-align: center; transition: transform .2s, box-shadow .2s; }
+  .bis-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .bis-card .val { font-size: 26px; font-weight: 800; color: var(--bis-accent); display: block; margin-bottom: 6px; }
+  .bis-card .lab { font-size: 12.5px; color: var(--bis-muted); }
+  .bis-card.red .val { color: var(--bis-red); }
+  .bis-card.green .val { color: var(--bis-green); }
+  .bis-card.purple .val { color: var(--bis-purple); }
+  .bis-impact { border-radius: 10px; padding: 14px 16px; margin: 12px 0; border: 1px solid; }
+  .bis-impact.short { background: var(--bis-red-soft); border-color: rgba(239,68,68,.3); }
+  .bis-impact.mid { background: var(--bis-orange-soft); border-color: rgba(245,158,11,.3); }
+  .bis-impact.long { background: var(--bis-green-soft); border-color: rgba(16,185,129,.3); }
+  .bis-impact h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .bis-impact.short h3 { color: var(--bis-red); }
+  .bis-impact.mid h3 { color: var(--bis-orange); }
+  .bis-impact.long h3 { color: var(--bis-green); }
+  .bis-impact p { margin: 0; font-size: 14px; color: var(--bis-text); }
+  .bis-signal { background: var(--bis-purple-soft); border: 1px solid rgba(139,92,246,.3); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+  .bis-signal h3 { margin: 0 0 10px; font-size: 15px; color: var(--bis-purple); font-weight: 700; }
+  .bis-signal ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--bis-text); }
+  .bis-signal li { margin-bottom: 5px; }
+  .bis-punchline { background: linear-gradient(135deg, rgba(239,68,68,.12) 0%, rgba(245,158,11,.08) 100%); border: 1px solid rgba(239,68,68,.25); border-radius: 12px; padding: 20px; margin: 18px 0; }
+  .bis-punchline h2 { font-size: 17px; color: var(--bis-red); margin: 0 0 12px; padding: 0; border: 0; font-weight: 800; }
+  .bis-punchline ul { padding-left: 18px; font-size: 14.5px; margin: 0; color: var(--bis-text); }
+  .bis-punchline li { margin-bottom: 6px; }
+  .bis-quote { background: var(--bis-card2); border-left: 3px solid var(--bis-accent); padding: 14px 16px; font-style: italic; font-size: 14.5px; color: var(--bis-muted); border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .bis-foot { text-align: center; color: var(--bis-muted); font-size: 12.5px; margin: 32px 0 12px; padding-top: 20px; border-top: 1px solid var(--bis-border); }
+  .article-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
+  .article-meta span { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--bis-muted); }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .atag { background: rgba(26,86,219,.15); border: 1px solid rgba(26,86,219,.3); color: var(--bis-accent); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+  footer { padding: 40px 0; border-top: 1px solid var(--bis-border); text-align: center; font-size: 13px; color: var(--bis-muted); }
+  footer a { color: var(--bis-accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 768px) { .t { padding: 0 20px; } .c { padding: 0 16px 60px; } .bis-hero { padding: 24px 18px; } .article-wrap { font-size: 15px; } }
+
+</style>
 </head>
 <body>
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
+<div class="article-wrap">
+<div class="t"><div class="t2"><a href="index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="index.html" class="t4">← 返回首页</a></div></div>
 <div class="c">
-  <div class="h">
-    <div class="b">2026-05-23</div>
-    <h1>Token经济这一年：我们真的在见证一场定价革命吗？</h1>
-    <div class="m"><span>📝 技术分析</span><span>🌏 AI · 算力</span></div>
-  </div>
-  <div class="prox">
-    <h2>文章简介</h2>
-    <p>本文为 Tech Blog 文章摘要展示页。完整文章请访问：<a href="https://liweicong2016-collab.github.io/tech-blog/" target="_blank">Livius's Tech Pulse</a></p>
-    <p style="margin-top:12px;">本文为技术分析报告，涵盖了AI、Token经济与大模型相关领域的深度研究与观察。</p>
-  </div>
-  <div class="tags">
-    <span class="tag">AI</span><span class="tag">Token经济</span><span class="tag">大模型</span>
-  </div>
+![算力集群](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80)
+*算力是Token工厂的原材料，但工厂真正的产品是智能的定价权*
+
+---
+
+## 开篇：一张截图引发的思考
+
+今年2月，我看到一张OpenRouter的榜单截图——前十名里，中国模型占了三个席位，合计份额约61%。
+
+愣了一下。
+
+要知道，2025年初这个数字还是1.2%。
+
+十八个月，从1%到61%。这不是渐进式的增长，是某种结构性逆转。
+
+a16z有位合伙人说了一句话，在创业圈流传很广：*"现在用开源栈做路演的创业公司，大约80%跑的是中国开源模型。"* 听完我专门去OpenRouter翻了翻数据，还真差不多。
+
+于是我开始认真想一个问题：**Token经济的本质，到底是什么？**
+
+---
+
+## 一、价格崩塌：一场静悄悄的定价革命
+
+如果只用一个词形容这两年Token市场的变化，我选择"崩塌"。
+
+来看看这张价格轨迹图揭示的事实：
+
+| 时间 | 事件 | 影响 |
+|------|------|------|
+| 2022-2024 | GPT-4时代，$60/百万tokens | 天价，少数玩家玩得起 |
+| 2024 Q3 | DeepSeek V2，$0.27/百万 | 第一次大冲击 |
+| 2025 Q1 | 国产模型集体跳水，$0.1–0.3/百万 | 全面价格战 |
+| 2026 Q1 | 部分场景跌破$0.01/百万 | 完全商品化 |
+
+但是——这里有个反直觉的数据：
+
+调用量增长了2,650%，市场总收入却增长了2,100%。
+
+价格跌了，但总额涨了。
+
+这在经济学上有个名字：杰文斯悖论（Jevons Paradox）。煤用得越便宜，用量越大，总消耗越多。Token市场完整地复现了这一规律。
+
+为什么会这样？五个机制在同时起作用：
+
+**1. 长上下文税** — 把几百万字塞进上下文窗口，听起来很爽，但这意味着每次请求消耗的token数量暴增。
+
+**2. 输出通胀** — 为了"安全"，模型输出的内容越来越冗长。一段本可以三个字说清楚的话，AI会洋洋洒洒写三百字。这不是浪费，这是策略。
+
+**3. 调度折价** — 缓存技术在进步，同样的请求不需要每次都重新计算，单位成本在悄悄下降。
+
+**4. 预算内化** — AI调用正在从"技术项目支出"变成"运营常规支出"。以前是研发费用，现在变成了水电费。
+
+**5. 合规溢价** — 可审计的Token、有来源记录的推理，正在成为企业采购的硬需求。这部分的溢价还在。
+
+---
+
+## 二、谁在用？用在哪儿？
+
+如果只用一张图说明中国AI模型现在的市场地位，大概是这样：
+
+```
+OpenRouter 市场份额（2026年2月）
+前10名里：
+  第1名：DeepSeek        ~28%
+  第2名：Qwen（阿里）    ~19%
+  第3名：MiniMax          ~14%
+  三家合计：             ~61%
+```
+
+从1.2%到61%，用了十八个月。
+
+这不是运气，是中国开源模型在技术性价比上找到了那个甜蜜点。
+
+---
+
+## 三、Token工厂：一条五阶段流水线
+
+我看过一份供应链研究报告，里面有句话很扎心：
+
+*"AI capEx正在成为全球经济的顶级掠食者，从每一个相邻行业吸取资金和产能……"*
+
+理解Token经济，得先理解它的生产流水线。分五个阶段：
+
+### 阶段A：算力获取
+
+GPU是Token工厂的原材料。但这里有个问题——GPU的供给是有限的，而需求是无限膨胀的。
+
+2025年A100/H100被禁，H200/L20也被纳入管制，这意味着中国市场的GPU获取渠道在收窄。但同时，中国模型厂商的训练需求在增长。这是一个结构性的矛盾。
+
+有意思的是，在这个矛盾里，Ascend系列NPU反而成了某种意义上的"备选方案"——不是因为它最便宜，而是因为它可用。
+
+### 阶段B：模型训练
+
+这一阶段的成本差，坦白说，大得惊人。
+
+同样是训练一个千亿参数级别的模型，有的团队需要烧几百万美元，有的只需要几十万。差距来自架构创新——MoE（混合专家）架构让激活参数压缩到3-5%，训练成本断崖式下降。
+
+DeepSeek能在价格战中站住脚，架构是核心原因。
+
+### 阶段C：推理部署
+
+这里有个反直觉的事实：Agent工作负载下，GPU的实际利用率只有25-40%。
+
+为什么？因为在等CPU的I/O操作。推理阶段不是compute-bound（计算瓶颈），而是memory-bound（内存带宽瓶颈）。
+
+MoE架构第二次发挥作用——把激活参数压缩到足够小，让内存带宽不再是瓶颈，GPU利用率可以显著提升。
+
+### 阶段D & E：定价与变现
+
+这是最复杂的部分，也是一切商业逻辑的终点。
+
+---
+
+## 四、单位经济学：谁在赚钱？
+
+看几组真实的数据（来源：摩根士丹利、摩根大通）：
+
+| 厂商 | 收入/分钟 | 成本/分钟 | 毛利 |
+|------|---------|---------|------|
+| MiniMax | ~$1.00 | ~$0.28 | **72%** |
+| 行业均值 | ~$0.50 | — | 更低 |
+| 阿里云百炼 | 组合收入 | 含基础设施分摊 | 低于纯API厂商 |
+
+**一个有意思的发现：**
+
+阿里云的AI收入结构不是纯Token API，而是"算力+训练+推理平台+专属实例+MaaS API"的组合。如果把89.71亿元季度AI收入全部算作Token API（按3元/百万单价），需要季度3P（千万亿）token——在当前规模下并不现实。
+
+Token是水龙头，真正的商业价值在水网。
+
+换句话说：阿里云卖的不是水价，是整个供水系统。
+
+这个逻辑，某种程度上解释了为什么纯API厂商在价格战里很被动——你没有"水网"，只有"水龙头"。
+
+---
+
+## 五、企业需求的三级跳
+
+摩根大通有个有意思的判断：中国2026年的企业端需求，大概率会复制美国2025年的路径。
+
+美国市场走过的路是这样的：
+
+**第一级：试点** — 几百个开发者，小规模实验，预算在研发费用里。
+
+**第二级：规模化投入** — 工程团队开始大规模调用API，预算独立出来。
+
+**第三级：AI成为固定支出** — CFO开始问"这个月Token账单为什么这么高"，然后第二个月批准了更高的预算上限。
+
+Anthropic的ARR曲线是这个路径最好的佐证：
+
+```
+2023年：$5亿
+2024年：$18亿
+2025年：$120亿
+2026年（预测）：$300亿+
+```
+
+这个增速，在传统软件市场里是看不到的。
+
+背后有一个定价权的秘密：*"品质和稀缺绑在一起，就是硬通货。"* 当一个工具足够不可替代，客户不会和你讨价还价，只会想办法加大预算来cover账单。
+
+---
+
+## 六、多模态：新战场，新量级
+
+视频生成 vs 文本Tokens的价格差：
+
+- 文本Token：$0.0000002/个（约等于不要钱）
+- 视频生成：$0.25/秒
+
+量级差距超过**100万倍**。
+
+MiniMax通过视频生成建立了独立于文本Token价格战的计量体系。视频不是文本的延伸，是另一套经济模型。
+
+这意味着什么？多模态不只是一场技术升级，是一场定价权的重新分配。
+
+---
+
+## 结语：Token是入口，全栈是利润
+
+回头看这份报告的核心结论，我越来越觉得它是对的：
+
+> Token经济的本质，是云厂商把能源、GPU、模型和平台治理能力封装成可计量的AI服务单位；客户把token纳入成本、吞吐、预算和治理体系；收入与数据再回流到模型升级、算力扩容和生态建设。
+
+这不是一个技术现象，这是一场商业范式的转移。
+
+价格战会继续，但价格战只是表层。真正决定胜负的，是谁能在Token的入口之外，搭起那道"水网"——数据治理、私有化部署、行业Agent、平台锁定。
+
+下一个十八个月，故事会更加精彩。
+
+---
+
+*作者注：本文数据综合自阿里巴巴FY2026财报、摩根士丹利/摩根大通研报、OpenRouter公开数据及行业估算。部分未上市企业数据为逆向推算，仅供方向参考。*
+<div class="tag-row"><span class="atag">["AI</span><span class="atag">Token经济</span><span class="atag">大模型</span><span class="atag">开源</span><span class="atag">市场分析"]</span></div>
 </div>
-<footer><div class="c" style="max-width:800px"><p>© 2026 Livius · AI · Compute · Southeast Asia</p></div></footer>
+<footer>
+  <div class="c" style="max-width:860px">
+    <p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p>
+  </div>
+</footer>
+</div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.bis-section, .bis-card, .bis-hero, .bis-alert, .bis-signal, .bis-punchline, .bis-impact, .bis-timeline .bis-tl-item');
+  els.forEach(function(el){
+    el.setAttribute('data-aos', 'fade-up');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
 </body></html>

@@ -1,54 +1,469 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>国产AI加速器生态实战观察：6841个模型在头部国产NPU上跑通了多少</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#070b14;--bg2:#0d1321;--bg3:#111827;--txt:#e8eaf0;--txt2:#94a3b8;--brd:#1e2d45;--p:#1a56db}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;font-size:16px}
-    a{color:#60a5fa;text-decoration:none}a:hover{opacity:.8}
-    .t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);padding:0 40px}
-    .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-    .t3{font-size:15px;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:8px;text-decoration:none}
-    .d{width:7px;height:7px;border-radius:50%;background:var(--p);box-shadow:0 0 8px var(--p)}
-    .t4{display:flex;align-items:center;gap:6px;color:var(--txt2);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-    .t4:hover{color:var(--txt)}
-    .c{max-width:800px;margin:0 auto;padding:60px 24px}
-    .h{padding:80px 0 40px;border-bottom:1px solid var(--brd);margin-bottom:48px}
-    .b{display:inline-block;background:rgba(26,86,219,.2);border:1px solid rgba(26,86,219,.4);color:#93c5fd;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:16px}
-    h1{font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;background:linear-gradient(135deg,#fff 40%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .m{font-size:13px;color:var(--txt2);display:flex;gap:16px;flex-wrap:wrap}
-    .m span{display:flex;align-items:center;gap:4px}
-    .prox{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;padding:40px;margin-bottom:32px}
-    .prox h2{font-size:20px;font-weight:700;margin-bottom:16px}
-    .prox p{color:var(--txt2);font-size:15px;line-height:1.7}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
-    .tag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:#93c5fd;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600}
-    ft{padding:40px 0;border-top:1px solid var(--brd);text-align:center;font-size:13px;color:var(--txt2)}
-    ft a{color:#60a5fa;text-decoration:none}
-    @media(max-width:768px){.t{padding:0 20px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国产 AI 加速器生态实战观察：6841 个模型在头部国产 NPU 上跑通了多少</title>
+<meta name="description" content="深度盘点 2026 年国产 AI 加速器生态：6841 个开源模型里，量化栈、推理框架、训练框架到底成熟到什么程度。海外客户/部署方最关心的 TCO、量化能力、模型覆盖，一张图说清楚。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+/* === Dark Mode Injection === */
+:root {
+  --bis-bg: #070b14;
+  --bis-card: #0d1321;
+  --bis-card2: #111827;
+  --bis-border: #1e2d45;
+  --bis-text: #e8eaf0;
+  --bis-muted: #94a3b8;
+  --bis-accent: #60a5fa;
+  --bis-accent-soft: rgba(26,86,219,0.18);
+  --bis-red: #f87171;
+  --bis-red-soft: rgba(239,68,68,0.15);
+  --bis-orange: #fbbf24;
+  --bis-orange-soft: rgba(245,158,11,0.15);
+  --bis-green: #34d399;
+  --bis-green-soft: rgba(16,185,129,0.15);
+  --bis-purple: #a78bfa;
+  --bis-purple-soft: rgba(139,92,246,0.15);
+  --bis-yellow: #fcd34d;
+  --bis-yellow-soft: rgba(212,160,23,0.15);
+}
+[data-aos] { opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-aos].aos-animate { opacity: 1; }
+[data-aos="fade-up"] { transform: translateY(24px); }
+[data-aos="fade-up"].aos-animate { transform: translateY(0); }
+[data-aos="fade-left"] { transform: translateX(24px); }
+[data-aos="fade-left"].aos-animate { transform: translateX(0); }
+[data-aos="zoom-in"] { transform: scale(0.94); }
+[data-aos="zoom-in"].aos-animate { transform: scale(1); }
+
+
+  .article-wrap * { box-sizing: border-box; }
+  .article-wrap { font-family: 'Inter','Noto Sans SC',-apple-system,sans-serif; color: var(--bis-text); line-height: 1.7; font-size: 16px; background: var(--bis-bg); min-height: 100vh; }
+  .article-wrap a { color: var(--bis-accent); text-decoration: none; }
+  .article-wrap a:hover { opacity: 0.8; }
+  .t { position: sticky; top: 0; z-index: 100; background: rgba(7,11,20,.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--bis-border); padding: 0 40px; }
+  .t2 { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .t3 { font-size: 15px; font-weight: 800; color: var(--bis-text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .d { width: 7px; height: 7px; border-radius: 50%; background: var(--bis-accent); box-shadow: 0 0 8px var(--bis-accent); }
+  .t4 { display: flex; align-items: center; gap: 6px; color: var(--bis-muted); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s; }
+  .t4:hover { color: var(--bis-text); }
+  .c { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+  .bis-hero { background: linear-gradient(135deg, rgba(26,86,219,.18) 0%, rgba(139,92,246,.1) 100%); border: 1px solid rgba(26,86,219,.3); border-radius: 16px; padding: 32px 28px; margin: 48px 0 32px; }
+  .bis-hero .tag { display: inline-block; background: var(--bis-red); color: #fff; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; letter-spacing: .5px; }
+  .bis-hero h1 { font-size: clamp(22px,4.5vw,36px); line-height: 1.3; margin: 0 0 12px; font-weight: 800; background: linear-gradient(135deg,#fff 50%,#93c5fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .bis-hero .subtitle { font-size: 14.5px; color: var(--bis-muted); margin: 0; line-height: 1.5; }
+  .bis-hero .date { font-size: 12px; color: var(--bis-muted); margin-top: 12px; }
+  .bis-alert { background: var(--bis-red-soft); border-left: 4px solid var(--bis-red); padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 20px 0; font-size: 15px; color: var(--bis-red); }
+  .bis-alert strong { color: var(--bis-red); }
+  .bis-section { background: var(--bis-card); border: 1px solid var(--bis-border); border-radius: 14px; padding: 24px 22px; margin: 20px 0; transition: background .25s; }
+  .bis-section:hover { background: var(--bis-card2); }
+  .bis-section h2 { font-size: 19px; font-weight: 700; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--bis-border); color: var(--bis-text); display: flex; align-items: center; gap: 10px; }
+  .bis-section h2 .num { display: inline-flex; align-items: center; justify-content: center; background: var(--bis-accent); color: #fff; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .bis-section p { margin: 0 0 12px; color: var(--bis-text); }
+  .bis-section p:last-child { margin-bottom: 0; }
+  .bis-section strong { color: #fff; }
+  .bis-section ul { padding-left: 20px; margin: 10px 0; }
+  .bis-section li { margin-bottom: 5px; color: var(--bis-text); }
+  .bis-timeline { position: relative; padding-left: 24px; }
+  .bis-timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--bis-border); }
+  .bis-tl-item { position: relative; margin-bottom: 18px; padding-left: 6px; }
+  .bis-tl-item:last-child { margin-bottom: 0; }
+  .bis-tl-item::before { content: ''; position: absolute; left: -20px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--bis-accent); border: 2px solid var(--bis-bg); box-shadow: 0 0 0 2px var(--bis-accent); }
+  .bis-tl-item .tl-date { font-size: 13px; font-weight: 700; color: var(--bis-accent); margin-bottom: 3px; }
+  .bis-tl-item .tl-text { font-size: 14.5px; color: var(--bis-text); }
+  .bis-tl-item.highlight::before { background: var(--bis-red); box-shadow: 0 0 0 2px var(--bis-red); }
+  .bis-tl-item.highlight .tl-date { color: var(--bis-red); }
+  .bis-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  .bis-flag { background: var(--bis-accent-soft); color: var(--bis-accent); font-size: 12.5px; padding: 5px 12px; border-radius: 16px; border: 1px solid rgba(26,86,219,.3); }
+  .bis-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
+  .bis-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .bis-table th, .bis-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--bis-border); }
+  .bis-table th { background: rgba(26,86,219,.1); font-weight: 700; color: var(--bis-accent); font-size: 12.5px; text-transform: uppercase; letter-spacing: .5px; }
+  .bis-table tr:hover td { background: rgba(30,41,59,.5); }
+  .bis-tag-r { background: var(--bis-red-soft); color: var(--bis-red); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-n { background: var(--bis-orange-soft); color: var(--bis-orange); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-m { background: var(--bis-green-soft); color: var(--bis-green); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0 0; }
+  .bis-card { background: var(--bis-card2); border: 1px solid var(--bis-border); border-radius: 12px; padding: 18px 14px; text-align: center; transition: transform .2s, box-shadow .2s; }
+  .bis-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .bis-card .val { font-size: 26px; font-weight: 800; color: var(--bis-accent); display: block; margin-bottom: 6px; }
+  .bis-card .lab { font-size: 12.5px; color: var(--bis-muted); }
+  .bis-card.red .val { color: var(--bis-red); }
+  .bis-card.green .val { color: var(--bis-green); }
+  .bis-card.purple .val { color: var(--bis-purple); }
+  .bis-impact { border-radius: 10px; padding: 14px 16px; margin: 12px 0; border: 1px solid; }
+  .bis-impact.short { background: var(--bis-red-soft); border-color: rgba(239,68,68,.3); }
+  .bis-impact.mid { background: var(--bis-orange-soft); border-color: rgba(245,158,11,.3); }
+  .bis-impact.long { background: var(--bis-green-soft); border-color: rgba(16,185,129,.3); }
+  .bis-impact h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .bis-impact.short h3 { color: var(--bis-red); }
+  .bis-impact.mid h3 { color: var(--bis-orange); }
+  .bis-impact.long h3 { color: var(--bis-green); }
+  .bis-impact p { margin: 0; font-size: 14px; color: var(--bis-text); }
+  .bis-signal { background: var(--bis-purple-soft); border: 1px solid rgba(139,92,246,.3); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+  .bis-signal h3 { margin: 0 0 10px; font-size: 15px; color: var(--bis-purple); font-weight: 700; }
+  .bis-signal ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--bis-text); }
+  .bis-signal li { margin-bottom: 5px; }
+  .bis-punchline { background: linear-gradient(135deg, rgba(239,68,68,.12) 0%, rgba(245,158,11,.08) 100%); border: 1px solid rgba(239,68,68,.25); border-radius: 12px; padding: 20px; margin: 18px 0; }
+  .bis-punchline h2 { font-size: 17px; color: var(--bis-red); margin: 0 0 12px; padding: 0; border: 0; font-weight: 800; }
+  .bis-punchline ul { padding-left: 18px; font-size: 14.5px; margin: 0; color: var(--bis-text); }
+  .bis-punchline li { margin-bottom: 6px; }
+  .bis-quote { background: var(--bis-card2); border-left: 3px solid var(--bis-accent); padding: 14px 16px; font-style: italic; font-size: 14.5px; color: var(--bis-muted); border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .bis-foot { text-align: center; color: var(--bis-muted); font-size: 12.5px; margin: 32px 0 12px; padding-top: 20px; border-top: 1px solid var(--bis-border); }
+  .article-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
+  .article-meta span { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--bis-muted); }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .atag { background: rgba(26,86,219,.15); border: 1px solid rgba(26,86,219,.3); color: var(--bis-accent); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+  footer { padding: 40px 0; border-top: 1px solid var(--bis-border); text-align: center; font-size: 13px; color: var(--bis-muted); }
+  footer a { color: var(--bis-accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 768px) { .t { padding: 0 20px; } .c { padding: 0 16px 60px; } .bis-hero { padding: 24px 18px; } .article-wrap { font-size: 15px; } }
+
+</style>
 </head>
 <body>
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
+<div class="article-wrap">
+<div class="t"><div class="t2"><a href="index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="index.html" class="t4">← 返回首页</a></div></div>
 <div class="c">
-  <div class="h">
-    <div class="b">2026-06-02</div>
-    <h1>国产AI加速器生态实战观察：6841个模型在头部国产NPU上跑通了多少</h1>
-    <div class="m"><span>📝 技术分析</span><span>🌏 AI · 算力</span></div>
+<div class="bis-hero">
+  <span class="tag">生态观察 · 2026-06</span>
+  <h1>国产 AI 加速器生态实战观察</h1>
+  <p class="subtitle">6841 个开源模型、6 大任务族、对位 NVIDIA 生态的完整链路 — 头部国产 NPU 平台全解析</p>
+  <p class="date">2026-06-02 · 行业观察</p>
+</div>
+
+<div class="bis-alert">
+⚠️ <strong>最大误解</strong>：国产 AI 加速器 ≠ 只跑 FP16。本文用真实下载数据 + 30 个原生模型快照，证明整条 INT4/INT8/旋转量化/MTP 优化栈已经做齐，对位 NVIDIA TensorRT-LLM。这不是 PPT，这是 GitCode 上正在跑的事实。
+</div>
+
+<!-- ============ MOD-01 生态规模 ============ -->
+<div class="bis-section">
+<h2><span class="num">1</span>生态规模 — 一个被低估的平台</h2>
+
+<p>头部国产 NPU 厂商在主流开源模型社区（AtomGit 社区，筛选 ascendNative=true 标签）已经有 <strong>6841 个模型</strong> 沉淀。我们抽首屏 30 个原生/兼容模型做样本分析。</p>
+
+<div class="bis-grid">
+  <div class="bis-card">
+    <span class="val">6,841</span>
+    <span class="lab">平台总模型 / TOTAL</span>
   </div>
-  <div class="prox">
-    <h2>文章简介</h2>
-    <p>本文为 Tech Blog 文章摘要展示页。完整文章请访问：<a href="https://liweicong2016-collab.github.io/tech-blog/" target="_blank">Livius's Tech Pulse</a></p>
-    <p style="margin-top:12px;">本文为技术分析报告，涵盖了AI加速器、量化与开源大模型相关领域的深度研究与观察。</p>
+  <div class="bis-card purple">
+    <span class="val">5</span>
+    <span class="lab">模型家族 / FAMILIES</span>
   </div>
-  <div class="tags">
-    <span class="tag">AI加速器</span><span class="tag">量化</span><span class="tag">开源大模型</span>
+  <div class="bis-card green">
+    <span class="val">85K+</span>
+    <span class="lab">头30累计下载</span>
+  </div>
+  <div class="bis-card red">
+    <span class="val">24.6K</span>
+    <span class="lab">TOP 1 下载量</span>
   </div>
 </div>
-<footer><div class="c" style="max-width:800px"><p>© 2026 Livius · AI · Compute · Southeast Asia</p></div></footer>
+
+<p><strong>头部集中度</strong>：TOP 1 占首屏 30 模型累计下载的 ~29%，TOP 2 合计占 ~48%。这意味着生态已经有 "明星模型" — 客户不用从零冒风险。</p>
+
+<ul>
+  <li>🥇 <strong>TOP 1</strong>：GLM-5-w4a8 — 32.6B MoE · W4A8 量化 · 24.6K 下载</li>
+  <li>🥈 <strong>TOP 2</strong>：Qwen3.5-397B-A17B — 397B MoE · W8A8 + MTP · 16.3K 下载</li>
+</ul>
+
+<p class="bis-quote">数据时点：2026-06-03 · 平台：AtomGit AI 社区（国产 NPU 模型平台）· 筛选 ascendNative=true</p>
+</div>
+
+<!-- ============ MOD-02 量化栈 ============ -->
+<div class="bis-section">
+<h2><span class="num">2</span>量化技术栈 — 整条推理优化栈已就位</h2>
+
+<p>这是海外客户最常问的问题：<strong>"国产 NPU 能跑量化模型吗？"</strong> 答案是肯定的 — 完整覆盖。</p>
+
+<div class="bis-grid">
+  <div class="bis-card">
+    <span class="val" style="color:#2b5fff">W4A8</span>
+    <span class="lab">4-bit 权重 + 8-bit 激活<br>GLM-5-w4a8 · GLM-5.1-w4a8</span>
+  </div>
+  <div class="bis-card green">
+    <span class="val" style="color:#1f9d6b">W8A8</span>
+    <span class="lab">8-bit 权+激<br>Qwen3.5-397B · 某头部 MoE</span>
+  </div>
+  <div class="bis-card purple">
+    <span class="val" style="color:#7c3aed">QuaRot</span>
+    <span class="lab">旋转量化<br>某头部 MoE · Qwen3-Coder</span>
+  </div>
+  <div class="bis-card red">
+    <span class="val" style="color:#e23b3b">MTP</span>
+    <span class="lab">多 token 预测<br>Qwen3.5-397B · GLM-5-mtp</span>
+  </div>
+  <div class="bis-card">
+    <span class="val" style="color:#e67e22">Flash</span>
+    <span class="lab">轻量推理版<br>glm-4.7-flash · z-image-turbo</span>
+  </div>
+  <div class="bis-card">
+    <span class="val" style="color:#7c3aed">Rot</span>
+    <span class="lab">量化旋转 RoPE-aware<br>GLM-5-W8A8-Rot</span>
+  </div>
+</div>
+
+<div class="bis-punchline">
+<h2>📌 销售话术</h2>
+<ul>
+  <li>✅ <strong>W4A8 已就位</strong> — 不是"未来支持"，是 GitCode 上 24.6K 下载的事实</li>
+  <li>✅ <strong>W8A8 已就位</strong> — 397B MoE + W8A8 + MTP 三重组合，跑通 16.3K 下载</li>
+  <li>✅ <strong>QuaRot 旋转量化</strong> — 某头部 MoE、Qwen3-Coder 都在用</li>
+  <li>✅ <strong>MTP（多 token 预测）</strong> — 高 QPS 服务化场景的杀手锏</li>
+  <li>✅ <strong>Flash/Turbo 轻量版</strong> — 端侧 / 边缘 / 高性价比场景</li>
+</ul>
+</div>
+</div>
+
+<!-- ============ MOD-03 推理框架 ============ -->
+<div class="bis-section">
+<h2><span class="num">3</span>推理与训练框架 — 1:1 对位 NVIDIA 生态</h2>
+
+<p>这是第二个最常问的问题：<strong>"国产 NPU 上跑 vLLM / SGLang 吗？代码要重写吗？"</strong> — 不用重写。</p>
+
+<div class="bis-timeline">
+  <div class="bis-tl-item">
+    <div class="tl-date">推理框架</div>
+    <div class="tl-text"><strong>vLLM Ascend</strong> — 海外主流推理框架，已有 Qwen3.5、GLM-4.7 适配</div>
+  </div>
+  <div class="bis-tl-item">
+    <div class="tl-date">推理框架</div>
+    <div class="tl-text"><strong>SGLang Ascend</strong> — Qwen3-Next-80B-A3B 已适配（8 个月前就支持）</div>
+  </div>
+  <div class="bis-tl-item">
+    <div class="tl-date">推理引擎</div>
+    <div class="tl-text"><strong>MindIE</strong>（厂商自研推理引擎）— Qwen-Image-series 在用</div>
+  </div>
+  <div class="bis-tl-item">
+    <div class="tl-date">训练框架</div>
+    <div class="tl-text"><strong>MindSpore-Lab</strong>（厂商自研训练）— Qwen3-8B 已在 MindSpore 上跑通</div>
+  </div>
+  <div class="bis-tl-item">
+    <div class="tl-date">生态兼容</div>
+    <div class="tl-text"><strong>PyTorch-NPU</strong> — 现有 PyTorch 代码 0 改动即可跑 YOLOv5/v10、PatchCore、WinCLIP、rapidOCR</div>
+  </div>
+  <div class="bis-tl-item highlight">
+    <div class="tl-date">微调/对齐</div>
+    <div class="tl-text"><strong>Ascend-SACT</strong> — 微调/对齐工具链，GLM-5 系列已用</div>
+  </div>
+</div>
+
+<p><strong>对 NVIDIA 生态的 1:1 对位</strong>：从训练（MindSpore / PyTorch-NPU）到推理（vLLM / SGLang / MindIE）到微调（SACT），整条工具链不缺位。</p>
+</div>
+
+<!-- ============ MOD-04 模型家族矩阵 ============ -->
+<div class="bis-section">
+<h2><span class="num">4</span>模型家族矩阵 — 6 大任务族全覆盖</h2>
+
+<div class="bis-table-wrap">
+<table class="bis-table">
+  <thead>
+    <tr>
+      <th>任务族</th>
+      <th>代表模型（节选）</th>
+      <th>生态成熟度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="bis-tag-m">通用 LLM</span></td>
+      <td>GLM-5 / 4.7 · Qwen3 / 3.5 · Gemma-4 · 某 1B 国产端侧模型</td>
+      <td>⭐⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-r">代码 LLM</span></td>
+      <td>Qwen3-Coder-480B-A35B（21.4B 激活 + W8A8 + QuaRot）</td>
+      <td>⭐⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-m">多模态 VLM</span></td>
+      <td>Qwen3.5 VLM · Qwen-Image · z-image · HunyuanWorld（3D）</td>
+      <td>⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-n">语音 ASR / TTS</span></td>
+      <td>Qwen3-ASR-1.7B · whisper-large-v3-turbo · Kokoro-82M TTS</td>
+      <td>⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-n">视觉 / OCR</span></td>
+      <td>YOLOv5 / v10 · PatchCore · WinCLIP · rapidOCR · pix2struct-docvqa</td>
+      <td>⭐⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><span class="bis-tag-r">行业垂直</span></td>
+      <td>PatchCore 工业异常检测 · WinCLIP 零样本工业视觉</td>
+      <td>⭐⭐⭐（增长中）</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="bis-signal">
+<h3>🔍 关键信号：行业垂直模型正在加速</h3>
+<ul>
+  <li>PatchCore（工业异常检测）— 1 天前刚发布</li>
+  <li>WinCLIP（零样本工业视觉）— 3 天前刚发布</li>
+  <li>工业视觉类模型 3 天内连发多个 → 制造/物流行业是 2026 年重点方向</li>
+</ul>
+</div>
+</div>
+
+<!-- ============ MOD-05 客户场景映射 ============ -->
+<div class="bis-section">
+<h2><span class="num">5</span>客户场景映射 — 一图说明你的业务有现成方案</h2>
+
+<p>这是销售工具的核心 — 客户说"我们想做 XX"，立刻能映射到 GitCode 上的具体模型。</p>
+
+<div class="bis-table-wrap">
+<table class="bis-table">
+  <thead>
+    <tr>
+      <th>客户业务场景</th>
+      <th>推荐模型</th>
+      <th>为什么选它</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LLM API 服务</strong></td>
+      <td>GLM-5-w4a8</td>
+      <td>24.6K 下载，W4A8 量化省显存</td>
+    </tr>
+    <tr>
+      <td><strong>代码助手 / Copilot</strong></td>
+      <td>Qwen3-Coder-480B-A35B-w8a8-QuaRot</td>
+      <td>480B MoE 21.4B 激活 + W8A8 + QuaRot 三重优化</td>
+    </tr>
+    <tr>
+      <td><strong>RAG / 文档智能</strong></td>
+      <td>pix2struct-docvqa · hunyuan-ocr · rapidOCR-npu</td>
+      <td>OCR + 文档 VQA 三件套</td>
+    </tr>
+    <tr>
+      <td><strong>多语种 ASR / TTS</strong></td>
+      <td>Qwen3-ASR-1.7B + Kokoro-82M</td>
+      <td>1.7B 轻量 ASR + 82M 端侧 TTS</td>
+    </tr>
+    <tr>
+      <td><strong>工业质检</strong></td>
+      <td>PatchCore · YOLOv10-Ascend · WinCLIP</td>
+      <td>工业视觉三件套，3 天内齐发</td>
+    </tr>
+    <tr>
+      <td><strong>AIGC 营销内容</strong></td>
+      <td>Qwen-Image-series · z-image-turbo</td>
+      <td>图像生成 + 端侧 turbo 版</td>
+    </tr>
+    <tr>
+      <td><strong>Agent 高 QPS 平台</strong></td>
+      <td>Qwen3.5-397B-A17B-w8a8-mtp</td>
+      <td>397B MoE + W8A8 + MTP 三重优化</td>
+    </tr>
+    <tr>
+      <td><strong>3D / 世界模型</strong></td>
+      <td>HunyuanWorld-Mirror-Ascend</td>
+      <td>3D 世界生成，已适配</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- ============ MOD-06 客户故事信号 ============ -->
+<div class="bis-section">
+<h2><span class="num">6</span>客户故事信号 — 工业视觉是 2026 重点</h2>
+
+<p>从模型发布时间分布可以反推生态投入方向：</p>
+
+<div class="bis-timeline">
+  <div class="bis-tl-item highlight">
+    <div class="tl-date">1 天前</div>
+    <div class="tl-text"><strong>PatchCore 工业异常检测</strong>发布 — 制造/物流/质检方向明确动作</div>
+  </div>
+  <div class="bis-tl-item highlight">
+    <div class="tl-date">3 天前</div>
+    <div class="tl-text"><strong>WinCLIP 零样本工业视觉</strong>发布 — 零样本意味着客户<strong>不需要训练数据</strong>，开箱即用</div>
+  </div>
+  <div class="bis-tl-item highlight">
+    <div class="tl-date">3 天前</div>
+    <div class="tl-text"><strong>rapidOCR-npu</strong>发布 — OCR 在金融/政企/法律场景是刚需</div>
+  </div>
+  <div class="bis-tl-item highlight">
+    <div class="tl-date">3 天前</div>
+    <div class="tl-text"><strong>pix2struct-docvqa</strong>发布 — 文档智能，与 rapidOCR 配套</div>
+  </div>
+</div>
+
+<div class="bis-signal">
+<h3>💼 对销售/售前的启示</h3>
+<ul>
+  <li><strong>工业视觉三件套</strong>（PatchCore + WinCLIP + YOLOv10）已经齐发 — 制造/物流行业可重点跟进</li>
+  <li><strong>OCR + 文档 VQA</strong>（rapidOCR + pix2struct + hunyuan-ocr）三件套 — 政企/金融/法律场景直接可用</li>
+  <li><strong>零样本模型</strong>（WinCLIP）适合客户没有训练数据的场景 — 降低部署门槛</li>
+</ul>
+</div>
+</div>
+
+<!-- ============ MOD-07 一句话总结 + 下一步 ============ -->
+<div class="bis-section">
+<h2><span class="num">7</span>结论与下一步</h2>
+
+<div class="bis-punchline">
+<h2>🎯 一句话给海外客户</h2>
+<p style="font-size:16px;line-height:1.7;margin:0">
+<strong>国产 AI 加速器不是 NVIDIA 的"降级替代" — 它已经是有完整量化栈、有 vLLM/SGLang 兼容、有 6841 个模型沉淀的成熟生态。</strong> 对于需要长期 TCO 优化、需要避免单点供应风险的客户，2026 年是认真评估的窗口期。
+</p>
+</div>
+
+<p><strong>对部署方的下一步</strong>：</p>
+<ul>
+  <li>✅ 试用：AtomGit AI 社区 ascendNative=true 筛选页直接看模型</li>
+  <li>✅ 评估：从客户业务最痛的场景（一般是 LLM API / OCR / 工业质检）开始 PoC</li>
+  <li>✅ 对比：用 vLLM / SGLang 在国产 NPU 和 NVIDIA 上跑同一模型，对比 TCO</li>
+  <li>✅ 迁移：PyTorch 代码 0 改动，CUDA 代码通过 torch_npu 适配器迁移</li>
+</ul>
+
+<p class="bis-quote">Drop-in replacement for CUDA stack — 已经是社区共识，不是 PPT 口号</p>
+</div>
+
+<div class="bis-foot">
+<p>本文为公开行业观察，所有数据来自 AtomGit AI 社区（ai.gitcode.com）公开筛选页 ascendNative=true。</p>
+<p>数据时点：2026-06-03 · 撰写：Tech Observer</p>
+</div>
+
+</div>
+<div class="tag-row"><span class="atag">["国产AI芯片</span><span class="atag">AI加速器</span><span class="atag">量化</span><span class="atag">推理框架</span><span class="atag">MoE</span><span class="atag">模型生态</span><span class="atag">GitCode</span><span class="atag">开源大模型"]</span></div>
+</div>
+<footer>
+  <div class="c" style="max-width:860px">
+    <p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p>
+  </div>
+</footer>
+</div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.bis-section, .bis-card, .bis-hero, .bis-alert, .bis-signal, .bis-punchline, .bis-impact, .bis-timeline .bis-tl-item');
+  els.forEach(function(el){
+    el.setAttribute('data-aos', 'fade-up');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
 </body></html>

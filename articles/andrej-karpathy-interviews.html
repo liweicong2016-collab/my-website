@@ -1,54 +1,243 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andrej Karpathy访谈与演讲全记录</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#070b14;--bg2:#0d1321;--bg3:#111827;--txt:#e8eaf0;--txt2:#94a3b8;--brd:#1e2d45;--p:#1a56db}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7;font-size:16px}
-    a{color:#60a5fa;text-decoration:none}a:hover{opacity:.8}
-    .t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--brd);padding:0 40px}
-    .t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
-    .t3{font-size:15px;font-weight:800;color:var(--txt);display:flex;align-items:center;gap:8px;text-decoration:none}
-    .d{width:7px;height:7px;border-radius:50%;background:var(--p);box-shadow:0 0 8px var(--p)}
-    .t4{display:flex;align-items:center;gap:6px;color:var(--txt2);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
-    .t4:hover{color:var(--txt)}
-    .c{max-width:800px;margin:0 auto;padding:60px 24px}
-    .h{padding:80px 0 40px;border-bottom:1px solid var(--brd);margin-bottom:48px}
-    .b{display:inline-block;background:rgba(26,86,219,.2);border:1px solid rgba(26,86,219,.4);color:#93c5fd;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:16px}
-    h1{font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;background:linear-gradient(135deg,#fff 40%,#93c5fd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .m{font-size:13px;color:var(--txt2);display:flex;gap:16px;flex-wrap:wrap}
-    .m span{display:flex;align-items:center;gap:4px}
-    .prox{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;padding:40px;margin-bottom:32px}
-    .prox h2{font-size:20px;font-weight:700;margin-bottom:16px}
-    .prox p{color:var(--txt2);font-size:15px;line-height:1.7}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
-    .tag{background:rgba(26,86,219,.15);border:1px solid rgba(26,86,219,.3);color:#93c5fd;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600}
-    ft{padding:40px 0;border-top:1px solid var(--brd);text-align:center;font-size:13px;color:var(--txt2)}
-    ft a{color:#60a5fa;text-decoration:none}
-    @media(max-width:768px){.t{padding:0 20px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrej Karpathy 访谈与演讲全记录</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+/* === Dark Mode Injection === */
+:root {
+  --bis-bg: #070b14;
+  --bis-card: #0d1321;
+  --bis-card2: #111827;
+  --bis-border: #1e2d45;
+  --bis-text: #e8eaf0;
+  --bis-muted: #94a3b8;
+  --bis-accent: #60a5fa;
+  --bis-accent-soft: rgba(26,86,219,0.18);
+  --bis-red: #f87171;
+  --bis-red-soft: rgba(239,68,68,0.15);
+  --bis-orange: #fbbf24;
+  --bis-orange-soft: rgba(245,158,11,0.15);
+  --bis-green: #34d399;
+  --bis-green-soft: rgba(16,185,129,0.15);
+  --bis-purple: #a78bfa;
+  --bis-purple-soft: rgba(139,92,246,0.15);
+  --bis-yellow: #fcd34d;
+  --bis-yellow-soft: rgba(212,160,23,0.15);
+}
+[data-aos] { opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-aos].aos-animate { opacity: 1; }
+[data-aos="fade-up"] { transform: translateY(24px); }
+[data-aos="fade-up"].aos-animate { transform: translateY(0); }
+[data-aos="fade-left"] { transform: translateX(24px); }
+[data-aos="fade-left"].aos-animate { transform: translateX(0); }
+[data-aos="zoom-in"] { transform: scale(0.94); }
+[data-aos="zoom-in"].aos-animate { transform: scale(1); }
+
+
+  .article-wrap * { box-sizing: border-box; }
+  .article-wrap { font-family: 'Inter','Noto Sans SC',-apple-system,sans-serif; color: var(--bis-text); line-height: 1.7; font-size: 16px; background: var(--bis-bg); min-height: 100vh; }
+  .article-wrap a { color: var(--bis-accent); text-decoration: none; }
+  .article-wrap a:hover { opacity: 0.8; }
+  .t { position: sticky; top: 0; z-index: 100; background: rgba(7,11,20,.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--bis-border); padding: 0 40px; }
+  .t2 { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .t3 { font-size: 15px; font-weight: 800; color: var(--bis-text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .d { width: 7px; height: 7px; border-radius: 50%; background: var(--bis-accent); box-shadow: 0 0 8px var(--bis-accent); }
+  .t4 { display: flex; align-items: center; gap: 6px; color: var(--bis-muted); font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s; }
+  .t4:hover { color: var(--bis-text); }
+  .c { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+  .bis-hero { background: linear-gradient(135deg, rgba(26,86,219,.18) 0%, rgba(139,92,246,.1) 100%); border: 1px solid rgba(26,86,219,.3); border-radius: 16px; padding: 32px 28px; margin: 48px 0 32px; }
+  .bis-hero .tag { display: inline-block; background: var(--bis-red); color: #fff; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 14px; letter-spacing: .5px; }
+  .bis-hero h1 { font-size: clamp(22px,4.5vw,36px); line-height: 1.3; margin: 0 0 12px; font-weight: 800; background: linear-gradient(135deg,#fff 50%,#93c5fd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .bis-hero .subtitle { font-size: 14.5px; color: var(--bis-muted); margin: 0; line-height: 1.5; }
+  .bis-hero .date { font-size: 12px; color: var(--bis-muted); margin-top: 12px; }
+  .bis-alert { background: var(--bis-red-soft); border-left: 4px solid var(--bis-red); padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 20px 0; font-size: 15px; color: var(--bis-red); }
+  .bis-alert strong { color: var(--bis-red); }
+  .bis-section { background: var(--bis-card); border: 1px solid var(--bis-border); border-radius: 14px; padding: 24px 22px; margin: 20px 0; transition: background .25s; }
+  .bis-section:hover { background: var(--bis-card2); }
+  .bis-section h2 { font-size: 19px; font-weight: 700; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--bis-border); color: var(--bis-text); display: flex; align-items: center; gap: 10px; }
+  .bis-section h2 .num { display: inline-flex; align-items: center; justify-content: center; background: var(--bis-accent); color: #fff; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .bis-section p { margin: 0 0 12px; color: var(--bis-text); }
+  .bis-section p:last-child { margin-bottom: 0; }
+  .bis-section strong { color: #fff; }
+  .bis-section ul { padding-left: 20px; margin: 10px 0; }
+  .bis-section li { margin-bottom: 5px; color: var(--bis-text); }
+  .bis-timeline { position: relative; padding-left: 24px; }
+  .bis-timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--bis-border); }
+  .bis-tl-item { position: relative; margin-bottom: 18px; padding-left: 6px; }
+  .bis-tl-item:last-child { margin-bottom: 0; }
+  .bis-tl-item::before { content: ''; position: absolute; left: -20px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--bis-accent); border: 2px solid var(--bis-bg); box-shadow: 0 0 0 2px var(--bis-accent); }
+  .bis-tl-item .tl-date { font-size: 13px; font-weight: 700; color: var(--bis-accent); margin-bottom: 3px; }
+  .bis-tl-item .tl-text { font-size: 14.5px; color: var(--bis-text); }
+  .bis-tl-item.highlight::before { background: var(--bis-red); box-shadow: 0 0 0 2px var(--bis-red); }
+  .bis-tl-item.highlight .tl-date { color: var(--bis-red); }
+  .bis-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  .bis-flag { background: var(--bis-accent-soft); color: var(--bis-accent); font-size: 12.5px; padding: 5px 12px; border-radius: 16px; border: 1px solid rgba(26,86,219,.3); }
+  .bis-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
+  .bis-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .bis-table th, .bis-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--bis-border); }
+  .bis-table th { background: rgba(26,86,219,.1); font-weight: 700; color: var(--bis-accent); font-size: 12.5px; text-transform: uppercase; letter-spacing: .5px; }
+  .bis-table tr:hover td { background: rgba(30,41,59,.5); }
+  .bis-tag-r { background: var(--bis-red-soft); color: var(--bis-red); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-n { background: var(--bis-orange-soft); color: var(--bis-orange); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-tag-m { background: var(--bis-green-soft); color: var(--bis-green); padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .bis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0 0; }
+  .bis-card { background: var(--bis-card2); border: 1px solid var(--bis-border); border-radius: 12px; padding: 18px 14px; text-align: center; transition: transform .2s, box-shadow .2s; }
+  .bis-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .bis-card .val { font-size: 26px; font-weight: 800; color: var(--bis-accent); display: block; margin-bottom: 6px; }
+  .bis-card .lab { font-size: 12.5px; color: var(--bis-muted); }
+  .bis-card.red .val { color: var(--bis-red); }
+  .bis-card.green .val { color: var(--bis-green); }
+  .bis-card.purple .val { color: var(--bis-purple); }
+  .bis-impact { border-radius: 10px; padding: 14px 16px; margin: 12px 0; border: 1px solid; }
+  .bis-impact.short { background: var(--bis-red-soft); border-color: rgba(239,68,68,.3); }
+  .bis-impact.mid { background: var(--bis-orange-soft); border-color: rgba(245,158,11,.3); }
+  .bis-impact.long { background: var(--bis-green-soft); border-color: rgba(16,185,129,.3); }
+  .bis-impact h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
+  .bis-impact.short h3 { color: var(--bis-red); }
+  .bis-impact.mid h3 { color: var(--bis-orange); }
+  .bis-impact.long h3 { color: var(--bis-green); }
+  .bis-impact p { margin: 0; font-size: 14px; color: var(--bis-text); }
+  .bis-signal { background: var(--bis-purple-soft); border: 1px solid rgba(139,92,246,.3); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+  .bis-signal h3 { margin: 0 0 10px; font-size: 15px; color: var(--bis-purple); font-weight: 700; }
+  .bis-signal ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--bis-text); }
+  .bis-signal li { margin-bottom: 5px; }
+  .bis-punchline { background: linear-gradient(135deg, rgba(239,68,68,.12) 0%, rgba(245,158,11,.08) 100%); border: 1px solid rgba(239,68,68,.25); border-radius: 12px; padding: 20px; margin: 18px 0; }
+  .bis-punchline h2 { font-size: 17px; color: var(--bis-red); margin: 0 0 12px; padding: 0; border: 0; font-weight: 800; }
+  .bis-punchline ul { padding-left: 18px; font-size: 14.5px; margin: 0; color: var(--bis-text); }
+  .bis-punchline li { margin-bottom: 6px; }
+  .bis-quote { background: var(--bis-card2); border-left: 3px solid var(--bis-accent); padding: 14px 16px; font-style: italic; font-size: 14.5px; color: var(--bis-muted); border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .bis-foot { text-align: center; color: var(--bis-muted); font-size: 12.5px; margin: 32px 0 12px; padding-top: 20px; border-top: 1px solid var(--bis-border); }
+  .article-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
+  .article-meta span { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--bis-muted); }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .atag { background: rgba(26,86,219,.15); border: 1px solid rgba(26,86,219,.3); color: var(--bis-accent); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+  footer { padding: 40px 0; border-top: 1px solid var(--bis-border); text-align: center; font-size: 13px; color: var(--bis-muted); }
+  footer a { color: var(--bis-accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 768px) { .t { padding: 0 20px; } .c { padding: 0 16px 60px; } .bis-hero { padding: 24px 18px; } .article-wrap { font-size: 15px; } }
+
+</style>
 </head>
 <body>
-<div class="t"><div class="t2"><a href="../index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="../index.html" class="t4">← 返回首页</a></div></div>
+<div class="article-wrap">
+<div class="t"><div class="t2"><a href="index.html" class="t3"><span class="d"></span>Livius's Tech Pulse</a><a href="index.html" class="t4">← 返回首页</a></div></div>
 <div class="c">
-  <div class="h">
-    <div class="b">2026-05-28</div>
-    <h1>Andrej Karpathy访谈与演讲全记录</h1>
-    <div class="m"><span>📝 技术分析</span><span>🌏 AI · 算力</span></div>
-  </div>
-  <div class="prox">
-    <h2>文章简介</h2>
-    <p>本文为 Tech Blog 文章摘要展示页。完整文章请访问：<a href="https://liweicong2016-collab.github.io/tech-blog/" target="_blank">Livius's Tech Pulse</a></p>
-    <p style="margin-top:12px;">本文为技术分析报告，涵盖了AI、Andrej Karpathy与大模型相关领域的深度研究与观察。</p>
-  </div>
-  <div class="tags">
-    <span class="tag">AI</span><span class="tag">Andrej Karpathy</span><span class="tag">大模型</span>
-  </div>
+# Andrej Karpathy 访谈与演讲全记录
+
+**作者：AI Observer | 2026年5月**
+
+> Andrej Karpathy 是人工智能领域的知名研究员、工程师和教育家，曾任 Tesla AI 高级总监、OpenAI 创始成员，并创立了 AI 教育公司 Eureka Labs。本文全面汇总了他在播客、会议演讲、媒体专访等不同平台的访谈和演讲记录。
+
+---
+
+## 播客访谈 (Podcasts)
+
+| 访谈标题 / 主题 | 日期 | 平台 / 主持人 | 链接 |
+| :--- | :--- | :--- | :--- |
+| Andrej Karpathy on Code Agents, AutoResearch, and the Loopy Era of AI | 2026年3月20日 | No Priors (Sarah Guo & Elad Gil) | [YouTube](https://www.youtube.com/watch?v=kwSVtQ7dziU) |
+| AGI is still a decade away (We're summoning ghosts, not building animals) | 2025年10月17日 | Dwarkesh Podcast (Dwarkesh Patel) | [YouTube](https://www.youtube.com/watch?v=lXUZvyajciY) / [Website](https://www.dwarkesh.com/p/andrej-karpathy) |
+| How AI Empowers | 2025年4月13日 | The AI Daily Brief | [Apple Podcasts](https://podcasts.apple.com/us/podcast/andrej-karpathy-on-how-ai-empowers/id1680633614?i=1000703402507) |
+| DeepSeek, China, OpenAI, NVIDIA, xAI, TSMC, Stargate, and AI Megaclusters | 2025年2月2日 | Lex Fridman Podcast #459 | [YouTube](https://www.youtube.com/watch?v=_1f-o0nqpEI) |
+| With Andrej Karpathy from OpenAI and Tesla | 2024年9月5日 | No Priors Ep. 80 | [YouTube](https://www.youtube.com/watch?v=hM_h0UA7upI) |
+| Tesla AI, Self-Driving, Optimus, Aliens, and AGI | 2022年10月29日 | Lex Fridman Podcast #333 | [YouTube](https://www.youtube.com/watch?v=cdiD-9MMpb0) |
+| Andrej Karpathy on the visionary AI in Tesla's autonomous driving | 2021年3月22日 | The Robot Brains Podcast (Pieter Abbeel) | [Spotify](https://open.spotify.com/episode/0IuwH7eTZ3TQBfU8XsMaRr) |
+| Heroes of Deep Learning: Andrew Ng interviews Andrej Karpathy | 2017年8月8日 | DeepLearning.AI | [YouTube](https://www.youtube.com/watch?v=_au3yw46lcg) |
+
+---
+
+## 会议演讲与公开讲座 (Keynotes & Talks)
+
+| 演讲标题 / 主题 | 日期 | 会议 / 平台 | 链接 |
+| :--- | :--- | :--- | :--- |
+| Software Is Changing (Again) / Software 3.0 | 2025年6月17日 | YC AI Startup School | [YouTube](https://www.youtube.com/watch?v=LCEmiRjPEtQ) / [Y Combinator](https://www.ycombinator.com/library/MW-andrej-karpathy-software-is-changing-again) |
+| CUDA Mode Keynote | 2024年10月3日 | GPU Mode IRL Hackathon | [YouTube](https://www.youtube.com/watch?v=aR6CzM0x-g0) |
+| Keynote at UC Berkeley AI Hackathon | 2024年7月4日 | UC Berkeley AI Hackathon | [YouTube](https://www.youtube.com/watch?v=3oCFHE9x0As) |
+| State of GPT | 2023年5月23日 | Microsoft Build | [YouTube](https://www.youtube.com/watch?v=bZQun8Y4L2A) / [Slides](https://karpathy.ai/stateofgpt.pdf) |
+| Tesla AI Day 2021 (Tesla Vision) | 2021年8月19日 | Tesla AI Day | [YouTube](https://www.youtube.com/watch?v=j0z4FweCy4M&t=2900) |
+| AI for Full Self-Driving | 2021年6月20日 | CVPR 2021 (WAD Keynote) | [YouTube](https://www.youtube.com/watch?v=g6bOwQdCJrc) |
+| Tesla Autonomy Day (Autopilot/FSD Architecture) | 2019年4月22日 | Tesla Autonomy Day | [YouTube](https://www.youtube.com/watch?v=Ucp0TTmvqOE&t=6678) |
+| Multi-Task Learning in the Wilderness | 2019年6月15日 | ICML 2019 | [SlidesLive](https://slideslive.com/38917690/multitask-learning-in-the-wilderness) |
+| PyTorch at Tesla | 2019年10月10日 | PyTorch Developer Conference | [YouTube](https://www.youtube.com/watch?v=oBklltKXtDE) |
+| Building the Software 2.0 Stack | 2018年5月 | Spark-AI Summit / TRAIN AI | [YouTube](https://www.youtube.com/watch?v=y57wwucbXR8) |
+| Deep Learning for Computer Vision | 2016年9月24日 | Bay Area Deep Learning School | [YouTube](https://www.youtube.com/watch?v=u6aEYuemt0M) |
+| NVIDIA GTC Keynote (with Jensen Huang) | 2015年3月 | NVIDIA GTC | [YouTube](https://www.youtube.com/watch?v=8AnV7xAvpLQ&t=4m15s) |
+
+---
+
+## YouTube 个人频道教育系列 (Educational Series)
+
+| 视频标题 | 发布日期 | 链接 |
+| :--- | :--- | :--- |
+| How I use LLMs | 2025年2月 | [YouTube](https://www.youtube.com/watch?v=EWvNQjAaOHw) |
+| Deep Dive into LLMs like ChatGPT | 2025年2月 | [YouTube](https://www.youtube.com/watch?v=7xTGNNLPyMI) |
+| [1hr Talk] Intro to Large Language Models | 2023年11月22日 | [YouTube](https://www.youtube.com/watch?v=zjkBMFhNj_g) |
+| Neural Networks: Zero to Hero (Playlist) | 持续更新 | [YouTube Playlist](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) |
+| Let's build GPT: from scratch, in code, spelled out | 2023年1月 | [YouTube](https://www.youtube.com/watch?v=kCc8FmEb1nY) |
+| CS231n: Convolutional Neural Networks for Visual Recognition | 2016年 | [YouTube Playlist](https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC) |
+
+---
+
+## 媒体专访与文字访谈 (Media & Text Interviews)
+
+| 文章标题 / 主题 | 日期 | 媒体 / 平台 | 链接 |
+| :--- | :--- | :--- | :--- |
+| OpenAI cofounder says he hasn't written a line of code in months and is in a 'state of psychosis' | 2026年3月21日 | Fortune | [Fortune](https://fortune.com/2026/03/21/andrej-karpathy-openai-cofounder-ai-agents-coding-state-of-psychosis-openclaw/) |
+| Innovator Under 35: Andrej Karpathy | 2020年 | MIT Technology Review | [MIT Tech Review](https://www.technologyreview.com/innovator/andrej-karpathy/) |
+| This Guy Beat Google's Super-Smart AI—But It Wasn't Easy | 2015年1月21日 | Wired | [Wired](https://www.wired.com/2015/01/karpathy/) |
+
+---
+
+## 关于 Andrej Karpathy
+
+Andrej Karpathy 是人工智能领域最具影响力的研究者之一：
+
+- **OpenAI 创始成员**（2015-2017），参与 GPT-1/GPT-2 早期研发
+- **Tesla AI 高级总监**（2017-2022），主导 Autopilot/FSD 计算机视觉架构
+- **Eureka Labs 创始人**，致力于 AI 原生教育产品
+- **顶级 AI 教育者**，其 Neural Networks: Zero to Hero 系列视频影响数百万学习者
+
+**核心观点摘录：**
+
+> "AGI is still a decade away — we're summoning ghosts, not building animals." — 2025年10月 Dwarkesh Podcast
+
+> "Software is changing again" — Software 3.0 时代，神经网络成为新的编程范式
+
+---
+
+*数据来源：[Andrej Karpathy 个人网站](https://karpathy.ai/)、YouTube、各大播客平台及新闻媒体。*
+<div class="tag-row"><span class="atag"></span></div>
 </div>
-<footer><div class="c" style="max-width:800px"><p>© 2026 Livius · AI · Compute · Southeast Asia</p></div></footer>
+<footer>
+  <div class="c" style="max-width:860px">
+    <p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p>
+  </div>
+</footer>
+</div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.bis-section, .bis-card, .bis-hero, .bis-alert, .bis-signal, .bis-punchline, .bis-impact, .bis-timeline .bis-tl-item');
+  els.forEach(function(el){
+    el.setAttribute('data-aos', 'fade-up');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
 </body></html>
