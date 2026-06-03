@@ -150,25 +150,6 @@
     .btn-outline { background:transparent; color:var(--text-primary); border:1px solid var(--border); }
     .btn-outline:hover { background:var(--bg-card-hover); }
 
-    /* ARTICLE LIST */
-    .article-list { display:flex; flex-direction:column; gap:0; }
-    .article-item {
-      display:grid; grid-template-columns:120px 1fr auto;
-      gap:24px; align-items:center;
-      padding:20px 0; border-bottom:1px solid var(--border);
-      transition:background .2s;
-    }
-    .article-item:last-child { border-bottom:none; }
-    .article-date { font-size:12px; color:var(--text-muted); font-weight:500; }
-    .article-title { font-size:15px; font-weight:600; color:var(--text-primary); }
-    .article-title a { color:inherit; }
-    .article-title a:hover { color:var(--accent); }
-    .article-tags { display:flex; gap:6px; }
-    .article-tag { font-size:11px; background:var(--bg-card); border:1px solid var(--border); color:var(--text-muted); padding:2px 8px; border-radius:6px; }
-    .article-arrow { color:var(--text-muted); font-size:18px; transition:color .2s,transform .2s; }
-    .article-item:hover .article-arrow { color:var(--accent); transform:translateX(4px); }
-    .article-item:hover .article-title { color:var(--accent); }
-
     /* TOPIC PILLS */
     .topic-pills { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px; }
     .pill {
@@ -188,7 +169,6 @@
     /* SCROLL ANIMATIONS */
     .fade-up { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
     .fade-up.visible { opacity:1; transform:none; }
-    .article-item { transition-delay:.05s; }
 
     /* BACK TO TOP */
     .back-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; border-radius:12px; background:var(--bg-card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-muted); font-size:18px; transition:all .2s; opacity:0; pointer-events:none; }
@@ -206,11 +186,9 @@
       .fr-stats { grid-template-columns:repeat(2,1fr); }
       .container { padding:0 20px; }
       .section { padding:60px 0; }
-      .article-item { grid-template-columns:1fr auto; gap:8px; }
-      .article-date { display:none; }
-      .article-tags { display:none; }
     }
   </style>
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
@@ -283,73 +261,103 @@
     <h2 class="section-title">技术文章</h2>
     <p class="section-desc">AI、算力、芯片与市场分析</p>
 
-    <div class="article-list">
+    <div class="cards-grid article-cards">
 
-      <div class="article-item">
-        <div class="article-date">2026-06-02</div>
-        <div class="article-title"><a href="articles/domestic-maas-token-wars-2026.html">国内MaaS大战2026：Token经济的两条战线</a></div>
-        <div class="article-tags">
-          <span class="article-tag">MaaS</span>
-          <span class="article-tag">Token经济</span>
-          <span class="article-tag">国产AI</span>
+      <article class="card article-card">
+        <a class="card-cover" href="articles/domestic-maas-token-wars-2026.html">
+          <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=900&q=80" alt="AI token economy abstract network">
+        </a>
+        <div class="card-body">
+          <div class="card-kicker">
+            <span class="card-tag">MaaS</span>
+            <span class="card-date">2026-06-02</span>
+            <span class="card-read">8 min read</span>
+          </div>
+          <h3 class="card-title"><a href="articles/domestic-maas-token-wars-2026.html">国内 MaaS 大战 2026：Token 经济的两条战线</a></h3>
+          <p class="card-desc">视频模型与 Coding 模型成为商业化主战场，通用 LLM 赛道被地板价击穿后的新定价逻辑。</p>
+          <div class="card-footer"><a class="card-arrow" href="articles/domestic-maas-token-wars-2026.html">阅读全文 →</a></div>
         </div>
-        <div class="article-arrow">→</div>
-      </div>
+      </article>
 
-      <div class="article-item">
-        <div class="article-date">2026-06-02</div>
-        <div class="article-title"><a href="articles/domestic-ai-accelerator-ecosystem-2026.html">国产AI加速器生态实战观察：6841个模型在头部国产NPU上跑通了多少</a></div>
-        <div class="article-tags">
-          <span class="article-tag">AI加速器</span>
-          <span class="article-tag">量化</span>
-          <span class="article-tag">开源大模型</span>
+      <article class="card article-card">
+        <a class="card-cover" href="articles/domestic-ai-accelerator-ecosystem-2026.html">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80" alt="AI accelerator circuit board">
+        </a>
+        <div class="card-body">
+          <div class="card-kicker">
+            <span class="card-tag">AI加速器</span>
+            <span class="card-date">2026-06-02</span>
+            <span class="card-read">10 min read</span>
+          </div>
+          <h3 class="card-title"><a href="articles/domestic-ai-accelerator-ecosystem-2026.html">国产 AI 加速器生态实战观察</a></h3>
+          <p class="card-desc">6841 个模型、量化栈、推理框架与训练工具链，拆解国产 NPU 生态的真实成熟度。</p>
+          <div class="card-footer"><a class="card-arrow" href="articles/domestic-ai-accelerator-ecosystem-2026.html">阅读全文 →</a></div>
         </div>
-        <div class="article-arrow">→</div>
-      </div>
+      </article>
 
-      <div class="article-item">
-        <div class="article-date">2026-05-28</div>
-        <div class="article-title"><a href="articles/andrej-karpathy-interviews.html">Andrej Karpathy访谈与演讲全记录</a></div>
-        <div class="article-tags">
-          <span class="article-tag">AI</span>
-          <span class="article-tag">Andrej Karpathy</span>
-          <span class="article-tag">大模型</span>
+      <article class="card article-card">
+        <a class="card-cover" href="articles/andrej-karpathy-interviews.html">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80" alt="AI research workstation">
+        </a>
+        <div class="card-body">
+          <div class="card-kicker">
+            <span class="card-tag">AI</span>
+            <span class="card-date">2026-05-28</span>
+            <span class="card-read">7 min read</span>
+          </div>
+          <h3 class="card-title"><a href="articles/andrej-karpathy-interviews.html">Andrej Karpathy 访谈与演讲全记录</a></h3>
+          <p class="card-desc">汇总 Karpathy 在播客、会议演讲、公开课程与媒体专访中的关键内容与资料链接。</p>
+          <div class="card-footer"><a class="card-arrow" href="articles/andrej-karpathy-interviews.html">阅读全文 →</a></div>
         </div>
-        <div class="article-arrow">→</div>
-      </div>
+      </article>
 
-      <div class="article-item">
-        <div class="article-date">2026-05-27</div>
-        <div class="article-title"><a href="articles/mena-companies-deep-report.html">中东互联网独角兽深度报告：6家企业万亿估值背后的ICT版图</a></div>
-        <div class="article-tags">
-          <span class="article-tag">MENA</span>
-          <span class="article-tag">独角兽</span>
-          <span class="article-tag">云计算</span>
+      <article class="card article-card">
+        <a class="card-cover" href="articles/mena-companies-deep-report.html">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=80" alt="Middle East technology skyline">
+        </a>
+        <div class="card-body">
+          <div class="card-kicker">
+            <span class="card-tag">MENA</span>
+            <span class="card-date">2026-05-27</span>
+            <span class="card-read">9 min read</span>
+          </div>
+          <h3 class="card-title"><a href="articles/mena-companies-deep-report.html">中东互联网独角兽深度报告</a></h3>
+          <p class="card-desc">6 家企业万亿估值背后的 ICT 版图，观察云、支付、电商和区域基础设施的增长路径。</p>
+          <div class="card-footer"><a class="card-arrow" href="articles/mena-companies-deep-report.html">阅读全文 →</a></div>
         </div>
-        <div class="article-arrow">→</div>
-      </div>
+      </article>
 
-      <div class="article-item">
-        <div class="article-date">2026-05-23</div>
-        <div class="article-title"><a href="articles/middle-east-article.html">中东资本、东南亚算力：一场正在发生的产业迁移</a></div>
-        <div class="article-tags">
-          <span class="article-tag">东南亚</span>
-          <span class="article-tag">IDC</span>
-          <span class="article-tag">AI算力</span>
+      <article class="card article-card">
+        <a class="card-cover" href="articles/middle-east-article.html">
+          <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=80" alt="Data center architecture and compute infrastructure">
+        </a>
+        <div class="card-body">
+          <div class="card-kicker">
+            <span class="card-tag">AI算力</span>
+            <span class="card-date">2026-05-23</span>
+            <span class="card-read">6 min read</span>
+          </div>
+          <h3 class="card-title"><a href="articles/middle-east-article.html">中东资本、东南亚算力</a></h3>
+          <p class="card-desc">资本、能源、数据中心与 AI 需求共同推动的产业迁移，正在东南亚形成新的算力版图。</p>
+          <div class="card-footer"><a class="card-arrow" href="articles/middle-east-article.html">阅读全文 →</a></div>
         </div>
-        <div class="article-arrow">→</div>
-      </div>
+      </article>
 
-      <div class="article-item">
-        <div class="article-date">2026-05-23</div>
-        <div class="article-title"><a href="articles/token-economy-2026.html">Token经济这一年：我们真的在见证一场定价革命吗？</a></div>
-        <div class="article-tags">
-          <span class="article-tag">AI</span>
-          <span class="article-tag">Token经济</span>
-          <span class="article-tag">大模型</span>
+      <article class="card article-card">
+        <a class="card-cover" href="articles/token-economy-2026.html">
+          <img src="https://images.unsplash.com/photo-1642104704074-907c0698cbd9?w=900&q=80" alt="Digital pricing dashboard">
+        </a>
+        <div class="card-body">
+          <div class="card-kicker">
+            <span class="card-tag">Token经济</span>
+            <span class="card-date">2026-05-23</span>
+            <span class="card-read">7 min read</span>
+          </div>
+          <h3 class="card-title"><a href="articles/token-economy-2026.html">Token 经济这一年：我们真的在见证一场定价革命吗？</a></h3>
+          <p class="card-desc">从模型调用、成本曲线到企业预算，回看 Token 定价如何重塑 AI 应用商业模型。</p>
+          <div class="card-footer"><a class="card-arrow" href="articles/token-economy-2026.html">阅读全文 →</a></div>
         </div>
-        <div class="article-arrow">→</div>
-      </div>
+      </article>
 
     </div>
   </section>
@@ -373,7 +381,7 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
   }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
-  document.querySelectorAll('.article-item,.featured-report,.section').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+  document.querySelectorAll('.article-card,.featured-report,.section').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
 
   // Back to top
   const btn = document.getElementById('backTop');
@@ -388,5 +396,6 @@
     navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#'+current); });
   });
 </script>
+<script src="main.js"></script>
 </body>
 </html>
