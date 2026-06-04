@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>昇腾小模型生态：2026年AI落地新势力</title>
+  <meta property="og:title" content="昇腾小模型生态：2026年AI落地新势力">
+  <meta property="og:description" content="AtomGit平台6929+个昇腾适配模型中，小模型正在医疗、零售、车载、教育等传统行业快速落地">
+  <meta property="og:image" content="https://liweicong2016-collab.github.io/tech-blog/images/ascend/ascend-ecosystem-hero---340caad9-f1ad-4d40-9dbe-d5733290f813.png">
+  <meta name="description" content="昇腾生态已有6929+个模型，小模型（<10B）是2026年AI落地的主力。成本低、延迟小、隐私安全——这些优势让小模型在传统行业找到了大模型无法切入的场景。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1e40af;
+      --accent: #7c3aed;
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #273548;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a { color: #60a5fa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(124,58,237,0.15) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(124,58,237,0.2);
+      border: 1px solid rgba(124,58,237,0.4);
+      color: #c4b5fd;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 40%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+    .hero .meta {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .hero .meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: -32px auto 60px;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-item {
+      background: var(--bg-card);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: #a78bfa;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* Section */
+    .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-header { margin-bottom: 40px; }
+    .section-number {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    /* Key Quote */
+    .key-quote {
+      background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(16,185,129,0.08) 100%);
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: 14px;
+      padding: 28px 32px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #e9d5ff;
+      text-align: center;
+      margin: 40px 0;
+      line-height: 1.6;
+    }
+    .key-quote strong { color: #c4b5fd; }
+
+    /* Image Grid */
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+    .img-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .img-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px 14px 0 0;
+    }
+    .img-card .img-caption {
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* KVI Grid */
+    .kvi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .kvi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kvi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 14px 14px 0 0;
+    }
+    .kvi-card.purple::before { background: var(--purple); }
+    .kvi-card.green::before { background: var(--success); }
+    .kvi-card.amber::before { background: var(--warning); }
+    .kvi-card.blue::before { background: var(--primary); }
+    .kvi-card .kvi-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .kvi-card .kvi-value {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .kvi-card.purple .kvi-value { color: #a78bfa; }
+    .kvi-card.green .kvi-value { color: #34d399; }
+    .kvi-card.amber .kvi-value { color: #fbbf24; }
+    .kvi-card.blue .kvi-value { color: #60a5fa; }
+    .kvi-card .kvi-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .kvi-card .kvi-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .kvi-card .kvi-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+    .kvi-card.purple .kvi-bar-fill { background: var(--purple); }
+    .kvi-card.green .kvi-bar-fill { background: var(--success); }
+    .kvi-card.amber .kvi-bar-fill { background: var(--warning); }
+    .kvi-card.blue .kvi-bar-fill { background: var(--primary); }
+
+    /* Table */
+    .model-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .model-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border-bottom: 2px solid var(--border);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .model-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(51,65,85,0.5);
+      vertical-align: middle;
+    }
+    .model-table tr:hover td { background: rgba(30,41,59,0.5); }
+    .code-block {
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #c4b5fd;
+    }
+
+    /* Industry Cards */
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .industry-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: background 0.2s;
+    }
+    .industry-card:hover { background: var(--bg-card-hover); }
+    .industry-card .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .industry-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .industry-card p { font-size: 13px; color: var(--text-muted); }
+    .industry-card .models { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .model-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      background: rgba(124,58,237,0.15);
+      color: #c4b5fd;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Drivers Grid */
+    .drivers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .driver-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .driver-card:hover { background: var(--bg-card-hover); }
+    .driver-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .driver-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .driver-card p { font-size: 13px; color: var(--text-muted); }
+
+    /* Conclusion */
+    .conclusion-box {
+      background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(124,58,237,0.1) 100%);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 16px;
+      padding: 40px 48px;
+      margin: 60px 0;
+    }
+    .conclusion-box h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 40%, #6ee7b7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .conclusion-box p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .conclusion-box blockquote {
+      border-left: 3px solid #6ee7b7;
+      padding-left: 20px;
+      margin: 24px 0;
+      font-size: 18px;
+      color: #6ee7b7;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+      transition: all 0.2s;
+    }
+    .back-link:hover { background: var(--bg-card-hover); color: var(--text); text-decoration: none; }
+
+    /* Source */
+    .source-box {
+      background: rgba(16,185,129,0.05);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+    .source-box strong { color: #6ee7b7; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); margin: -20px 0 40px; }
+      .hero { padding: 60px 0 40px; }
+      .img-grid { grid-template-columns: 1fr; }
+      .conclusion-box { padding: 28px 24px; }
+    }
+    @media (max-width: 480px) {
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">🤖 AI基础设施 · 2026年6月</div>
+    <h1>昇腾小模型生态<br>2026年AI落地新势力</h1>
+    <p class="subtitle">AtomGit平台6929+个昇腾适配模型中，小模型正在医疗、零售、车载、教育等传统行业快速落地。分析2026年小模型爆发背后的逻辑与机会。</p>
+    <div class="meta">
+      <span>📅 2026年6月</span>
+      <span>🔧 昇腾生态</span>
+      <span>📁 AI基础设施</span>
+      <span>🔒 内部研究</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Back -->
+  <a href="index.html" class="back-link reveal">← 返回首页</a>
+
+  <!-- Stats -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-value">6929+</div>
+      <div class="stat-label">昇腾适配模型</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">80%</div>
+      <div class="stat-label">小模型占比</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1/50</div>
+      <div class="stat-label">推理成本比</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">6</div>
+      <div class="stat-label">核心行业</div>
+    </div>
+  </div>
+
+  <!-- Key Quote -->
+  <div class="key-quote reveal">
+    <strong>核心判断：</strong>昇腾生态的真正机会不在大模型，而在小模型。2026年，AI落地的主战场是传统行业，而传统行业需要的是<strong>低成本、低延迟、隐私安全</strong>的小模型。
+  </div>
+
+  <!-- Infographic Images -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">01 · 生态概览</div>
+      <h2>昇腾小模型生态全图</h2>
+    </div>
+    <div class="img-grid">
+      <div class="img-card">
+        <img src="https://liweicong2016-collab.github.io/tech-blog/images/ascend/ascend-ecosystem-hero---340caad9-f1ad-4d40-9dbe-d5733290f813.png" alt="昇腾小模型生态概览" loading="lazy">
+        <div class="img-caption">▲ 昇腾小模型生态：六大行业应用分布（参数规模 0.5B - >1T）</div>
+      </div>
+      <div class="img-card">
+        <img src="https://liweicong2016-collab.github.io/tech-blog/images/ascend/ascend-industry-applications---76145ec2-dba2-4260-a5c1-799a175d7364.png" alt="昇腾小模型行业应用" loading="lazy">
+        <div class="img-caption">▲ 行业应用：医疗、零售、车载、工业、移动、教育（低成本 · 高速度 · 隐私安全）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Overview -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">02 · 市场概况</div>
+      <h2>小模型为什么在2026年爆发？</h2>
+      <p class="section-desc">四大驱动力正在加速小模型在传统行业的落地。</p>
+    </div>
+    <div class="drivers-grid">
+      <div class="driver-card reveal">
+        <div class="driver-icon">💰</div>
+        <h3>成本驱动</h3>
+        <p>推理成本只有大模型的1%。适合客服、内容审核等高频调用场景。</p>
+      </div>
+      <div class="driver-card reveal">
+        <div class="driver-icon">⚡</div>
+        <h3>速度驱动</h3>
+        <p>毫秒级响应。实时翻译、工业质检、自动驾驶都是刚需。</p>
+      </div>
+      <div class="driver-card reveal">
+        <div class="driver-icon">🔒</div>
+        <h3>隐私驱动</h3>
+        <p>数据不出本地。医疗、金融、法律等行业必须本地部署。</p>
+      </div>
+      <div class="driver-card reveal">
+        <div class="driver-icon">📱</div>
+        <h3>端侧驱动</h3>
+        <p>手机/IOT不需要联网。端侧AI+昇腾NPU是最佳组合。</p>
+      </div>
+    </div>
+
+    <div class="kvi-grid" style="margin-top:40px;">
+      <div class="kvi-card purple">
+        <div class="kvi-label">推理成本对比</div>
+        <div class="kvi-value">1/50</div>
+        <div class="kvi-desc">昇腾小模型 vs GPT-4o，单Token成本节省50倍</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="kvi-card green">
+        <div class="kvi-label">响应速度</div>
+        <div class="kvi-value">毫秒级</div>
+        <div class="kvi-desc">大模型秒级响应 vs 小模型毫秒级，满足实时场景</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="kvi-card amber">
+        <div class="kvi-label">部署成本</div>
+        <div class="kvi-value">~$2GB</div>
+        <div class="kvi-desc">1B模型参数文件约2GB，普通服务器即可运行</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="kvi-card blue">
+        <div class="kvi-label">功耗优势</div>
+        <div class="kvi-value">低功耗</div>
+        <div class="kvi-desc">昇腾NPU超低功耗，适合移动端和IOT设备</div>
+        <div class="kvi-bar"><div class="kvi-bar-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Industry -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">03 · 行业落地</div>
+      <h2>六大行业：小模型正在切入</h2>
+      <p class="section-desc">传统行业需要的是低成本、低延迟、隐私安全的小模型。</p>
+    </div>
+    <div class="industry-grid">
+      <div class="industry-card reveal">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15);">🏥</div>
+        <h3>医疗</h3>
+        <p>数据不能上云，必须本地部署。影像OCR任务单一，小模型精调后效果接近大模型。</p>
+        <div class="models">
+          <span class="model-tag">hunyuan-ocr</span>
+          <span class="model-tag">rapidocr-npu</span>
+          <span class="model-tag">MiniMax-M2.7</span>
+        </div>
+      </div>
+      <div class="industry-card reveal">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);">🛒</div>
+        <h3>零售/电商</h3>
+        <p>客服对话需要实时响应，日均调用量千万级以上，成本敏感。</p>
+        <div class="models">
+          <span class="model-tag">z-image-turbo</span>
+          <span class="model-tag">VibeVoice-0.5B</span>
+          <span class="model-tag">Yolov5</span>
+        </div>
+      </div>
+      <div class="industry-card reveal">
+        <div class="card-icon" style="background:rgba(124,58,237,0.15);">🚗</div>
+        <h3>智能驾驶/车载</h3>
+        <p>车载系统要求离线可用，语音指令需要毫秒级响应。</p>
+        <div class="models">
+          <span class="model-tag">Qwen3-ASR-1.7B</span>
+          <span class="model-tag">Kokoro-82M</span>
+          <span class="model-tag">Gemma-4</span>
+        </div>
+      </div>
+      <div class="industry-card reveal">
+        <div class="card-icon" style="background:rgba(16,185,129,0.15);">🏭</div>
+        <h3>工业质检</h3>
+        <p>质检任务单一，工厂环境要求实时性，检测节拍&lt;200ms。</p>
+        <div class="models">
+          <span class="model-tag">yolov10_ascend</span>
+          <span class="model-tag">Yolov5</span>
+        </div>
+      </div>
+      <div class="industry-card reveal">
+        <div class="card-icon" style="background:rgba(26,86,219,0.15);">📱</div>
+        <h3>移动端/端侧AI</h3>
+        <p>手机芯片算力有限，大模型跑不动。端侧AI保护隐私不过度依赖云端。</p>
+        <div class="models">
+          <span class="model-tag">MiniMax-M2.7</span>
+          <span class="model-tag">winclip-vit-l14</span>
+        </div>
+      </div>
+      <div class="industry-card reveal">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15);">🎓</div>
+        <h3>教育/办公</h3>
+        <p>会议转录需要实时，文档OCR任务固定，教育场景日均调用量大。</p>
+        <div class="models">
+          <span class="model-tag">whisper-large-v3-turbo</span>
+          <span class="model-tag">Qwen3-8B</span>
+          <span class="model-tag">hunyuan-ocr</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Model List -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">04 · 模型清单</div>
+      <h2>代表模型一览</h2>
+    </div>
+    <table class="model-table reveal">
+      <thead>
+        <tr>
+          <th>模型名</th>
+          <th>参数</th>
+          <th>任务</th>
+          <th>适用场景</th>
+          <th>下载量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="code-block">hunyuan-ocr</span></td>
+          <td>-</td>
+          <td>OCR</td>
+          <td>医疗票据、文档</td>
+          <td>440</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">whisper-large-v3-turbo</span></td>
+          <td>-</td>
+          <td>ASR</td>
+          <td>会议转录</td>
+          <td>463</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">Kokoro-82M</span></td>
+          <td>82M</td>
+          <td>TTS</td>
+          <td>车载语音</td>
+          <td>460</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">Qwen3-ASR-1.7B</span></td>
+          <td>1.7B</td>
+          <td>ASR</td>
+          <td>语音助手</td>
+          <td>901</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">Qwen3-8B</span></td>
+          <td>8.2B</td>
+          <td>文本</td>
+          <td>本地问答</td>
+          <td>2.7K</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">MiniMax-M2.7</span></td>
+          <td>2.7B</td>
+          <td>多模态</td>
+          <td>端侧AI</td>
+          <td>1.4K</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">GLM-4.7-flash</span></td>
+          <td>-</td>
+          <td>文本</td>
+          <td>快速对话</td>
+          <td>450</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">yolov10_ascend</span></td>
+          <td>9B</td>
+          <td>目标检测</td>
+          <td>工业质检</td>
+          <td>80</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">VibeVoice-Realtime-0.5B</span></td>
+          <td>0.5B</td>
+          <td>TTS</td>
+          <td>实时语音</td>
+          <td>519</td>
+        </tr>
+        <tr>
+          <td><span class="code-block">rapidocr-npu</span></td>
+          <td>-</td>
+          <td>OCR</td>
+          <td>移动端</td>
+          <td>42</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Conclusion -->
+  <div class="conclusion-box reveal">
+    <h2>结论：昇腾的机会在哪里？</h2>
+    <blockquote>不是谁最强，是谁最适合。小模型在传统行业的落地速度，正在超过所有人的预期。</blockquote>
+    <p><strong>1. 传统行业是主战场：</strong>制造、医疗、零售、农业——数据不能上云、响应需要实时、调用量大、场景单一。</p>
+    <p style="margin-top:16px;"><strong>2. 大小模型协同是趋势：</strong>不是"小模型取代大模型"，而是小模型处理简单任务，大模型处理复杂任务。</p>
+    <p style="margin-top:16px;"><strong>3. 昇腾的差异化优势：</strong>政策支持（国产替代）、成本（同等算力价格更低）、生态（CANN+MindSpore+Ascend全家桶）、本地化（售后服务响应快）。</p>
+  </div>
+
+  <!-- Data Sources -->
+  <section class="section reveal">
+    <div class="section-header">
+      <div class="section-number">📚</div>
+      <h2>数据来源</h2>
+    </div>
+    <div class="source-box">
+      <p><strong>主要参考来源：</strong>AtomGit AI平台（ai.gitcode.com）· 昇腾官方文档 · 华为ISP军团内部市场情报，2026年6月</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 华为技术有限公司 ISP军团互联行业COE · 内部研究资料 · 仅供业务参考</p>
+    <p style="margin-top:8px;">
+      <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a> ·
+      数据截至2026年6月 ·
+      报告版本 v1.0
+    </p>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  const barFills = document.querySelectorAll('.kvi-bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target;
+        const width = fill.style.width;
+        fill.style.width = '0';
+        setTimeout(() => { fill.style.width = width; }, 100);
+        barObserver.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.5 });
+  barFills.forEach(bar => barObserver.observe(bar));
+</script>
+</body>
+</html>
