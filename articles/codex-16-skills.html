@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex 16 个必装 Skills：内容创作 10 + 视频制作 6</title>
+<meta name="description" content="把 Codex 武装成你的内容工厂——10 个写作/调研/配图技能 + 6 个视频生成/剪辑技能一站式收录。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#a78bfa;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:#a78bfa;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin:6px 0;color:#e8eaf0}
+.bis-section code{background:#1e2d45;color:#fde68a;padding:1px 6px;border-radius:4px;font-size:13px;font-family:'SF Mono','Menlo',monospace}
+.skill-card{display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:start;padding:18px 0;border-bottom:1px solid #1e2d45}
+.skill-card:last-child{border-bottom:none}
+.skill-card .skill-img{width:140px;height:140px;object-fit:cover;border-radius:12px;border:1px solid #1e2d45}
+.skill-card .skill-body h3{font-size:17px;font-weight:700;color:#fff;margin:0 0 8px;display:flex;align-items:center;gap:10px}
+.skill-card .skill-body h3 .idx{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#fff;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:700;flex-shrink:0}
+.skill-card .skill-body .desc{font-size:14px;color:#cbd5e1;margin:0 0 8px;line-height:1.65}
+.skill-card .skill-body .meta{font-size:12.5px;color:#94a3b8;line-height:1.7}
+.skill-card .skill-body .meta code{background:#1e2d45;color:#fde68a;padding:1px 6px;border-radius:4px;font-family:'SF Mono','Menlo',monospace}
+.table-wrap{overflow-x:auto;margin:12px 0 8px}
+table.skill-table{width:100%;border-collapse:collapse;font-size:13.5px;background:#0d1321;border:1px solid #1e2d45;border-radius:10px;overflow:hidden}
+table.skill-table th{background:#111827;color:#94a3b8;font-weight:600;text-align:left;padding:10px 12px;border-bottom:1px solid #1e2d45;white-space:nowrap}
+table.skill-table td{padding:10px 12px;border-bottom:1px solid #1e2d45;color:#e8eaf0}
+table.skill-table tr:last-child td{border-bottom:none}
+table.skill-table tr:hover td{background:#111827}
+.combo-section{background:linear-gradient(135deg,#0d1321 0%,#1a0d2e 100%);border:1px solid #1e2d45;border-radius:14px;padding:24px 26px;margin:32px 0}
+.combo-section h2{font-size:18px;font-weight:700;color:#fff;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.outro{margin-top:48px;padding:32px 28px;background:linear-gradient(135deg,#0d1321,#1a0d2e);border:1px solid #1e2d45;border-radius:14px;text-align:center}
+.outro p{color:#cbd5e1;margin:8px 0;font-size:15px;line-height:1.75}
+.outro strong{color:#fff}
+.outro code{background:#1e2d45;color:#fde68a;padding:3px 8px;border-radius:5px;font-size:13.5px;font-family:'SF Mono','Menlo',monospace}
+.divider{height:1px;background:linear-gradient(90deg,transparent,#1e2d45,transparent);margin:48px 0 8px}
+@media(max-width:768px){
+  .t{padding:0 20px}
+  .c{padding:0 16px 60px}
+  .hero-body{padding:24px 20px}
+  .hero-img{height:200px}
+  .skill-card{grid-template-columns:1fr;gap:12px}
+  .skill-card .skill-img{width:100%;height:200px}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav class="t">
+  <div class="t2">
+    <a href="../index.html" class="t3"><span class="dot"></span>Livius's Tech Pulse</a>
+    <a href="../index.html" class="t4">← 返回首页</a>
+  </div>
+</nav>
+
+<main class="c">
+
+  <div class="hero">
+    <img class="hero-img" src="images/codex-16/codex-skills-cover---85c9830d-8460-4948-9d2f-a77bc3c5f195.webp" alt="Codex 16 Skills Cover">
+    <div class="hero-overlay"></div>
+    <div class="hero-body">
+      <span class="tag">Creator + Video · 16 Skills</span>
+      <h1>Codex 16 个必装 Skills</h1>
+      <p class="subtitle">写作、润色、调研、配图、封面……再加视频生成与剪辑。一次给你配齐。先收藏，再慢慢装，这 16 个一个比一个实用。</p>
+      <div class="hero-meta">
+        <span>📅 2026-06-05</span>
+        <span>⏱ 12 分钟阅读</span>
+        <span>🏷️ Codex · Skills · AI 创作</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Codex</span>
+        <span class="tag-pill">Skills</span>
+        <span class="tag-pill">内容创作</span>
+        <span class="tag-pill">视频制作</span>
+        <span class="tag-pill">AI 提效</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="bis-section">
+    <h2><span class="num">📕</span>第一辑 · 内容创作者 10 大 Skills</h2>
+    <p>写一篇能看、能传、能留住人的稿子，从这 10 个开始。</p>
+
+    <div class="table-wrap">
+      <table class="skill-table">
+        <thead><tr><th>#</th><th>Skill</th><th>作用</th><th>一句话定位</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Humanizer-zh</td><td>润色</td><td>去 AI 味，让文字像人写的</td></tr>
+          <tr><td>2</td><td>dbskill</td><td>选题</td><td>内容诊断 + 爆款拆解</td></tr>
+          <tr><td>3</td><td>content-research-writer</td><td>写作</td><td>选题→资料→成稿一站搞定</td></tr>
+          <tr><td>4</td><td>NotebookLM Skill</td><td>写作</td><td>知识库创作，减少幻觉</td></tr>
+          <tr><td>5</td><td>Deep Research Skill</td><td>调研</td><td>不会查资料就靠它</td></tr>
+          <tr><td>6</td><td>ian-xiaohei-illustrations</td><td>配图</td><td>观点/流程秒变统一插图</td></tr>
+          <tr><td>7</td><td>guizang-social-card-skill</td><td>分发</td><td>长文→小红书/公众号卡片</td></tr>
+          <tr><td>8</td><td>baoyu-skills</td><td>配图</td><td>信息图、结构图、对比图</td></tr>
+          <tr><td>9</td><td>guizang-ppt-skill</td><td>演讲</td><td>文章秒变 PPT / 演讲稿</td></tr>
+          <tr><td>10</td><td>html-anything</td><td>包装</td><td>Markdown→网页 / 海报 / PNG</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-1-humanizer---1c3a9ea9-a50b-4530-b4fa-897ad9877fd7.webp" alt="Humanizer-zh">
+      <div class="skill-body">
+        <h3><span class="idx">1</span>Humanizer-zh — 中文去 AI 味</h3>
+        <p class="desc">中文创作者必备的"去 AI 味"技能，能识别空话、套话、模板化表达和 AI 腔，让文章更自然、更像真人写出来的。</p>
+        <div class="meta">
+          <div>适合：所有用 AI 写中文稿的人</div>
+          <div>价值：把"在当今时代…""值得关注的是…"这种腔调扒掉</div>
+          <div>GitHub：<code>github.com/op7418/Humaniz…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-2-dbskill---c3bb7620-b809-4013-95f9-aaaa0cad9bcb.png" alt="dbskill">
+      <div class="skill-body">
+        <h3><span class="idx">2</span>dbskill — 选题诊断器</h3>
+        <p class="desc">内容创作者的"选题诊断器"，适合做内容分析、标题优化、爆款拆解、商业表达和 Hook 设计，尤其适合中文自媒体和知识博主。</p>
+        <div class="meta">
+          <div>适合：自媒体 / 知识博主 / 公众号作者</div>
+          <div>价值：先诊断再下笔，少走 80% 弯路</div>
+          <div>GitHub：<code>github.com/dontbesilent20…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-3-research-writer---44894864-22a0-43bb-aa64-ffd134af590a.png" alt="content-research-writer">
+      <div class="skill-body">
+        <h3><span class="idx">3</span>content-research-writer — 一站式写作流</h3>
+        <p class="desc">从选题、资料搜集、提纲设计到初稿生成的一站式写作工作流，适合公众号、博客、Newsletter 和深度长文创作。</p>
+        <div class="meta">
+          <div>适合：长文 / Newsletter / 深度博客作者</div>
+          <div>价值：把"开题—查资料—列纲—写稿"串成一条线</div>
+          <div>GitHub：<code>github.com/ComposioHQ/awe…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-4-notebooklm---3775d525-782b-46da-b721-8467123d92af.png" alt="NotebookLM Skill">
+      <div class="skill-body">
+        <h3><span class="idx">4</span>NotebookLM Skill — 知识库创作</h3>
+        <p class="desc">基于个人知识库进行内容创作，能够有效减少幻觉和错误引用，特别适合行业研究、课程开发和深度内容整理。</p>
+        <div class="meta">
+          <div>适合：行业研究 / 课程开发者 / 深度内容作者</div>
+          <div>价值：用自己的资料喂 AI，引用更准</div>
+          <div>GitHub：<code>github.com/PleasePrompto/…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-5-deep-research---e7fda185-0839-4fdd-a815-28ea2112ef7c.png" alt="Deep Research Skill">
+      <div class="skill-body">
+        <h3><span class="idx">5</span>Deep Research Skill — 自动调研</h3>
+        <p class="desc">专门解决"不会查资料"的问题，自动完成搜索、整理、交叉验证和观点归纳，非常适合科技、AI 和行业研究类创作者。</p>
+        <div class="meta">
+          <div>适合：科技 / AI / 行业研究向创作者</div>
+          <div>价值：把 2 小时的查资料压缩到 10 分钟</div>
+          <div>GitHub：<code>github.com/langchain-ai/o…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-6-illustration---03185fd3-2f59-419f-933e-890c3fce2254.png" alt="ian-xiaohei-illustrations">
+      <div class="skill-body">
+        <h3><span class="idx">6</span>ian-xiaohei-illustrations — 文章配图神器</h3>
+        <p class="desc">文章配图神器，可以把观点、流程、情绪和隐喻自动转化为统一风格的插图，让内容更具传播力。</p>
+        <div class="meta">
+          <div>适合：公众号 / 博客 / Newsletter 美化刚需</div>
+          <div>价值：风格统一 + 量产 + 不用自己画</div>
+          <div>GitHub：<code>github.com/helloianneo/ia…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-7-social-card---e23dd5f9-b88d-4fca-9368-c49ff42f1271.png" alt="guizang-social-card-skill">
+      <div class="skill-body">
+        <h3><span class="idx">7</span>guizang-social-card-skill — 长文变卡片</h3>
+        <p class="desc">长文变卡片的利器，可将文章快速拆解为小红书图文、公众号封面和知识卡片，方便内容二次分发。</p>
+        <div class="meta">
+          <div>适合：做多平台分发的创作者</div>
+          <div>价值：一篇文章 → 5 张图卡，跨平台复用</div>
+          <div>GitHub：<code>github.com/op7418/guizang…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-8-baoyu---d22a4df9-34d9-44c4-9a4c-41f03291c0a0.png" alt="baoyu-skills">
+      <div class="skill-body">
+        <h3><span class="idx">8</span>baoyu-skills — 创作者视觉工具箱</h3>
+        <p class="desc">面向创作者的视觉工具箱，能够生成信息图、结构图、对比图和知识图解，让复杂内容更容易被理解和传播。</p>
+        <div class="meta">
+          <div>适合：讲概念、做教程、写硬核分析的作者</div>
+          <div>价值：复杂内容 → 一张图说清</div>
+          <div>GitHub：<code>github.com/JimLiu/baoyu-s…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-9-ppt---04d2f27c-616e-4b09-8e97-adeac88b198d.png" alt="guizang-ppt-skill">
+      <div class="skill-body">
+        <h3><span class="idx">9</span>guizang-ppt-skill — 文章秒变 PPT</h3>
+        <p class="desc">将文章观点快速转化为 PPT、演讲稿和分享材料，特别适合经常做公开分享和课程输出的人。</p>
+        <div class="meta">
+          <div>适合：讲师 / 顾问 / 经常做分享的人</div>
+          <div>价值：写完稿子直接出 deck</div>
+          <div>GitHub：<code>github.com/op7418/guizang…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/skill-10-html-anything---6b77cc2f-a172-4335-a95f-3256baedc400.png" alt="html-anything">
+      <div class="skill-body">
+        <h3><span class="idx">10</span>html-anything — 一键生成网页/海报</h3>
+        <p class="desc">把 Markdown、文案和文章直接变成精美网页、海报、知识卡片或 PNG 图片，是内容包装和视觉化输出的神器。</p>
+        <div class="meta">
+          <div>适合：需要把内容"打包成可发布物料"的人</div>
+          <div>价值：一份稿子 → 网页 / 海报 / 知识卡 / PNG</div>
+          <div>GitHub：<code>github.com/nexu-io/html-a…</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bis-section">
+    <h2><span class="num">🎬</span>第二辑 · 视频创作者 6 大 Skills</h2>
+    <p>装完 Codex 不知道干什么？当然是<strong>做视频搞钱</strong>！给 Codex 装上这 6 个 GitHub Skills，直接让它参与整条视频制作流程。</p>
+
+    <img class="skill-img" src="images/codex-16/video-skills-cover---55f4fd4f-89cc-4738-9223-c0a9efaa5ebc.png" alt="视频封面" style="width:100%;height:auto;margin:14px 0;border-radius:12px;">
+
+    <div class="table-wrap">
+      <table class="skill-table">
+        <thead><tr><th>#</th><th>Skill</th><th>作用</th><th>一句话定位</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>HyperFrames</td><td>视频生成</td><td>一句话生成动效视频</td></tr>
+          <tr><td>2</td><td>video-use</td><td>剪辑</td><td>Agent 帮你剪掉废话</td></tr>
+          <tr><td>3</td><td>Remotion Skills</td><td>视频生成</td><td>用 React 批量出视频</td></tr>
+          <tr><td>4</td><td>Generative Media Skills</td><td>多模态</td><td>AI 视频/图/音频工具箱</td></tr>
+          <tr><td>5</td><td>videocut-skills</td><td>剪辑</td><td>中文视频剪辑 Agent</td></tr>
+          <tr><td>6</td><td>seedance2-skill</td><td>提示词</td><td>给即梦写专业分镜</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/vskill-1-hyperframes---5b8b93e3-cde4-47c0-972b-a52ede7e832e.png" alt="HyperFrames">
+      <div class="skill-body">
+        <h3><span class="idx">1</span>HyperFrames — 一句话生成动效视频</h3>
+        <p class="desc">告诉 Codex 视频主题，它可以使用 HTML、CSS 和动画制作产品介绍、动态海报、知识视频和 PPT 风格视频，最后渲染为 MP4。很适合把文章、推文、产品介绍快速改成视频。</p>
+        <div class="meta">
+          <div>适合：把文章、推文、产品介绍快速改成视频</div>
+          <div>价值：纯文本 → MP4，中间不用碰剪辑软件</div>
+          <div>GitHub：<code>github.com/heygen-com/hyp…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/vskill-2-video-use---1db39ace-d60d-44cb-97de-2347a677b797.png" alt="video-use">
+      <div class="skill-body">
+        <h3><span class="idx">2</span>video-use — 让 Codex 帮你剪视频</h3>
+        <p class="desc">把拍摄素材交给 Agent，它可以协助删除停顿、错误片段和口头禅，继续处理字幕、音频、调色与画面动效。经常制作口播、教程和采访视频的人可以重点看它。</p>
+        <div class="meta">
+          <div>适合：口播、教程、采访视频</div>
+          <div>价值：Agent 替你看粗剪、过口癖、做字幕</div>
+          <div>GitHub：<code>github.com/browser-use/vi…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/vskill-3-remotion---6112c5be-44f0-42f5-91ef-ef2285d28135.png" alt="Remotion Skills">
+      <div class="skill-body">
+        <h3><span class="idx">3</span>Remotion Skills — 用代码批量制作视频</h3>
+        <p class="desc">Remotion 官方提供的 Agent Skills。可让 Codex 使用 React 编写视频，统一控制画面、字幕、动画和时间轴。特别适合批量制作排行榜、数据周报、产品更新和固定栏目视频。</p>
+        <div class="meta">
+          <div>适合：排行榜、数据周报、产品更新、固定栏目</div>
+          <div>价值：模板化 + 编程化 = 量产视频</div>
+          <div>GitHub：<code>github.com/remotion-dev/s…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/vskill-4-gen-media---d0275e70-1c23-48d5-b1b6-f0e80b536b95.png" alt="Generative Media Skills">
+      <div class="skill-body">
+        <h3><span class="idx">4</span>Generative Media Skills — AI 视频生成工具箱</h3>
+        <p class="desc">覆盖图片、视频和音频生成，可以调用 AI 模型制作产品广告、UGC 视频、音乐视频和社交媒体短片。部分功能需要配置 MuAPI，并会产生生成费用。</p>
+        <div class="meta">
+          <div>适合：想大量尝试 AI 视频玩法的人</div>
+          <div>价值：一次配齐文/图/视/音生成通路</div>
+          <div>GitHub：<code>github.com/SamurAIGPT/Gen…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/vskill-5-videocut-v2---88c6d398-b8dd-4bed-9c41-d8e83be1d08b.png" alt="videocut-skills">
+      <div class="skill-body">
+        <h3><span class="idx">5</span>videocut-skills — 中文视频剪辑 Agent</h3>
+        <p class="desc">面向中文创作者的视频剪辑 Skills，可以让 Agent 理解剪辑需求，并协助处理素材、字幕和短视频制作流程。中文用户想用 Claude Code 或其他 Agent 剪视频可以重点研究。</p>
+        <div class="meta">
+          <div>适合：用 Codex / Claude Code 剪中文视频</div>
+          <div>价值：中文 prompt 直接出剪辑</div>
+          <div>GitHub：<code>github.com/Ceeon/videocut…</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <img class="skill-img" src="images/codex-16/vskill-6-seedance---545ce646-8259-4334-8fe7-17ffafead052.png" alt="seedance2-skill">
+      <div class="skill-body">
+        <h3><span class="idx">6</span>seedance2-skill — 帮即梦写专业视频提示词</h3>
+        <p class="desc">告诉 Codex 一个视频创意，它会帮你设计逐秒分镜、人物动作、运镜、对白、音效，以及 @图片、@视频 的素材引用方式。生成的提示词可以直接交给即梦 Seedance 2.0 制作核心镜头。它负责提示词和分镜，生成视频仍需进入即梦操作。</p>
+        <div class="meta">
+          <div>适合：玩即梦 Seedance 2.0 的创作者</div>
+          <div>价值：分镜师级 prompt，机器读得懂</div>
+          <div>GitHub：<code>github.com/dexhunter/seed…</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="combo-section">
+    <h2>🎯 不知道怎么搭配？直接抄这几套</h2>
+    <div class="table-wrap">
+      <table class="skill-table">
+        <thead><tr><th>场景</th><th>推荐组合</th></tr></thead>
+        <tbody>
+          <tr><td>文章、推文转视频</td><td><code>HyperFrames</code></td></tr>
+          <tr><td>真人口播、采访剪辑</td><td><code>video-use + HyperFrames</code></td></tr>
+          <tr><td>批量制作固定栏目</td><td><code>Remotion Skills + HyperFrames</code></td></tr>
+          <tr><td>AI 短剧、广告视频</td><td><code>seedance2-skill + 即梦 + video-use</code></td></tr>
+          <tr><td>大量测试 AI 视频玩法</td><td><code>Generative Media Skills</code></td></tr>
+          <tr><td>调研 + 写作 + 配图</td><td><code>Deep Research + content-research-writer + ian-xiaohei-illustrations</code></td></tr>
+          <tr><td>知识库深度长文</td><td><code>NotebookLM + Humanizer-zh + baoyu</code></td></tr>
+          <tr><td>一稿多发</td><td><code>content-research-writer + guizang-social-card-skill</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="outro">
+    <p>别再只让 AI 帮你写一篇文章了。</p>
+    <p>真正的提效，是让 AI 按照你的创作流程完成<strong>调研、写作、优化、配图、分发和视频化</strong>。</p>
+    <p>以后只需要告诉 Codex：<br><code>"把这篇推文做成一条 45 秒竖版视频，前三秒抓住注意力，添加中文配音和动态字幕，完成后检查画面与音量。"</code></p>
+    <p>剩下的脚本、分镜、提示词、剪辑和包装，都可以交给 Codex 一步步完成。</p>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  var bar = document.getElementById('progress-bar');
+  function update(){
+    var h = document.documentElement;
+    var sc = h.scrollTop || document.body.scrollTop;
+    var sh = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+    var pct = sh > 0 ? (sc / sh) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+</script>
+</body>
+</html>
