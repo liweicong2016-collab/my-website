@@ -181,7 +181,33 @@
       footer { padding:32px 20px; }
       .bar-row { grid-template-columns:90px 1fr 40px; }
     }
-  </style>
+  
+/* === Language switcher === */
+.lang-switch{display:inline-flex;align-items:center;gap:2px;background:rgba(255,255,255,.04);border:1px solid #1e2d45;border-radius:8px;padding:3px;margin-left:12px;flex-shrink:0}
+.lang-btn{background:transparent;border:0;color:#94a3b8;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:30px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.08)}
+.lang-btn.active{color:#070b14;background:#f59e0b;box-shadow:0 1px 3px rgba(245,158,11,.4)}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{margin-left:auto}.nav-links{display:none!important}}
+/* === /Language switcher === */
+</style>
+<!-- Google Translate -->
+<div id="google_translate_element" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"></div>
+<script>
+function googleTranslateElementInit(){
+  if(!window.google||!google.translate)return;
+  new google.translate.TranslateElement({
+    pageLanguage:'zh-CN',
+    includedLanguages:'en,ja,vi',
+    layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay:false
+  },'google_translate_element');
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+<!-- /Google Translate -->
 </head>
 <body class="report-page">
 
@@ -196,6 +222,12 @@
       <li><a href="thailand-idc.html" class="active">研究报告</a></li>
       <li><a href="https://github.com/liweicong2016-collab" target="_blank">GitHub</a></li>
     </ul>
+    <div class="lang-switch" data-current="zh">
+      <button class="lang-btn active" data-lang="zh" aria-label="中文">中</button>
+      <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
+      <button class="lang-btn" data-lang="vi" aria-label="Tiếng Việt">VI</button>
+    </div>
   </div>
 </nav>
 
@@ -440,5 +472,36 @@
 </footer>
 
 <script src="main.js"></script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var current=sw.getAttribute('data-current')||'zh';
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function doGTranslate(langCode){
+    var combo=document.querySelector('.goog-te-combo');
+    if(combo){combo.value=langCode;combo.dispatchEvent(new Event('change'));return;}
+    var attempts=0;
+    var iv=setInterval(function(){
+      combo=document.querySelector('.goog-te-combo');
+      if(combo){clearInterval(iv);combo.value=langCode;combo.dispatchEvent(new Event('change'));}
+      else if(++attempts>30){clearInterval(iv);showToast('Translation service unavailable / 翻译服务暂不可用',2400);}
+    },150);
+  }
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var lang=this.getAttribute('data-lang');
+      if(lang===current){showToast(lang==='zh'?'已是中文':'Already '+lang.toUpperCase(),1000);return;}
+      setActive(this);
+      if(lang==='zh'){doGTranslate('zh-CN');showToast('已切换到中文',1000);}
+      else if(lang==='en'){doGTranslate('en');showToast('Switching to English...',1200);}
+      else if(lang==='ja'){doGTranslate('ja');showToast('日本語に切り替え中...',1200);}
+      else if(lang==='vi'){doGTranslate('vi');showToast('Đang chuyển sang tiếng Việt...',1200);}
+    });
+  });
+})();
+</script>
 </body>
 </html>
