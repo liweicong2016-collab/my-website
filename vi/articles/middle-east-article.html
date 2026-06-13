@@ -118,11 +118,11 @@ footer a:hover{text-decoration:underline}
 <body>
 <div id="progress-bar"></div>
 <div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
-<div class="lang-switch" data-current="vi">
-  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+<div class="lang-switch" data-current="zh">
+  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
   <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
   <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
-  <a class="lang-btn active" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
 </div>
 <a class="t4" href="../index.html">← Back</a></div></div>
 <div class="c"><div class="article-body"><div class="hero fade-up">
@@ -306,11 +306,18 @@ footer a:hover{text-decoration:underline}
   if(!sw)return;
   var pageUrl=window.location.href;
   function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
-  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
-  function localizedUrl(lang){
-    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
-    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  function setActive(lang){
+    sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.classList.add('active');
+    sw.setAttribute('data-current',lang);
   }
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\/,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\/,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/, '$1/'+lang+'$2');
+  }
+  // Default: ZH active, regardless of data-current attribute set in HTML
+  setActive('zh');
   ['zh','en','vi','ja'].forEach(function(lang){
     var btn=sw.querySelector('[data-lang="'+lang+'"]');
     if(btn)btn.href=localizedUrl(lang);
@@ -318,7 +325,7 @@ footer a:hover{text-decoration:underline}
   sw.querySelectorAll('.lang-btn').forEach(function(btn){
     btn.addEventListener('click',function(e){
       var lang=this.getAttribute('data-lang');
-      setActive(this);
+      setActive(lang);
       if(lang==='zh' && this.getAttribute('href')===pageUrl){
         e.preventDefault();showToast('已是中文 / Already Chinese',1000);
       } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
