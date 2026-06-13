@@ -20,10 +20,10 @@ a{color:#a78bfa;text-decoration:none}a:hover{opacity:.8}
 .t4:hover{color:#e8eaf0}
 
 /* ===== 语种切换 ===== */
-.lang-switch{display:inline-flex;align-items:center;gap:2px;background:rgba(255,255,255,.04);border:1px solid #1e2d45;border-radius:8px;padding:3px;margin-left:auto}
-.lang-btn{background:transparent;border:0;color:#94a3b8;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:30px}
-.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.08)}
-.lang-btn.active{color:#070b14;background:#f59e0b;box-shadow:0 1px 3px rgba(245,158,11,.4)}
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
 .lang-btn:disabled{opacity:.4;cursor:not-allowed}
 .lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -112,31 +112,17 @@ footer a:hover{text-decoration:underline}
 @media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="../main.css">
-<!-- Google Translate -->
-<div id="google_translate_element" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true"></div>
-<script>
-function googleTranslateElementInit(){
-  if(!window.google||!google.translate)return;
-  new google.translate.TranslateElement({
-    pageLanguage:'zh-CN',
-    includedLanguages:'en,ja,vi',
-    layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
-    autoDisplay:false
-  },'google_translate_element');
-}
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
-<!-- /Google Translate -->
+
 
 </head>
 <body>
 <div id="progress-bar"></div>
 <div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
 <div class="lang-switch" data-current="zh">
-  <button class="lang-btn active" data-lang="zh" aria-label="中文">中</button>
-  <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
-  <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
-  <button class="lang-btn" data-lang="vi" aria-label="Tiếng Việt">VI</button>
+  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
 </div>
 <a class="t4" href="../index.html">← Back</a></div></div>
 <div class="c"><div class="article-body">
@@ -314,28 +300,27 @@ function googleTranslateElementInit(){
 (function(){
   var sw=document.querySelector('.lang-switch');
   if(!sw)return;
-  var current=sw.getAttribute('data-current')||'zh';
-  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  var pageUrl=window.location.href;
   function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
-  function doGTranslate(langCode){
-    var combo=document.querySelector('.goog-te-combo');
-    if(combo){combo.value=langCode;combo.dispatchEvent(new Event('change'));return;}
-    var attempts=0;
-    var iv=setInterval(function(){
-      combo=document.querySelector('.goog-te-combo');
-      if(combo){clearInterval(iv);combo.value=langCode;combo.dispatchEvent(new Event('change'));}
-      else if(++attempts>30){clearInterval(iv);showToast('Translation service unavailable / 翻译服务暂不可用',2400);}
-    },150);
-  }
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function gtUrl(lang){return 'https://translate.google.com/translate?sl=zh-CN&tl='+lang+'&u='+encodeURIComponent(pageUrl);}
+  // Populate hrefs so right-click "open in new tab" works too
+  var zh=sw.querySelector('[data-lang="zh"]');if(zh)zh.href=pageUrl;
+  var en=sw.querySelector('[data-lang="en"]');if(en)en.href=gtUrl('en');
+  var ja=sw.querySelector('[data-lang="ja"]');if(ja)ja.href=gtUrl('ja');
+  var vi=sw.querySelector('[data-lang="vi"]');if(vi)vi.href=gtUrl('vi');
   sw.querySelectorAll('.lang-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){
+    btn.addEventListener('click',function(e){
       var lang=this.getAttribute('data-lang');
-      if(lang===current){showToast(lang==='zh'?'已是中文':'Already '+lang.toUpperCase(),1000);return;}
       setActive(this);
-      if(lang==='zh'){doGTranslate('zh-CN');showToast('已切换到中文',1000);}
-      else if(lang==='en'){doGTranslate('en');showToast('Switching to English...',1200);}
-      else if(lang==='ja'){doGTranslate('ja');showToast('日本語に切り替え中...',1200);}
-      else if(lang==='vi'){doGTranslate('vi');showToast('Đang chuyển sang tiếng Việt...',1200);}
+      if(lang==='zh'){
+        if(this.getAttribute('href')===pageUrl||this.getAttribute('href')==='#'){
+          e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+        }
+      } else {
+        // For en/ja/vi, let the <a href> navigate to Google Translate
+        showToast('Opening Google Translate... / 正在打开 Google 翻译',1400);
+      }
     });
   });
 })();
