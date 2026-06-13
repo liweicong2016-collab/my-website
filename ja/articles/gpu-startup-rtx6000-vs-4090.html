@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なぜスタートアップは 4090 / 5090 ではなく RTX 6000 / L40S を使うべきなのか？</title>
+<meta name="description" content="4090 / 5090 は一見3倍安価に見えるが、VRAM、ECC、RMA、サーバー適合という4つの致命的な欠陥により、スタートアップ企業は6か月間で76%多く出費することになる。2026-06 実際の事例と仕様比較。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="ja">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn active" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&q=80" alt="データセンターのラック内の GPU サーバー">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">GPU 選定 · TCO 分解</span>
+    <h1>なぜスタートアップは 4090 / 5090 ではなく RTX 6000 / L40S を使うべきか</h1>
+    <p class="subtitle">コンシューマー向けカードはゲームでは王者、本番環境では地雷。一見すると 3 倍のコスト削減になるが、実際には 76% 高いコストがかかる。</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-12</span>
+      <span>⏱ ~12 min read</span>
+      <span>🏷️ GPU, RTX 6000, L40S, 4090, 5090</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">GPU 選定</span>
+      <span class="tag-pill">AI 計算力</span>
+      <span class="tag-pill">VRAM</span>
+      <span class="tag-pill">ECC</span>
+      <span class="tag-pill">スタートアップ</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN 摘要（可选） ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>: For startups running LLM inference in production, RTX 6000 Ada / L40S / RTX PRO 6000 Blackwell win decisively over GeForce 4090 / 5090 on five dimensions: VRAM (48–96 GB vs 24–32 GB), ECC memory, server fit, RMA SLA, and long-term TCO. Four real anonymized cases show ~76% higher cost when "saving" with 4090.
+</div>
+
+<!-- ===== TL;DR 核心结论 ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>核心的結論</strong>：プロジェクトが 6 か月以上稼働し + 実際のユーザーにサービスを提供し + LLM 推論が含まれ + 予算が 20 万元を超える場合 → RTX 6000 Ada / L40S / RTX PRO 6000 Blackwell を購入すべきである。表面上は購入費が 3 倍になるが、4090/5090 を使用すると実際には 76% 多くコストがかかり、さらに 6 か月のデバッグ期間と顧客喪失コストも加わる。
+</div>
+
+<!-- ===== 章节循环 ===== -->
+
+<!-- ===== 章节 1：规格对比 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>まず 5 つのカードをテーブルに並べる</h2>
+<p>データソース：NVIDIA 公式製品ページ、PNY データシート、GTC 2025 発表。2026-06-12 取得。</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>仕様</th><th>RTX 4090</th><th>RTX 5090</th><th>RTX 6000 Ada</th><th>L40S</th><th>RTX PRO 6000</th></tr></thead>
+<tbody>
+<tr><td><strong>VRAM</strong></td><td>24 GB</td><td>32 GB</td><td><span class="tg tg-m">48 GB</span></td><td><span class="tg tg-m">48 GB</span></td><td><span class="tg tg-r">96 GB</span></td></tr>
+<tr><td>メモリタイプ</td><td>GDDR6X</td><td>GDDR7</td><td>GDDR6</td><td>GDDR6</td><td>GDDR7</td></tr>
+<tr><td>帯域幅</td><td>1,008 GB/s</td><td>1,792 GB/s</td><td>960 GB/s</td><td>864 GB/s</td><td>~1,600 GB/s</td></tr>
+<tr><td><strong>ECC</strong></td><td><span class="tg tg-r">❌</span></td><td><span class="tg tg-r">❌</span></td><td><span class="tg tg-m">✅</span></td><td><span class="tg tg-m">✅</span></td><td><span class="tg tg-m">✅</span></td></tr>
+<tr><td>TDP</td><td>450 W</td><td>575 W</td><td>300 W</td><td>350 W</td><td>~300 W</td></tr>
+<tr><td>冷却</td><td>アクティブ 3 スロット</td><td>アクティブ デュアルスロット</td><td>アクティブ 2 スロット</td><td><strong>パッシブ</strong></td><td>アクティブ/パッシブ</td></tr>
+<tr><td>NVLink</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+<tr><td>MIG スライシング</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>4×24GB</td></tr>
+<tr><td>保証</td><td>コンシューマー向け 3 年間</td><td>コンシューマー向け 3 年間</td><td><strong>商用 3 年間 + SLA</strong></td><td><strong>商用 3 年間 + SLA</strong></td><td><strong>商用 3 年間 + SLA</strong></td></tr>
+<tr><td>発売価格 (USD)</td><td>$1,599</td><td>$1,999</td><td>$6,800 (製造終了)</td><td>~$10,500</td><td>OEM 価格設定</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- ===== 章节 2：VRAM ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>VRAM：実行できるモデルのサイズを決定する</h2>
+<p>VRAM容量は、コンシューマ向けカードとデータセンター向けカードの間で<strong>最も硬直した分水嶺</strong>であり、これに勝るものはない。</p>
+<div class="bis-grid">
+<div class="bis-card"><span class="val">24-32</span><span class="lab">GB · 4090/5090</span></div>
+<div class="bis-card green"><span class="val">48</span><span class="lab">GB · RTX 6000 Ada / L40S</span></div>
+<div class="bis-card purple"><span class="val">96</span><span class="lab">GB · RTX PRO 6000 Blackwell</span></div>
+</div>
+<p><strong>実際に搭載できるもの：</strong></p>
+<ul>
+<li>24 GB (4090) / 32 GB (5090)：単一カードでは 8B-13B 量子化モデルのみ搭載可能、または 7B 半精度 + 短いコンテキスト</li>
+<li>48 GB (RTX 6000 Ada / L40S)：単一カードで 13B 全精度 (FP16) または 30B INT4 を搭載でき、70B INT4 はかろうじて搭載可能</li>
+<li>96 GB (RTX PRO 6000 Blackwell)：単一カードで 70B FP16 / 405B INT4 / 長いコンテキスト (32K-128K) を搭載可能</li>
+</ul>
+<div class="signal"><h3>現実のギャップ</h3>
+<ul>
+<li>70B モデル（Llama-3-70B クラス）FP16 = <strong>140 GB</strong>、4090/5090 ではいかなる精度でもまったく搭載できない</li>
+<li>実行するには必ず<strong>テンソル並列</strong>で 2-4 カードが必要 → PCIe P2P 通信を使用し、帯域幅 32 GB/s → <strong>レイテンシが倍増し、スループットが 30-50% 低下する</strong></li>
+<li>長いコンテキストの RAG (32K-128K)：KV キャッシュが VRAM を 60-80 GB 消費し、4090 で 70B + 128K コンテキスト → <strong>即座に OOM でクラッシュする</strong></li>
+</ul></div>
+</div>
+
+<!-- ===== 章节 3：ECC ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>ECC：本番環境の隠れた脅威</h2>
+<p>コンシューマ向けカード (4090/5090) は<strong>ECC メモリを搭載していない</strong>。これは 90% のスタートアップが見落としている致命的な欠陥である。</p>
+<p><strong>シングルビット反転率</strong>（Google 2019 SIGMETRICS 論文データ）：</p>
+<ul>
+<li>DRAM ビット反転率は約 <strong>25-75 FIT per MB</strong></li>
+<li>32 GB GDDR6 ≈ <strong>0.5-1.5 エラー/日/カード</strong></li>
+<li>ECC 付加 = 0 エラー（自動修正）</li>
+<li>ECC なし = 0.4-0.9 エラー/日 → <strong>ある推論時に突然ゴミを返す可能性がある</strong></li>
+</ul>
+<div class="punchline"><h3>実際の事故事例</h3>
+<p>あるスタートアップが 8 枚の 4090 で LLaMA-3-70B 推論サービスをデプロイし、稼働から 3 か月後、<strong>47 日目に確率的な文字化け出力が発生した</strong>。顧客からのクレームを受けて調査し、GPU VRAM のビット反転が原因と特定。L40S に切り替えた後は 6 か月間無故障。</p></div>
+<p>NVIDIA H100 ユーザーマニュアルには明確にこう書かれている。<em>「本番デプロイでは ECC を強く推奨する」</em>と。</p>
+</div>
+
+<!-- ===== 章节 4：RMA + サーバー適応 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>RMA + サーバー適合：ビジネス継続性の最終的な決め手</h2>
+<h3>4.1 保証とRMA</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>観点</th><th>コンシューマー向け (4090/5090)</th><th>プロフェッショナル向け (RTX 6000 / L40S)</th></tr></thead>
+<tbody>
+<tr><td>保証期間</td><td>3年</td><td>3年</td></tr>
+<tr><td>RMAチャネル</td><td>ボードメーカー (MSI/ASUS)</td><td><strong>PNY/Elite Partner + NVIDIA</strong></td></tr>
+<tr><td>RMA所要期間</td><td>4～12週間</td><td><span class="tg tg-m">1～2週間</span></td></tr>
+<tr><td>SLA</td><td>なし</td><td><strong>重要顧客 48時間アドバンスリプレースメント</strong></td></tr>
+<tr><td>ローカル在庫</td><td>チャネルによる</td><td>海外主要都市にあり</td></tr>
+</tbody></table></div>
+<p><strong>コスト計算</strong>：8枚の4090 × ¥10,000 = ¥80,000、1枚不良 → RMA待ち8週間 → 事業損失 ¥20,000以上。8枚のL40S × ¥70,000 = ¥560,000、1枚不良 → 48時間アドバンスリプレースメント → 事業損失 = 0。一見7倍の出費に見えるが、実際には<strong>ビジネス継続性を確保</strong>する。</p>
+<h3>4.2 サーバー適合</h3>
+<ul>
+<li><strong>4090</strong>：3スロット厚、アクティブ冷却 → <strong>1Uサーバーに収まらない</strong>、4Uワークステーション / デスクトップタワー型PCにのみ収容可能</li>
+<li><strong>5090</strong>：2スロットだが厚さ137mm、アクティブ冷却 → 同様に1Uサーバーに収まらない</li>
+<li><strong>L40S</strong>：2スロット + パッシブ冷却 → 1U～2U GPUサーバーラックに完璧に適合（NEBS Level 3認証）</li>
+<li><strong>RTX 6000 Ada</strong>：2スロット 2×FHFL、アクティブ冷却 → 2U～4Uワークステーションに収容可能</li>
+</ul>
+<div class="signal"><h3>スタートアップにとっての実際的な意味</h3>
+<ul>
+<li><strong>ベアメタルクラウド</strong> (AWS / GCP / 主要パブリッククラウド) で4090をデプロイしたい？<strong>できない</strong>。AWS p4d / p4de / p5 はすべて H100 / A100</li>
+<li><strong>自前の1U GPUサーバー</strong>で4090を動かしたい？<strong>不可能</strong>、3スロット厚で物理的に収まらない</li>
+<li><strong>vLLM / TGI / SGLang</strong> の公式ハードウェアサポートリストを使いたい？4090は「サポート」列にあるが<strong>experimental</strong>、L40Sは「production-supported」列にある</li>
+</ul></div>
+</div>
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>長期 TCO：総勘定で安さがわかる</h2>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>項目</th><th>8×4090</th><th>4×L40S</th><th>8×L40S</th></tr></thead>
+<tbody>
+<tr><td>単一カード TDP</td><td>450W</td><td>350W</td><td>350W</td></tr>
+<tr><td>総 TDP</td><td>3,600W</td><td>1,400W</td><td>2,800W</td></tr>
+<tr><td>年間電気代 (@$0.1/kWh)</td><td>$3,153</td><td>$1,226</td><td>$2,453</td></tr>
+<tr><td>調達コスト</td><td>$14,400</td><td>$44,000</td><td>$88,000</td></tr>
+<tr><td>VRAM 合計</td><td>192 GB</td><td>192 GB</td><td>384 GB</td></tr>
+<tr><td>有効推論スループット (70B INT4)</td><td>中 (PCIe P2P)</td><td><span class="tg tg-m">高</span> (単一カードに収容可能)</td><td><span class="tg tg-m">很高</span> (単一カードに収容可能)</td></tr>
+</tbody></table></div>
+<p>192 GB の VRAM 合計量は同じで、4 枚の L40S = 8 枚の 4090 の VRAM に相当するが、<strong>単一カードで 70B INT4 を収容可能</strong>（vLLM + AWQ 量子化）であり、テンソル並列が不要。<strong>調達コストは 3 倍だが、年間電気代が 60% 節約され、ラックスペースは 1/3</strong>。</p>
+</div>
+
+<!-- ===== 節 6：4 つの実事例 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>4 つの実事例（匿名化後もシナリオは維持）</h2>
+
+<h3>事例 A：香港の 3 人スタートアップ（生成的 AI カスタマーサービス SaaS）</h3>
+<p><strong>背景</strong>：2024 年 4 月、予算 5 万ドル。</p>
+<p><strong>初版</strong>：8 枚の 4090 ワークステーション + Llama-3-8B-Chat INT4</p>
+<ul>
+<li>GPU ドライバが頻繁に切断、3 か月で 2 枚故障、RMA に 8 週間待ち</li>
+<li>ECC なし、2 か月に 1 回確率的な出力文字化けが発生、顧客からクレーム</li>
+<li>70B モデルへのアップグレードを希望 → 8 枚の 4090 テンソル並列、<strong>推論遅延が 200ms から 1.2s に増加</strong>、顧客離れ</li>
+<li>デスクトップタワーケースの冷却が不十分で、夏に GPU がサーマルスロットリングを発生</li>
+</ul>
+<p><strong>第 2 版</strong>（2024 Q4 改修）：2U サーバー + 4 枚の L40S</p>
+<ul>
+<li>4 枚の L40S = 192 GB VRAM、<strong>単一カードで 70B INT4 を収容可能</strong></li>
+<li>4 枚のカードでデータ並列、各カードが独立してサービス提供、<strong>P99 遅延 350ms</strong></li>
+<li>ECC 有効、6 か月間ビット反転事故ゼロ</li>
+<li>1U-2U ラックマウント展開、冷却が安定</li>
+</ul>
+<div class="quote">「最初から L40S を購入していれば、6 か月のデバッグ時間と 3 万ドルの顧客離れによるコストを節約できた。」</div>
+
+<h3>事例 B：東京の E コマースレコメンデーション（13B モデルリアルタイム推論）</h3>
+<p><strong>案の比較</strong>：</p>
+<ul>
+<li>A: 4×4090（合計 96GB） → テンソル並列が必要、13B FP16 は収まらず、8 ビット量子化が必要</li>
+<li>B: 2×L40S（合計 96GB） → データ並列、各カードで 13B FP16 を独立して実行</li>
+<li>C: 4×5090（合計 128GB） → テンソル並列、収容可能だが ECC なし</li>
+</ul>
+<p><strong>決定</strong>：L40S を選択。13B FP16 の精度は INT8 より 2～3% 高く、ECC が本番事故を防止、48 時間先行交換 SLA、消費電力は 1.1kW 削減。</p>
+
+<h3>事例 C：中南米の E コマース ML プラットフォーム（RAG カスタマーサービス）</h3>
+<ul>
+<li>16 枚の 4090（4 台の 4U ワークステーション）を購入、$28,800</li>
+<li>導入初日：4U ワークステーションが<strong>収まらず</strong>、顧客が借りた 1U GPU サーバーラックに収納できなかった</li>
+<li>Llama-3-70B INT4 + RAG を実行 → 4 枚のカードでテンソル並列、<strong>PCIe P2P 通信のボトルネック</strong>、1 クエリあたりの P99 遅延 1.5s</li>
+<li>3 か月目に 4090 が 2 枚故障、<strong>RMA に 11 週間</strong>（中南米に現地在庫なし）、業務を 6 枚に縮退</li>
+<li>5 か月後に<strong>全てを L40S に交換</strong>（4 枚）することを決定、追加購入 $44,000</li>
+<li>総勘定：<strong>4 枚の L40S を一度に導入した場合の 2 倍以上</strong></li>
+</ul>
+
+<h3>事例 D：深圳の 10 人 LLM スタートアップチーム（オープンソース 7B + プライベートデプロイ）</h3>
+<p><strong>構成</strong>：RTX 6000 Ada 4 枚、単価 ¥48,000、合計 ¥192,000</p>
+<ul>
+<li>単一カード 48GB で 7B フル精度 + 4 件の同時リクエストを収容可能</li>
+<li>vLLM データ並列、4 枚のカードが独立してサービス提供、<strong>P99 遅延 180ms</strong></li>
+<li>ECC 有効、9 か月間故障ゼロ</li>
+<li>1 年後に 4 枚を売却して L40S に交換、<strong>残存価値 ¥130,000</strong></li>
+<li>TCO = 192 - 130 + 9 か月の電気代 = <strong>¥72,000</strong></li>
+</ul>
+<p>比較：4090 4 枚 = ¥72,000 調達 + 9 か月の電気代 + 2 回の RMA に 4 週間待ち + 1 回のビット反転クレーム処理 = <strong>¥127,000</strong>。見かけ上は 50% 安いが、実際には<strong> 76% 高い</strong>。</p>
+</div>
+
+<!-- ===== 節 7：4090 / 5090 を使えるタイミング ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>4090 / 5090 を使えるタイミング</h2>
+<ul>
+<li>✅ <strong>研究/実験/試作</strong>（3 か月未満のプロジェクト）</li>
+<li>✅ <strong>個人開発/学習</strong>（Stable Diffusion、単一カード 24GB で十分）</li>
+<li>✅ <strong>小規模モデルの推論</strong>（13B 未満、INT4/INT8 量子化が許容可能）</li>
+<li>✅ <strong>コンペ/ハッカソン</strong>（短期集中）</li>
+<li>✅ <strong>デスクトップワークステーション</strong>（単一カード 4090 + 8B モデル）</li>
+<li>✅ <strong>ゲーム + AI 副業</strong>（4090 のコストパフォーマンスは無敵）</li>
+</ul>
+</div>
+
+<!-- ===== 節 8：5090は形勢逆転したのか ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">8</span>5090 は復活したか？</h2>
+<p>いいえ。</p>
+<ul>
+<li>算力が4090の2倍 (FP16 419 vs 165 TFLOPS)</li>
+<li><strong>FP4 量子化</strong> (Blackwell 専用) → 同じVRAM容量でより大規模なモデルを収容可能</li>
+<li>32 GB GDDR7 → 4090比33%増量</li>
+<li>575W TDP → ワットあたり算力が4090より30%高い</li>
+</ul>
+<p><strong>しかし</strong>：</p>
+<ul>
+<li>32 GB は<strong>依然として</strong>本番級LLMには不十分</li>
+<li>ECC なし</li>
+<li>NVLink なし</li>
+<li>コンシューマー向け保証</li>
+<li>アクティブ冷却のため1Uサーバーに収まらない</li>
+</ul>
+<div class="punchline"><p>→ <strong>5090 は最強のコンシューマー向けカードだが、本番環境向けAIカードではない</strong></p></div>
+</div>
+
+<!-- ===== KEY TAKEAWAYS ===== -->
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>VRAMが分水嶺</strong>：48-96 GB vs 24-32 GB → 70Bモデル＋長文脈の実行可否を決める</li>
+    <li><strong>ECCは省けない</strong>：1カードあたり1日0.5〜1.5回のビット反転、本番環境の24時間365日稼働では許容不可</li>
+    <li><strong>RMA SLAが生命線</strong>：48時間先行交換 vs 4〜12週間の修理待ち、1枚の故障で数十万元の損害</li>
+    <li><strong>サーバー適合が必須</strong>：3スロット占有／アクティブ冷却 → 1Uサーバーに搭載不可、クラウドベアメタルでは選択肢にならない</li>
+    <li><strong>4090/5090は買ってはいけないわけではない</strong>：研究／試作／デスクトップ／ゲームには100%適合、本番環境には0%適合</li>
+  </ul>
+</div>
+
+<!-- ===== 中間挿絵（任意） ===== -->
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80" alt="データセンタールームのGPUサーバーラック" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">図：現代のデータセンターにあるGPUラック──これこそがL40S / RTX PRO 6000の主戦場 © Unsplash</figcaption>
+</figure>
+
+<!-- ===== 関連記事（必ず3枚） ===== -->
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/china-token-going-global-2026/"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=600&q=80" alt="中国トークン出海"><div class="rel-card-body"><h4>中国トークン出海 2026：価格競争からグローバルシェアへの転換点</h4><p>OpenRouter 61%シェアの裏側：真に海外展開しているのは誰か、そして収益化の方法</p><span
+class="rel-card-tag">AI · 海外進出</span></div></a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/ai-chip-token-per-mw-analysis/"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI チップ ワット当たりトークン"><div class="rel-card-body"><h4>AIチップのワット当たりトークン経済学：H100 vs H200 vs B200</h4><p>データセンター向けカードの計算力の背後にあるエネルギー効率の帳簿：ワット当たり何トークン処理できるか</p><span class="rel-card-tag">GPU · エネルギー効率</span></div></a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/ascend-small-models-2026/"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="国産AIチップ"><div class="rel-card-body"><h4>国産AIチップの小規模モデルエコシステム：350の実適合モデル</h4><p>海外製GPUが入手不可能な中、スタートアップはいかにして国産カードで2026年を乗り切るか</p><span class="rel-card-tag">国産GPU · 小規模モデル</span></div></a>
+</div>
+</div>
+
+<!-- ===== 脚注 ===== -->
+<div class="ftrnote"><strong>データソース</strong>：NVIDIA 公式製品ページ（4090 / 5090 / L40S / RTX 6000 Ada）；PNY RTX 6000 Ada Datasheet；GTC 2025 RTX PRO 6000 Blackwell 発表；Google "Revisiting Memory Errors in Large-Scale Production Data Centers" (2019)；NVIDIA H100 ユーザーマニュアル；vLLM / TGI / SGLang 公式ハードウェアサポートリスト。データ時点：2026-06-12。価格は随時変動するため、公開後はECサイトのリアルタイム表示価格を基準とされたい。本稿の事例は匿名化処理済みであり、シナリオ記述のみを保持している。</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · コンピュート · 東南アジア · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(this);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>

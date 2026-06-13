@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Token经济这一年：从1.2%到61%，中国开源模型在OpenRouter上的份额爆炸式增长</title>
-<meta name="description" content="从2025年初的1.2%到2026年的61%，中国开源模型在OpenRouter上的份额爆炸式增长，中国模型是如何做到的。">
+<title>トークンエコノミーのこの一年：1.2%から61%へ、中国オープンソースモデルのOpenRouterにおけるシェア爆発的増加</title>
+<meta name="description" content="2025年初頭の1.2%から2026年の61%へ、OpenRouter上での中国オープンソースモデルのシェアは爆発的な伸びを見せた。中国のモデルはどのようにこれを達成したのか。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -118,10 +118,10 @@ footer a:hover{text-decoration:underline}
 <body>
 <div id="progress-bar"></div>
 <div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
-<div class="lang-switch" data-current="zh">
-  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+<div class="lang-switch" data-current="ja">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
   <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
-  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn active" data-lang="ja" href="#" aria-label="日本語">日</a>
   <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
 </div>
 <a class="t4" href="../index.html">← Back</a></div></div>
@@ -131,18 +131,18 @@ footer a:hover{text-decoration:underline}
   <img class="hero-img" src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=1200&q=80" alt="Finance markets">
   <div class="hero-overlay"></div>
   <div class="hero-body">
-    <span class="tag">Token Economy · 2026</span>
-    <h1>Token经济这一年</h1>
-    <p class="subtitle">从2025年初的1.2%到2026年的61%，中国开源模型在OpenRouter上的份额爆炸式增长 — 复盘路径与未来展望</p>
+    <span class="tag">トークンエコノミー · 2026</span>
+    <h1>トークンエコノミーのこの一年</h1>
+    <p class="subtitle">2025年初の1.2%から2026年の61%へ、中国オープンソースモデルがOpenRouterでのシェアを爆発的に拡大 — その道筋と今後の展望</p>
     <div class="hero-meta">
       <span>📅 2026-06-02</span>
       <span>⏱ ~8 min read</span>
-      <span>🏷️ Token Economy · OpenRouter · 中国开源模型</span>
+      <span>🏷️ トークンエコノミー · OpenRouter · 中国オープンソースモデル</span>
     </div>
     <div class="tag-row">
       <span class="tag-pill">Token Economy</span>
       <span class="tag-pill">OpenRouter</span>
-      <span class="tag-pill">中国开源模型</span>
+      <span class="tag-pill">中国オープンソースモデル</span>
       <span class="tag-pill">DeepSeek</span>
       <span class="tag-pill">Qwen</span>
     </div>
@@ -150,81 +150,79 @@ footer a:hover{text-decoration:underline}
 </div>
 
 <div class="callout fade-up">
-  ⚠️ <strong>核心数据</strong>：2025年初，中国开源模型在OpenRouter上的调用量份额约1.2%。2026年初，这一数字已跃升至61%。这不是偶然，是技术、价格、时机三维共振的结果。
+  ⚠️ <strong>コアデータ</strong>：2025年初、中国オープンソースモデルがOpenRouterにおけるコール量シェアは約1.2%であった。2026年初には、その数字は61%に急上昇した。これは偶然ではなく、技術、価格、タイミングの3つの要素が重なった結果である。
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">1</span>份额爆炸 — 从1.2%到61%</h2>
-<p>OpenRouter作为一个聚合全球主流模型API的平台，其调用量分布是衡量模型竞争力的客观指标。2025年以前，中国模型几乎可以忽略不计。转折点出现在2025年Q1。</p>
+<h2><span class="num">1</span>シェア爆発 — 1.2%から61%へ</h2>
+<p>OpenRouterは、世界の主要モデルのAPIを集約するプラットフォームとして、そのコール量分布はモデル競争力を測る客観的な指標である。2025年以前、中国モデルはほぼ無視できるレベルだった。転換点は2025年第1四半期に現れた。</p>
 <div class="bis-grid">
-  <div class="bis-card"><span class="val">1.2%</span><span class="lab">2025年初中国模型份额</span></div>
-  <div class="bis-card green"><span class="val">61%</span><span class="lab">2026年中国模型份额</span></div>
-  <div class="bis-card"><span class="val">18</span><span class="lab">月均增长月份</span></div>
-  <div class="bis-card red"><span class="val">~50x</span><span class="lab">份额增长倍数</span></div>
+  <div class="bis-card"><span class="val">1.2%</span><span class="lab">2025年初の中国モデルシェア</span></div>
+  <div class="bis-card green"><span class="val">61%</span><span class="lab">2026年の中国モデルシェア</span></div>
+  <div class="bis-card"><span class="val">18</span><span class="lab">月平均成長月数</span></div>
+  <div class="bis-card red"><span class="val">~50x</span><span class="lab">シェア成長倍率</span></div>
 </div>
 <div class="punchline">
-<h3>📈 爆发式增长的三个阶段</h3>
+<h3>📈 爆発的成長の3つの段階</h3>
 <ul>
-  <li><strong>第一阶段（2025 Q1-Q2）</strong>：DeepSeek-R1发布，海外开发者社区发现中国模型性价比极高，开始自发传播</li>
-  <li><strong>第二阶段（2025 Q3-Q4）</strong>：Qwen3、GLM-4等跟进，OpenRouter接入量激增，价格战加剧</li>
-  <li><strong>第三阶段（2026 Q1）</strong>：中国模型在Coding、Reasoning、多模态等领域建立主导地位</li>
+  <li><strong>第1段階（2025 Q1-Q2）</strong>：DeepSeek-R1がリリースされ、海外開発者コミュニティが中国モデルのコストパフォーマンスの高さに気づき、自発的に拡散し始めた</li>
+  <li><strong>第2段階（2025 Q3-Q4）</strong>：Qwen3、GLM-4などが続き、OpenRouterへの接続数が急増し、価格競争が激化した</li>
+  <li><strong>第3段階（2026 Q1）</strong>：中国モデルがコーディング、推論、マルチモーダルなどの分野で主導的地位を確立した</li>
 </ul>
 </div>
 </div>
 
 <figure class="fade-up" style="margin:8px 0 24px">
   <img src="https://images.unsplash.com/photo-1642104704074-907c0698cbd9?w=900&q=80" alt="Charts" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
-  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：数据可视化 — Token经济的市场格局变化 © Unsplash</figcaption>
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">図：データ可視化 — トークンエコノミーの市場構造の変化 © Unsplash</figcaption>
 </figure>
-
 <div class="bis-section fade-up">
-<h2><span class="num">2</span>为什么是中国开源模型</h2>
-<p>中国开源模型能够在短时间内实现爆发式增长，背后有三个核心驱动因素：</p>
+<h2><span class="num">2</span>なぜ中国のオープンソースモデルなのか</h2>
+<p>中国のオープンソースモデルが短期間で爆発的な成長を遂げた背景には、3つの核心的駆動要因がある：</p>
 <div class="signal">
-<h3>🎯 三大驱动因素</h3>
+<h3>🎯 三大駆動要因</h3>
 <ul>
-  <li><strong>性价比革命</strong>：中国模型的API价格通常只有GPT-4的1/10到1/50，却能达到同等甚至更好的效果</li>
-  <li><strong>开源透明</strong>：DeepSeek开源模型权重，允许任何人自由使用和微调，极大降低了企业采用门槛</li>
-  <li><strong>生态快速迭代</strong>：Qwen、GLM等模型系列快速迭代，每代都有显著提升，保持技术竞争力</li>
+  <li><strong>コストパフォーマンス革命</strong>：中国モデルのAPI価格は通常GPT-4の1/10から1/50でありながら、同等かそれ以上の効果を発揮する</li>
+  <li><strong>オープンソースと透明性</strong>：DeepSeekはモデルウェイトをオープンソース化し、誰でも自由に使用・ファインチューニングできるようにすることで、企業の導入障壁を大幅に下げた</li>
+  <li><strong>エコシステムの迅速な反復</strong>：Qwen、GLMなどのモデルシリーズは迅速に反復され、各世代で顕著な向上が見られ、技術競争力を維持している</li>
 </ul>
 </div>
 <div class="tbl-wrap">
 <table class="tbl">
-<thead><tr><th>模型</th><th>发布方</th><th>关键优势</th><th>OpenRouter采用率</th></tr></thead>
+<thead><tr><th>モデル</th><th>提供元</th><th>主要な強み</th><th>OpenRouter採用率</th></tr></thead>
 <tbody>
-<tr><td>DeepSeek-R1</td><td>幻方量化</td><td>推理能力强、开源、成本低</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>Qwen3</td><td>阿里云</td><td>多模态能力强、社区活跃</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td>GLM-4</td><td>智谱AI</td><td>中文理解强、中杯大杯齐全</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td>Yi-2</td><td>零一万物</td><td>代码能力强、开源</td><td>⭐⭐⭐</td></tr>
-<tr><td>Baichuan</td><td>百川智能</td><td>中文企业应用</td><td>⭐⭐⭐</td></tr>
+<tr><td>DeepSeek-R1</td><td>幻方量化</td><td>推論能力が高く、オープンソースでコストが低い</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td>Qwen3</td><td>アリババクラウド</td><td>マルチモーダル能力が高く、コミュニティが活発</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td>GLM-4</td><td>智譜AI</td><td>中国語理解が強く、中型・大型モデルが揃っている</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td>Yi-2</td><td>01.AI</td><td>コード生成能力が高く、オープンソース</td><td>⭐⭐⭐</td></tr>
+<tr><td>Baichuan</td><td>百川智能</td><td>中国語の企業向けアプリケーション</td><td>⭐⭐⭐</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">3</span>Token经济的商业模式</h2>
-<p>Token经济的本质是按使用量收费的商业模式。模型厂商通过API调用量乘以单价来计算收入。</p>
+<h2><span class="num">3</span>トークンエコノミーのビジネスモデル</h2>
+<p>トークンエコノミーの本質は、使用量に応じて課金するビジネスモデルである。モデルベンダーはAPI呼び出し量に単価を乗じて収益を計算する。</p>
 <div class="bis-grid">
-  <div class="bis-card cyan"><span class="val">$0.001</span><span class="lab">DeepSeek-R1 每千Token</span></div>
-  <div class="bis-card"><span class="val">$0.03</span><span class="lab">GPT-4 每千Token</span></div>
-  <div class="bis-card green"><span class="val">30x</span><span class="lab">价格差距</span></div>
-  <div class="bis-card purple"><span class="val">~70%</span><span class="lab">企业TCO节省</span></div>
+  <div class="bis-card cyan"><span class="val">$0.001</span><span class="lab">DeepSeek-R1 千トークンあたり</span></div>
+  <div class="bis-card"><span class="val">$0.03</span><span class="lab">GPT-4 千トークンあたり</span></div>
+  <div class="bis-card green"><span class="val">30x</span><span class="lab">価格差</span></div>
+  <div class="bis-card purple"><span class="val">~70%</span><span class="lab">企業のTCO削減</span></div>
 </div>
-<div class="quote">"Token经济的核心是规模效应 — 当模型调用量越大，边际成本越低，厂商可以在保持利润率的同时持续降价，最终形成赢家通吃。" — 2026行业观察</div>
+<div class="quote">"トークンエコノミーの核心は規模の経済である。モデルの呼び出し量が増えるほど限界費用は低下し、ベンダーは利益率を維持しながら継続的に値下げすることが可能となり、最終的に勝者総取りの状況が形成される。" — 2026年業界観測</div>
 </div>
-
 <div class="bis-section fade-up">
-<h2><span class="num">4</span>竞争格局与未来展望</h2>
-<p>2026年的Token经济竞争已经进入下半场，从单纯的价格竞争转向综合能力的竞争。</p>
+<h2><span class="num">4</span>競争環境と将来展望</h2>
+<p>2026年のトークン経済競争はすでに後半戦に入り、単純な価格競争から総合能力の競争へと移行している。</p>
 <div class="tbl-wrap">
 <table class="tbl">
-<thead><tr><th>维度</th><th>领先玩家</th><th>核心策略</th></tr></thead>
+<thead><tr><th>次元</th><th>リーディングプレーヤー</th><th>コア戦略</th></tr></thead>
 <tbody>
-<tr><td><span class="tg tg-m">推理能力</span></td><td>OpenAI o1/o3, DeepSeek-R2</td><td>强化学习+长思考链</td></tr>
-<tr><td><span class="tg tg-n">价格战</span></td><td>中国模型厂商</td><td>极低价格+开源策略</td></tr>
-<tr><td><span class="tg tg-r">多模态</span></td><td>GPT-4o, Gemini-Ultra, Qwen-VL</td><td>端到端原生多模态</td></tr>
-<tr><td><span class="tg tg-p">企业级</span></td><td>Anthropic, Google, 阿里云</td><td>安全对齐+企业SLA</td></tr>
+<tr><td><span class="tg tg-m">推論能力</span></td><td>OpenAI o1/o3, DeepSeek-R2</td><td>強化学習＋長思考チェーン</td></tr>
+<tr><td><span class="tg tg-n">価格戦争</span></td><td>中国モデルベンダー</td><td>極低価格＋オープンソース戦略</td></tr>
+<tr><td><span class="tg tg-r">マルチモーダル</span></td><td>GPT-4o, Gemini-Ultra, Qwen-VL</td><td>エンドツーエンドのネイティブマルチモーダル</td></tr>
+<tr><td><span class="tg tg-p">エンタープライズ級</span></td><td>Anthropic, Google, Alibaba Cloud</td><td>安全アライメント＋企業SLA</td></tr>
 </tbody>
 </table>
 </div>
@@ -233,28 +231,28 @@ footer a:hover{text-decoration:underline}
 <div class="key-takeaways fade-up">
   <h3>🎯 Key Takeaways</h3>
   <ul>
-    <li><strong>份额爆炸不是偶然</strong>：中国开源模型从1.2%到61%，是技术突破（DeepSeek-R1）+价格革命（API定价）+开源策略三重共振的结果</li>
-    <li><strong>Token经济进入下半场</strong>：价格战让位于综合能力（推理、多模态、企业级）竞争</li>
-    <li><strong>开源是中国模型的核心竞争力</strong>：DeepSeek证明了开源+高性能+低成本可以撼动闭源霸权</li>
-    <li><strong>未来方向</strong>：推理能力（Agent）、多模态原生、长上下文是企业级竞争的三个高地</li>
+    <li><strong>シェア爆発は偶然ではない</strong>：中国のオープンソースモデルが1.2%から61%へ、これは技術的突破（DeepSeek-R1）＋価格革命（API価格設定）＋オープンソース戦略の三重の共鳴の結果である</li>
+    <li><strong>トークン経済は後半戦に突入</strong>：価格戦争は総合能力（推論、マルチモーダル、エンタープライズ）競争に道を譲る</li>
+    <li><strong>オープンソースは中国モデルの核心的競争力</strong>：DeepSeekは、オープンソース＋高性能＋低コストがクローズドソースの覇権を揺るがし得ることを証明した</li>
+    <li><strong>将来の方向性</strong>：推論能力（Agent）、ネイティブマルチモーダル、長文コンテキストはエンタープライズ競争の三つの高地である</li>
   </ul>
 </div>
 
 <figure class="fade-up" style="margin:8px 0 24px">
   <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=80" alt="Data center" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
-  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：数据中心 — Token工厂的基础设施 © Unsplash</figcaption>
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">図：データセンター — トークン工場のインフラ © Unsplash</figcaption>
 </figure>
 
 <div class="related-section fade-up">
 <h2>Related Reading</h2>
 <div class="related-grid">
-<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>国内MaaS大战2026</h4><p>Coding模型Q1涨价83%同时调用量增400%，视频模型单月收入破10亿</p><span class="rel-card-tag">MaaS</span></div></a>
-<a class="rel-card" href="china-internet-ai-capabilities-2025.html"><img src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=600&q=80" alt="China AI"><div class="rel-card-body"><h4>2025中国互联网头部企业AI能力深度洞察</h4><p>字节跳动、阿里巴巴、腾讯、幻方——从AI at Work、AI in Products、Building AI SOTA三大维度拆解</p><span class="rel-card-tag">Deep Report</span></div></a>
-<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI accelerator"><div class="rel-card-body"><h4>国产AI加速器生态实战观察</h4><p>6841个模型在头部国产NPU上跑通，量化栈+推理框架已就位</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>国内MaaS大戦2026</h4><p>CodingモデルはQ1に83%値上げ、呼び出し量は400%増、動画モデルの月間収入が10億突破</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="china-internet-ai-capabilities-2025.html"><img src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=600&q=80" alt="China AI"><div class="rel-card-body"><h4>2025中国インターネットトップ企業AI能力深層洞察</h4><p>ByteDance、Alibaba、Tencent、幻方——AI at Work、AI in Products、Building AI SOTAの三大次元から分析</p><span class="rel-card-tag">Deep Report</span></div></a>
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI accelerator"><div class="rel-card-body"><h4>国産AIアクセラレータエコシステム実戦観察</h4><p>6841個のモデルがトップ国産NPUで動作確認、量子化スタック＋推論フレームワークが準備完了</p><span class="rel-card-tag">AI Accelerator</span></div></a>
 </div>
 </div>
 
-<div class="ftrnote"><strong>数据来源</strong>：本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
+<div class="ftrnote"><strong>データソース</strong>：本文は公開業界資料に基づき整理したもので、データの時点及び出所は本文の脚注を参照のこと。一部の数字は業界推定値であり、方向性の参考に留まる。</div>
 
 </div></div>
 <footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国トークン海外進出2026：価格競争から世界シェアの転換点へ</title>
+<meta name="description" content="中国の大規模モデルが OpenRouter で 61% のシェアを獲得したのは、まだ始まりに過ぎない。本稿では、本当に海外進出しているのは誰か、ターゲット市場をどう選ぶか、価格設定をどう打ち出すか、マネタイズの道筋がどこにあるのかを分析する。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="ja">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn active" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=1200&q=80" alt="Global network">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Token Going Global · 2026</span>
+    <h1>中国トークン海外進出 2026</h1>
+    <p class="subtitle">1.2% から 61% へ——シェアの先にある真の問題：誰が海外展開し、どう収益化し、持続可能か</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-11</span>
+      <span>⏱ ~10 min read</span>
+      <span>🏷️ Token Going Global · OpenRouter · MaaS · オープンソース大規模モデル</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">Token 海外進出</span>
+      <span class="tag-pill">OpenRouter 61%</span>
+      <span class="tag-pill">オープンソース大規模モデル</span>
+      <span class="tag-pill">MaaS</span>
+      <span class="tag-pill">グローバル市場</span>
+    </div>
+  </div>
+</div>
+
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>：Chinese open-source LLMs grew from 1.2% to 61% OpenRouter token share in 18 months. This report dissects who is actually going global, which markets matter, the pricing war at 1/30 of OpenAI, the 4 proven monetization paths, and 3 counter-intuitive findings (the real share is probably ~45% globally when AWS/Azure/Vertex are included; the biggest winners are middle-layer players like Together AI, not the model companies; open-source is the biggest lever AND the biggest risk).
+</div>
+
+<div class="callout fade-up">
+  ⚠️ <strong>核心結論</strong>：中国モデルが OpenRouter で 61% シェアを獲得しているのは表面的な現象である。実際のグローバルシェアはおそらく 45% に近い（AWS Bedrock / Azure / Vertex を含めた場合）。最大の勝者は最速で走るモデル企業ではなく、Together AI や OpenRouter のような「海外で中継役を担う中間層」である。オープンソース＋極限的低価格の双発エンジンはすでに天井に近づいており、次の段階は SaaS＋ハードウェアバンドルのフルスタック戦争である。
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>概念の整理：「トークン海外進出」とは何か</h2>
+<p>よく混同される3つの概念：</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>概念</th><th>意味</th><th>代表例</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">モデル海外展開</span></td><td>重みを Hugging Face に公開</td><td>オープンソース先頭 R / トップ総合クラウド B / スタートアップ K / Z</td></tr>
+<tr><td><span class="tg tg-n">API海外展開</span></td><td>海外での推論サービス展開</td><td>総合クラウド B 国際サイト / 動画クラウド A 国際サイト / Together AI</td></tr>
+<tr><td><span class="tg tg-r">トークン海外展開</span></td><td>サードパーティプラットフォーム経由の間接利用</td><td>OpenRouter / Vercel AI Gateway / Cloudflare AI</td></tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<h3>📌 本当にシェアを決めるのは第3の概念</h3>
+<p>開発者は中国のクラウドアカウントを登録しない——彼らは OpenRouter 上でワンクリックでAPIを切り替える。海外展開は販売の問題ではなく、<strong>インフラの問題</strong>である：重み＋推論計算能力＋OpenAI互換インターフェース＋Stripe決済の4点セットを最初に整えた者が、受動的トラフィックを獲得する。</p>
+</div>
+</div>
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>プレイヤーマップ：5段階の階層化</h2>
+<p>「海外進出の実際の深度」に基づき5段階に分類（社名は一律コードネーム、対応関係は内部資料にて）：</p>
+<div class="signal">
+<h3>🎯 第1段階 — グローバル開発者の恩恵を真に享受（海外コール率5%以上）</h3>
+<ul>
+  <li><strong>オープンソースリーダーチーム R</strong>：V3発表7日でOpenRouterトップに；MIT + OpenAI互換 + 極限的低価格の「三連打」；海外コール率60%以上</li>
+  <li><strong>トップクラウド総合 B</strong>：モデルマトリクスが最も充実（0.6B–235Bフルサイズ + マルチモーダル）；HF累計ダウンロード4,200万回；OpenAI/Anthropic/Vertexの3つのSDKに対応</li>
+  <li><strong>AIスタートアップ K</strong>：ロングコンテキスト（200K以上）+ ツール呼び出しがコア差別化要因；GitHub Stars 21K以上</li>
+</ul>
+</div>
+<div class="signal">
+<h3>📊 第2段階 — 認知されているがコール量は未爆発</h3>
+<ul>
+  <li><strong>AIスタートアップ Z</strong>：HFトレンドに長期ランクイン；海外ブランド認知度は低い；国内83%値上げで収益化に成功、海外の有料転換率は1/5</li>
+  <li><strong>AIスタートアップ Y</strong>：ロングコンテキスト + ツール呼び出しが強み；商業化は依然模索中</li>
+  <li><strong>AIスタートアップ S</strong>：マルチモーダルシーンで採用あり；規模は小さい</li>
+</ul>
+</div>
+<div class="signal">
+<h3>🌐 第3段階 — チャネル海外進出（モデルではなくコールを提供）</h3>
+<ul>
+  <li><strong>トップ動画クラウド A</strong>：動画生成モデル + 親会社の海外エコシステム波及；直接Runway / Pikaに対抗</li>
+  <li><strong>中国クラウド事業者 C</strong>：C社の国際サイトを通じて間接的に海外展開；東南アジアのゲーム/金融にサービス提供</li>
+</ul>
+</div>
+<div class="signal">
+<h3>⚙️ 第4段階 — インフラ海外進出</h3>
+<ul>
+  <li><strong>AIコンピューティングプラットフォーム T</strong>（Together AI）：中国バックグラウンド、北米最大の独立推論クラウド；Llama / Q / D / G系をホスティング</li>
+  <li><strong>大規模モデルルーティングゲートウェイ G</strong>（OpenRouter初期パートナー）：統一API + 自動fallback + 課金</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>目標市場：東南アジアは訓練場、欧米は主戦場</h2>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">38%</span><span class="lab">北米（主戦場）</span></div>
+  <div class="bis-card cyan"><span class="val">22%</span><span class="lab">東南アジア（実質的な収益プール）</span></div>
+  <div class="bis-card green"><span class="val">17%</span><span class="lab">欧州（コンプライアンス競争）</span></div>
+  <div class="bis-card purple"><span class="val">9%</span><span class="lab">中南米（高成長・低ベース）</span></div>
+  <div class="bis-card red"><span class="val">6%</span><span class="lab">中東（ソブリンファンド参入）</span></div>
+  <div class="bis-card"><span class="val">8%</span><span class="lab">アフリカ / その他</span></div>
+</div>
+<div class="callout">
+  <strong>キーインサイト 1</strong>：北米は主戦場だが価格感応度が高い。GPT-5登場後、中国モデルは「コスト」で生き残らざるを得ない。<br>
+  <strong>キーインサイト 2</strong>：東南アジアは実質的な収益プール。東南アジアの某ライドシェア大手は、本番トラフィックの30%をすでに中国モデルに切り替え、<strong>年間4,000万ドルを削減</strong>。<br>
+  <strong>キーインサイト 3</strong>：欧州はコンプライアンス競争。オープンソースの重みは、むしろ米国のクローズドソースよりもGDPR / EU AI Act審査を通過しやすい。<br>
+  <strong>キーインサイト 4</strong>：中南米 / 中東は高成長・低ベース。中東の某ソブリンファンドが2025年から調達を開始、1件あたり5,000万ドル規模。
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>価格戦争：1/10は終局にあらず、1/30こそが本命</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>モデル</th><th>入力 $/百万token</th><th>出力 $/百万token</th><th>GPT-4o比</th></tr></thead>
+<tbody>
+<tr><td>GPT-4o (クローズドソース)</td><td>2.50</td><td>10.00</td><td>1.0×</td></tr>
+<tr><td>クローズドA系（海外トップ）</td><td>3.00</td><td>15.00</td><td>1.3×</td></tr>
+<tr><td>クローズドB系（海外トップ）</td><td>1.25</td><td>10.00</td><td>0.7×</td></tr>
+<tr><td>Llama 4 70B (オープンソース)</td><td>0.85</td><td>0.85</td><td>0.2×</td></tr>
+<tr><td><strong>中国オープンソース R系 235B</strong></td><td><strong>0.20</strong></td><td><strong>0.60</strong></td><td><strong>0.04×</strong></td></tr>
+<tr><td><strong>中国オープンソース R系 V3.2</strong></td><td><strong>0.14</strong></td><td><strong>0.28</strong></td><td><strong>0.03×</strong></td></tr>
+<tr><td><strong>中国オープンソース Z系 4.5</strong></td><td><strong>0.20</strong></td><td><strong>0.20</strong></td><td><strong>0.03×</strong></td></tr>
+<tr><td><strong>中国オープンソース K系 K2</strong></td><td><strong>0.15</strong></td><td><strong>2.50</strong></td><td><strong>0.06×</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="quote">「中国モデルの真の利益は入力側にある——ロングコンテキスト、文書分析、RAG検索は天然の優位シナリオだ。キャッシュヒット価格は0.014ドル/百万token、OpenAIのバッチAPIよりもさらに1桁低い。」</div>
+</div>
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>収益化パス：4 つの実証済みモデル</h2>
+<div class="punchline">
+<h3>📦 パス A — API直販（大手クラウドベンダー）</h3>
+<p>収益 1 億ドル～50 億ドル/年；粗利率 30～50%；シンガポール/フランクフルト/バージニアの複数リージョンに展開；最大の課題は現地BDと中米関係下での顧客信頼</p>
+</div>
+<div class="punchline">
+<h3>🔀 パス B — アグリゲーションプラットフォームの収益分配（スタートアップチーム）</h3>
+<p>収益 1,000 万ドル～5 億ドル/年；粗利率 50～70%；代表例は Together AI、Fireworks AI、OpenRouter；課題はモデルの反復速度</p>
+</div>
+<div class="punchline">
+<h3>💼 パス C — 業界向けSaaS（最も収益性が高いが最も難しい）</h3>
+<p>収益 5 億ドル～100 億ドル/年；粗利率 60～80%；法務AI/医療AI/教育AIの3つの実例（ARR 3,000 万ドル / 単一プロジェクト 8,000 万ドル / 5 年で 2 億ドル）</p>
+</div>
+<div class="punchline">
+<h3>🖥️ パス D — ハードウェア + モデル バンドル（IDC / チップメーカー）</h3>
+<p>収益 1 億ドル～30 億ドル/年；粗利率 20～35%；チップ + サーバー + 光モジュールメーカーが中国製モデルを組み合わせて東南アジア / 中東 / ラテンアメリカへ販売</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>常識に反する3つの発見</h2>
+<div class="signal">
+<h3>💡 発見1 — 実際のグローバルシェアはすでに45%近くに達している可能性</h3>
+<p>OpenRouterの公開データ61%には「AWS Bedrock / Azure AI Foundry / Vertex Model Garden / Vercel/Cloudflare Gateway によってプッシュされている」部分が含まれていない。非明示的な呼び出しを加えると、<strong>世界のLLM推論トラフィックにおける中国製モデルの実際のシェアはすでに45%近くに達している可能性がある</strong>。</p>
+</div>
+<div class="signal">
+<h3>💡 発見2 — 最も成功しているのは中間層</h3>
+<p>Together AI は年率換算 5 億ドルのARR、粗利率 60%超であり、<strong>本質的には中国のオープンソースモデルを米国に再販売している</strong>。OpenRouter の初期チームの半数は華人系である。Cloudflare Workers AI は中国製モデルを「低遅延の代替品」として欧米のSaaS企業に販売している。結論：<strong>海外市場向け収益の大部分は「海外で中継を担う華人系チーム」が獲得している</strong>——越境ECにおける「華僑倉庫」モデルのAI版である。</p>
+</div>
+<div class="signal">
+<h3>💡 発見3 — オープンソースは最大のレバレッジであると同時に最大のリスク</h3>
+<p>三つの地雷：(1) クローズドソースのA系/B系が中国のオープンソースモデルの出力を組織的に蒸留している；(2) 2025年、米議会は「モデルの重み」をBIS規制リストに加える議論を開始；(3) 開発者はOpenAI互換プロトコル + Stripe + AWSへのデプロイに慣れており、<strong>中国製モデルとの結びつきは実際には非常に低く</strong>、一夜で切り戻せる。真の勝者は「オープンソース + クローズドソース + SaaS + ハードウェア」のフルスタック展開ができる者である。</p>
+</div>
+</div>
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>AI海外進出の最前線に関する判断</h2>
+<div class="callout">
+  <strong>判断 1 — 顧客の購買行動は2層に二分される</strong><br>
+  • 個人開発者 / アーリーステージのスタートアップ：トークン課金 → 中国モデル = デフォルトオプション<br>
+  • 中規模SaaS / エンタープライズ企業：ビジネス成果ベースの課金 → 中国モデル = 代替案 + 交渉材料<br>
+  販売戦略は2系統に分ける必要がある：開発者向け（GitHub / Discord / HN）と、購買意思決定者向け（コンプライアンス + データ常駐 + 現地事例）
+</div>
+<div class="callout">
+  <strong>判断 2 — 3つの過小評価されている市場機会</strong><br>
+  1. 東南アジア多言語カスタマーサポート（インドネシア語 / ベトナム語 / タイ語）<br>
+  2. ラテンアメリカのスペイン語プログラミング教育（メキシコ / ブラジル K12 + 職業訓練）<br>
+  3. 中東アラビア語 + イスラム文化シーン（金融コンプライアンス / 教法相談 / コンテンツモデレーション）
+</div>
+<div class="callout">
+  <strong>判断 3 — リバース海外進出こそが本当に儲かる</strong><br>
+  国内MaaS事業者の国内収入は年間100〜150億元、海外API収入はその1/10未満。海外APIは価格競争 + 薄利多売の道。本当に儲かるのは、海外の開発者を国内の大規模エコシステム（WAIC / 雲栖 / 杭州 / 蘇州 / 深圳 AI起業園）に引き込むことである。
+</div>
+<div class="callout">
+  <strong>判断 4 — 警戒すべき法的闘争のシグナル</strong><br>
+  2025年第4四半期、ある米国主要AI企業が「中国のオープンソースモデルにトラフィックを奪われている」として法的措置を開始（訓練データのコンプライアンス追跡）。すべての海外大企業契約には「<strong>モデル切替条項</strong>」と「<strong>地政学的不可抗力条項</strong>」を盛り込む必要がある。
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>トークン海外展開 ≠ モデル海外展開 ≠ API海外展開</strong>：本当にシェアを決めるのは、サードパーティプラットフォーム（OpenRouter / Vercel / Cloudflare）上での間接的な呼び出しであり、中国クラウドベンダーの直接販売ではない</li>
+    <li><strong>61%は見かけ上の数字、実際の比率は45%に近い可能性</strong>：OpenRouterにはAWS Bedrock / Azure / Vertex上の中国モデルの呼び出しが含まれていない</li>
+    <li><strong>最大の勝者は中間層</strong>：Together AI（ARR 5億ドル、粗利益率60%）は「中国のオープンソースモデルを米国に売り戻す」ことが、直接海外展開するより100倍容易である</li>
+    <li><strong>1/30の価格競争はすでに常態化</strong>：キャッシュヒット時 0.014ドル/100万トークン、OpenAIバッチAPIより1桁低い</li>
+    <li><strong>4つの収益化経路</strong>：API直接販売 / アグリゲーション収益分配 / 業界SaaS / ハードウェアバンドル —— 「フルスタック展開」だけが最終形</li>
+    <li><strong>3つの過小評価された機会</strong>：東南アジア多言語カスタマーサポート / ラテンアメリカプログラミング教育 / 中東アラビア語シーン</li>
+    <li><strong>オープンソースは最大のレバレッジであり最大のリスクでもある</strong>：蒸留 + BIS規制 + 低結合度、3つの地雷が待ち受ける</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Compute" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">図：計算クラスタ — トークン海外展開のインフラ基盤 © Unsplash</figcaption>
+</figure>
+
+<div class="relat
+ed-section fade-up">
+<h2>関連記事</h2>
+<div class="related-grid">
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="トークンエコノミー"><div class="rel-card-body"><h4>トークンエコノミーの1年</h4><p>1.2%から61%へ：中国のオープンソースモデルがOpenRouterでシェアを爆発的に拡大 — その経緯と今後の展望</p><span class="rel-card-tag">Token Economy</span></div></a>
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>中国MaaS大戦争 2026</h4><p>コーディングモデル、Q1に83%値上げもコール数は400%増、動画モデルは単月収入が10億元突破</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="mena-companies-deep-report.html"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="MENA"><div class="rel-card-body"><h4>中東インターネットユニコーン深度レポート</h4><p>MENAのインターネット企業6社の総評価額150億米ドルの背後にあるICT戦略図</p><span class="rel-card-tag">Deep Report</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>データ出典</strong>：OpenRouter / Hugging Face / Artificial Analysis 公開ランキング（2025-2026）、各企業の公開財務諸表、a16z / Menlo Ventures / Bessemer 業界調査、中国MaaS業界内部調査（匿名化後引用）。データ時点：2026-05～2026-06。企業名はすべてコード名で表記し、実名との対応は内部資料に記載。</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(this);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>

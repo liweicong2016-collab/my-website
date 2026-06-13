@@ -439,23 +439,22 @@
   var pageUrl=window.location.href;
   function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
   function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
-  function gtUrl(lang){return 'https://translate.google.com/translate?sl=zh-CN&tl='+lang+'&u='+encodeURIComponent(pageUrl);}
-  // Populate hrefs so right-click "open in new tab" works too
-  var zh=sw.querySelector('[data-lang="zh"]');if(zh)zh.href=pageUrl;
-  var en=sw.querySelector('[data-lang="en"]');if(en)en.href=gtUrl('en');
-  var ja=sw.querySelector('[data-lang="ja"]');if(ja)ja.href=gtUrl('ja');
-  var vi=sw.querySelector('[data-lang="vi"]');if(vi)vi.href=gtUrl('vi');
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
   sw.querySelectorAll('.lang-btn').forEach(function(btn){
     btn.addEventListener('click',function(e){
       var lang=this.getAttribute('data-lang');
       setActive(this);
-      if(lang==='zh'){
-        if(this.getAttribute('href')===pageUrl||this.getAttribute('href')==='#'){
-          e.preventDefault();showToast('已是中文 / Already Chinese',1000);
-        }
-      } else {
-        // For en/ja/vi, let the <a href> navigate to Google Translate
-        showToast('Opening Google Translate... / 正在打开 Google 翻译',1400);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
       }
     });
   });

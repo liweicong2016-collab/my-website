@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国トークンビジネス閉ループ：1/10の価格で稼働し続ける5つのメカニズム</title>
+<meta name="description" content="中国のAPIが10分の1の価格でも持続稼働しているのは、補助金によるものではなく、5つの基盤メカニズム（長コンテキスト税／出力インフレ／スケジューリング割引／予算内部化／コンプライアンスプレミアム）と3つの中国独自の特色（国産GPU／電力補助金／オープンソースのフライホイール）によるものである。単一トークンのコスト構造、9社のクローズドループ評価、MaaS販売パラダイムが学ぶ価値があるかどうかを分解する。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="ja">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn active" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Token 工厂与商业闭环">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Token経済 · 商業クローズドループ</span>
+    <h1>中国Token商業クローズドループ：1/10価格でも回る5つのメカニズム</h1>
+    <p class="subtitle">クローズドループはARRより重要である。1/10の価格で持続的に稼働できることが、まさに中国MaaSが0から1への道のりを完了したことを証明している。</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-12</span>
+      <span>⏱ ~14 min read</span>
+      <span>🏷️ Token経済, MaaS, 商業クローズドループ, 推論コスト</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">Token経済</span>
+      <span class="tag-pill">商業クローズドループ</span>
+      <span class="tag-pill">MaaS</span>
+      <span class="tag-pill">推論コスト</span>
+      <span class="tag-pill">ポジティブサイクル</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN 摘要（可选） ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>: This report dissects whether China's MaaS (Model-as-a-Service) business has a closed-loop / positive-cycle commercial model. Three new angles: (1) unit economics of single token — 70-93% gross margin for vertical winners; (2) MaaS sales playbook — copy the form, not the essence; (3) 5 mechanisms sustaining 1/10 pricing: long-context tax, output inflation, scheduling discount, budget internalization, compliance premium + 3 China-specific overlays.
+</div>
+
+<!-- ===== TL;DR 核心结论 ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>核心結論</strong>：中国のToken商業クローズドループは部分的に成立している——単点のトップモデル（映像/Coding）はクローズドループ化済み、汎用LLMは半クローズドループ。MaaSの販売パラダイムは形は学べても本質は学べない。1/10価格で回るのは5つのメカニズム＋3つの中国特有の要素が重なっているからだ。
+</div>
+
+<!-- ===== 中间插图（可选） ===== -->
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80" alt="云计算与 MaaS 商业模式" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">図：「リソース販売」から「Token販売」、そして「能力販売」へ——中国MaaS販売パラダイムの三つの段階 © Unsplash</figcaption>
+</figure>
+
+<!-- ===== 章节 1：3 个问题 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>まず3つの問題を分解する</h2>
+<p>本記事では既報の <a href="https://liweicong2016-collab.github.io/tech-blog/posts/domestic-maas-token-wars-2026/">国内MaaS大戦</a>（「二つの戦線」について既に説明した）や <a href="https://liweicong2016-collab.github.io/tech-blog/posts/china-token-going-global-2026/">中国Token海外展開</a>（「OpenRouter 61%のシェア」について既に説明した）を繰り返さない。<strong>今回、以下の3つの新たな問題だけに答える：</strong></p>
+<ol>
+  <li><strong>商業クローズドループ</strong> — Token販売による収入が、計算リソース + 研究開発 + 販売コストをカバーできるか？どの企業が成立させているのか？</li>
+  <li><strong>ポジティブサイクル</strong> — クローズドループが成立した後、ビジネスが自己強化できるか（モデルが良くなる → 顧客が増える → データが還流する → モデルがさらに良くなる）？</li>
+  <li><strong>価格が1/10でも回る</strong> — 中国のAPI価格が長期にわたり海外の10分の1以下にもかかわらず、市場は崩壊していない。それを支える5つの根本的メカニズムとは？</li>
+</ol>
+</div>
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>閉ループ/正循環の厳密な採算</h2>
+<h3>2.1 単一Tokenのコスト構造（推論側、2026年6月逆算）</h3>
+<p>中国の主流GPUサーバー＋電力コストから逆算：</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>コスト項目</th><th>数値</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>GPUサーバー調達</td><td>¥350,000/台</td><td>8カードH100 / 8カードH200 / 8カード国産Aカード</td></tr>
+<tr><td>サーバー減価償却</td><td>3年間の線形</td><td>月 ¥9,720</td></tr>
+<tr><td>電気代</td><td>¥0.65/kWh</td><td>上海/北京/深圳のIDC</td></tr>
+<tr><td>単一台の全負荷消費電力</td><td>5.6 kW</td><td>8カード + CPU + 冷却</td></tr>
+<tr><td>単一台の月間電気代</td><td>¥2,624</td><td></td></tr>
+<tr><td>運用保守 + データセンターユニット</td><td>¥3,000/台/月</td><td></td></tr>
+<tr><td>帯域幅 + ストレージ</td><td>¥1,500/台/月</td><td></td></tr>
+<tr><td>人件費償却</td><td>¥4,000/台/月</td><td></td></tr>
+<tr><td><strong>単一台の月間総コスト</strong></td><td><strong>¥20,844</strong></td><td></td></tr>
+<tr><td>単一台の月間推論トークン生産能力</td><td>50B tokens</td><td>利用率30％を仮定</td></tr>
+<tr><td><strong>単一トークンの限界費用</strong></td><td><strong>¥0.42 / 百万tokens</strong></td><td></td></tr>
+</tbody></table></div>
+<p><strong>比較</strong>：海外H100推論コストは約 <strong>$0.60 / 百万tokens</strong>（≈ ¥4.3）、中国の推論コスト = 海外の <strong>10%</strong> で、「価格が1/10」という市場現象と一致。国産GPU置き換え後 = 海外の <strong>7%</strong>。</p>
+
+<h3>2.2 販売価格 vs コスト：粗利率分布</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>モデル</th><th>総合ASP (¥/百万)</th><th>限界費用 (¥/百万)</th><th><strong>粗利率</strong></th></tr></thead>
+<tbody>
+<tr><td>国産オープンソース7B（オープンソース先駆者チームR級）</td><td>1.5</td><td>0.42</td><td><span class="tg tg-m">72%</span></td></tr>
+<tr><td>国産オープンソース70B（モデル乙級）</td><td>5.0</td><td>1.5</td><td><span class="tg tg-m">70%</span></td></tr>
+<tr><td>モデル丙（コーディング先頭）</td><td>20</td><td>1.5</td><td><span class="tg tg-r">93%</span> ⭐</td></tr>
+<tr><td>モデル甲（動画）</td><td>500/秒</td><td>50/秒</td><td><span class="tg tg-m">90%</span></td></tr>
+<tr><td>海外トップモデルA（海外）</td><td>60</td><td>30</td><td>50%</td></tr>
+<tr><td>GPT-4o（海外）</td><td>40</td><td>25</td><td>38%</td></tr>
+</tbody></table></di>
+v>
+<div class="signal"><h3>主要な発見</h3>
+<ul>
+<li>国産汎用LLM：粗利益率 ~70%、<strong>既にコストを賄っている</strong></li>
+<li>国産Codingトップ：粗利益率 93%、<strong>好循環が極致</strong></li>
+<li>動画モデル：秒単位課金、規模が全く異なり、それでも粗利益率 90%</li>
+<li>海外主流：粗利益率はさらに低く（38～50%）、算力コストが10倍高いため</li>
+</ul></div>
+
+<h3>2.3 クローズドループ／好循環の判定基準</h3>
+<p><strong>三つの必要条件</strong>（同時に満たす必要あり）：</p>
+<ul>
+<li>✅ <strong>条件1</strong>：モデルが特定の垂直分野でトップ（上位3位）であること</li>
+<li>✅ <strong>条件2</strong>：顧客業務が深く結びついている（移行コスト > 切り替え利益）であること</li>
+<li>✅ <strong>条件3</strong>：トークン収入 > 算力 + 研究開発 + 販売コスト（粗利益率 > 30% かつ ARR成長率 > 50%）であること</li>
+</ul>
+
+<h3>2.4 9社の格付け（2026-06）</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>企業／製品</th><th>条件1</th><th>条件2</th><th>条件3</th><th><strong>クローズドループ評価</strong></th></tr></thead>
+<tbody>
+<tr><td>某大手動画クラウドA／モデル甲</td><td>✅ ショートドラマ第1位</td><td>✅ 95%のショートドラマユーザー</td><td>✅ 単月10億+、ARR 150億</td><td><span class="tg tg-r">⭐⭐⭐⭐⭐</span></td></tr>
+<tr><td>某大手コーディングスタートアップX／モデル丙</td><td>✅ コーディングトップ</td><td>✅ コードが製品そのもの</td><td>✅ 値上げ83% + 数量増加400%</td><td><span class="tg tg-r">⭐⭐⭐⭐⭐</span></td></tr>
+<tr><td>某大手総合クラウドB／モデル乙</td><td>✅ オープンソース第2位</td><td>⚠️ オープンソースで移行可能</td><td>⚠️ 価格競争が激しい</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td>国産オープンソースリーディングチームR</td><td>✅ オープンソース第1位</td><td>❌ 完全オープンソース無料</td><td>⚠️ 海外クローズドループ／国内半クローズドループ</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td>某大手総合クラウドC／モデル丁</td><td>⚠️ WeChatエコシステム</td><td>✅ 自前の囲い込み</td><td>⚠️ 規模限定的</td><td>⭐⭐⭐</td></tr>
+<tr><td>某AIスタートアップZ</td><td>⚠️ マルチモーダルで特色あり</td><td>⚠️ オープンソース＋商用</td><td>⚠️ 動画単体で収益</td><td>⭐⭐⭐</td></tr>
+<tr><td>某AIスタートアップY</td><td>⚠️ 長文分野トップ</td><td>⚠️ 個人ユーザーが多い</td><td>❌ 2024年資金消費モード</td><td>⭐⭐</td></tr>
+<tr><td>某大手総合クラウドE／モデル戊</td><td>❌ 汎用分野で特色なし</td><td>❌ 主に内部利用</td><td>❌ 対外収益限定的</td><td>⭐⭐</td></tr>
+<tr><td>某AIスタートアップW</td><td>⚠️ 一部シーン</td><td>⚠️ 汎用分野</td><td>❌ 僅か</td><td>⭐</td></tr>
+</tbody></table></div>
+<div class="punchline"><h3>結論</h3>
+<ul>
+<li><strong>クローズドループ済み</strong>：単点トップモデル（動画／コーディング）</li>
+<li><strong>半クローズドループ</strong>：汎用LLMトップ（グループの資金注入かオープンソースのフライホイールに依存）</li>
+<li><strong>未クローズドループ</strong>：汎用LLMロングテール＋トラフィック型AI企業</li>
+</ul></div>
+</div>
+
+<!-- ===== 章节 3：MaaS 销售范式 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>MaaS販売パラダイムは学ぶ価値があるか</h2>
+<h3>3.1 中国のMaaS販売パラダイムの核心</h3>
+<p>ある大手総合クラウドBが2025-2026年に推進するMaaS販売パラダイムのアップグレード：</p>
+<div class="callout"><strong>従来のクラウド販売（リソース販売） → MaaS販売（トークン販売） → エージェント販売（能力/シナリオ/結果の販売）</strong></div>
+<p><strong>コアアクション</strong>：</p>
+<ol>
+  <li>複数の新しいMaaS販売チームを設立し、既存の直販チームと協力して受注を行う</li>
+  <li><strong>コアKPI</strong>：利用シーンの発掘 + 企業のエージェント活用促進 + トークン消費量の増加</li>
+  <li><strong>付随製品</strong>：業界別エージェントテンプレート（Eコマースカスタマーサポート / 金融リスク管理 / 行政問合せ / 工業文書）</li>
+  <li><strong>価格モデル</strong>：年間契約枠 + トークンパッケージ + 成果報酬（GMV連動 / 節約工数連動）</li>
+</ol>
+<p>ある大手動画クラウドAのより過激なバリエーション：モデル甲は直接<strong>ホワイトリスト + 年間枠</strong>方式を採用。春節のピーク時には10時間待ち → 「最高入札額 + 最も業務の深い」顧客を強制的に選別。「フルスペック版」の安定供給 → GPUリソースを年間契約顧客に優先提供。</p>
+
+<h3>3.2 米国式AI販売パラダイムとの比較</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>次元</th><th>中国のMaaS販売</th><th>米国式AI販売 (OpenAI / Anthropic)</th></tr></thead>
+<tbody>
+<tr><td>コアKPI</td><td>シーン + トークン消費 + ビジネス成果</td><td>月間アクティブ数 + ARR + リテンション</td></tr>
+<tr><td>顧客分類</td><td>業界キーアカウント（金融 / 政府・企業 / 製造業）</td><td>開発者 + 企業PM + IT調達</td></tr>
+<tr><td>アプローチ経路</td><td>営業ドリブン + ハイレベルBD</td><td>製品ドリブン + セルフサービスドキュメント + 営業支援</td></tr>
+<tr><td>価格モデル</td><td>年間枠 + トークンパッケージ + 成果報酬</td><td>従量課金 + エンタープライズ契約 + ティア価格</td></tr>
+<tr><td>堀</td><td>グループ内シナリオ養殖</td><td>モデル能力 + ツールチェーン生態系</td></tr>
+</tbody></table></div>
+
+<h3>3.3 「形 vs. 神」の分解</h3>
+<div class="signal"><h3>学べる形（営業組織 / プロセス / ツール）</h3>
+<ul>
+<li>✅ MaaS専任販売チームの設立、既存直販との協業</li>
+<li>✅ KPI設計：シナリオ数 + トークン消費量 + ビジネス成果</li>
+<li>✅ 業界別エージェントテンプレートライブラリ</li>
+<li>✅ 年間枠 + トークンパッケージ + 成果報酬型価格</li>
+<li>✅ 付随するホワイトペーパー + ROI試算ツール</li>
+</ul></div>
+<div class="signal"><h3>学べない神（根幹的な優位性）</h3>
+<ul>
+<li>❌ <strong>グループ内シナリオ養殖</strong> — ある大手動画クラウドAは抖音ショートドラマ（年220～300億）、ある大手総合クラウドBは淘宝カスタマーサービス（数百万の事業者）、ある大手総合クラウドCは公式アカウントを持つ。</li>
+<li>❌ <strong>グループ内GPU/電力スケジューリング</strong> — 「自社のGPU遊休時間」をMaaS事業に割引提供できる</li>
+<li>❌ <strong>国産GPU代替</strong> — 国産Aカードの「使えれば良し」の姿勢で、H100/H200の禁輸後も中国大手は推論能力を維持可能</li>
+<li>❌ <strong>データコンプライアンスの優位性</strong> — 国内大手顧客（金融/政府・企業/中央企業）は自然と国内クラウドを選択する</li>
+</ul></div>
+
+<h3>3.4 誰にとって学ぶに値するか</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>企業タイプ</th><th>学ぶ価値があること</th><th>学べないこと</th></tr></thead>
+<tbody>
+<tr><td>産業シーンを持つクラウド事業者</td><td>全面的に学べる（形 + KPI調整）</td><td>自社の魚養殖には時間が必要</td></tr>
+<tr><td>純AIスタートアップ</td><td>形は学べる（営業組織/価格モデル）</td><td>魚養殖/計算能力/データコンプライアンスは学べない</td></tr>
+<tr><td>従来業界のISV/SI</td><td>MaaS販売KPI体系を学ぶ</td><td>自社開発モデル不足/計算能力不足</td></tr>
+<tr><td>海外大手</td><td>「年間枠 + トークンパッケージ」価格を学ぶ</td><td>中国大手の「グループ内魚養殖」は学べない</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- ===== 章节 4：5 个机制 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>価格が10分の1でも機能する5つのメカニズム</h2>
+<p>これは本稿で最もコアな節である。<strong>中国のAPI価格は長期的に海外の10分の1以下だが、市場は崩壊しておらず、補助金によるものではなく、5つの基層メカニズムが同時にボリュームを引き上げ、3つの中国特有の要素が重なっているからである。</strong></p>
+
+<h3>メカニズム1：ロングコンテキスト税</h3>
+<p><strong>現象</strong>：2025年～2026年、主流モデルのコンテキストウィンドウは8Kから128K / 1M / 10Mへと飛躍的に拡大する。</p>
+<ul>
+<li>1回のRAGリクエストに50万～100万文字のコンテキストを詰め込む</li>
+<li>1回のAPI呼び出しあたりのトークン数は約1Kから約500Kへ（<strong>500倍</strong>）</li>
+<li>顧客は「価格は変わっていない」と感じる（API単価は5～10分の1に低下）、しかし<strong>実際の消費金額</strong>は50倍に増加</li>
+</ul>
+<div class="punchline"><p>トークン単価は90%下落、しかし<strong>1回あたりの金額は75倍</strong>に → 顧客の総請求額は逆に7.5倍に増加。モデル事業者（1回あたりの課金額増）＋上位アプリ（ユーザー体験向上）→ ウィンウィン。</p></div>
+
+<h3>メカニズム2：出力インフレ</h3>
+<p><strong>現象</strong>：モデルは「安全で冗長な出力」を好む。本来50字で説明できる内容を、AIは500字書く。</p>
+<ul>
+<li>初期のGPT-4：平均出力200トークン/リクエスト</li>
+<li>2026年第1四半期の主流モデル：平均出力800トークン/リクエスト</li>
+<li><strong>出力トークンは4倍に増加</strong>（入力は変わらずとも）</li>
+</ul>
+<p>出力トークンの価格は通常、入力の3～5倍である（特にコーディングや動画生成）。顧客は「出力トークン」に対してより多くの料金を支払う → 事業者の収益増加；しかしGPUの実計算量は4倍には増えていない（キャッシュ / 投機的デコード / 量子化）→ 限界費用の伸びは収益の伸びを大きく下回る。→ <strong>事業者にとって：粗利率が拡大</strong></p>
+
+<h3>メカニズム3：スケジューリング割引</h3>
+<p>1トークンあたりの限界費用は4つの技術的手段を通じて継続的に低下する：</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>技術</th><th>1トークンあたりコスト低下</th></tr></thead>
+<tbody>
+<tr><td>キャッシュ（Cache）</td><td>キャッシュヒット → 90%低下</td></tr>
+<tr><td>量子化（Quantization）</td><td>FP16 → INT8 / INT4 → 50～75%低下</td></tr>
+<tr><td>MoEアーキテクチャ</td><td>アクティブパラメータを3～5%に圧縮 → 急激な低下</td></tr>
+<tr><td>投機的デコード</td><td>推論時間を30～50%短縮</td></tr>
+</tbody></table></div>
+<p><strong>データ</strong>（オープンソース先導チームRの公開技術報告書）：</p>
+<ul>
+<li>1トークンあたり推論コスト 2024年第4四半期：$0.0014</li>
+<li>1トークンあたり推論コスト 2026年第1四半期：$0.0002（<strong>86%低下</strong>）</li>
+<li>API販売価格 2024年第4四半期：$0.27/百万トークン</li>
+<li>API販売価格 2026年第1四半期：$0.014/百万トークン（<strong>95%低下</strong>）</li>
+<li><strong>販売価格の下落がコストより速い → 粗利率はむしろ拡大</strong></li>
+</ul>
+
+<h3>メカニズム4：予算の内製化</h3>
+<p>AI呼び出しは「研究開発プロジェクト支出」から「運営の定常支出」へと変化する。</p>
+<ul>
+<li>2024年：CFOの視点＝「これは研究開発部の新しいおもちゃ」</li>
+<li>2026年：CFOの視点＝「これは光熱費＋SaaSサブスクリプション＋クラウドリソース」</li>
+</ul>
+<div class="signal"><h3>事業者にとっての意味</h3>
+<ul>
+<li>顧客内部の承認経路が短縮（IT部門の決定権が拡大）</li>
+<li>更新率が向上（60～80%業界基準）</li>
+<li>ARPUが向上（CFOが自発的に予算上限を引き上げる）</li>
+</ul></div>
+<p><strong>データ</strong>：2024年の企業AI予算中央値 $50K/年 → 2026年 $500K/年（<strong>10倍増</strong>）。主なドライバー：「パイロット」→「スケール化」→「固定支出」の三段跳び。</p>
+
+<h3>メカニズム5：コンプライアンスプレミアム</h3>
+<p>監査可能 / 出所記録付き / プライベートデプロイのトークンは依然として30～100%のプレミアムがつく。</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>業界</th><th>プレミアム倍率</th></tr></thead>
+<tbody>
+<tr><td>金融業界の監査トークン</td><td><strong>1.3～2.0倍</strong>標準価格</td></tr>
+<tr><td>政府・企業のプライベートデプロイ</td><td><strong>1.5～3.0倍</strong>標準価格</td></tr>
+<tr><td>医療 / 法律の追跡可能トークン</td><td><strong>1.2～1.5倍</strong>標準価格</td></tr>
+</tbody></table></div>
+<div class="punchline"><p>標準APIの価格競争は激しい（粗利率30～50%）、コンプライアンス / プライベートデプロイ / 業界カスタマイズのトークンは依然として高粗利（60～80%）。<strong>MaaS販売の中核的利益源</strong>はコンプライアンスプレミアムであり、標準APIではない。</p></div>
+
+<h3>中国特有の3つの重ね合わせ</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>中国の特徴</th><th>節約 / 上乗せ</th><th>メカニズム</th></tr></thead>
+<tbody>
+<tr><td><strong>国産GPU代替</strong></td><td>推論コスト30～50%低下</td><td>国産Aカードの価格はH100の50～70%、TDPは近い</td></tr>
+<tr><td><strong>電力補助</strong></td><td>推論コスト15～25%低下</td><td>内モンゴル / 貴州 / 寧夏のIDC電気料金 0.3～0.4元/kWh、沿海部より30～50%安い</td></tr>
+<tr><td><strong>オープンソースエコシステムのフライホイール</strong></td><td>ARRが国内固定費を希薄化</td><td>オープンソース先導チーム R / モデル乙がOpenRouterシェア50%+を獲得 → 海外コールが還流 → 国内計算リソースのアイドル時間を埋める</td></tr>
+</tbody></table></div>
+<p><strong>純効果</strong>：</p>
+<ul>
+<li>中国の推論コスト = 海外の10～15%（構造的）</li>
+<li>中国のAPI販売価格 = 海外の10～15%（追随）</li>
+<li><strong>1トークンあたり粗利率は海外と同等かそれ以上</strong>（構造的低コスト＋コンプライアンスプレミアムの強さ）</li>
+</ul>
+</div>
+
+<!-- ===== 章节 5：3 个独有打法 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>中国MaaSの3つの独自戦略</h2>
+<h3>戦略1：シナリオ養魚 → トークン収穫</h3>
+<p><strong>ある大手動画クラウドAの戦略</strong>：</p>
+<ol>
+  <li>抖音のショートドラマ事業が成功 → モデル甲の能力を検証</li>
+  <li>モデル甲のショートドラマ業界浸透率95%</li>
+  <li>ショートドラマ業界の年間生産額220～300億元 → 同社が58%を獲得 = <strong>127～174億元</strong></li>
+  <li>モデル甲を外部公開（ホワイトリスト＋年次契約）→ 業界外ARR 30～50億元</li>
+  <li><strong>単一モデルのARR 150億元以上</strong>（2026年目標）</li>
+</ol>
+<p><strong>ある大手総合クラウドBの戦略</strong>：</p>
+<ol>
+  <li>淘宝 / 1688のマーチャントカスタマーサービスシナリオ → モデル乙の能力を検証</li>
+  <li>モデル乙をオープンソース化 → 国内外の開発者が自発的に採用</li>
+  <li>OpenRouter上でモデル乙が19%のシェアを獲得 → 海外からの呼び出しが還流</li>
+  <li>阿里雲MaaSプラットフォームを企業に販売 → 国内企業のARR</li>
+  <li><strong>MaaS事業の四半期収入約30億元</strong>（四半期AI収入×30%で推定）</li>
+</ol>
+
+<h3>戦略2：オープンソースのフライホイール → グローバルな呼び出しで国内コストを薄める</h3>
+<p><strong>オープンソース先導チームRの戦略</strong>：</p>
+<ol>
+  <li>V2 / V3 すべてMITライセンスでオープンソース化</li>
+  <li>価格を極限まで低く設定（$0.014/百万キャッシュヒット）</li>
+  <li>OpenRouterで28%のシェアを獲得 → 世界中の開発者が採用</li>
+  <li>海外からの呼び出し量 → 国内GPU使用率が向上</li>
+  <li><strong>国内の価格設定は低いが、グローバルな呼び出しがトレーニング＋推論＋研究開発の固定費を分散させている</strong></li>
+</ol>
+
+<h3>戦略3：コンプライアンス / プライベート化 / 業界エージェント → 高利益率プレミアム</h3>
+<div class="signal"><h3>金融業界（匿名化事例）</h3>
+<ul>
+<li>ある大手都市商業銀行 × ある大手コーディングスタートアップX：プライベート展開＋監査トークン</li>
+<li>契約金額8000万元/3年</li>
+<li>単一トークン価格は標準APIの3倍</li>
+<li><strong>粗利益率85%+</strong></li>
+</ul></div>
+<div class="signal"><h3>政府・企業顧客（匿名化事例）</h3>
+<ul>
+<li>ある省レベルの政府クラウド × ある大手総合クラウドB：業界エージェントテンプレート（行政問合せ / 文書審査 / データ分析）</li>
+<li>契約金額1.2億元/3年</li>
+<li>計算力＋モデル＋実装＋運用保守の一体型パッケージ</li>
+<li><strong>粗利益率70%+</strong></li>
+</ul></div>
+<div class="signal"><h3>製造業（匿名化事例）</h3>
+<ul>
+<li>ある自動車グループ × ある大手動画クラウドA：モデル甲＋デジタルヒューマン＋ショート動画生成</li>
+<li>契約金額5000万元/1年</li>
+<li>ディーラー研修動画/マーケティング素材/顧客サポートに使用</li>
+<li><strong>粗利益率80%+</strong></li>
+</ul></div>
+</div>
+
+<!-- ===== 第6章：反対意見 ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>反対意見 / リスクポイント</h2>
+<h3>6.1 価格が1/10でも機能する3つの懸念</h3>
+<p><strong>懸念1：補助金合戦はいつまで続くのか？</strong></p>
+<p>現在、中国のAPI価格 = コスト + わずかな利潤（真の市場清算価格ではない）。もしある日、業界の淘汰が進み（2～3社の寡占企業が残る）、価格が5～10倍に跳ね返る可能性がある。<em>類比：中国クラウド市場の2018～2020年の価格戦争 → 2021～2022年に30～50%の値上げ。</em></p>
+<p><strong>懸念2：オープンソースのフライホイールは持続可能か？</strong></p>
+<p>オープンソースをリードするチームR / モデル乙は現在「ボランティア精神 + 国家戦略支援」で動いている。もし政策支援が弱まるか、チームに商業化の圧力が高まれば → オープンソースライセンスが引き締められる可能性がある。<em>類比：Red Hat / MongoDB / Elasticは皆「オープンソース → 商業化による厳格化」の道を歩んできた。</em></p>
+<p><strong>懸念3：コンプライアンス・プレミアムの持続可能性</strong></p>
+<p>現在のコンプライアンス / プライベート化プレミアムの30～100%は「国産代替 + データセキュリティ」政策に基づいている。もし海外モデルが再び中国参入を許可されれば → コンプライアンス・プレミアムは圧縮されるだろう。</p>
+
+<h3>6.2 クローズドループの3つの脆弱な点</h3>
+<p><strong>脆弱点1：単一モデルのウィンドウ期間</strong> — モデル甲は現在、短尺ドラマでの浸透率95% → 業界飽和；海外動画モデルが第3世代で追い上げ → そのモートはどれだけ持続するか？<strong>判断</strong>：動画モデルのウィンドウ期間は18～24ヶ月であり、次世代モデルへの継続的な投資が必要。</p>
+<p><strong>脆弱点2：コーディングモデルの同質化</strong> — モデル丙は現在コーディング分野でトップだが、海外モデル + Cursor / Devin が競合している；海外モデルが再び参入許可されれば、コーディングのトップは交代する可能性がある。<strong>判断</strong>：コーディングのウィンドウ期間は12～18ヶ月であり、開発者エコシステムとの結びつきが必要。</p>
+<p><strong>脆弱点3：汎用LLMの価格戦争の泥沼</strong> — 国産オープンソースの7B / 70Bの価格は既に0.5～2元/百万トークンまで低下しており、さらなる値下げ余地は限られている（既に限界費用に近い）。<strong>判断</strong>：汎用LLM市場は2年以内に3～5社の寡占に収束し、価格戦争は終了する。</p>
+</div>
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>結論：ビジネス閉ループが成立する条件</h2>
+<h3>7.1 成立する4つの条件（同時に満たす）</h3>
+<ul>
+  <li>✅ <strong>条件 1</strong>：モデルがある垂直分野でトップ3に入る（上位3位）</li>
+  <li>✅ <strong>条件 2</strong>：顧客業務との深い結びつき（移行コスト > 切り替え利益）</li>
+  <li>✅ <strong>条件 3</strong>：トークン収入 > 計算力 + 研究開発 + 販売コスト（粗利益率 > 30%）</li>
+  <li>✅ <strong>条件 4</strong>：「自家鱼塘」、「オープンソースフライホイール」、「コンプライアンスプレミアム」のいずれか一つを持つ</li>
+</ul>
+
+<h3>7.2 ビジネルモデルの比較：海外 vs 中国</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>次元</th><th>海外（OpenAI / Anthropic）</th><th>中国（動画リーダー / Codingリーダー / 総合クラウド）</th></tr></thead>
+<tbody>
+<tr><td>コアとなるユースケース</td><td>開発者 + 個人Pro</td><td>グループ内ユースケース + 業界KA</td></tr>
+<tr><td>閉ループ経路</td><td>モデル能力 + ツールチェーン + エコシステム</td><td>グループ内育成 + オープンソースフライホイール + コンプライアンスプレミアム</td></tr>
+<tr><td>参入障壁</td><td>モデル品質 + ツールチェーン</td><td>自社シナリオ + データコンプライアンス + 国産化</td></tr>
+<tr><td>粗利益率</td><td>38-50%</td><td>70-93%（トップ）/ 30-50%（汎用）</td></tr>
+<tr><td>価格競争への態度</td><td>慎重、グローバル価格を破壊しないように</td><td>積極的、まず国内で徹底的に戦う</td></tr>
+<tr><td>持続可能性</td><td>高（CFOの受容度高）</td><td>中（政策 + オープンソースエコシステムに依存）</td></tr>
+</tbody></table></div>
+
+<h3>7.3 読者への判断</h3>
+<div class="punchline"><h3>中国MaaSプレイヤー向け</h3>
+<ul>
+  <li>汎用LLMレースは18ヶ月以内に淘汰される</li>
+  <li>垂直分野（動画 / Coding / ショートドラマ / 業界Agent）が2026-2028年に実際に利益を生む主戦場となる</li>
+  <li>「自家鱼塘」こそが究極のモートであり、グループ内シナリオで育成→トークン収益化の道筋は丸ごと学ぶ価値がある</li>
+</ul></div>
+<div class="punchline"><h3>顧客 / 投資家向け</h3>
+<ul>
+  <li>「値上げしても量が減らない」現象はトップAIモデルで成立している（CodingリーダーXで実証済み）</li>
+  <li>1/10価格は2〜3年持続し、その後5〜10倍に跳ね返る（業界淘汰）</li>
+  <li>オープンソースフライホイール = グローバルコールが国内コストを薄め、<strong>オープンソースリーダーチームR / モデル乙 が構造的勝者</strong></li>
+</ul></div>
+<div class="punchline"><h3>海外読者向け</h3>
+<ul>
+  <li>中国MaaS販売パラダイムは「形は学べるが神髄は学べない」</li>
+  <li>真のモートはグループ内シナリオでの育成であり、これは中国インターネット大手の独自資産だ</li>
+  <li>海外は「年間枠 + トークンパッケージ + 成果分配」の価格モデルを学べるが、「自家鱼塘」は学べない</li>
+</ul></div>
+</div>
+
+<!-- ===== 関連記事（必ず3枚） ===== -->
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/domestic-maas-token-wars-2026/"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="国内MaaS大戦"><div class="rel-card-body"><h4>国内MaaS大戦2026：トークン経済の二つの戦線</h4><p>動画 + Codingのポイントモデルは既に軌道に乗り、Codingは83%値上げ + コール量400%増</p><span clas="
+s="rel-card-tag">MaaS · 二つの戦線</span></div></a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/china-token-going-global-2026/"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=600&q=80" alt="中国 Token 海外展開"><div class="rel-card-body"><h4>中国 Token 海外展開 2026：価格競争から世界シェアへの転換点</h4><p>OpenRouter 61% シェアの背後にある伏線：誰が本当に海外展開し、どう収益化しているのか</p><span class="rel-card-tag">AI · 海外展開</span></div></a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/token-economy-2026/"><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&q=80" alt="Token 経済価格革命"><div class="rel-card-body"><h4>Token 経済のこの一年：我々は本当に価格革命を目撃しているのか？</h4><p>1.2% から 61% シェアへ、18ヶ月、Token 経済の五段階パイプライン</p><span class="rel-card-tag">Token 経済 · 価格設定</span></div></a>
+</div>
+</div>
+
+<!-- ===== 脚注 ===== -->
+<div class="ftrnote"><strong>データソース</strong>：WeChat公式アカウント「智能涌现」2026/6/3 報道（国内 MaaS 事業の中核データソース）；某大手総合クラウド B FY2026 Q3 決算：AI 収入 89.71 億元/四半期；モルガン・スタンレー AI 計算力リサーチレポート：単位 Token 経済学；JPモルガン Token 経済リサーチレポート：企業 AI 予算の三段跳び；Anthropic 2026 Q1 決算電話会議：ARR 成長曲線；国産オープンソース先導チーム R 公開技術レポート：MoE アーキテクチャ + 推論コスト；OpenRouter 公開データ：2026-02 市場シェア；NVIDIA H100 / H200 / Blackwell 公開データシート：GPU コスト推算；IDC 業界レポート：中国クラウド市場 GPU 価格 + 電力コスト；某大手コーディングスタートアップ X CEO 決算電話会議：モデル丙値上げ + 呼び出し量データ；国家発展改革委員会 2025 データセンター電気料金政策。データ時点：2026-06-12。一部の数字は逆算推定であり、実際のデータは顧客構造/割引率により 10-20% の偏差があり得る。本記事の事例は匿名化済み、シナリオ記述のみを保持。</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(this);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>

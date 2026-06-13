@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Trung Quốc ra nước ngoài 2026: Từ cuộc chiến giá cả đến bước ngoặt thị phần toàn cầu</title>
+<meta name="description" content="Việc các mô hình ngôn ngữ lớn Trung Quốc giành 61% thị phần trên OpenRouter chỉ là khởi đầu. Bài viết này phân tích ai đang thực sự xuất ngoại, lựa chọn thị trường mục tiêu ra sao, định giá thế nào và con đường kiếm tiền nằm ở đâu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="vi">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn active" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body"><div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=1200&q=80" alt="Mạng lưới toàn cầu">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Token Vươn Ra Toàn Cầu · 2026</span>
+    <h1>Token Trung Quốc Ra Nước Ngoài 2026</h1>
+    <p class="subtitle">Từ 1.2% đến 61% — Vấn đề thực sự đằng sau thị phần: Ai đang vươn ra toàn cầu, cách kiếm tiền, liệu có bền vững</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-11</span>
+      <span>⏱ ~10 phút đọc</span>
+      <span>🏷️ Token Vươn Ra Toàn Cầu · OpenRouter · MaaS · Mô hình lớn mã nguồn mở</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">Token vươn ra toàn cầu</span>
+      <span class="tag-pill">OpenRouter 61%</span>
+      <span class="tag-pill">Mô hình lớn mã nguồn mở</span>
+      <span class="tag-pill">MaaS</span>
+      <span class="tag-pill">Thị trường toàn cầu</span>
+    </div>
+  </div>
+</div>
+
+<div class="en-block fade-up">
+  <strong>Tóm tắt tiếng Anh</strong>：Mô hình LLM mã nguồn mở của Trung Quốc tăng từ 1.2% lên 61% thị phần token trên OpenRouter trong 18 tháng. Báo cáo này phân tích ai thực sự đang vươn ra toàn cầu, thị trường nào quan trọng, cuộc chiến giá ở mức 1/30 so với OpenAI, 4 lộ trình kiếm tiền đã được chứng minh, và 3 phát hiện phản trực giác (thị phần thực tế toàn cầu có lẽ khoảng 45% khi bao gồm AWS/Azure/Vertex; người thắng lớn nhất là các công ty lớp giữa như Together AI, không phải các công ty mô hình; mã nguồn mở là đòn bẩy lớn nhất VÀ rủi ro lớn nhất).
+</div>
+
+<div class="callout fade-up">
+  ⚠️ <strong>Kết luận cốt lõi</strong>：Mô hình Trung Quốc chiếm 61% thị phần trên OpenRouter chỉ là bề nổi. Thị phần thực tế toàn cầu có thể gần 45% (khi thêm AWS Bedrock / Azure / Vertex). Người thắng lớn nhất không phải công ty mô hình chạy nhanh nhất, mà là các bên trung gian ở nước ngoài như Together AI, OpenRouter. Động cơ kép mã nguồn mở + giá cực thấp đã tiến gần tới trần, bước tiếp theo là cuộc chiến toàn diện SaaS + phần cứng.
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>Làm rõ khái niệm: "Token vươn ra toàn cầu" là gì</h2>
+<p>Ba khái niệm thường bị nhầm lẫn:</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Khái niệm</th><th>Ý nghĩa</th><th>Đại diện</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">Mô hình vươn ra toàn cầu</span></td><td>Tải trọng số lên Hugging Face</td><td>Các công ty dẫn đầu mã nguồn mở R / Cloud tổng hợp B / Startup K / Z</td></tr>
+<tr><td><span class="tg tg-n">API vươn ra toàn cầu</span></td><td>Triển khai dịch vụ suy luận ở nước ngoài</td><td>Cloud tổng hợp B trạm quốc tế / Cloud video A trạm quốc tế / Together AI</td></tr>
+<tr><td><span class="tg tg-r">Token vươn ra toàn cầu</span></td><td>Được gọi gián tiếp qua nền tảng bên thứ ba</td><td>OpenRouter / Vercel AI Gateway / Cloudflare AI</td></tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<h3>📌 Điều thực sự quyết định thị phần là mục thứ ba</h3>
+<p>Lập trình viên sẽ không đăng ký tài khoản cloud Trung Quốc — họ trực tiếp chuyển API bằng một cú nhấp trên OpenRouter. Vươn ra toàn cầu không phải vấn đề bán hàng, mà là <strong>vấn đề hạ tầng</strong>: ai hoàn thiện trước bộ tứ trọng số + sức mạnh suy luận + giao diện tương thích OpenAI + thanh toán Stripe, người đó sẽ giành được lưu lượng thụ động.</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>Bản đồ người chơi: Phân thành năm cấp</h2>
+<p>Phân thành năm cấp theo "độ sâu thực tế vươn ra toàn cầu" (tên công ty đều dùng mã, tương ứng trong tài liệu nội bộ):</p>
+<div class="signal">
+<h3>🎯 Cấp một — Thực sự hưởng lợi từ lập trình viên toàn cầu (≥5% lượt gọi từ nước ngoài)</h3>
+<ul>
+  <li><strong>Đội ngũ tiên phong mã nguồn mở R</strong>: V3 phát hành 7 ngày đứng đầu OpenRouter; "cú đấm ba liên" MIT + tương thích OpenAI + giá cực thấp; lượt gọi từ nước ngoài 60%+</li>
+  <li><strong>Cloud tổng hợp hàng đầu B</strong>: Ma trận mô hình đầy đủ nhất (0.6B–235B toàn kích cỡ + đa phương thức); tổng lượt tải HF 42 triệu; tương thích ba bộ SDK OpenAI/Anthropic/Vertex</li>
+  <li><strong>Startup AI K</strong>: Ngữ cảnh dài (200K+)+ gọi công cụ là khác biệt cốt lõi; GitHub Stars 21K+</li>
+</ul>
+</div>
+<div class="signal">
+<h3>📊 Cấp hai — Được nhận biết nhưng lượt gọi chưa bùng nổ</h3>
+<ul>
+  <li><strong>Startup AI Z</strong>: Thường xuyên lọt HF Trending; nhận diện thương hiệu nước ngoài thấp; tăng giá 83% trong nước kiếm được tiền, tỷ lệ chuyển đổi trả phí nước ngoài 1/5</li>
+  <li><strong>Startup AI Y</strong>: Ngữ cảnh dài + gọi công cụ là điểm sáng; thương mại hóa vẫn đang khám phá</li>
+  <li><strong>Startup AI S</strong>: Kịch bản đa phương thức có được chấp nhận; quy mô nhỏ</li>
+</ul>
+</div>
+<div class="signal">
+<h3>🌐 Cấp ba — Vươn ra toàn cầu qua kênh (không xuất mô hình, xuất lượt gọi)</h3>
+<ul>
+  <li><strong>Cloud video hàng đầu A</strong>: Mô hình tạo video + lan tỏa hệ sinh thái nước ngoài của công ty mẹ; cạnh tranh trực tiếp với Runway / Pika</li>
+  <li><strong>Nhà máy cloud Trung Quốc C</strong>: Gián tiếp vươn ra qua trạm quốc tế của C; phục vụ game / tài chính Đông Nam Á</li>
+</ul>
+</div>
+<div class="signal">
+<h3>⚙️ Cấp bốn — Vươn ra toàn cầu về hạ tầng</h3>
+<ul>
+  <li><strong>Nền tảng sức mạnh AI T</strong>（Together AI）：Xuất thân Trung Quốc, cloud suy luận độc lập lớn nhất Bắc Mỹ; đồng thời lưu trữ Llama / Q / D / G</li>
+  <li><strong>Cổng định tuyến mô hình lớn G</strong>（Đối tác ban đầu của OpenRouter）：API thống nhất + tự động dự phòng + tính phí</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>Thị trường mục tiêu: Đông Nam Á là sân tập, châu Âu-Mỹ là chiến trường chính</h2>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">38%</span><span class="lab">Bắc Mỹ (chiến trường chính)</span></div>
+  <div class="bis-card cyan"><span class="val">22%</span><span class="lab">Đông Nam Á (bể thu nhập thực)</span></div>
+  <div class="bis-card green"><span class="val">17%</span><span class="lab">châu Âu (chạy đua tuân thủ)</span></div>
+  <div class="bis-card purple"><span class="val">9%</span><span class="lab">Mỹ Latinh (tăng trưởng cao, cơ sở thấp)</span></div>
+  <div class="bis-card red"><span class="val">6%</span><span class="lab">Trung Đông (quỹ đầu tư quốc gia vào cuộc)</span></div>
+  <div class="bis-card"><span class="val">8%</span><span class="lab">châu Phi / khác</span></div>
+</div>
+<div class="callout">
+  <strong>Quan sát then chốt 1</strong>：Bắc Mỹ là chiến trường chính nhưng nhạy cảm về giá. Sau khi GPT-5 ra mắt, mô hình Trung Quốc phải dựa vào "chi phí" để tồn tại.<br>
+  <strong>Quan sát then chốt 2</strong>：Đông Nam Á là bể thu nhập thực. Một gã khổng lồ gọi xe Đông Nam Á đã chuyển 30% lưu lượng sản xuất sang mô hình Trung Quốc, <strong>tiết kiệm 40 triệu USD mỗi năm</strong>.<br>
+  <strong>Quan sát then chốt 3</strong>：châu Âu là chạy đua tuân thủ. Trọng số mã nguồn mở thực ra dễ dàng vượt qua GDPR / EU AI Act hơn so với mã đóng của Mỹ.<br>
+  <strong>Quan sát then chốt 4</strong>：Mỹ Latinh / Trung Đông là tăng trưởng cao, cơ sở thấp. Một quỹ đầu tư quốc gia Trung Đông bắt đầu mua sắm từ năm 2025, quy mô đơn hàng đạt 50 triệu USD.
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>Cuộc chiến giá: 1/10 không phải hồi kết, 1/30 mới là</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Mô hình</th><th>Đầu vào USD/triệu</th><th>Đầu ra USD/triệu</th><th>Tương đối so với GPT-4o</th></tr></thead>
+<tbody>
+<tr><td>GPT-4o (mã đóng)</td><td>2.50</td><td>10.00</td><td>1.0×</td></tr>
+<tr><td>Hệ A mã đóng (đầu hàng nước ngoài)</td><td>3.00</td><td>15.00</td><td>1.3×</td></tr>
+<tr><td>Hệ B mã đóng (đầu hàng nước ngoài)</td><td>1.25</td><td>10.00</td><td>0.7×</td></tr>
+<tr><td>Llama 4 70B (mã nguồn mở)</td><td>0.85</td><td>0.85</td><td>0.2×</td></tr>
+<tr><td><strong>Hệ R mã nguồn mở Trung Quốc 235B</strong></td><td><strong>0.20</strong></td><td><strong>0.60</strong></td><td><strong>0.04×</strong></td></tr>
+<tr><td><strong>Hệ R mã nguồn mở Trung Quốc V3.2</strong></td><td><strong>0.14</strong></td><td><strong>0.28</strong></td><td><strong>0.03×</strong></td></tr>
+<tr><td><strong>Hệ Z mã nguồn mở Trung Quốc 4.5</strong></td><td><strong>0.20</strong></td><td><strong>0.20</strong></td><td><strong>0.03×</strong></td></tr>
+<tr><td><strong>Hệ K mã nguồn mở Trung Quốc K2</strong></td><td><strong>0.15</strong></td><td><strong>2.50</strong></td><td><strong>0.06×</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="quote">"Lợi nhuận thực sự của mô hình Trung Quốc nằm ở phía đầu vào — ngữ cảnh dài, phân tích tài liệu, truy xuất RAG là những kịch bản lợi thế tự nhiên. Giá cache hit 0.014 USD/triệu token, thấp hơn cả OpenAI batch API một bậc về mặt lượng."</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>Lộ trình kiếm tiền: 4 mô hình đã được chứng minh</h2>
+<div class="punchline">
+<h3>📦 Lộ trình A — Bán trực tiếp API (đại gia cloud)</h3>
+<p>Doanh thu 100 triệu-5 tỷ USD/năm; lợi nhuận gộp 30-50%; triển khai đa vùng Singapore/Frankfurt/Virginia; thách thức lớn nhất là BD địa phương + niềm tin của khách hàng trong quan hệ Mỹ-Trung</p>
+</div>
+<div class="punchline">
+<h3>🔀 Lộ trình B — Chia sẻ lợi nhuận qua nền tảng tổng hợp (đội ngũ khởi nghiệp)</h3>
+<p>Doanh thu 10 triệu-500 triệu USD/năm; lợi nhuận gộp 50-70%; đại diện là Together AI, Fireworks AI, OpenRouter; thách thức là tốc độ lặp mô hình</p>
+</div>
+<div class="punchline">
+<h3>💼 Lộ trình C — SaaS ngành (kiếm tiền nhất nhưng khó nhất)</h3>
+<p>Doanh thu 500 triệu-10 tỷ USD/năm; lợi nhuận gộp 60-80%; ba trường hợp thực tế AI pháp lý / AI y tế / AI giáo dục (ARR 30 triệu / dự án 80 triệu / 5 năm 200 triệu USD)</p>
+</div>
+<div class="punchline">
+<h3>🖥️ Lộ trình D — Phần cứng + mô hình gói kèm (IDC / nhà máy chip)</h3>
+<p>Doanh thu 100 triệu-3 tỷ USD/năm; lợi nhuận gộp 20-35%; chip + máy chủ + module quang kết hợp mô hình Trung Quốc bán sang Đông Nam Á / Trung Đông / Mỹ Latinh</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>Ba phát hiện phản trực giác</h2>
+<div class="signal">
+<h3>💡 Phát hiện 1 — Thị phần thực tế toàn cầu có thể đã gần 45%</h3>
+<p>Dữ liệu công khai trên OpenRouter 61% không bao gồm phần "được AWS Bedrock / Azure AI Foundry / Vertex Model Garden / Vercel/Cloudflare Gateway đẩy đi". Cộng thêm lượt gọi ẩn, <strong>thị phần thực tế của mô hình Trung Quốc trong lưu lượng suy luận LLM toàn cầu có thể đã gần 45%</strong>.</p>
+</div>
+<div class="signal">
+<h3>💡 Phát hiện 2 — Thành công nhất trong vươn ra toàn cầu là lớp giữa</h3>
+<p>Together AI đạt doanh thu thuần niên hóa 500 triệu USD, lợi nhuận gộp 60%+, <strong>bản chất là bán mô hình mã nguồn mở Trung Quốc về Mỹ</strong>. Đội ngũ sớm của OpenRouter một nửa là người Hoa. Cloudflare Workers AI bán mô hình Trung Quốc như "thay thế độ trễ thấp" cho SaaS châu Âu-Mỹ. Kết luận: <strong>tiền từ vươn ra toàn cầu, phần lớn bị "đội ngũ người Hoa làm trung chuyển ở nước ngoài" kiếm được</strong> — phiên bản AI của mô hình "kho người Hoa" trong thương mại điện tử xuyên biên giới.</p>
+</div>
+<div class="signal">
+<h3>💡 Phát hiện 3 — Mã nguồn mở là đòn bẩy lớn nhất cũng là rủi ro lớn nhất</h3>
+<p>Ba quả bom: (1) Hệ mã đóng A / B chắt lọc một cách có hệ thống đầu ra của mô hình mã nguồn mở Trung Quốc; (2) Quốc hội Mỹ bắt đầu thảo luận năm 2025 về việc đưa "trọng số mô hình" vào danh sách kiểm soát BIS; (3) Lập trình viên quen dùng giao thức tương thích OpenAI + Stripe + triển khai AWS, <strong>và mức kết dính với mô hình Trung Quốc thực ra rất thấp</strong>, có thể chuyển lại chỉ trong một đêm. Người thắng thực sự là những ai có bố cục toàn diện "mã nguồn mở + mã đóng + SaaS + phần cứng".</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>Đánh giá đối với tiền tuyến AI vươn ra toàn cầu</h2>
+<div class="callout">
+  <strong>Đánh giá 1 — Hành vi mua hàng của khách hàng phân tách thành hai lớp</strong><br>
+  • Lập trình viên cá nhân / khởi nghiệp sớm: trả theo Token → mô hình Trung Quốc = lựa chọn mặc định<br>
+  • SaaS cỡ vừa / khách hàng doanh nghiệp: trả theo "kết quả kinh doanh" → mô hình Trung Quốc = dự phòng + con bài thương lượng<br>
+  Chiến lược bán hàng phải chia thành hai bộ: một bộ kết nối lập trình viên (GitHub / Discord / HN), một bộ kết nối người quyết định mua sắm (tuân thủ + cư trú dữ liệu + case study địa phương)
+</div>
+<div class="callout">
+  <strong>Đánh giá 2 — Ba cơ hội thị trường bị đánh giá thấp</strong><br>
+  1. Dịch vụ khách hàng đa ngôn ngữ Đông Nam Á (tiếng Indonesia / tiếng Việt / tiếng Thái)<br>
+  2. Dạy Coding tiếng Tây Ban Nha Mỹ Latinh (K12 + đào tạo nghề Mexico / Brazil)<br>
+  3. Tiếng Ả Rập Trung Đông + kịch bản văn hóa Hồi giáo (tuân thủ tài chính / tư vấn giáo luật / kiểm duyệt nội dung)
+</div>
+<div class="callout">
+  <strong>Đánh giá 3 — Vươn ra toàn cầu theo hướng ngược lại mới thực sự kiếm tiền</strong><br>
+  Các nhà cung cấp MaaS trong nước đạt doanh thu 100-150 tỷ NDT/năm trong nước, doanh thu API nước ngoài chưa đến 1/10. API nước ngoài là con đường chiến tranh giá cả + lợi nhuận mỏng. Thực sự kiếm tiền là kéo lập trình viên nước ngoài vào đại hệ sinh thái trong nước (WAIC / Yunqi / Hàng Châu / Tô Châu / Thâm Quyến AI Startup Park).
+</div>
+<div class="callout">
+  <strong>Đánh giá 4 — Tín hiệu chiến tranh pháp lý cần cảnh giác</strong><br>
+  Q4/2025 một công ty AI hàng đầu của Mỹ bắt đầu hành động pháp lý chống lại việc "bị phân tán bởi mô hình mã nguồn mở Trung Quốc" (truy vết tuân thủ dữ liệu huấn luyện). Tất cả hợp đồng khách hàng lớn nước ngoài phải dự phòng "<strong>điều khoản chuyển đổi mô hình</strong>" và "<strong>điều khoản bất khả kháng địa chính trị</strong>".
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Điểm then chốt</h3>
+  <ul>
+    <li><strong>Token vươn ra toàn cầu ≠ Mô hình vươn ra toàn cầu ≠ API vươn ra toàn cầu</strong>：Điều thực sự quyết định thị phần là lượt gọi gián tiếp trên nền tảng bên thứ ba (OpenRouter / Vercel / Cloudflare), không phải bán trực tiếp từ cloud Trung Quốc</li>
+    <li><strong>61% là bề nổi, thị phần thực tế có thể gần 45%</strong>：OpenRouter không bao gồm lượt gọi mô hình Trung Quốc trên AWS Bedrock / Azure / Vertex</li>
+    <li><strong>Người thắng lớn nhất là lớp giữa</strong>：Together AI (ARR 500 triệu USD, lợi nhuận gộp 60%) "bán mô hình mã nguồn mở Trung Quốc về Mỹ" dễ dàng gấp 100 lần so với trực tiếp vươn ra</li>
+    <li><strong>Cuộc chiến giá 1/30 đã là bình thường mới</strong>：cache hit 0.014 USD/triệu token, thấp hơn OpenAI batch API một bậc</li>
+    <li><strong>Bốn lộ trình kiếm tiền</strong>：Bán trực tiếp API / chia sẻ lợi nhuận tổng hợp / SaaS ngành / gói kèm phần cứng — chỉ có "bố cục toàn diện" mới là hồi kết</li>
+    <li><strong>Ba cơ hội bị đánh giá thấp</strong>：Dịch vụ khách hàng đa ngôn ngữ Đông Nam Á / Giáo dục Coding Mỹ Latinh / Kịch bản tiếng Ả Rập Trung Đông</li>
+    <li><strong>Mã nguồn mở là đòn bẩy lớn nhất cũng là rủi ro lớn nhất</strong>：Bị chắt lọc + kiểm soát BIS + mức kết dính thấp, ba quả bom chờ tháo ngòi</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Tính toán" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Ảnh: Cụm sức mạnh tính toán — Nền tảng hạ tầng cho Token vươn ra toàn cầu © Unsplash</figcaption>
+</figure>
+
+<div class="related-section fade-up">
+<h2>Bài đọc liên quan</h2>
+<div class="related-grid">
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token Economy"><div class="rel-card-body"><h4>Token Kinh tế năm nay</h4><p>Từ 1.2% đến 61%：Sự tăng trưởng bùng nổ thị phần của mô hình mã nguồn mở Trung Quốc trên OpenRouter — Phục hồi lộ trình và triển vọng tương lai</p><span class="rel-card-tag">Token Economy</span></div></a>
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>Đại chiến MaaS nội địa 2026</h4><p>Mô hình Coding Q1 tăng giá 83% đồng thời lượt gọi tăng 400%, mô hình video doanh thu tháng vượt 1 tỷ</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="mena-companies-deep-report.html"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="MENA"><div class="rel-card-body"><h4>Báo cáo chuyên sâu kỳ lân Internet Trung Đông</h4><p>Bản đồ ICT đằng sau tổng định giá 15 tỷ USD của 6 doanh nghiệp Internet MENA</p><span class="rel-card-tag">Báo cáo chuyên sâu</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>Nguồn dữ liệu</strong>：Bảng xếp hạng công khai OpenRouter / Hugging Face / Artificial Analysis (2025-2026), báo cáo tài chính công khai của các nhà cung cấp, nghiên cứu ngành a16z / Menlo Ventures / Bessemer, khảo sát nội bộ ngành MaaS trong nước (đã ẩn danh khi trích dẫn). Thời điểm dữ liệu: 2026-05 đến 2026-06. Tên công ty đều dùng mã thay thế, tương ứng trong tài liệu nội bộ.</div></div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(this);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>

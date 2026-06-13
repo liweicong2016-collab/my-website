@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China's Token Business Loop: 5 Mechanisms That Keep It Running at 1/10 the Price</title>
+<meta name="description" content="Chinese API prices at 1/10 continue to operate, not due to subsidies, but because of 5 underlying mechanisms (long-context tax / output inflation / scheduling discount / budget internalization / compliance premium) plus 3 China-specific features (domestic GPUs / electricity subsidies / open-source flywheel). Breakdown of single-token cost structure, closed-loop ratings of 9 companies, and whether the MaaS sales paradigm is worth learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="en">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn active" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Token Factory and Business Closed Loop">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Token Economy · Business Closed Loop</span>
+    <h1>China's Token Business Closed Loop: 5 Mechanisms That Work at 1/10 the Price</h1>
+    <p class="subtitle">A closed loop matters more than ARR. The ability to sustain operations at 1/10 the price proves that China's MaaS has completed its journey from 0 to 1.</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-12</span>
+      <span>⏱ ~14 min read</span>
+      <span>🏷️ Token Economy, MaaS, Business Closed Loop, Inference Cost</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">Token Economy</span>
+      <span class="tag-pill">Business Closed Loop</span>
+      <span class="tag-pill">MaaS</span>
+      <span class="tag-pill">Inference Cost</span>
+      <span class="tag-pill">Positive Cycle</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN Summary (Optional) ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>: This report dissects whether China's MaaS (Model-as-a-Service) business has a closed-loop / positive-cycle commercial model. Three new angles: (1) unit economics of single token — 70-93% gross margin for vertical winners; (2) MaaS sales playbook — copy the form, not the essence; (3) 5 mechanisms sustaining 1/10 pricing: long-context tax, output inflation, scheduling discount, budget internalization, compliance premium + 3 China-specific overlays.
+</div>
+
+<!-- ===== TL;DR Core Conclusion ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>Core Conclusion</strong>: China's Token business closed loop partially exists—single-point leading models (Video / Coding) have closed the loop, while general LLMs are in a semi-closed loop. The MaaS sales paradigm can be copied in form but not in spirit. Operations sustained at 1/10 the price rely on 5 mechanisms + 3 China-specific overlays.
+</div>
+
+<!-- ===== Mid-article Illustration (Optional) ===== -->
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80" alt="Cloud Computing and MaaS Business Models" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: From "Selling Resources" to "Selling Tokens" to "Selling Capabilities"—Three Stages of China's MaaS Sales Paradigm © Unsplash</figcaption>
+</figure>
+
+<!-- ===== Chapter 1: 3 Questions ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>First, Break Down the 3 Questions</h2>
+<p>This piece does not repeat the content from <a href="https://liweicong2016-collab.github.io/tech-blog/posts/domestic-maas-token-wars-2026/">Domestic MaaS War</a> (which already covered the "two battlefronts") or <a href="https://liweicong2016-collab.github.io/tech-blog/posts/china-token-going-global-2026/">China Token Going Global</a> (which covered the "61% share on OpenRouter"). <strong>This time, we only answer 3 new questions:</strong></p>
+<ol>
+  <li><strong>Business Closed Loop</strong> — Can revenue from selling Tokens cover the costs of compute + R&D + sales? Which companies have achieved this?</li>
+  <li><strong>Positive Cycle</strong> — Once the loop is closed, can the business self-reinforce (better model → more customers → data feedback → better model)?</li>
+  <li><strong>Sustaining Operations at 1/10 Price</strong> — China's API prices are chronically 10x lower than overseas markets, yet the market hasn't collapsed. What are the 5 underlying mechanisms enabling this?</li>
+</ol>
+</div>
+
+<!-- ===== Chapter 2: Hard Math for the Closed Loop ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>The Hard Math for a Closed Loop / Positive Cycle</h2>
+<h3>2.1 Single Token Cost Structure (Inference-side, reverse-engineered for 2026-06)</h3>
+<p>Reverse-engineered from mainstream Chinese GPU server + electricity costs:</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Cost Item</th><th>Value</th><th>Remarks</th></tr></thead>
+<tbody>
+<tr><td>GPU Server Procurement</td><td>¥350,000/unit</td><td>8-card H100 / 8-card H200 / 8-card Domestic A-card</td></tr>
+<tr><td>Server Depreciation</td><td>3-year linear</td><td>Monthly ¥9,720</td></tr>
+<tr><td>Electricity Cost</td><td>¥0.65/kWh</td><td>Shanghai/Beijing/Shenzhen IDC</td></tr>
+<tr><td>Single Unit Full-load Power</td><td>5.6 kW</td><td>8 cards + CPU + Cooling</td></tr>
+<tr><td>Monthly Electricity Cost Per Unit</td><td>¥2,624</td><td></td></tr>
+<tr><td>Ops + Colocation Space</td><td>¥3,000/unit/month</td><td></td></tr>
+<tr><td>Bandwidth + Storage</td><td>¥1,500/unit/month</td><td></td></tr>
+<tr><td>Personnel Amortization</td><td>¥4,000/unit/month</td><td></td></tr>
+<tr><td><strong>Total Monthly Cost Per Unit</strong></td><td><strong>¥20,844</strong></td><td></td></tr>
+<tr><td>Monthly Inference Token Capacity Per Unit</td><td>50B tokens</td><td>Assuming 30% utilization</td></tr>
+<tr><td><strong>Marginal Cost Per Token</strong></td><td><strong>¥0.42 / million tokens</strong></td><td></td></tr>
+</tbody></table></div>
+<p><strong>Comparison</strong>: Overseas H100 inference cost is approx. <strong>$0.60 / million tokens</strong> (≈ ¥4.3). China's inference cost = <strong>10%</strong> of overseas, consistent with the "1/10 price" market phenomenon. After domestic GPU substitution = <strong>7%</strong> of overseas.</p>
+
+<h3>2.2 Price vs. Cost: Gross Margin Distribution</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Model</th><th>Composite ASP (¥/M)</th><th>Marginal Cost (¥/M)</th><th><strong>Gross Margin</strong></th></tr></thead>
+<tbody>
+<tr><td>Domestic Open-Source 7B (Open-Source Leader Team R level)</td><td>1.5</td><td>0.42</td><td><span class="tg tg-m">72%</span></td></tr>
+<tr><td>Domestic Open-Source 70B (Model B level)</td><td>5.0</td><td>1.5</td><td><span class="tg tg-m">70%</span></td></tr>
+<tr><td>Model C (Coding Leader)</td><td>20</td><td>1.5</td><td><span class="tg tg-r">93%</span> ⭐</td></tr>
+<tr><td>Model A (Video)</td><td>500/second</td><td>50/second</td><td><span class="tg tg-m">90%</span></td></tr>
+<tr><td>Overseas Leading Model A (Overseas)</td><td>60</td><td>30</td><td>50%</td></tr>
+<tr><td>GPT-4o (Overseas)</td><td>40</td><td>25</td><td>38%</td></tr>
+</tbody></table></div>
+<div class="signal"><h3>Key Finding</h3>
+<ul>
+<li>Domestic general LLMs: Gross margin ~70%, <strong>already covering costs</strong></li>
+<li>Domestic Coding leader: Gross margin 93%, <strong>the ultimate positive cycle</strong></li>
+<li>Video models: Charged per second, a completely different scale, gross margin still 90%</li>
+<li>Overseas mainstream: Thinner gross margins (38-50%), as compute costs are 10x higher</li>
+</ul></div>
+
+<h3>2.3 Criteria for a Closed Loop / Positive Cycle</h3>
+<p><strong>Three necessary conditions</strong> (must be met simultaneously):</p>
+<ul>
+<li>✅ <strong>Condition 1</strong>: The model is a leader (top 3) in a specific vertical scenario.</li>
+<li>✅ <strong>Condition 2</strong>: Customer business is deeply integrated (switching cost > benefit of switching).</li>
+<li>✅ <strong>Condition 3</strong>: Token revenue > Compute + R&D + Sales cost (Gross Margin > 30% + ARR growth > 50%).</li>
+</ul>
+
+<h3>2.4 Ratings for 9 Companies (2026-06)</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Company / Product</th><th>Cond. 1</th><th>Cond. 2</th><th>Cond. 3</th><th><strong>Closed Loop Rating</strong></th></tr></thead>
+<tbody>
+<tr><td>A Leading Video Cloud A / Model A</td><td>✅ #1 in Short Dramas</td><td>✅ 95% of short drama users</td><td>✅ Monthly 1B+ / ARR 15B</td><td><span class="tg tg-r">⭐⭐⭐⭐⭐</span></td></tr>
+<tr><td>A Leading Coding Startup X / Model C</td><td>✅ Coding Leader</td><td>✅ Code is the product</td><td>✅ 83% price hike + 400% volume growth</td><td><span class="tg tg-r">⭐⭐⭐⭐⭐</span></td></tr>
+<tr><td>A Leading Comprehensive Cloud B / Model B</td><td>✅ Open-Source #2</td><td>⚠️ Migratable via open-source</td><td>⚠️ Intense price war</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td>Domestic Open-Source Leader Team R</td><td>✅ Open-Source #1</td><td>❌ Completely open-source & free</td><td>⚠️ Overseas loop closed / Domestic semi-closed</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td>A Leading Comprehensive Cloud C / Model D</td><td>⚠️ WeChat ecosystem</td><td>✅ Own fish pond</td><td>⚠️ Limited scale</td><td>⭐⭐⭐</td></tr>
+<tr><td>An AI Startup Z</td><td>⚠️ Distinctive multimodal</td><td>⚠️ Open-source + commercial</td><td>⚠️ Video standalone profitable</td><td>⭐⭐⭐</td></tr>
+<tr><td>An AI Startup Y</td><td>⚠️ Long-context leader</td><td>⚠️ Many individual users</td><td>❌ Cash-burning model in 2024</td><td>⭐⭐</td></tr>
+<tr><td>A Leading Comprehensive Cloud E / Model E</td><td>❌ Undifferentiated in general track</td><td>❌ Primarily internal use</td><td>❌ Limited external revenue</td><td>⭐⭐</td></tr>
+<tr><td>An AI Startup W</td><td>⚠️ Some scenarios</td><td>⚠️ General track</td><td>❌ Meager</td><td>⭐</td></tr>
+</tbody></table></div>
+<div class="punchline"><h3>Conclusion</h3>
+<ul>
+<li><strong>Closed Loop Achieved</strong>: Single-point leading models (Video / Coding)</li>
+<li><strong>Semi-Closed Loop</strong>: Leading general LLMs (relying on group subsidies or open-source flywheel)</li>
+<li><strong>Not Closed</strong>: Long-tail general LLMs + traffic-driven AI companies</li>
+</ul></div>
+</div>
+
+<!-- ===== Chapter 3: MaaS Sales Paradigm ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>Is the MaaS Sales Paradigm Worth Learning?</h2>
+<h3>3.1 The Core of China's MaaS Sales Paradigm</h3>
+<p>The MaaS sales paradigm upgrade driven by a Leading Comprehensive Cloud B in 2025-2026:</p>
+<div class="callout"><strong>Traditional Cloud Sales (Selling Resources) → MaaS Sales (Selling Tokens) → Agent Sales (Selling Capabilities / Selling Scenarios / Selling Outcomes)</strong></div>
+<p><strong>Core Actions</strong>:</p>
+<ol>
+  <li>Established several new MaaS sales teams to collaborate with existing direct sales teams on deals.</li>
+  <li><strong>Core KPIs</strong>: Discover usage scenarios + drive enterprise Agent adoption + increase Token consumption.</li>
+  <li><strong>Supporting Products</strong>: Industry Agent templates (e-commerce customer service / financial risk control / government Q&A / industrial documentation).</li>
+  <li><strong>Pricing Model</strong>: Annual framework agreements + Token packages + outcome-based sharing (tied to GMV / labor hours saved).</li>
+</ol>
+<p>A variant from a Leading Video Cloud A (more aggressive): Model A directly uses a <strong>whitelist + annual framework</strong> model; queuing up to 10 hours during peak Spring Festival periods → forcibly filtering for the "highest-bidding + most deeply integrated" customers; stable supply of the "full-powered version" → prioritizing GPU resources for annual framework clients.</p>
+
+<h3>3.2 Comparison with US-style AI Sales Paradigm</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Dimension</th><th>China MaaS Sales</th><th>US-style AI Sales (OpenAI / Anthropic)</th></tr></thead>
+<tbody>
+<tr><td>Core KPI</td><td>Scenarios + Token consumption + Business outcomes</td><td>MAU + ARR + Retention</td></tr>
+<tr><td>Customer Classification</td><td>Industry KA (Finance / Gov/Enterprise / Manufacturing)</td><td>Developers + Enterprise PM + IT Procurement</td></tr>
+<tr><td>Engagement Path</td><td>Sales-driven + High-level BD</td><td>Product-led + Self-serve docs + Sales-assist</td></tr>
+<tr><td>Pricing Model</td><td>Annual framework + Token packages + Outcome sharing</td><td>Usage-based billing + Enterprise contracts + Tiered pricing</td></tr>
+<tr><td>Moat</td><td>Fishing in intra-group scenarios</td><td>Model capability + Toolchain ecosystem</td></tr>
+</tbody></table></div>
+
+<h3>3.3 Deconstructing "Form vs. Spirit"</h3>
+<div class="signal"><h3>Learnable Form (Sales Org / Process / Tools)</h3>
+<ul>
+<li>✅ Establishing dedicated MaaS sales teams to collaborate with direct sales.</li>
+<li>✅ KPI design: Number of scenarios + Token consumption + Business outcomes.</li>
+<li>✅ Library of industry Agent templates.</li>
+<li>✅ Annual framework + Token package + Outcome-sharing pricing.</li>
+<li>✅ Supporting whitepapers + ROI calculation tools.</li>
+</ul></div>
+<div class="signal"><h3>Unlearnable Spirit (Foundational Advantages)</h3>
+<ul>
+<li>❌ <strong>Fishing in intra-group scenarios</strong> — A Leading Video Cloud A has Douyin short dramas (annual ¥22-30B), A Leading Comprehensive Cloud B has Taobao customer service (millions of merchants), A Leading Comprehensive Cloud C has Official Accounts.</li>
+<li>❌ <strong>Intra-group GPU / Power scheduling</strong> — Can discount "idle GPU time" for MaaS business.</li>
+<li>❌ <strong>Domestic GPU substitution</strong> — The "usable is enough" status of domestic A-cards allows Chinese big tech to still have inference capability after H100 / H200 bans.</li>
+<li>❌ <strong>Data compliance advantage</strong> — Large domestic clients (Finance / Gov/Enterprise / State-owned) naturally choose domestic clouds.</li>
+</ul></div>
+
+<h3>3.4 Who It's Worth Learning For</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Company Type</th><th>What's Worth Learning</th><th>What Can't Be Learned</th></tr></thead>
+<tbody>
+<tr><td>Cloud vendors with industry scenarios</td><td>Holistically (form + adjust KPIs)</td><td>Building one's own fish pond takes time</td></tr>
+<tr><td>Pure AI startups</td><td>Form is learnable (sales org / pricing model)</td><td>Fish pond / Compute / Data compliance cannot be learned</td></tr>
+<tr><td>Traditional industry ISVs / SIs</td><td>Learn the MaaS sales KPI system</td><td>Lack self-developed models / compute</td></tr>
+<tr><td>Overseas big tech</td><td>Learn "annual framework + Token package" pricing</td><td>"Group-bred fish pond" of Chinese giants cannot be learned</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- ===== Chapter 4: 5 Mechanisms ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>5 Mechanisms That Allow Sustained Operations at 1/10 the Price</h2>
+<p>This is the hardest-hitting section of this article. <strong>China's API prices are chronically 10x lower than overseas, and the market hasn't collapsed. It's not due to subsidies, but 5 underlying mechanisms that simultaneously boost volume + 3 China-specific overlays.</strong></p>
+
+<h3>Mechanism 1: Long-Context Tax</h3>
+<p><strong>Phenomenon</strong>: From 2025 to 2026, mainstream model context windows jumped from 8K to 128K / 1M / 10M.</p>
+<ul>
+<li>A single RAG request stuffs in 500K-1M characters of context.</li>
+<li>Token count per API call surged from ~1K to ~500K (<strong>500x</strong>).</li>
+<li>Customers perceive "prices haven't changed" (API unit price dropped 5-10x), but <strong>actual spend</strong> increased 50x.</li>
+</ul>
+<div class="punchline"><p>Token unit price fell 90%, but <strong>single-call amount grew 75x</strong> → customer's total bill actually grows 7.5x. Model providers (earning more per call) + downstream applications (better user experience) → win-win.</p></div>
+
+<h3>Mechanism 2: Output Inflation</h3>
+<p><strong>Phenomenon</strong>: Models tend to "safely verbose output." A point that could be made in 50 words, AI will write in 500.</p>
+<ul>
+<li>Early GPT-4: Averaged 200 tokens output / request</li>
+<li>2026 Q1 Mainstream models: Averaged 800 tokens output / request</li>
+<li><strong>Output tokens up 4x</strong> (even with the same input)</li>
+</ul>
+<p>Output token pricing is typically 3-5x that of input (especially for Coding / Video generation). Customers pay more for "output tokens" → vendor revenue grows; but actual GPU computation hasn't grown 4x (caching / speculative decoding / quantization) → marginal cost growth is far lower than revenue growth. → <strong>For vendors: Expanding gross margin</strong></p>
+
+<h3>Mechanism 3: Scheduling Discount</h3>
+<p>Marginal cost per token continuously declines through 4 technical means:</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Technology</th><th>Per Token Cost Reduction</th></tr></thead>
+<tbody>
+<tr><td>Cache</td><td>Cache hit → drops 90%</td></tr>
+<tr><td>Quantization</td><td>FP16 → INT8 / INT4 → drops 50-75%</td></tr>
+<tr><td>MoE Architecture</td><td>Active parameters squeezed to 3-5% → cliff dive</td></tr>
+<tr><td>Speculative Decoding</td><td>Inference time drops 30-50%</td></tr>
+</tbody></table></div>
+<p><strong>Data</strong> (from the public technical report of the Domestic Open-Source Leader Team R):</p>
+<ul>
+<li>Per token inference cost 2024 Q4: $0.0014</li>
+<li>Per token inference cost 2026 Q1: $0.0002 (<strong>down 86%</strong>)</li>
+<li>API price 2024 Q4: $0.27/million</li>
+<li>API price 2026 Q1: $0.014/million (<strong>down 95%</strong>)</li>
+<li><strong>Price fell faster than cost → gross margin actually expanded</strong></li>
+</ul>
+
+<h3>Mechanism 4: Budget Internalization</h3>
+<p>AI calls migrated from "R&D project expense" to "regular operational expense."</p>
+<ul>
+<li>2024: CFO perspective = "This is the R&D department's new toy"</li>
+<li>2026: CFO perspective = "This is like utilities + SaaS subscriptions + cloud resources"</li>
+</ul>
+<div class="signal"><h3>Implications for Vendors</h3>
+<ul>
+<li>Internal customer approval paths shorten (IT department decision-making power increases).</li>
+<li>Renewal rates increase (60-80% industry benchmark).</li>
+<li>ARPU increases (CFO proactively raises budget caps).</li>
+</ul></div>
+<p><strong>Data</strong>: Median enterprise AI budget was $50K/year in 2024 → $500K/year in 2026 (<strong>10x increase</strong>). Main driver: The triple jump from "pilot" → "scaling" → "fixed expenditure."</p>
+
+<h3>Mechanism 5: Compliance Premium</h3>
+<p>Tokens that are auditable / source-tracked / privately deployed can still command a 30-100% premium.</p>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Industry</th><th>Premium Multiple</th></tr></thead>
+<tbody>
+<tr><td>Financial industry audit tokens</td><td><strong>1.3-2.0x</strong> standard price</td></tr>
+<tr><td>Gov/Enterprise private deployment</td><td><strong>1.5-3.0x</strong> standard price</td></tr>
+<tr><td>Medical / Legal traceable tokens</td><td><strong>1.2-1.5x</strong> standard price</td></tr>
+</tbody></table></div>
+<div class="punchline"><p>Standard API price wars are intense (gross margins 30-50%), but compliance / private / industry-customized tokens remain high-margin (60-80%). <strong>The core profit source of MaaS sales</strong> is the compliance premium, not standard APIs.</p></div>
+
+<h3>3 China-Specific Overlays</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>China Characteristic</th><th>Saving / Boost</th><th>Mechanism</th></tr></thead>
+<tbody>
+<tr><td><strong>Domestic GPU Substitution</strong></td><td>Inference cost down 30-50%</td><td>Domestic A-card priced at 50-70% of H100, comparable TDP</td></tr>
+<tr><td><strong>Electricity Subsidies</strong></td><td>Inference cost down 15-25%</td><td>Inner Mongolia / Guizhou / Ningxia IDC electricity at 0.3-0.4 RMB/kWh, 30-50% cheaper than coastal areas</td></tr>
+<tr><td><strong>Open-Source Ecosystem Flywheel</strong></td><td>ARR amortizes domestic fixed costs</td><td>Open-Source Leader Team R / Model B capture 50%+ share on OpenRouter → overseas call volume reflows → fills domestic GPU idle time</td></tr>
+</tbody></table></div>
+<p><strong>Net Effect</strong>:</p>
+<ul>
+<li>China inference cost = 10-15% of overseas (structural)</li>
+<li>China API selling price = 10-15% of overseas (following)</li>
+<li><strong>Per-token gross margin on par with or even higher than overseas</strong> (lower structural cost + strong compliance premium)</li>
+</ul>
+</div>
+
+<!-- ===== Chapter 5: 3 Unique Playbooks ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>3 Unique Playbooks of China's MaaS</h2>
+<h3>Playbook 1: Fish in Scenarios → Harvest Tokens</h3>
+<p><strong>Path of a Leading Video Cloud A</strong>:</p>
+<ol>
+  <li>Douyin short drama business takes off → validates Model A capability</li>
+  <li>Model A achieves 95% penetration in the short drama industry</li>
+  <li>Short drama industry annual output ¥220-30B → This company captures 58% = <strong>¥12.7-17.4B</strong></li>
+  <li>Model A opens to external parties (whitelist + annual framework) → ARR from outside the industry ¥3-5B</li>
+  <li><strong>Single-point model ARR 15B+</strong> (2026 target)</li>
+</ol>
+<p><strong>Path of a Leading Comprehensive Cloud B</strong>:</p>
+<ol>
+  <li>Taobao / 1688 merchant customer service scenario → validates Model B capability</li>
+  <li>Model B open-sourced → spontaneously adopted by domestic and international developers</li>
+  <li>Model B captures 19% share on OpenRouter → overseas call volume reflows</li>
+  <li>Alibaba Cloud MaaS platform sells to enterprises → domestic enterprise ARR</li>
+  <li><strong>MaaS business quarterly revenue ~¥3B</strong> (estimated as 30% of quarterly AI revenue)</li>
+</ol>
+
+<h3>Playbook 2: Open-Source Flywheel → Global Calls Amortize Domestic Costs</h3>
+<p><strong>Path of the Domestic Open-Source Leader Team R</strong>:</p>
+<ol>
+  <li>V2 / V3 all released under MIT open-source license</li>
+  <li>Priced at the absolute floor ($0.014/million cache hit)</li>
+  <li>Captures 28% share on OpenRouter → adopted by global developers</li>
+  <li>Overseas call volume → improves domestic GPU utilization</li>
+  <li><strong>Domestic pricing is low, but global calls amortize the fixed costs of training + inference + R&D</strong></li>
+</ol>
+
+<h3>Playbook 3: Compliance / Private Deployment / Industry Agents → High-Margin Premium</h3>
+<div class="signal"><h3>Financial Industry (Anonymized Case)</h3>
+<ul>
+<li>A leading city commercial bank × A Leading Coding Startup X: Private deployment + audit tokens</li>
+<li>Contract value: ¥80M / 3 years</li>
+<li>Per token price: 3x the standard API</li>
+<li><strong>Gross margin 85%+</strong></li>
+</ul></div>
+<div class="signal"><h3>Gov/Enterprise Client (Anonymized Case)</h3>
+<ul>
+<li>A provincial government cloud × A Leading Comprehensive Cloud B: Industry Agent templates (gov Q&A / document review / data analysis)</li>
+<li>Contract value: ¥120M / 3 years</li>
+<li>Integrated package includes compute + model + implementation + maintenance</li>
+<li><strong>Gross margin 70%+</strong></li>
+</ul></div>
+<div class="signal"><h3>Manufacturing (Anonymized Case)</h3>
+<ul>
+<li>An automotive group × A Leading Video Cloud A: Model A + digital human + short video generation</li>
+<li>Contract value: ¥50M / 1 year</li>
+<li>Used for dealer training videos / marketing materials / customer support</li>
+<li><strong>Gross margin 80%+</strong></li>
+</ul></div>
+</div>
+
+<!-- ===== Chapter 6: Counterarguments ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>Counterarguments / Risk Factors</h2>
+<h3>6.1 Three Hidden Concerns About Sustaining 1/10 Price</h3>
+<p><strong>Concern 1: How Long Can the Subsidy War Last?</strong></p>
+<p>Current China API prices = cost + razor-thin profit (not a true market clearing price). If the industry consolidates one day (leaving 2-3 oligopolies), prices could rebound 5-10x. <em>Analogy: China's cloud market saw a price war from 2018-2020 → prices rose 30-50% from 2021-2022.</em></p>
+<p><strong>Concern 2: Can the Open-Source Flywheel Be Sustained?</strong></p>
+<p>Open-Source Leader Team R / Model B are currently supported by "public goodwill + national strategic support." If policy support weakens or the team faces greater commercialization pressure → open-source licensing could tighten. <em>Analogy: Red Hat / MongoDB / Elastic all took the path of "open-source → commercial tightening."</em></p>
+<p><strong>Concern 3: Sustainability of the Compliance Premium</strong></p>
+<p>The current 30-100% compliance/private deployment premium is based on "domestic substitution + data security" policies. If overseas models are re-permitted entry into China → the compliance premium will be compressed.</p>
+
+<h3>6.2 Three Vulnerabilities of the Closed Loop</h3>
+<p><strong>Vulnerability 1: Window of Opportunity for Single-Point Models</strong> — Model A currently has 95% penetration in short dramas → industry saturation; overseas video models following up with 3rd generation → how long can the moat last? <strong>Assessment</strong>: Video model opportunity window is 18-24 months; continuous investment in next-gen models is needed.</p>
+<p><strong>Vulnerability 2: Homogenization of Coding Models</strong> — Model C is currently the Coding leader, but overseas models + Cursor / Devin are all competing; once overseas models are re-permitted, the Coding leadership position could rotate. <strong>Assessment</strong>: Coding window is 12-18 months; must bind the developer ecosystem.</p>
+<p><strong>Vulnerability 3: Price War Quagmire for General LLMs</strong> — Domestic open-source 7B / 70B prices are already as low as 0.5-2 RMB/million tokens; limited room for further price cuts (already approaching marginal cost). <strong>Assessment</strong>: The general LLM track will consolidate to 3-5 oligopolies within 2 years, ending the price war.</p>
+</div>
+
+<!-- ===== Chapter 7: Conclusion ===== -->
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>Conclusion: Under What Conditions Does the Business Closed Loop Hold?</h2>
+<h3>7.1 The 4 Conditions for It to Hold (Must Be Met Simultaneously)</h3>
+<ul>
+  <li>✅ <strong>Condition 1</strong>: The model is a leader (top 3) in a specific vertical scenario.</li>
+  <li>✅ <strong>Condition 2</strong>: Customer business is deeply integrated (switching cost > benefit of switching).</li>
+  <li>✅ <strong>Condition 3</strong>: Token revenue > Compute + R&D + Sales cost (Gross Margin > 30%).</li>
+  <li>✅ <strong>Condition 4</strong>: Must possess one of the three: a "personal fish pond," or an "open-source flywheel," or a "compliance premium."</li>
+</ul>
+
+<h3>7.2 Business Model Benchmarking: Overseas vs. China</h3>
+<div class="tbl-wrap"><table class="tbl">
+<thead><tr><th>Dimension</th><th>Overseas (OpenAI / Anthropic)</th><th>China (Video Leader / Coding Leader / Comprehensive Clouds)</th></tr></thead>
+<tbody>
+<tr><td>Core Scenario</td><td>Developers + Individual Pro</td><td>Intra-group scenarios + Industry KA</td></tr>
+<tr><td>Closed Loop Path</td><td>Model capability + Toolchain + Ecosystem</td><td>Group fish pond + Open-source flywheel + Compliance premium</td></tr>
+<tr><td>Moat</td><td>Model quality + Toolchain</td><td>Proprietary scenarios + Data compliance + Localization</td></tr>
+<tr><td>Gross Margin</td><td>38-50%</td><td>70-93% (Leaders) / 30-50% (Generalists)</td></tr>
+<tr><td>Price War Attitude</td><td>Cautious, avoids disrupting global pricing</td><td>Aggressive, penetrate the domestic market first, ask questions later</td></tr>
+<tr><td>Sustainability</td><td>High (Strong CFO acceptance)</td><td>Medium (Reliant on policy + open-source ecosystem)</td></tr>
+</tbody></table></div>
+
+<h3>7.3 Verdict for the Reader</h3>
+<div class="punchline"><h3>For China MaaS Players</h3>
+<ul>
+  <li>The general<div class="punchline"><h3>For Chinese MaaS Players</h3>
+<ul>
+  <li>The general LLM track will be cleared out within 18 months</li>
+  <li>Vertical scenarios (video / coding / short dramas / industry agents) are the real profit battleground for 2026-2028</li>
+  <li>"Your own fish pond" is the ultimate moat — the path of nurturing fish in internal group scenarios → harvesting tokens is worth studying in full</li>
+</ul></div>
+<div class="punchline"><h3>For Clients / Investors</h3>
+<ul>
+  <li>"Raising prices without losing volume" holds true for top AI models (verified by leading coding player X)</li>
+  <li>Pricing at 1/10th can be sustained for 2-3 years, then will rebound 5-10x (industry shakeout)</li>
+  <li>Open-source flywheel = global inference amortizes domestic costs, <strong>leading open-source team R / Model Yi are structural winners</strong></li>
+</ul></div>
+<div class="punchline"><h3>For Overseas Readers</h3>
+<ul>
+  <li>China's MaaS sales paradigm: "the form can be learned, the spirit cannot be replicated"</li>
+  <li>The real moat is nurturing fish within in-house group scenarios — a unique asset of China's big internet platforms</li>
+  <li>Overseas can learn the "annual framework + token packages + performance-based revenue share" pricing model, but cannot replicate the "own fish pond"</li>
+</ul></div>
+</div>
+
+<!-- ===== Related Reading (must have 3 cards) ===== -->
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/domestic-maas-token-wars-2026/"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="Domestic MaaS War"><div class="rel-card-body"><h4>Domestic MaaS War 2026: Two Fronts of the Token Economy</h4><p>Video + coding single-point models have proven out; coding price up 83% + call volume up 400%</p><span class="rel-card-tag">MaaS · Two Fronts</span></div></a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/china-token-going-global-2026/"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=600&q=80" alt="China Token Going Global"><div class="rel-card-body"><h4>China Token Going Global 2026: The Inflection Point from Price War to Global Market Share</h4><p>The hidden storyline behind OpenRouter's 61% share: who is truly going overseas and how to monetize</p><span class="rel-card-tag">AI · Going Global</span></div></a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/token-economy-2026/"><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&q=80" alt="Token Economy Pricing Revolution"><div class="rel-card-body"><h4>This Year in Token Economy: Are We Truly Witnessing a Pricing Revolution?</h4><p>From 1.2% to 61% share, 18 months, the token economy's five-stage pipeline</p><span class="rel-card-tag">Token Economy · Pricing</span></div></a>
+</div>
+</div>
+
+<!-- ===== Footnotes ===== -->
+<div class="ftrnote"><strong>Data Sources</strong>: Public account "Smart Emergence" report on 2026/6/3 (core data source for domestic MaaS businesses); one top-tier integrated cloud B FY2026 Q3 earnings: AI revenue 89.71 billion yuan / quarter; Morgan Stanley AI compute research report: unit token economics; J.P. Morgan Token Economy research report: enterprise AI budget triple-jump; Anthropic 2026 Q1 earnings call: ARR growth curve; domestic leading open-source team R public technical report: MoE architecture + inference cost; OpenRouter public data: 2026-02 market share; NVIDIA H100 / H200 / Blackwell public datasheet: GPU cost estimation; IDC industry report: China cloud market GPU price + electricity cost; one leading coding startup X CEO earnings call: Model Bing price increase + call volume data; National Development and Reform Commission 2025 data center electricity pricing policy. Data timestamp: 2026-06-12. Some figures are reverse-engineered estimates; actual data may deviate by 10-20% due to client mix / discount rate differences. Cases in this article have been anonymized, preserving only scenario descriptions.</div>
+
+</div></div><footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(this);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>

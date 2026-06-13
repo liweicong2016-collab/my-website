@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China's Token Goes Global 2026: From Price War to Global Share Inflection Point</title>
+<meta name="description" content="Chinese large models capturing a 61% share on OpenRouter is just the beginning. This article dissects who is truly going global, how to choose target markets, pricing strategies, and monetization paths.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="en">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn active" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=1200&q=80" alt="Global network">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Token Going Global · 2026</span>
+    <h1>China Token Going Global 2026</h1>
+    <p class="subtitle">From 1.2% to 61%—The Real Questions Behind the Share: Who Is Going Global, How to Monetize, and Can It Last?</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-11</span>
+      <span>⏱ ~10 min read</span>
+      <span>🏷️ Token Going Global · OpenRouter · MaaS · Open-source LLMs</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">Token Going Global</span>
+      <span class="tag-pill">OpenRouter 61%</span>
+      <span class="tag-pill">Open-source LLMs</span>
+      <span class="tag-pill">MaaS</span>
+      <span class="tag-pill">Global Market</span>
+    </div>
+  </div>
+</div>
+
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>：Chinese open-source LLMs grew from 1.2% to 61% OpenRouter token share in 18 months. This report dissects who is actually going global, which markets matter, the pricing war at 1/30 of OpenAI, the 4 proven monetization paths, and 3 counter-intuitive findings (the real share is probably ~45% globally when AWS/Azure/Vertex are included; the biggest winners are middle-layer players like Together AI, not the model companies; open-source is the biggest lever AND the biggest risk).
+</div>
+
+<div class="callout fade-up">
+  ⚠️ <strong>Core Conclusion</strong>: Chinese models capturing 61% share on OpenRouter is just the surface. The real global share is likely close to 45% (after including AWS Bedrock / Azure / Vertex). The biggest winners aren't the fastest model companies, but middle-layer players like Together AI and OpenRouter that "act as overseas intermediaries." The twin engines of open-source + extreme low pricing are nearing their ceiling; the next step is a full-stack war of SaaS + hardware bundling.
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>Concept Clarification: What Is "Token Going Global"</h2>
+<p>Three commonly conflated concepts:</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Concept</th><th>Meaning</th><th>Representatives</th></tr></thead>
+<tbody>
+<tr><td><span class="tg tg-m">Model Going Global</span></td><td>Weights released to Hugging Face</td><td>Leading open-source R / Comprehensive cloud B / Startup K / Z</td></tr>
+<tr><td><span class="tg tg-n">API Going Global</span></td><td>Deploying inference services overseas</td><td>Comprehensive cloud B international site / Video cloud A international site / Together AI</td></tr>
+<tr><td><span class="tg tg-r">Token Going Global</span></td><td>Indirect calls on third-party platforms</td><td>OpenRouter / Vercel AI Gateway / Cloudflare AI</td></tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<h3>📌 What truly determines the share is the third one</h3>
+<p>Developers won't register for a Chinese cloud account—they directly switch APIs on OpenRouter with one click. Going global isn't a sales problem; it's an <strong>infrastructure problem</strong>: whoever puts together the quartet of weights + inference compute + OpenAI-compatible interface + Stripe billing first captures passive traffic.</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>Player Map: Five Tiers</h2>
+<p>Classified by the "actual depth of going global" into five tiers (all company names are codenames; cross-references in internal documents):</p>
+<div class="signal">
+<h3>🎯 Tier 1 — Truly reaping the global developer dividend (≥5% overseas calls)</h3>
+<ul>
+  <li><strong>Leading open-source team R</strong>: Topped OpenRouter within 7 days of V3 release; MIT license + OpenAI compatibility + extreme low pricing "triple punch"; overseas calls 60%+</li>
+  <li><strong>Comprehensive cloud B</strong>: Most complete model matrix (0.6B–235B full size + multimodal); cumulative HF downloads 42 million; compatible with OpenAI/Anthropic/Vertex SDKs</li>
+  <li><strong>AI startup K</strong>: Long context (200K+) + tool calling as core differentiation; GitHub Stars 21K+</li>
+</ul>
+</div>
+<div class="signal">
+<h3>📊 Tier 2 — Recognized but call volume not yet exploded</h3>
+<ul>
+  <li><strong>AI startup Z</strong>: Consistently on HF Trending; low overseas brand recognition; domestic price hike of 83% profitable, overseas paid conversion rate 1/5</li>
+  <li><strong>AI startup Y</strong>: Long context + tool calling highlights; commercialization still under exploration</li>
+  <li><strong>AI startup S</strong>: Adopted in multimodal scenarios; limited scale</li>
+</ul>
+</div>
+<div class="signal">
+<h3>🌐 Tier 3 — Channel Going Global (not models but calls go out)</h3>
+<ul>
+  <li><strong>Leading video cloud A</strong>: Video generation models + parent company's overseas ecosystem spillover; directly competing with Runway / Pika</li>
+  <li><strong>Chinese cloud vendor C</strong>: Indirectly going global through C's international site; serving Southeast Asian gaming / finance</li>
+</ul>
+</div>
+<div class="signal">
+<h3>⚙️ Tier 4 — Infrastructure Going Global</h3>
+<ul>
+  <li><strong>AI compute platform T</strong> (Together AI): Chinese background, largest independent inference cloud in North America; simultaneously hosting Llama / Q / D / G series</li>
+  <li><strong>LLM routing gateway G</strong> (early partner of OpenRouter): Unified API + auto fallback + billing</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>Target Markets: Southeast Asia as Training Ground, Europe and the US as Main Battlefields</h2>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">38%</span><span class="lab">North America (Main Battlefield)</span></div>
+  <div class="bis-card cyan"><span class="val">22%</span><span class="lab">Southeast Asia (True Revenue Pool)</span></div>
+  <div class="bis-card green"><span class="val">17%</span><span class="lab">Europe (Compliance Race)</span></div>
+  <div class="bis-card purple"><span class="val">9%</span><span class="lab">Latin America (High Growth, Low Base)</span></div>
+  <div class="bis-card red"><span class="val">6%</span><span class="lab">Middle East (Sovereign Funds Entering)</span></div>
+  <div class="bis-card"><span class="val">8%</span><span class="lab">Africa / Others</span></div>
+</div>
+<div class="callout">
+  <strong>Key Observation 1</strong>: North America is the main battlefield but price-sensitive. After GPT-5 emerges, Chinese models must rely on "cost" to survive.<br>
+  <strong>Key Observation 2</strong>: Southeast Asia is a true revenue pool. A Southeast Asian ride-hailing giant has already shifted 30% of its production traffic to Chinese models, <strong>saving $40 million annually</strong>.<br>
+  <strong>Key Observation 3</strong>: Europe is a compliance race. Open-source weights are actually easier to pass GDPR / EU AI Act scrutiny than US closed-source models.<br>
+  <strong>Key Observation 4</strong>: Latin America / Middle East are high-growth, low-base markets. A Middle Eastern sovereign fund started procurement in 2025, with single deals at the $50 million level.
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>Pricing War: 1/10 Is Not the Endgame, 1/30 Is</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>Model</th><th>Input $/Million</th><th>Output $/Million</th><th>Relative to GPT-4o</th></tr></thead>
+<tbody>
+<tr><td>GPT-4o (Closed-source)</td><td>2.50</td><td>10.00</td><td>1.0×</td></tr>
+<tr><td>Closed-source A Series (Leading Overseas)</td><td>3.00</td><td>15.00</td><td>1.3×</td></tr>
+<tr><td>Closed-source B Series (Leading Overseas)</td><td>1.25</td><td>10.00</td><td>0.7×</td></tr>
+<tr><td>Llama 4 70B (Open-source)</td><td>0.85</td><td>0.85</td><td>0.2×</td></tr>
+<tr><td><strong>Chinese Open-source R Series 235B</strong></td><td><strong>0.20</strong></td><td><strong>0.60</strong></td><td><strong>0.04×</strong></td></tr>
+<tr><td><strong>Chinese Open-source R Series V3.2</strong></td><td><strong>0.14</strong></td><td><strong>0.28</strong></td><td><strong>0.03×</strong></td></tr>
+<tr><td><strong>Chinese Open-source Z Series 4.5</strong></td><td><strong>0.20</strong></td><td><strong>0.20</strong></td><td><strong>0.03×</strong></td></tr>
+<tr><td><strong>Chinese Open-source K Series K2</strong></td><td><strong>0.15</strong></td><td><strong>2.50</strong></td><td><strong>0.06×</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="quote">"The real profit of Chinese models lies on the input side—long contexts, document analysis, and RAG retrieval are natural advantage scenarios. The cache hit price of 0.014 USD per million tokens is an order of magnitude lower than OpenAI's batch API."</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>Monetization Paths: 4 Proven Models</h2>
+<div class="punchline">
+<h3>📦 Path A — Direct API Sales (Major Cloud Vendors)</h3>
+<p>Revenue $100 million–$5 billion/year; gross margin 30–50%; multi-region deployment in Singapore/Frankfurt/Virginia; the biggest challenge is local BD + customer trust amid the China-US relationship</p>
+</div>
+<div class="punchline">
+<h3>🔀 Path B — Aggregation Platform Revenue Share (Startups)</h3>
+<p>Revenue $10 million–$500 million/year; gross margin 50–70%; representatives are Together AI, Fireworks AI, OpenRouter; challenge is model iteration speed</p>
+</div>
+<div class="punchline">
+<h3>💼 Path C — Industry SaaS (Most Profitable but Hardest)</h3>
+<p>Revenue $500 million–$10 billion/year; gross margin 60–80%; three real cases in legal AI/medical AI/education AI ($30 million ARR / $80 million per project / $200 million over 5 years)</p>
+</div>
+<div class="punchline">
+<h3>🖥️ Path D — Hardware + Model Bundling (IDC / Chip Manufacturers)</h3>
+<p>Revenue $100 million–$3 billion/year; gross margin 20–35%; chip + server + optical module manufacturers bundle Chinese models to sell into Southeast Asia / Middle East / Latin America</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>Three Counter-intuitive Findings</h2>
+<div class="signal">
+<h3>💡 Finding 1 — The Real Global Share May Already Be Close to 45%</h3>
+<p>OpenRouter's public 61% data excludes the part being "pushed through AWS Bedrock / Azure AI Foundry / Vertex Model Garden / Vercel/Cloudflare Gateways." Adding these implicit calls, <strong>the actual share of Chinese models in global LLM inference traffic may already be close to 45%</strong>.</p>
+</div>
+<div class="signal">
+<h3>💡 Finding 2 — The Most Successful Globalizers Are Middle Layer Players</h3>
+<p>Together AI annualizes $500 million ARR with 60%+ gross margin, <strong>essentially selling Chinese open-source models back to the US</strong>. The early OpenRouter team is half Chinese heritage. Cloudflare Workers AI uses Chinese models as "low-latency alternatives" sold to European and American SaaS. Conclusion: <strong>A significant portion of the globalization money is earned by "Chinese diaspora teams acting as intermediaries overseas"</strong>—the AI version of the "overseas Chinese warehouse" model in cross-border e-commerce.</p>
+</div>
+<div class="signal">
+<h3>💡 Finding 3 — Open-Source Is the Biggest Lever and Biggest Risk</h3>
+<p>Three landmines: (1) Closed-source A / B series systematically distill Chinese open-source model outputs; (2) The US Congress began discussing adding "model weights" to the BIS control list in 2025; (3) Once developers get used to the OpenAI-compatible protocol + Stripe + AWS deployment, <strong>their coupling with Chinese models is actually very low</strong>—they can switch back overnight. The true winners are those with a full-stack layout of "open-source + closed-source + SaaS + hardware."</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>Judgments on AI Going Global Frontlines</h2>
+<div class="callout">
+  <strong>Judgment 1 — Customer purchasing behavior splits into two layers</strong><br>
+  • Individual developers / Early startups: Pay by token → Chinese models = default option<br>
+  • Mid-tier SaaS / Enterprise clients: Pay by "business outcome" → Chinese models = backup + negotiation chip<br>
+  Sales strategy needs two sets: one for developers (GitHub / Discord / HN), one for procurement decision-makers (compliance + data residency + local case studies)
+</div>
+<div class="callout">
+  <strong>Judgment 2 — Three underestimated market opportunities</strong><br>
+  1. Southeast Asian multilingual customer service (Indonesian / Vietnamese / Thai)<br>
+  2. Spanish-language coding education in Latin America (Mexico / Brazil K12 + vocational training)<br>
+  3. Middle East Arabic language + Islamic culture scenarios (financial compliance / Sharia advisory / content moderation)
+</div>
+<div class="callout">
+  <strong>Judgment 3 — Reverse globalization is where the real money is</strong><br>
+  Domestic MaaS players have domestic revenue of 10–15 billion RMB/year, while overseas API revenue is less than 1/10. Overseas API is a path of price wars + thin margins. The real money is in pulling overseas developers into the domestic ecosystem (WAIC / Yunqi Conference / Hangzhou / Suzhou / Shenzhen AI startup parks).
+</div>
+<div class="callout">
+  <strong>Judgment 4 — Legal war signals to be wary of</strong><br>
+  In Q4 2025, a leading American AI company began taking legal action over being "diverted by Chinese open-source models" (training data compliance tracing). All major overseas client contracts should reserve a <strong>"model switching clause"</strong> and a <strong>"geopolitical force majeure clause"</strong>.
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>Token Going Global ≠ Model Going Global ≠ API Going Global</strong>: What truly determines share is indirect calls on third-party platforms (OpenRouter / Vercel / Cloudflare), not direct sales by Chinese cloud vendors</li>
+    <li><strong>61% is surface, real share likely close to 45%</strong>: OpenRouter doesn't include Chinese model calls on AWS Bedrock / Azure / Vertex</li>
+    <li><strong>The biggest winners are middle-layer players</strong>: Together AI ($500 million ARR, 60% gross margin) "selling Chinese open-source models back to the US" is 100 times easier than going global directly</li>
+    <li><strong>Pricing war at 1/30 is now the norm</strong>: Cache hit at 0.014 USD per million tokens—an order of magnitude lower than OpenAI's batch API</li>
+    <li><strong>Four monetization paths</strong>: Direct API sales / Aggregation revenue share / Industry SaaS / Hardware bundling—only a "full-stack layout" is the endgame</li>
+    <li><strong>Three underestimated opportunities</strong>: Southeast Asian multilingual customer service / Latin American coding education / Middle Eastern Arabic scenarios</li>
+    <li><strong>Open-source is the biggest lever and biggest risk</strong>: Being distilled + BIS controls + low coupling—three landmines to dismantle</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Compute" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: Compute Cluster — The Infrastructure Foundation for Token Going Global © Unsplash</figcaption>
+</figure>
+
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token Economy"><div class="rel-card-body"><h4>Token Economy This Year</h4><p>From 1.2% to 61%: The Explosive Growth of Chinese Open-source Models' Share on OpenRouter — Review and Outlook</p><span class="rel-card-tag">Token Economy</span></div></a>
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>Domestic MaaS War 2026</h4><p>Coding model price up 83% in Q1 while call volume triples 400%, video model monthly revenue exceeds 1 billion</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="mena-companies-deep-report.html"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="MENA"><div class="rel-card-body"><h4>MENA Internet Unicorns Deep Report</h4><p>The ICT Landscape Behind 6 MENA Internet Companies with Total Valuation of 15 Billion USD</p><span class="rel-card-tag">Deep Report</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>Data Sources</strong>: OpenRouter / Hugging Face / Artificial Analysis public rankings (2025–2026), public financial reports from various vendors, industry research from a16z / Menlo Ventures / Bessemer, internal MaaS industry survey (anonymized quotes). Data timeframe: 2026-05 to 2026-06. All company names are codenamed; cross-references in internal documents.</div>
+
+</div><footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(btn){sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/,'$1/'+lang+'$2');
+  }
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(this);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>

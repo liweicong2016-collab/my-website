@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>国产AI加速器生态实战观察：6841个模型在头部国产NPU上跑通了多少</title>
-<meta name="description" content="深度盘点2026年国产AI加速器生态：6841个开源模型里，量化栈、推理框架、训练框架到底成熟到什么程度。">
+<title>China's AI Accelerator Ecosystem in Action: How Many of 6,841 Models Run on Leading Domestic NPUs?</title>
+<meta name="description" content="A deep dive into China’s domestic AI accelerator ecosystem in 2026, evaluating how mature quantization stacks, inference frameworks, and training frameworks are across 6,841 open-source models.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -127,9 +127,9 @@ footer a:hover{text-decoration:underline}
 <body>
 <div id="progress-bar"></div>
 <div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
-<div class="lang-switch" data-current="zh">
-  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
-  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+<div class="lang-switch" data-current="en">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn active" data-lang="en" href="#" aria-label="English">EN</a>
   <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
   <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
 </div>
@@ -141,129 +141,129 @@ footer a:hover{text-decoration:underline}
   <div class="hero-overlay"></div>
   <div class="hero-body">
     <span class="tag">Ecosystem · 2026-06</span>
-    <h1>国产AI加速器生态实战观察</h1>
-    <p class="subtitle">6841个开源模型、6大任务族、对位NVIDIA生态的完整链路 — 头部国产NPU平台全解析</p>
+    <h1>Real-World Observations of China's AI Accelerator Ecosystem</h1>
+    <p class="subtitle">6,841 open-source models, 6 task families, an end-to-end pipeline mirroring NVIDIA’s ecosystem — a full analysis of a leading domestic NPU platform</p>
     <div class="hero-meta">
       <span>📅 2026-06-02</span>
       <span>⏱ ~10 min read</span>
-      <span>🏷️ 国产AI芯片 · AI加速器 · 模型生态</span>
+      <span>🏷️ China AI chips · AI accelerators · model ecosystem</span>
     </div>
     <div class="tag-row">
-      <span class="tag-pill">国产AI芯片</span>
-      <span class="tag-pill">AI加速器</span>
-      <span class="tag-pill">量化</span>
-      <span class="tag-pill">推理框架</span>
+      <span class="tag-pill">China AI chips</span>
+      <span class="tag-pill">AI accelerators</span>
+      <span class="tag-pill">quantization</span>
+      <span class="tag-pill">inference frameworks</span>
       <span class="tag-pill">MoE</span>
-      <span class="tag-pill">模型生态</span>
+      <span class="tag-pill">model ecosystem</span>
     </div>
   </div>
 </div>
 
 <div class="callout fade-up">
-  ⚠️ <strong>最大误解</strong>：国产AI加速器 ≠ 只跑FP16。本文用真实下载数据+30个原生模型快照，证明整条INT4/INT8/旋转量化/MTP优化栈已经做齐，对位NVIDIA TensorRT-LLM。这不是PPT，这是GitCode上正在跑的事实。
+  ⚠️ <strong>The biggest misconception</strong>: China’s AI accelerators ≠ FP16-only. This article uses real download data + 30 native model snapshots to prove that the entire INT4/INT8/rotary quantization/MTP optimization stack is fully in place, rivaling NVIDIA TensorRT-LLM. This isn't a slide deck — this is what’s live on GitCode.
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">1</span>生态规模 — 一个被低估的平台</h2>
-<p>头部国产NPU厂商在主流开源模型社区（AtomGit社区，筛选ascendNative=true标签）已经有 <strong>6841个模型</strong> 沉淀。</p>
+<h2><span class="num">1</span>Ecosystem Scale — A Platform Underestimated</h2>
+<p>A leading domestic NPU vendor has accumulated <strong>6,841 models</strong> on a major open-source model community (AtomGit, filtered by ascendNative=true).</p>
 <div class="bis-grid">
-  <div class="bis-card"><span class="val">6,841</span><span class="lab">平台总模型 / TOTAL</span></div>
-  <div class="bis-card green"><span class="val">5</span><span class="lab">模型家族 / FAMILIES</span></div>
-  <div class="bis-card purple"><span class="val">85K+</span><span class="lab">头30累计下载</span></div>
-  <div class="bis-card red"><span class="val">24.6K</span><span class="lab">TOP 1 下载量</span></div>
+  <div class="bis-card"><span class="val">6,841</span><span class="lab">Total platform models</span></div>
+  <div class="bis-card green"><span class="val">5</span><span class="lab">Model families</span></div>
+  <div class="bis-card purple"><span class="val">85K+</span><span class="lab">Cumulative downloads of top 30</span></div>
+  <div class="bis-card red"><span class="val">24.6K</span><span class="lab">TOP 1 downloads</span></div>
 </div>
-<p><strong>头部集中度</strong>：TOP 1占首屏30模型累计下载的~29%，TOP 2合计占~48%。</p>
+<p><strong>Head concentration</strong>: TOP 1 accounts for ~29% of cumulative downloads among the first-screen top 30 models; TOP 2 combined account for ~48%.</p>
 <ul>
-  <li>🥇 <strong>TOP 1</strong>：GLM-5-w4a8 — 32.6B MoE · W4A8量化 · 24.6K下载</li>
-  <li>🥈 <strong>TOP 2</strong>：Qwen3.5-397B-A17B — 397B MoE · W8A8+MTP · 16.3K下载</li>
+  <li>🥇 <strong>TOP 1</strong>: GLM-5-w4a8 — 32.6B MoE · W4A8 quantization · 24.6K downloads</li>
+  <li>🥈 <strong>TOP 2</strong>: Qwen3.5-397B-A17B — 397B MoE · W8A8+MTP · 16.3K downloads</li>
 </ul>
-<div class="quote">数据时点：2026-06-03 · 平台：AtomGit AI社区（国产NPU模型平台）· 筛选ascendNative=true</div>
+<div class="quote">Data snapshot: 2026-06-03 · Platform: AtomGit AI Community (domestic NPU model hub) · Filter: ascendNative=true</div>
 </div>
 
 <figure class="fade-up" style="margin:8px 0 24px">
   <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=80" alt="Data center" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
-  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI加速器服务器集群 — NPU是国产AI算力的核心基础设施 © Unsplash</figcaption>
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: AI accelerator server cluster — NPUs are the core infrastructure for China’s AI compute © Unsplash</figcaption>
 </figure>
 
 <div class="bis-section fade-up">
-<h2><span class="num">2</span>量化技术栈 — 整条推理优化栈已就位</h2>
-<p>这是海外客户最常问的问题：<strong>"国产NPU能跑量化模型吗？"</strong> 答案是肯定的 — 完整覆盖。</p>
+<h2><span class="num">2</span>Quantization Tech Stack — The Full Inference Optimization Stack Is Ready</h2>
+<p>This is the most frequent question from overseas customers: <strong>"Can domestic NPUs run quantized models?"</strong> The answer is yes — full coverage.</p>
 <div class="bis-grid">
-  <div class="bis-card"><span class="val" style="color:#38bdf8">W4A8</span><span class="lab">4-bit权重+8-bit激活<br>GLM-5-w4a8 · GLM-5.1-w4a8</span></div>
-  <div class="bis-card green"><span class="val" style="color:#34d399">W8A8</span><span class="lab">8-bit权+激<br>Qwen3.5-397B · 某头部MoE</span></div>
-  <div class="bis-card purple"><span class="val" style="color:#a78bfa">QuaRot</span><span class="lab">旋转量化<br>某头部MoE · Qwen3-Coder</span></div>
-  <div class="bis-card red"><span class="val" style="color:#f87171">MTP</span><span class="lab">多token预测<br>Qwen3.5-397B · GLM-5-mtp</span></div>
-  <div class="bis-card orange"><span class="val" style="color:#fbbf24">Flash</span><span class="lab">轻量推理版<br>glm-4.7-flash · z-image-turbo</span></div>
-  <div class="bis-card"><span class="val" style="color:#a78bfa">Rot</span><span class="lab">量化旋转RoPE-aware<br>GLM-5-W8A8-Rot</span></div>
+  <div class="bis-card"><span class="val" style="color:#38bdf8">W4A8</span><span class="lab">4-bit weights + 8-bit activations<br>GLM-5-w4a8 · GLM-5.1-w4a8</span></div>
+  <div class="bis-card green"><span class="val" style="color:#34d399">W8A8</span><span class="lab">8-bit weights + activations<br>Qwen3.5-397B · a leading MoE</span></div>
+  <div class="bis-card purple"><span class="val" style="color:#a78bfa">QuaRot</span><span class="lab">Rotary quantization<br>leading MoE · Qwen3-Coder</span></div>
+  <div class="bis-card red"><span class="val" style="color:#f87171">MTP</span><span class="lab">Multi-token prediction<br>Qwen3.5-397B · GLM-5-mtp</span></div>
+  <div class="bis-card orange"><span class="val" style="color:#fbbf24">Flash</span><span class="lab">Lightweight inference editions<br>glm-4.7-flash · z-image-turbo</span></div>
+  <div class="bis-card"><span class="val" style="color:#a78bfa">Rot</span><span class="lab">Rotation-aware quantization (RoPE)<br>GLM-5-W8A8-Rot</span></div>
 </div>
 <div class="punchline">
-<h3>📌 销售话术</h3>
+<h3>📌 Sales Pitch</h3>
 <ul>
-  <li>✅ <strong>W4A8已就位</strong> — 不是"未来支持"，是GitCode上24.6K下载的事实</li>
-  <li>✅ <strong>W8A8已就位</strong> — 397B MoE + W8A8 + MTP三重组合，跑通16.3K下载</li>
-  <li>✅ <strong>QuaRot旋转量化</strong> — 某头部MoE、Qwen3-Coder都在用</li>
-  <li>✅ <strong>MTP（多token预测）</strong> — 高QPS服务化场景的杀手锏</li>
-  <li>✅ <strong>Flash/Turbo轻量版</strong> — 端侧/边缘/高性价比场景</li>
+  <li>✅ <strong>W4A8 ready</strong> — not “future support”; 24.6K downloads live on GitCode</li>
+  <li>✅ <strong>W8A8 ready</strong> — 397B MoE + W8A8 + MTP triple combo, validated with 16.3K downloads</li>
+  <li>✅ <strong>QuaRot rotary quantization</strong> — already adopted by a leading MoE and Qwen3-Coder</li>
+  <li>✅ <strong>MTP (multi-token prediction)</strong> — a killer feature for high-QPS serving scenarios</li>
+  <li>✅ <strong>Flash/Turbo lightweight editions</strong> — for edge/on-device/cost-sensitive scenarios</li>
 </ul>
 </div>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">3</span>推理与训练框架 — 1:1对位NVIDIA生态</h2>
-<p>这是第二个最常问的问题：<strong>"国产NPU上跑vLLM / SGLang吗？代码要重写吗？"</strong> — 不用重写。</p>
+<h2><span class="num">3</span>Inference and Training Frameworks — 1:1 Paralleling the NVIDIA Ecosystem</h2>
+<p>This is the second most-asked question: <strong>"Can I run vLLM / SGLang on domestic NPUs? Do I need to rewrite code?"</strong> — No rewriting needed.</p>
 <div class="timeline">
-  <div class="tl-item"><div class="tl-date">推理框架</div><div class="tl-text"><strong>vLLM Ascend</strong> — 海外主流推理框架，已有Qwen3.5、GLM-4.7适配</div></div>
-  <div class="tl-item"><div class="tl-date">推理框架</div><div class="tl-text"><strong>SGLang Ascend</strong> — Qwen3-Next-80B-A3B已适配（8个月前就支持）</div></div>
-  <div class="tl-item"><div class="tl-date">推理引擎</div><div class="tl-text"><strong>MindIE</strong>（厂商自研推理引擎）— Qwen-Image-series在用</div></div>
-  <div class="tl-item"><div class="tl-date">训练框架</div><div class="tl-text"><strong>MindSpore-Lab</strong>（厂商自研训练）— Qwen3-8B已在MindSpore上跑通</div></div>
-  <div class="tl-item"><div class="tl-date">生态兼容</div><div class="tl-text"><strong>PyTorch-NPU</strong> — 现有PyTorch代码0改动即可跑YOLOv5/v10、PatchCore、WinCLIP、rapidOCR</div></div>
-  <div class="tl-item hi"><div class="tl-date">微调/对齐</div><div class="tl-text"><strong>Ascend-SACT</strong> — 微调/对齐工具链，GLM-5系列已用</div></div>
+  <div class="tl-item"><div class="tl-date">Inference Framework</div><div class="tl-text"><strong>vLLM Ascend</strong> — mainstream inference framework, already adapted for Qwen3.5 and GLM-4.7</div></div>
+  <div class="tl-item"><div class="tl-date">Inference Framework</div><div class="tl-text"><strong>SGLang Ascend</strong> — Qwen3-Next-80B-A3B adapted (supported since 8 months ago)</div></div>
+  <div class="tl-item"><div class="tl-date">Inference Engine</div><div class="tl-text"><strong>MindIE</strong> (in-house inference engine) — used by Qwen-Image-series</div></div>
+  <div class="tl-item"><div class="tl-date">Training Framework</div><div class="tl-text"><strong>MindSpore-Lab</strong> (in-house training) — Qwen3-8B already running on MindSpore</div></div>
+  <div class="tl-item"><div class="tl-date">Ecosystem Compatibility</div><div class="tl-text"><strong>PyTorch-NPU</strong> — existing PyTorch code runs YOLOv5/v10, PatchCore, WinCLIP, rapidOCR with zero changes</div></div>
+  <div class="tl-item hi"><div class="tl-date">Fine-tuning/Alignment</div><div class="tl-text"><strong>Ascend-SACT</strong> — fine-tuning/alignment toolkit, used by GLM-5 series</div></div>
 </div>
-<p><strong>对NVIDIA生态的1:1对位</strong>：从训练（MindSpore/PyTorch-NPU）到推理（vLLM/SGLang/MindIE）到微调（SACT），整条工具链不缺位。</p>
+<p><strong>One-to-one correspondence with the NVIDIA ecosystem</strong>: From training (MindSpore/PyTorch-NPU) to inference (vLLM/SGLang/MindIE) to fine-tuning (SACT), the whole toolchain is complete.</p>
 </div>
 
 <figure class="fade-up" style="margin:8px 0 24px">
   <img src="https://images.unsplash.com/photo-1532996123724-8ff2c4a6f7b7?w=900&q=80" alt="Circuit" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
-  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：AI芯片电路 — 国产NPU正在快速缩小与NVIDIA的技术差距 © Unsplash</figcaption>
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: AI chip circuit — Domestic NPUs are rapidly closing the technology gap with NVIDIA © Unsplash</figcaption>
 </figure>
 
 <div class="bis-section fade-up">
-<h2><span class="num">4</span>模型家族矩阵 — 6大任务族全覆盖</h2>
+<h2><span class="num">4</span>Model Family Matrix — Full Coverage Across 6 Task Families</h2>
 <div class="tbl-wrap">
 <table class="tbl">
-<thead><tr><th>任务族</th><th>代表模型（节选）</th><th>生态成熟度</th></tr></thead>
+<thead><tr><th>Task Family</th><th>Representative Models (selection)</th><th>Ecosystem Maturity</th></tr></thead>
 <tbody>
-<tr><td><span class="tg tg-m">通用LLM</span></td><td>GLM-5/4.7 · Qwen3/3.5 · Gemma-4 · 某1B国产端侧模型</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td><span class="tg tg-r">代码LLM</span></td><td>Qwen3-Coder-480B-A35B（21.4B激活+W8A8+QuaRot）</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td><span class="tg tg-m">多模态VLM</span></td><td>Qwen3.5 VLM · Qwen-Image · z-image · HunyuanWorld（3D）</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td><span class="tg tg-n">语音ASR/TTS</span></td><td>Qwen3-ASR-1.7B · whisper-large-v3-turbo · Kokoro-82M TTS</td><td>⭐⭐⭐⭐</td></tr>
-<tr><td><span class="tg tg-n">视觉/OCR</span></td><td>YOLOv5/v10 · PatchCore · WinCLIP · rapidOCR · pix2struct-docvqa</td><td>⭐⭐⭐⭐⭐</td></tr>
-<tr><td><span class="tg tg-r">行业垂直</span></td><td>PatchCore工业异常检测 · WinCLIP零样本工业视觉</td><td>⭐⭐⭐（增长中）</td></tr>
+<tr><td><span class="tg tg-m">General LLM</span></td><td>GLM-5/4.7 · Qwen3/3.5 · Gemma-4 · a 1B domestic edge model</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td><span class="tg tg-r">Code LLM</span></td><td>Qwen3-Coder-480B-A35B (21.4B activated + W8A8 + QuaRot)</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td><span class="tg tg-m">Multimodal VLM</span></td><td>Qwen3.5 VLM · Qwen-Image · z-image · HunyuanWorld (3D)</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td><span class="tg tg-n">Speech ASR/TTS</span></td><td>Qwen3-ASR-1.7B · whisper-large-v3-turbo · Kokoro-82M TTS</td><td>⭐⭐⭐⭐</td></tr>
+<tr><td><span class="tg tg-n">Vision/OCR</span></td><td>YOLOv5/v10 · PatchCore · WinCLIP · rapidOCR · pix2struct-docvqa</td><td>⭐⭐⭐⭐⭐</td></tr>
+<tr><td><span class="tg tg-r">Vertical Industry</span></td><td>PatchCore industrial anomaly detection · WinCLIP zero-shot industrial vision</td><td>⭐⭐⭐ (growing)</td></tr>
 </tbody>
 </table>
 </div>
 <div class="signal">
-<h3>🔍 关键信号：行业垂直模型正在加速</h3>
+<h3>🔍 Key Signal: Vertical Industry Models Are Accelerating</h3>
 <ul>
-  <li>PatchCore（工业异常检测）— 1天前刚发布</li>
-  <li>WinCLIP（零样本工业视觉）— 3天前刚发布</li>
-  <li>工业视觉类模型3天内连发多个 → 制造/物流行业是2026年重点方向</li>
+  <li>PatchCore (industrial anomaly detection) — released 1 day ago</li>
+  <li>WinCLIP (zero-shot industrial vision) — released 3 days ago</li>
+  <li>Multiple industrial vision models released within 3 days → manufacturing/logistics are key directions for 2026</li>
 </ul>
 </div>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">5</span>客户场景映射</h2>
-<p>客户说"我们想做XX"，立刻能映射到GitCode上的具体模型。</p>
+<h2><span class="num">5</span>Customer Scenario Mapping</h2>
+<p>When a customer says “we want to do XX”, it maps directly to specific models on GitCode.</p>
 <div class="tbl-wrap">
 <table class="tbl">
-<thead><tr><th>客户业务场景</th><th>推荐模型</th><th>为什么选它</th></tr></thead>
+<thead><tr><th>Customer Business Scenario</th><th>Recommended Model</th><th>Why</th></tr></thead>
 <tbody>
-<tr><td><strong>LLM API服务</strong></td><td>GLM-5-w4a8</td><td>24.6K下载，W4A8量化省显存</td></tr>
-<tr><td><strong>代码助手/Copilot</strong></td><td>Qwen3-Coder-480B-A35B-w8a8-QuaRot</td><td>480B MoE 21.4B激活+W8A8+QuaRot三重优化</td></tr>
-<tr><td><strong>RAG/文档智能</strong></td><td>pix2struct-docvqa · hunyuan-ocr · rapidOCR-npu</td><td>OCR+文档VQA三件套</td></tr>
-<tr><td><strong>工业质检</strong></td><td>PatchCore · YOLOv10-Ascend · WinCLIP</td><td>工业视觉三件套，3天内齐发</td></tr>
-<tr><td><strong>Agent高QPS平台</strong></td><td>Qwen3.5-397B-A17B-w8a8-mtp</td><td>397B MoE+W8A8+MTP三重优化</td></tr>
+<tr><td><strong>LLM API service</strong></td><td>GLM-5-w4a8</td><td>24.6K downloads, W4A8 quantization saves memory</td></tr>
+<tr><td><strong>Code assistant/Copilot</strong></td><td>Qwen3-Coder-480B-A35B-w8a8-QuaRot</td><td>480B MoE 21.4B activated + W8A8 + QuaRot triple optimization</td></tr>
+<tr><td><strong>RAG / document intelligence</strong></td><td>pix2struct-docvqa · hunyuan-ocr · rapidOCR-npu</td><td>OCR + document VQA trifecta</td></tr>
+<tr><td><strong>Industrial quality inspection</strong></td><td>PatchCore · YOLOv10-Ascend · WinCLIP</td><td>Industrial vision trifecta, all released within 3 days</td></tr>
+<tr><td><strong>High-QPS Agent platform</strong></td><td>Qwen3.5-397B-A17B-w8a8-mtp</td><td>397B MoE + W8A8 + MTP triple optimization</td></tr>
 </tbody>
 </table>
 </div>
@@ -272,47 +272,46 @@ footer a:hover{text-decoration:underline}
 <div class="key-takeaways fade-up">
   <h3>🎯 Key Takeaways</h3>
   <ul>
-    <li><strong>国产AI加速器不是NVIDIA的"降级替代"</strong> — 有完整量化栈（INT4/INT8/QuaRot/MTP）、vLLM/SGLang兼容、6841个模型沉淀的成熟生态</li>
-    <li><strong>量化栈已就位</strong>：W4A8（24.6K下载验证）、W8A8（397B MoE+MTP）</li>
-    <li><strong>推理框架1:1对位NVIDIA</strong>：PyTorch-NPU（0改动）、vLLM Ascend、SGLang Ascend、MindIE</li>
-    <li>对于需要长期TCO优化、需要避免单点供应风险的客户，<strong>2026年是认真评估的窗口期</strong></li>
+    <li><strong>China AI accelerators are not a “downgraded” NVIDIA alternative</strong> — they have a complete quantization stack (INT4/INT8/QuaRot/MTP), vLLM/SGLang compatibility, and a mature ecosystem with 6,841 models</li>
+    <li><strong>Quantization stack is ready</strong>: W4A8 (validated by 24.6K downloads), W8A8 (397B MoE + MTP)</li>
+    <li><strong>Inference frameworks mirror NVIDIA 1:1</strong>: PyTorch-NPU (zero changes), vLLM Ascend, SGLang Ascend, MindIE</li>
+    <li>For customers requiring long-term TCO optimization and wanting to avoid single-supplier risk, <strong>2026 is the window for serious evaluation</strong></li>
   </ul>
 </div>
 
 <figure class="fade-up" style="margin:8px 0 24px">
   <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Server room" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
-  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：数据中心全景 — AI算力基础设施正在成为全球科技竞争的核心 © Unsplash</figcaption>
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">Figure: Data center panorama — AI compute infrastructure is becoming the core of global tech competition © Unsplash</figcaption>
 </figure>
 
 <div class="bis-section fade-up">
-<h2><span class="num">6</span>结论与下一步</h2>
+<h2><span class="num">6</span>Conclusion and Next Steps</h2>
 <div class="punchline">
-<h3>🎯 一句话给海外客户</h3>
-<p><strong>国产AI加速器不是NVIDIA的"降级替代" — 它已经是有完整量化栈、有vLLM/SGLang兼容、有6841个模型沉淀的成熟生态。</strong> 对于需要长期TCO优化、需要避免单点供应风险的客户，2026年是认真评估的窗口期。</p>
+<h3>🎯 One sentence for overseas customers</h3>
+<p><strong>China AI accelerators are not a “downgraded” NVIDIA alternative — they already represent a mature ecosystem with a complete quantization stack, vLLM/SGLang compatibility, and 6,841 models.</strong> For customers who need long-term TCO optimization and want to avoid single-supplier risk, 2026 is the window for serious evaluation.</p>
 </div>
-<p><strong>对部署方的下一步</strong>：</p>
+<p><strong>Next steps for deployers</strong>:</p>
 <ul>
-  <li>✅ 试用：AtomGit AI社区ascendNative=true筛选页直接看模型</li>
-  <li>✅ 评估：从客户业务最痛的场景（LLM API/OCR/工业质检）开始PoC</li>
-  <li>✅ 对比：用vLLM/SGLang在国产NPU和NVIDIA上跑同一模型，对比TCO</li>
-  <li>✅ 迁移：PyTorch代码0改动，CUDA代码通过torch_npu适配器迁移</li>
+  <li>✅ Try: Browse the AtomGit AI Community filtered by ascendNative=true to see the models</li>
+  <li>✅ Evaluate: Start a PoC for the customer’s most painful scenario (LLM API / OCR / industrial inspection)</li>
+  <li>✅ Compare: Run the same model on domestic NPU and NVIDIA using vLLM/SGLang, and compare TCO</li>
+  <li>✅ Migrate: PyTorch code with zero changes; CUDA code migrates via torch_npu adapters</li>
 </ul>
-<div class="quote">Drop-in replacement for CUDA stack — 已经是社区共识，不是PPT口号</div>
+<div class="quote">Drop-in replacement for the CUDA stack — it's already community consensus, not a slideware slogan</div>
 </div>
 
 <div class="related-section fade-up">
 <h2>Related Reading</h2>
 <div class="related-grid">
-<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>国内MaaS大战2026</h4><p>Coding模型Q1涨价83%同时调用量增400%，视频模型单月收入破10亿</p><span class="rel-card-tag">MaaS</span></div></a>
-<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token"><div class="rel-card-body"><h4>Token经济这一年</h4><p>从2025年初的1.2%到2026年的61%，中国开源模型在OpenRouter上的份额爆炸式增长</p><span class="rel-card-tag">Token Economy</span></div></a>
-<a class="rel-card" href="china-internet-ai-capabilities-2025.html"><img src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=600&q=80" alt="China AI"><div class="rel-card-body"><h4>2025中国互联网头部企业AI能力深度洞察</h4><p>字节跳动、阿里巴巴、腾讯、幻方——从AI at Work、AI in Products、Building AI SOTA三大维度拆解</p><span class="rel-card-tag">Deep Report</span></div></a>
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>China MaaS Wars 2026</h4><p>Coding model prices rose 83% in Q1 while call volume jumped 400%; video models hit monthly revenue of over 1 billion yuan</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="token-economy-2026.html"><img src="https://images.unsplash.com/photo-1611974789855-9c702756b717?w=600&q=80" alt="Token"><div class="rel-card-body"><h4>The Token Economy This Year</h4><p>From 1.2% in early 2025 to 61% in 2026, China’s open-source models exploded in share on OpenRouter</p><span class="rel-card-tag">Token Economy</span></div></a>
+<a class="rel-card" href="china-internet-ai-capabilities-2025.html"><img src="https://images.unsplash.com/photo-1547981609-4b6b1a8f0c7a?w=600&q=80" alt="China AI"><div class="rel-card-body"><h4>2025 Deep Insight: AI Capabilities of China’s Top Internet Companies</h4><p>ByteDance, Alibaba, Tencent, High-Flyer — deconstructed across AI at Work, AI in Products, and Building AI SOTA</p><span class="rel-card-tag">Deep Report</span></div></a>
 </div>
 </div>
 
-<div class="ftrnote"><strong>数据来源</strong>：本文基于公开行业资料整理，数据时点及来源请参见正文脚注。部分数字为行业估算，仅供方向参考。</div>
+<div class="ftrnote"><strong>Data sources</strong>: This article is based on public industry materials; data snapshots and sources are indicated in the body footnotes. Some figures are industry estimates for directional reference only.</div>
 
-</div></div>
-<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div><footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
 </div></div>
 <script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
 <div class="lang-toast" id="langToast"></div>
