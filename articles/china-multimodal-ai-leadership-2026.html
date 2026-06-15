@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国 Token 出海 2026：从价格战到全球份额的拐点</title>
+<meta name="description" content="中国大模型在 OpenRouter 拿下 61% 份额只是开始。本文拆解谁在真正出海、目标市场怎么选、定价怎么打、变现路径在哪。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+
+
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="zh">
+  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80" alt="Multimodal AI">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">Multimodal AI · 2026</span>
+    <h1>国内多模态 AI 现状：LLM 追到半步之遥，视频模型却领先一整年</h1>
+    <p class="subtitle">同一个 AI 战场，文字和视频走的是完全相反的剧本——LLM 是半步之遥，视频生成是事实垄断</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-15</span>
+      <span>⏱ ~9 min read</span>
+      <span>🏷️ Multimodal AI · 视频生成 · 3D 建模 · 国内 AI 现状</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">国内多模态</span>
+      <span class="tag-pill">LLM 4 个月差距</span>
+      <span class="tag-pill">视频领先 1 年</span>
+      <span class="tag-pill">3D 建模</span>
+      <span class="tag-pill">出海策略</span>
+    </div>
+  </div>
+</div>
+
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>: Chinese multimodal AI is splitting in two. On the LLM side, domestic flagship models have closed the gap with first-tier to roughly 4 months (down from 8+) in chat quality, 6-8 months in code/agents, and 4 months in multimodal understanding—while leading by 4 months in Chinese and 7× on price. On video generation, however, the gap has inverted: a leading Chinese video cloud leads the global first tier by 17-27 percentage points on character consistency and 3D consistency, generates 1080p 30s clips 2.6× faster, costs 18× less, and is about to launch a next-gen model supporting 18-minute continuous generation (9× longer than Sora 2, 4.5× longer than Veo 3). Total addressable market: ¥600-800B ARR for the leading Chinese video cloud. The strategic implication: don't waste bullets on the general LLM race—sell video, 3D, and digital humans to Southeast Asia → MENA → LATAM.
+</div>
+
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>：国内多模态 AI <strong>两极分化</strong>。LLM 赛道是"半步之遥"（4-8 个月差距，绝对值已经够用）；视频生成赛道是"事实垄断"（领先 12 个月以上）。如果你只盯 LLM 榜单会低估国内实力；只看视频生成会高估 LLM 破局能力。出海胜负手：<strong>卖视频、卖 3D、卖数字人，不要在美元通用 LLM 客户身上浪费子弹</strong>。
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>LLM 通用赛道——半步之遥</h2>
+<p>国内某头部 LLM 公司 C 的旗舰模型，在 2026 年 6 月的多项基准测试上拿到了与第一梯队 Opus 4.6 <strong>持平</strong>的成绩（chat 维度）。</p>
+<p>但<strong>持平</strong>≠<strong>全面追平</strong>。</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>维度</th><th>国内头部</th><th>第一梯队</th><th>差距</th></tr></thead>
+<tbody>
+<tr><td>通用 chat 质量</td><td>87</td><td>92</td><td>~4 个月</td></tr>
+<tr><td>代码（公开 benchmark）</td><td>62%</td><td>78%</td><td>~6 个月</td></tr>
+<tr><td>长上下文（128K）</td><td>60% 检索准确</td><td>78%</td><td>~6-8 个月</td></tr>
+<tr><td>Agent 编排</td><td>47%</td><td>71%</td><td>~8 个月</td></tr>
+<tr><td>多模态理解</td><td>84%</td><td>88%</td><td>~4 个月</td></tr>
+<tr><td><strong>中文理解</strong></td><td><strong>96%</strong></td><td><strong>88%</strong></td><td><strong>领先 4 个月</strong></td></tr>
+<tr><td>价格（输入/输出 per 1M token）</td><td>¥2 / ¥8</td><td>$15 / $75</td><td><strong>价格优势 7 倍</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<h3>📌 关键判断</h3>
+<p>差距在 4-8 个月之间，但<strong>绝对值已经够用</strong>。80% 的应用场景里，4 个月的差距<strong>用户感知不到</strong>。</p>
+<p>但 20% 的场景里——复杂代码重构、多步骤 agent 编排、千万级 token 长文档推理——这 20% 恰恰是<strong>美元用户最在意的</strong>，也是<strong>毛利率最高</strong>的。</p>
+</div>
+<div class="callout">
+<strong>LLM 通用赛道判断</strong>：靠<strong>价格 + 中文优势 + 私有化部署</strong>吃下 60% 国内市场没问题。<br>
+<strong>海外破局窗口</strong>：中文场景（跨境电商 / 海外华人开发者）→ 一带一路（东南亚 / 中东本地化）→ 别在美元通用 LLM 客户身上浪费子弹。
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>视频生成——事实垄断</h2>
+<p>国内某头部视频云 A 的旗舰模型，在 3D 建模、AI 短剧生成、镜头控制、角色一致性等维度，<strong>全球排名第一</strong>。</p>
+<p><strong>注意我的措辞——不是"国内排名第一"，是"全球排名第一"。</strong></p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>维度</th><th>国内（头部视频云 A）</th><th>第一梯队</th><th>差距</th></tr></thead>
+<tbody>
+<tr><td>1080p 30s 生成速度</td><td>90s</td><td>240s</td><td><strong>领先 2.6 倍</strong></td></tr>
+<tr><td>角色一致性</td><td>95%</td><td>78%</td><td><strong>领先 17 pp</strong></td></tr>
+<tr><td>镜头物理（重力 / 流体）</td><td>88%</td><td>86%</td><td>持平</td></tr>
+<tr><td><strong>3D 一致性</strong></td><td><strong>92%</strong></td><td><strong>65%</strong></td><td><strong>领先 27 pp</strong></td></tr>
+<tr><td>18 分钟连续</td><td>✅（下一代）</td><td>❌（最长 2 分钟）</td><td><strong>领先 1 代</strong></td></tr>
+<tr><td>成本 / 分钟</td><td>¥1.8</td><td>$4.5</td><td><strong>价格优势 18 倍</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="punchline">
+<h3>💡 27 pp 的 3D 一致性差距是这个报告最让我惊讶的数字</h3>
+<p>这意味着当你要求 AI 生成一个旋转 360 度的 3D 物体时，国内模型能保持物体形状、材质、光影完全一致；第一梯队的模型 35% 的概率<strong>会"穿模"或"变形"</strong>。</p>
+<p>这 27 pp 的差距，<strong>美国团队需要 12+ 个月才能追上</strong>。</p>
+</div>
+<div class="signal">
+<h3>🛡️ 三条护城河</h3>
+<ul>
+<li><strong>数据闭环</strong>：国内某头部视频云 A 背后有<strong>600 万抖音/今日头条 3D 创作者</strong>每天生成 3D 内容回流</li>
+<li><strong>物理仿真训练管线</strong>：自研的 3D 物理引擎直接喂给视频模型</li>
+<li><strong>镜头控制 token 经济</strong>：把镜头语言（推 / 拉 / 摇 / 移）变成可学习的 token，推理效率高 3 倍</li>
+</ul>
+<p>这三条护城河<strong>没有一个能靠"砸钱"复制</strong>——都需要<strong>时间 + 数据 + 工程</strong>。</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>下一代视频模型——18 分钟的意义</h2>
+<p>更让人惊讶的是即将到来的下一代。</p>
+<p>国内某头部视频云 A 的下一代旗舰模型（2026 年下半年发布，对外口径"下个季度"）会支持 <strong>18 分钟连续视频生成</strong>。</p>
+<div class="punchline">
+<h3>📌 18 分钟意味着什么</h3>
+<ul>
+<li>上一代：60 秒</li>
+<li>下一代：18 分钟 = <strong>18 倍增长</strong></li>
+<li>Sora 2 当前最长：2 分钟 → <strong>9 倍差距</strong></li>
+<li>Veo 3 公开评测最长：4 分钟 → <strong>4.5 倍差距</strong></li>
+</ul>
+</div>
+<p><strong>这就是"事实垄断"的含义。</strong></p>
+<p>更关键的是它支持"低分辨率调整片段"——先用 480p 跑完整 18 分钟（token 经济友好），用户调满意后再 upscale 到 1080p / 4K。</p>
+<div class="signal">
+<h3>🎬 创作者工作流的 4 个改变</h3>
+<ul>
+<li><strong>AI 短剧（30 集 / 季）</strong>：从"按镜头生成"变成"按集生成"，效率提升 18 倍</li>
+<li><strong>产品演示</strong>：从"5 分钟 demo 拼接"变成"18 分钟完整走查"</li>
+<li><strong>教学课程</strong>：从"PPT 配音"变成"AI 主讲人 18 分钟连续输出"</li>
+<li><strong>营销短片</strong>：从"模板填充"变成"AI 一次成型"</li>
+</ul>
+</div>
+<div class="callout">
+<strong>商业影响推算</strong>：1200 万创作者 × 平均 60 分钟/月 × ¥0.6/分钟 = <strong>¥4.3 亿/月</strong>，年化 <strong>¥52 亿 ARR 增量</strong>。加上现有 ARR → 总 ARR 可达 <strong>¥200 亿</strong>。
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>国内多模态整体格局</h2>
+<p>把视角拉远看，国内多模态 AI 的格局是<strong>两极分化</strong>的：</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>类别</th><th>国内代表</th><th>距第一梯队</th><th>备注</th></tr></thead>
+<tbody>
+<tr><td>LLM 文本</td><td>多家头部</td><td>4-6 个月</td><td>价格 + 中文吃国内</td></tr>
+<tr><td>LLM 代码</td><td>头部 LLM 公司 D 等</td><td>6 个月</td><td>海外破局中</td></tr>
+<tr><td><strong>视频生成</strong></td><td><strong>头部视频云 A</strong></td><td><strong>领先 12 个月</strong></td><td><strong>事实垄断</strong></td></tr>
+<tr><td>图像生成</td><td>多家头部</td><td>持平</td><td>价格优势</td></tr>
+<tr><td><strong>3D 生成</strong></td><td><strong>头部视频云 A / 头部 3D 公司 H</strong></td><td><strong>领先 6-9 个月</strong></td><td><strong>数据闭环优势</strong></td></tr>
+<tr><td>语音 / TTS</td><td>多家头部</td><td>持平</td><td>中文强</td></tr>
+<tr><td>音乐</td><td>头部语音 J 等</td><td>落后 3 个月</td><td>海外破局</td></tr>
+<tr><td><strong>数字人</strong></td><td><strong>头部数字人 I 等</strong></td><td><strong>领先 9 个月</strong></td><td><strong>国内 SaaS 化最强</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="signal">
+<h3>🔑 三个"领先"领域的共同点</h3>
+<p>都需要<strong>"国内特有数据闭环"</strong>：</p>
+<ul>
+<li><strong>视频生成</strong>：600 万抖音 3D 创作者</li>
+<li><strong>3D 生成</strong>：国内短视频 / 直播 / 电商场景</li>
+<li><strong>数字人</strong>：国内直播带货 SaaS 化最彻底</li>
+</ul>
+<p>这些数据闭环<strong>海外复制成本极高——不是"算力问题"，是"生态问题"</strong>。</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>出海应该卖什么——战略建议</h2>
+<div class="signal">
+<h3>🎯 第一梯队碾压的领域（视频 / 3D / 数字人）</h3>
+<ul>
+<li>客户<strong>主动找你</strong>，不需要冷启动</li>
+<li>价格优势 18 倍 = 客户 ROI 显而易见</li>
+<li>监管摩擦相对小（不算"敏感 AI"）</li>
+</ul>
+</div>
+<div class="signal">
+<h3>📊 半步之遥的领域（LLM 通用）</h3>
+<ul>
+<li>靠"中文 + 一带一路 + 私有化"吃细分市场</li>
+<li>别在美元通用 LLM 客户身上浪费子弹</li>
+<li>卖给 SaaS 集成商比卖给终端客户容易 10 倍</li>
+</ul>
+</div>
+<div class="signal">
+<h3>⚠️ 落后 / 平价的领域（音乐 / 图像）</h3>
+<ul>
+<li>海外破局难度大</li>
+<li>适合"白牌出海"，不做品牌</li>
+</ul>
+</div>
+<div class="callout">
+<strong>目标市场优先级</strong>：<br>
+1. <strong>东南亚</strong>：低监管 + 中文友好 + AI 短剧需求爆发 = <strong>第一优先</strong><br>
+2. <strong>中东</strong>：高 ARPU + 数字人需求 = <strong>第二优先</strong><br>
+3. <strong>拉美</strong>：市场大 + 监管松 = <strong>第三优先</strong><br>
+4. <strong>欧美</strong>：监管严 + 客户挑剔 = <strong>只打垂直 SaaS 集成商</strong>
+</div>
+</div>
+
+<div class="key-takeaways fade-up">
+  <h3>🎯 Key Takeaways</h3>
+  <ul>
+    <li><strong>国内多模态 AI 两极分化</strong>：LLM 是半步之遥（4-8 个月差距），视频生成是事实垄断（领先 12 个月以上）</li>
+    <li><strong>LLM "持平"≠"全面追平"</strong>：chat 维度持平，代码 / agent / 长上下文仍落后 6-8 个月——这恰恰是美元用户最在意的</li>
+    <li><strong>视频生成的 3 个护城河</strong>：600 万抖音 3D 创作者数据闭环 + 自研物理仿真训练管线 + 镜头控制 token 经济——没有一个能靠砸钱复制</li>
+    <li><strong>下一代视频模型 = 18 分钟</strong>：9 倍于 Sora 2，4.5 倍于 Veo 3；ARR 增量推算 ¥52 亿，总 ARR 可达 ¥200 亿</li>
+    <li><strong>数字人 / 3D / 视频生成的共同点</strong>：依赖"国内特有数据闭环"，海外复制成本极高</li>
+    <li><strong>出海胜负手</strong>：卖视频、卖 3D、卖数字人，不要在美元通用 LLM 客户身上浪费子弹</li>
+    <li><strong>目标市场优先级</strong>：东南亚 → 中东 → 拉美 → 欧美（只打垂直 SaaS 集成商）</li>
+  </ul>
+</div>
+
+<figure class="fade-up" style="margin:8px 0 24px">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80" alt="Compute" style="width:100%;border-radius:12px;border:1px solid #1e2d45">
+  <figcaption style="text-align:center;font-size:12px;color:#94a3b8;margin-top:8px">图：算力集群 — 多模态 AI 的基础设施底座 © Unsplash</figcaption>
+</figure>
+
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="domestic-maas-token-wars-2026.html"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="MaaS"><div class="rel-card-body"><h4>国内 MaaS 大战 2026</h4><p>Coding 模型 Q1 涨价 83% 同时调用量增 400%，视频模型单月收入破 10 亿</p><span class="rel-card-tag">MaaS</span></div></a>
+<a class="rel-card" href="china-token-going-global-2026.html"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=600&q=80" alt="Token Going Global"><div class="rel-card-body"><h4>中国 Token 出海 2026</h4><p>从 1.2% 到 61%：份额之后的真问题——谁在出海、怎么变现、能否持续</p><span class="rel-card-tag">Token Going Global</span></div></a>
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=600&q=80" alt="AI Accelerator"><div class="rel-card-body"><h4>国内 AI 加速器生态 2026</h4><p>从推理芯片到大模型一体机的全栈战争，国产 GPU / TPU 的真实格局</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+</div>
+</div>
+
+<div class="ftrnote"><strong>数据来源</strong>：国内头部 LLM 公司 C 2026-06 月度 benchmark 通稿 / LMArena 2026-06 排名 / 头部视频云 A 2026Q1 收入披露 / Sensor Tower 2026Q1 数据 / 第三方独立评测 SyntheticAperture 2026-05 / Gartner 2026Q2 AI 厂商报告。<strong>数据时点</strong>：2026-06-15。<strong>公司名一律以代号指代</strong>，对应关系在内部资料。</div>
+
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(lang){
+    sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.classList.add('active');
+    sw.setAttribute('data-current',lang);
+  }
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\/,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\/,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/, '$1/'+lang+'$2');
+  }
+  // Default: ZH active, regardless of data-current attribute set in HTML
+  setActive('zh');
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(lang);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script></body></html>
