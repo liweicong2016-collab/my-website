@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三个 coding 模型接力跑同一份代码：GLM-5.2 / Sonnet 4.6 / Opus 4.7 实战对比</title>
+<meta name="description" content="同 harness、同 TDD、同项目——把 GLM-5.2、Sonnet 4.6、Opus 4.7 拉到一份代码基线上跑真实任务，结论：GLM-5.2 ≈ Opus 4.7，Sonnet 4.6 低半档但快省。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80" alt="代码编辑器与多模型协作">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">CODING MODEL COMPARISON 2026 · LIVE TEST</span>
+    <h1>三个 coding 模型接力跑同一份代码：GLM-5.2 / Sonnet 4.6 / Opus 4.7 实战对比</h1>
+    <p class="subtitle">同 harness / 同 TDD / 同项目——这次测试给方法学的反思比给排名更有价值。</p>
+    <div class="hero-meta">
+      <span>📅 2026-06-15</span>
+      <span>⏱ ~10 min read</span>
+      <span>🏷️ AI · Coding 模型 · 方法学</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">GLM-5.2</span>
+      <span class="tag-pill">Sonnet 4.6</span>
+      <span class="tag-pill">Opus 4.7</span>
+      <span class="tag-pill">DeepSeek v4-pro</span>
+      <span class="tag-pill">方法学</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN 摘要（可选） ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>：Three coding models — GLM-5.2, Sonnet 4.6, Opus 4.7 (plus DeepSeek v4-pro) — ran the same project, same TDD flow, same agent harness. The conclusion: GLM ≈ Opus, Sonnet is half a tier below but fast. More interesting than the ranking: the methodological reflection on why benchmark numbers ≠ real-world performance.
+</div>
+
+<!-- ===== TL;DR 核心结论 ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>：GLM-5.2 ≈ Opus 4.7（深度调试 / TDD 纪律 / 角色边界 同档）;Sonnet 4.6 低半档但快省;DeepSeek v4-pro 也是第一档 + 延迟四家最快（11.4s）+ 寡言型执行者。
+</div>
+
+<!-- ===== 章节循环起点（每篇文章自己加） ===== -->
+
+
+<!-- ===== 章节 1：结论先放这儿 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">1</span>结论先放这儿</h2>
+  <p>把 <strong>GLM-5.2</strong>、<strong>Sonnet 4.6</strong>、<strong>Opus 4.7</strong> 拉到同一份代码、同一份 TDD 流程、同一套 ZCode agent harness 上跑真实任务（再加一节里把 <strong>DeepSeek v4-pro</strong> 也拉进来做了浏览器交互和 8 步 rollback）。结论一句话：</p>
+  <ul>
+    <li><strong>GLM-5.2 ≈ Opus 4.7</strong>——深度调试、TDD 纪律、角色边界三家都第一梯队。</li>
+    <li><strong>Sonnet 4.6</strong> 低半档——但快、省，效率型执行者。</li>
+    <li><strong>DeepSeek v4-pro</strong> 也是第一档——延迟四家最快（平均 11.4 秒），但风格完全不同：寡言、边跑边调、靠密集工具调用推进。</li>
+  </ul>
+  <p>这次测试最有价值的不是给模型排名，而是<strong>反思方法学本身</strong>。为什么这么说，下面展开。</p>
+</div>
+
+<!-- ===== 章节 2：测试背景 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">2</span>测试背景：为什么这次不是又一个 benchmark</h2>
+  <p>我以前写过几篇行业 benchmark 速读（SWE-bench Leaderboards、Aider polyglot、LMArena Chatbot Arena、Artificial Analysis），它们都有同一个盲点：</p>
+  <div class="callout">
+    <strong>benchmark 数字</strong>只能告诉你"够不够格"，不能告诉你"够不够好用"。
+  </div>
+  <p>一个 SWE-bench Verified 60% 通过率的模型，可能在真实项目里被一个 review finding 卡住 30 分钟爬不出来；一个 SWE-bench 40% 的模型，可能在 review 面前一抓一个准、还顺手把测试时序的隐性 bug 修了。</p>
+  <p>所以这次我换了一个<strong>实战对实战</strong>的 setup：</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>维度</th><th>设定</th></tr></thead>
+      <tbody>
+        <tr><td>项目</td><td>一个完整的前后端项目（包含 Playwright 拖拽、SortableJS 集成、V9.4.3 index rollback）</td></tr>
+        <tr><td>Harness</td><td>ZCode agent（自主编码 agent framework）</td></tr>
+        <tr><td>流程</td><td>TDD：RED → GREEN → REFACTOR；reviewer 抓 finding</td></tr>
+        <tr><td>模型接的段落</td><td>GLM-5.2 跑主体（190 turn）；Sonnet 4.6 清 E4（25 turn）；Opus 4.7 调 3 个 medium finding（26 turn）；DeepSeek v4-pro 跑浏览器交互 + 8 步 rollback（120 turn）</td></tr>
+        <tr><td>最终结果</td><td>pytest 全绿 / vitest 全绿 / build 通过 / 零回归</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>关键约束</strong>：这不是 head-to-head benchmark。四家接的是<strong>不同阶段、不同类型的任务</strong>，难度不可比。但<strong>harness、流程、代码基线完全一样</strong>，这给了我们一个观察"模型风格差异"的机会。</p>
+</div>
+
+<!-- ===== 章节 3：关键数字三表 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">3</span>关键数字三张表</h2>
+
+  <h3>3.1 延迟（平均单 turn 秒数）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>模型</th><th>平均</th><th>最慢单 turn</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DeepSeek v4-pro</strong></td><td><span class="tg tg-m">11.4s</span></td><td>44.8s</td></tr>
+        <tr><td>GLM-5.2</td><td>16.4s</td><td>52.4s</td></tr>
+        <tr><td>Sonnet 4.6</td><td>17.0s</td><td>52.4s</td></tr>
+        <tr><td>Opus 4.7</td><td>17.9s</td><td>33.7s</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>最反直觉的数字</strong>：平均延迟最慢的反而是 Opus 4.7（17.9s），但<strong>它最稳</strong>——最慢单 turn 33.7s，是四家里最低的。GLM 和 Sonnet 都飙到过 52.4s。</p>
+  <p>也就是说：<strong>"慢 turn 数量"比"平均延迟"更能反映模型的稳定性</strong>。Opus 慢得均匀，GLM / Sonnet 偶尔一两个长 Read / Edit 把平均拉高。DeepSeek 是另一个极端——<strong>平均最快 + 也很稳</strong>（11.4s / 44.8s）。</p>
+
+  <h3>3.2 输出密度（平均每文本 turn 字数）</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>模型</th><th>字数</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DeepSeek v4-pro</strong></td><td>157</td></tr>
+        <tr><td>Sonnet 4.6</td><td>322</td></tr>
+        <tr><td>Opus 4.7</td><td>442</td></tr>
+        <tr><td>GLM-5.2</td><td>452</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>这才是四家真正的"风格签名"</strong>。</p>
+  <ul>
+    <li>GLM / Opus：平均每 turn 442-452 字，喜欢"先解释，再动手"。</li>
+    <li>Sonnet：322 字，中等密度。</li>
+    <li>DeepSeek v4-pro：157 字，<strong>是其他三家的不到一半</strong>。</li>
+  </ul>
+  <p>DeepSeek v4-pro 的典型输出长这样：</p>
+  <div class="quote">
+    Good progress — dragstart triggered DndController! But dragover needs to hit the Sortable container. Let me check the DOM structure.
+  </div>
+  <p>一句话，然后直接调工具。不铺垫、不写长篇计划、不"我先复盘一下刚才做了什么"。</p>
+
+  <h3>3.3 prompt cache 命中率</h3>
+  <p>四家都在 <strong>47%-50%</strong>。这个数字完全是 harness 决定的，跟模型本身无关——列出它只是为了<strong>避免读者误以为是模型差异</strong>。</p>
+</div>
+
+<!-- ===== 章节 4：深度调试三家 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">4</span>深度调试：三家各自的"绝活"</h2>
+  <p>benchmark 数字最难看出来的就是这一项。三个 case 拼起来看。</p>
+
+  <h3>4.1 Opus 4.7：定位 overlay 克隆节点</h3>
+  <p>M1 测试改了之后还是失败。Opus 没有急着换方案，而是逐层诊断：</p>
+  <ul>
+    <li>querySelector 命中的节点实际属性是什么？</li>
+    <li>节点是来自源 DOM 还是被 SortableJS 克隆出来放到 overlay 的？</li>
+    <li>真的是源节点吗？</li>
+  </ul>
+  <p>定位到根因：<strong>querySelector 命中的其实是 overlay 里的克隆节点，而不是原始行</strong>。这是一个真正的 DOM 结构陷阱。</p>
+  <p>后面还撞上 test-ordering bleed：测试之间 window listener 没清干净，跨测试污染。Opus 的判断是 <code>afterEach</code> 要按名字清掉所有 window listener。</p>
+  <p>整条链路：<strong>症状 → 逐层排除 → 定位根因 → 验证修复</strong>。这是高水平表现。</p>
+
+  <h3>4.2 GLM-5.2：被 reviewer 抓 is_connected 是 Node API</h3>
+  <p>GLM 在另一个 session 里写了一段 Playwright Python 代码。Reviewer 一抓：<code>is_connected</code> 是 <strong>Playwright 的 Node.js API，Python 里根本不存在</strong>。</p>
+  <p>GLM 的反应链：</p>
+  <ol>
+    <li>承认错误（不狡辩、不重新生成试试）</li>
+    <li>查文档确认（是 Python 真的没这个 API，还是我用错了？）</li>
+    <li>换成 <code>page.wait_for_function</code>（验证替代方案）</li>
+    <li>顺手检查 <code>time</code> 模块是不是变成 dead import</li>
+    <li>编译、重读 helper 确认接线一致</li>
+    <li>全量回归</li>
+  </ol>
+  <p>这条链路和 Opus 的"逐层诊断"是<strong>同一个档次</strong>的深度调试。两家在"测试反复失败 / 钻进 DOM 或 API 误用的深层"时都能自己爬出来。</p>
+  <p><strong>更关键的是角色边界</strong>：GLM 守授权边界极严。实现完成后主动停下等放行，<strong>不抢 commit</strong>。Reviewer 甩 finding 它逐条确认、改、再用 Self-check 表格回报。Reviewer 不说话，它不跑下一步。</p>
+  <p><strong>还会思辨规则</strong>：tdd skill 说"一次一个测试"，GLM 看了几个 round-trip case 走的是同一条 attrEsc 路径，主动判断<strong>这几个可以合并成参数化测试</strong>——并且<strong>把理由说出来</strong>。这是"理解规则的意图"，不是"机械执行规则的字面"。</p>
+
+  <h3>4.3 Sonnet 4.6：4 个 carry-forward bug 一口气清完</h3>
+  <p>E4 段落 reviewer 一次性甩了 4 个 carry-forward bug。Sonnet 的反应：</p>
+  <ul>
+    <li>第一反应<strong>不盲信 reviewer</strong>（25 turn 里前 4-5 个 Read + Bash 都是核 4 条事实）</li>
+    <li>然后逐条改</li>
+    <li>25 turn / 7 分钟全清完</li>
+    <li>收尾给一张 Bug | Fix | Evidence 三列表</li>
+  </ul>
+  <p><strong>风格</strong>：目标明确 → 核对事实 → 批量执行 → 干净收尾。没有大段铺垫，也没有长篇复盘。</p>
+  <p><strong>但</strong>：这段 Sonnet 走得很顺，没遇到 Opus 那种反复失败的困境。所以<strong>深度调试这一档在这段里没机会展示</strong>。Sonnet 是效率型执行者——快速清账段落最划算，深度调试这一档不好说和 GLM / Opus 同档。<strong>所以定位上更像是低半档但快、省</strong>。</p>
+</div>
+
+<!-- ===== 章节 5：四家定位 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">5</span>四家定位（加 DeepSeek v4-pro）</h2>
+  <p>把 DeepSeek v4-pro 也加进来后，定位更清晰：</p>
+
+  <h3>5.1 GLM-5.2</h3>
+  <ul>
+    <li><strong>档次</strong>：第一档</li>
+    <li><strong>延迟</strong>：16.4s（第二快）</li>
+    <li><strong>风格</strong>：均衡型，Read / Edit / Bash 比例健康</li>
+    <li><strong>强项</strong>：深度调试、TDD 纪律、角色边界、review 互动、思辨规则</li>
+    <li><strong>弱项</strong>：无明显短板，偶尔慢 turn（52.4s 那种）</li>
+    <li><strong>适合</strong>：主体阶段（190 turn 这种长阶段）、多轮 review</li>
+  </ul>
+
+  <h3>5.2 Opus 4.7</h3>
+  <ul>
+    <li><strong>档次</strong>：第一档</li>
+    <li><strong>延迟</strong>：17.9s（最慢平均但最稳）</li>
+    <li><strong>风格</strong>：Read 最少 / Bash 最多，倾向于"直接跑起来看"</li>
+    <li><strong>强项</strong>：深度调试、逐层诊断、RED 先行、改之前先写回归测试</li>
+    <li><strong>弱项</strong>：最慢平均（17.9s），对快节奏段落不划算</li>
+    <li><strong>适合</strong>：调最难的问题、需要多轮诊断的段落</li>
+  </ul>
+
+  <h3>5.3 DeepSeek v4-pro</h3>
+  <ul>
+    <li><strong>档次</strong>：第一档</li>
+    <li><strong>延迟</strong>：11.4s（<strong>四家最快</strong>，比 Opus 快 36%）</li>
+    <li><strong>风格</strong>：寡言型执行者，惜字如金，靠密集工具调用推进</li>
+    <li><strong>强项</strong>：浏览器交互调试、步骤密集的执行任务、明确的失败陈述</li>
+    <li><strong>弱项</strong>：不擅长长篇计划 / 多轮 review 回报（输出密度太低）</li>
+    <li><strong>适合</strong>：浏览器交互调试（用 chrome-devtools + playwright 这种）、明确的步骤清单</li>
+  </ul>
+  <p><strong>它的深度调试也是第一档</strong>——但走的是不同路径。它这段接的是用 chrome-devtools 和 playwright 两个 MCP 在真实浏览器里调拖拽，120 turn 死磕 SortableJS 不响应合成事件。路径：</p>
+  <div class="quote">
+    pointer events → HTML5 DragEvent → 发现 SortableJS 检查 isTrusted 拒绝合成事件 → 钻进源码发现要在绑定方法之前注册监听器所以 monkey-patch 不生效 → 改用重注册监听器
+  </div>
+  <p>每一步失败都明确说："SortableJS didn't respond to programmatic pointer events"、"The issue is that SortableJS registers the event listener BEFORE binding methods"。</p>
+  <p>工具调用结构：43 个 Bash + 27 个 chrome-devtools 脚本 + 大量 playwright 操作，典型的"边跑边调"。前三家更偏 Read + Edit。</p>
+
+  <h3>5.4 Sonnet 4.6</h3>
+  <ul>
+    <li><strong>档次</strong>：低半档（深度调试这一档没机会展示）</li>
+    <li><strong>延迟</strong>：17.0s</li>
+    <li><strong>风格</strong>：效率型执行者</li>
+    <li><strong>强项</strong>：快速清账、目标明确、收尾干净</li>
+    <li><strong>弱项</strong>：深度调试未验证</li>
+    <li><strong>适合</strong>：收尾清账、明确目标的段落</li>
+  </ul>
+</div>
+
+<!-- ===== 章节 6：方法学反思 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">6</span>方法学反思：benchmark 数字 ≠ 实战表现</h2>
+  <p>这次测试最有价值的是<strong>它挑战了主流 benchmark 的方法学假设</strong>。</p>
+
+  <h3>6.1 主流 benchmark 测的是什么</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Benchmark</th><th>测的什么</th><th>测不到的</th></tr></thead>
+      <tbody>
+        <tr><td>SWE-bench</td><td>真实 GitHub issue 修复</td><td>多轮 review / 角色边界</td></tr>
+        <tr><td>Aider polyglot</td><td>6 语言 225 题 edit format</td><td>长项目记忆 / review 互动</td></tr>
+        <tr><td>LiveCodeBench</td><td>持续更新的新题</td><td>错误恢复 / 自诊断</td></tr>
+        <tr><td>Chatbot Arena</td><td>真实人类盲测投票</td><td>任务粒度太粗</td></tr>
+        <tr><td>Terminal-Bench</td><td>接近 agent 真实场景</td><td>仍是 fresh task，没 follow-up</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>共同盲点</strong>：benchmark 都是"看模型一次能不能做对"，看不到"模型犯错后能不能爬出来"。</p>
+
+  <h3>6.2 这次实战补上的维度</h3>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>维度</th><th>传统 benchmark</th><th>这次实战</th></tr></thead>
+      <tbody>
+        <tr><td>任务类型</td><td>独立问题</td><td>同一项目的不同阶段</td></tr>
+        <tr><td>评估方式</td><td>通过 / 不通过</td><td>通过率 + review 抓 finding 数 + 自我承认错误的速度</td></tr>
+        <tr><td>失败处理</td><td>任务算失败</td><td>模型自己诊断根因、换路径、再回归</td></tr>
+        <tr><td>角色边界</td><td>不测</td><td>测（自主停等放行 vs 抢 commit）</td></tr>
+        <tr><td>工具调用</td><td>计数</td><td>计数 + 倾向（Read vs Bash 比例）</td></tr>
+        <tr><td>输出风格</td><td>不测</td><td>测（每 turn 字数 / 失败陈述明确性）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>结论</strong>：benchmark 是"够格"门槛，<strong>真实项目的"实战表现"才是"好用"门槛</strong>。两者关系类似高考分 vs 工作后表现。</p>
+
+  <h3>6.3 这次的反常识发现</h3>
+  <ol>
+    <li><strong>延迟最慢 ≠ 质量最低</strong>：Opus 平均 17.9s 反而比 GLM 16.4s 慢，但深度调试稳定性是四家最高。</li>
+    <li><strong>输出越短 ≠ 越浅</strong>：DeepSeek v4-pro 157 字 / turn 是四家最少，但深度调试和 GLM / Opus 同档。</li>
+    <li><strong>守边界 ≠ 弱</strong>：GLM 实现完主动停下等放行 = 高水平（不是"没能自己跑完"），Sonnet 不盲信 reviewer 先核 4 个事实 = 高水平（不是"没主见"）。</li>
+    <li><strong>不同模型擅长不同任务</strong>：不能用单一 score rank 模型。</li>
+    <li><strong>prompt cache 命中率与模型无关</strong>：这个数字只能反映 harness 设计。</li>
+  </ol>
+
+  <h3>6.4 "分阶段接力"本身就是一个新方法</h3>
+  <p>把一个项目按阶段切给不同模型，每家扬长避短——这是"模型异构计算"的实践雏形（类似 GPU 集群里 CPU / GPU / NPU 各管一段）。未来这个思路可能延伸成"agent 编排层 = 模型路由器"。</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>段落类型</th><th>适合的模型</th><th>理由</th></tr></thead>
+      <tbody>
+        <tr><td>主体（190 turn）</td><td>GLM-5.2 / Opus 4.7</td><td>深度、TDD、边界</td></tr>
+        <tr><td>清 E4（25 turn）</td><td>Sonnet 4.6</td><td>效率、收尾、核对</td></tr>
+        <tr><td>调 medium finding（26 turn）</td><td>Opus 4.7</td><td>深度诊断</td></tr>
+        <tr><td>浏览器交互 + 8 步 rollback（120 turn）</td><td>DeepSeek v4-pro</td><td>寡言执行、密集工具调用</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 章节 7：务实的接法 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">7</span>务实的接法（给做 agent 的同行）</h2>
+  <div class="punchline">
+    <p>长阶段 / 多轮 review / 自觉守边界的主体 → <strong>GLM 或 Opus</strong></p>
+    <p>浏览器交互调试 / 步骤密集的执行 → <strong>DeepSeek v4-pro</strong></p>
+    <p>收尾清账 → <strong>Sonnet</strong></p>
+  </div>
+  <p>这次四家各管一段，<strong>最终 pytest 和 vitest 全绿，build 通过，零回归</strong>。这就是"模型异构计算"在编码 agent 里的最小可用形态。</p>
+</div>
+
+<!-- ===== 章节 8：局限 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">8</span>局限</h2>
+  <ul>
+    <li><strong>样本量</strong>：一个 session（GLM 的 190 turn 是主样本，其他三家各 25-120 turn 不等）</li>
+    <li><strong>不是 head-to-head</strong>：四家接的是不同阶段、任务难度不可比</li>
+    <li><strong>benchmark 基准未做</strong>：这次只测了实战表现，没有同 session 跑 SWE-bench / Aider 数字做 cross-check</li>
+    <li><strong>人为切段</strong>：模型切换是人工切的，可能引入"段落难度差异"的混杂变量</li>
+  </ul>
+  <p>更严谨的版本需要：四家同 session 跑同一份 SWE-bench Verified 子集 + 同一份 Aider polyglot 子集 + 同一份真实项目段落。但那种测试我还没做——留给下一篇文章。</p>
+</div>
+
+<!-- ===== 章节 9：延伸阅读 ===== -->
+<div class="bis-section fade-up">
+  <h2><span class="num">9</span>延伸阅读</h2>
+  <ul>
+    <li><a href="https://swebench.com/" target="_blank">SWE-bench Leaderboards</a></li>
+    <li><a href="https://aider.chat/docs/leaderboards/" target="_blank">Aider LLM Leaderboards</a></li>
+    <li><a href="https://lmarena.ai/" target="_blank">LMArena Chatbot Arena</a></li>
+    <li><a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a></li>
+    <li><a href="https://www.vellum.ai/llm-leaderboard" target="_blank">Vellum LLM Leaderboard</a></li>
+  </ul>
+</div>
+
+<!-- ===== Related Reading ===== -->
+<div class="related-section fade-up">
+<h2>Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="china-multimodal-ai-leadership-2026.html"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80" alt="LLM Benchmark"><div class="rel-card-body"><h4>国内多模态 AI 现状 2026</h4><p>LLM 与国外 4 个月差距 / 视频生成领先 1 年——三个国产模型如何逼近前沿</p><span class="rel-card-tag">LLM 评测</span></div></a>
+<a class="rel-card" href="domestic-ai-accelerator-ecosystem-2026.html"><img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=600&q=80" alt="AI Accelerator"><div class="rel-card-body"><h4>国内 AI 加速器生态 2026</h4><p>从推理芯片到大模型一体机的全栈战争，国产 GPU / TPU 的真实格局</p><span class="rel-card-tag">AI Accelerator</span></div></a>
+<a class="rel-card" href="gpu-startup-rtx6000-vs-4090.html"><img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&q=80" alt="GPU Startup"><div class="rel-card-body"><h4>GPU 创业：RTX 6000 vs 4090</h4><p>推理场景的真实 TCO 对比——为什么数据中心宁愿多花 2 倍的钱买工作站卡</p><span class="rel-card-tag">GPU</span></div></a>
+</div>
+</div>
+
+<!-- ===== 附录：脱敏说明 ===== -->
+<div class="ftrnote">
+  <strong>📌 脱敏说明</strong>：本文按公开报告惯例使用代号：模型版本号（GLM-5.2 / Sonnet 4.6 / Opus 4.7 / DeepSeek v4-pro）按用户原话保留作为技术事实，<strong>母公司主体</strong>（头部 Coding 创业公司 X / 头部 MoE 厂商 / 海外某 AI 公司）按公开报告惯例使用代号。代号指代对象的完整对照表存于私有 source.md，不在公开版本展开。读者无需关心具体公司名也能完整理解方法学结论。
+</div>
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
