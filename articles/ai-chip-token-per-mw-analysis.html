@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1MW电力能跑多少Token？英伟达GPU能效分析</title><meta name="description" content="1MW电力能跑多少Token？英伟达GPU能效分析"><style>
+*{box-sizing:border-box}body{margin:0;background:#070b14;color:#e8eaf0;font:16px/1.8 Inter,'Noto Sans SC',system-ui,sans-serif}a{color:#38bdf8}.wrap{max-width:900px;margin:auto;padding:0 24px}.nav{border-bottom:1px solid #1e2d45;padding:18px 0}.nav a{margin-right:18px;text-decoration:none}.hero{padding:70px 0 40px}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.15;margin:14px 0}.meta{color:#8b95a8;font-size:14px}.article{padding-bottom:80px}.article h2{margin-top:42px;color:#fbbf24}.article h3{color:#38bdf8}.article img{max-width:100%;height:auto;border-radius:10px}.article blockquote{border-left:3px solid #38bdf8;padding-left:18px;color:#b6c1d2}.article table{width:100%;border-collapse:collapse}.article td,.article th{border:1px solid #2d3f5e;padding:8px}.article code{background:#111827;padding:2px 5px;border-radius:4px}footer{border-top:1px solid #1e2d45;padding:28px 0;color:#8b95a8}
+</style></head><body><nav class="nav"><div class="wrap"><a href="https://liweicong2016-collab.github.io/my-website/">Web 首页</a><a href="https://liweicong2016-collab.github.io/tech-blog/posts/ai-chip-token-per-mw-analysis/">Blog 原文</a><a href="https://github.com/liweicong2016-collab/my-website">源码</a></div></nav><main class="wrap"><header class="hero"><div class="meta">Livius's Tech Pulse · 2026-06-04T16:00:00+08:00</div><h1>1MW电力能跑多少Token？英伟达GPU能效分析</h1></header><article class="article"><h2>背景：为什么用 &quot;Token / MW&quot; 来衡量？</h2>
+<p>在 AI 算力竞赛中，<strong>电力是终极约束</strong>。不管芯片多强，最终都要看&quot;花多少钱的电，能出多少 token&quot;。</p>
+<p>这个指标综合了：</p>
+<ul>
+<li>GPU 的功耗（TDP）</li>
+<li>GPU 的算力（TFLOPS）</li>
+<li>GPU 的数量（受功耗墙限制）</li>
+<li>实际推理效率（受显存带宽、互联带宽影响）</li>
+</ul>
+<h2>核心数据对比</h2>
+<h3>GPU 规格表</h3>
+<p>| 芯片 | TDP (W) | FP16 算力 (TFLOPS) | 显存带宽 | 显存 | 架构 |</p>
+<p>|---|---|---|---|---|---|</p>
+<p>| <strong>H100 SXM5</strong> | 700 | 3,956 | 3,350 GB/s | 80GB HBM3 | Hopper |</p>
+<p>| <strong>H200 SXM</strong> | 700 | 3,956 | 4.8 TB/s | 141GB HBM3e | Hopper |</p>
+<p>| <strong>B100</strong> | 700 | 14,400 | ~3.2 TB/s | 192GB HBM3e | Blackwell |</p>
+<p>| <strong>B200 SXM</strong> | 1,000 | 20,000 | ~8 TB/s | 192GB HBM3e | Blackwell |</p>
+<blockquote>数据来源：NVIDIA 官方白皮书</blockquote>
+<h2>理论算力：每 MW 能部署多少卡？</h2>
+<p>$$N_{cards} = \frac{1{,}000{,}000 \text{ W}}{TDP_{per\_card}}$$</p>
+<p>| 芯片 | 单卡功耗 | 每 MW 可部署 |</p>
+<p>|---|---|---|</p>
+<p>| H100 / H200 | 700W | ~1,428 张 |</p>
+<p>| B100 | 700W | ~1,428 张 |</p>
+<p>| B200 | 1,000W | 1,000 张 |</p>
+<h2>FP16 算力：每 MW 的总算力</h2>
+<p>$$P_{MW} = N_{cards} \times FP16_{per\_card}$$</p>
+<p>| 芯片 | 单卡 FP16 | 每 MW 部署数 | 每 MW 总算力 |</p>
+<p>|---|---|---|---|</p>
+<p>| H100 | 3,956 TFLOPS | 1,428 | <strong>5.65 PFLOPS</strong> |</p>
+<p>| H200 | 3,956 TFLOPS | 1,428 | <strong>5.65 PFLOPS</strong> |</p>
+<p>| B100 | 14,400 TFLOPS | 1,428 | <strong>20.6 PFLOPS</strong> |</p>
+<p>| B200 | 20,000 TFLOPS | 1,000 | <strong>20 PFLOPS</strong> |</p>
+<p><strong>结论</strong>：B100 凭借 Blackwell 架构，在同等电力下达到 H100 的 <strong>3.6 倍</strong>总算力。</p>
+<h2>Token 生成效率估算</h2>
+<h3>估算方法</h3>
+<p>FP16 算力 ≠ Token 生成量。实际效率取决于：</p>
+<p>1. <strong>显存带宽</strong>：决定数据供给速度</p>
+<p>2. <strong>互联带宽</strong>：决定多卡协作效率</p>
+<p>3. <strong>模型大小</strong>：大模型瓶颈在显存带宽</p>
+<p>4. <strong>batch size</strong>：批处理可提升利用率</p>
+<p><strong>估算基准</strong>：以 Llama-70B 模型为例</p>
+<p>| 芯片 | Token/s per 卡（估算） | 参考 |</p>
+<p>|---|---|---|</p>
+<p>| H100 SXM | 2,500 – 4,000 tok/s | Llama-70B @ FP16 |</p>
+<p>| H200 | 3,000 – 5,000 tok/s | 同上，HBM3e 加持 |</p>
+<p>| B100 | 7,000 – 10,000 tok/s | Blackwell 架构提升 |</p>
+<p>| B200 | 8,000 – 12,000 tok/s | NVLink 5.0 加持 |</p>
+<h2>Token / MWh 对比</h2>
+<p>$$\text{Token per MWh} = \text{Token/s per card} \times N_{cards} \times 3600$$</p>
+<h3>静态部署（不考虑休机）</h3>
+<p>| 芯片 | Token/s per 卡 | 每 MW 卡数 | <strong>Token / MWh（静态）</strong> |</p>
+<p>|---|---|---|---|</p>
+<p>| H100 | 3,500 | 1,428 | <strong>17.9 T</strong> |</p>
+<p>| H200 | 4,200 | 1,428 | <strong>21.6 T</strong> |</p>
+<p>| B100 | 8,500 | 1,428 | <strong>43.7 T</strong> |</p>
+<p>| B200 | 10,000 | 1,000 | <strong>36.0 T</strong> |</p>
+<blockquote>T = 万亿（10¹²）</blockquote>
+<h3>动态利用率（考虑实际部署效率）</h3>
+<p>实际推理中，GPU 不可能 100% 运转。考虑峰值利用率后：</p>
+<p>| 芯片 | 静态 Token/MWh | 利用率 70% |</p>
+<p>|---|---|---|</p>
+<p>| H100 | 17.9 T | <strong>12.5 T</strong> |</p>
+<p>| H200 | 21.6 T | <strong>15.1 T</strong> |</p>
+<p>| B100 | 43.7 T | <strong>30.6 T</strong> |</p>
+<p>| B200 | 36.0 T | <strong>25.2 T</strong> |</p>
+<h2>核心结论</h2>
+<h3>1. B200 是目前 Token 效率最高的 GPU</h3>
+<p>B200 每 MW Token 效率约为 H100 的 <strong>2 倍</strong>，总算力是 H100 的 <strong>3.6 倍</strong>。</p>
+<p>Blackwell 架构的核心优势：</p>
+<ul>
+<li><strong>NVLink 5.0</strong>：1.8 TB/s 双向互联，彻底消除多卡通信瓶颈</li>
+<li><strong>192GB HBM3e</strong>：单卡可装下 70B+ 模型，batch size 更大</li>
+<li><strong>20 PFLOPS FP16</strong>：单位功耗算力大幅提升</li>
+</ul>
+<h3>2. H200 是当前最均衡的选择</h3>
+<p>H200 使用与 H100 相同的功耗（700W），但凭借 141GB HBM3e 显存：</p>
+<ul>
+<li>显存容量提升 76%</li>
+<li>显存带宽提升 43%</li>
+<li>Token 效率比 H100 高 <strong>约 20%</strong></li>
+</ul>
+<p>对于已有 H100 集群的企业，升级到 H200 是最高性价比的选择。</p>
+<h3>3. 互联带宽是核心瓶颈</h3>
+<p>对于大模型推理，NVLink 是生命线：</p>
+<ul>
+<li>70B 模型单卡装不下，必须多卡并行</li>
+<li>HCCS/PCIe 带宽远低于 NVLink，多卡利用率会大幅下降</li>
+<li>B200 的 NVLink 5.0（1.8 TB/s）比 H100 的 NVLink 4.0（900 GB/s）快 <strong>2 倍</strong></li>
+</ul>
+<h3>4. 功耗 vs 算力的权衡</h3>
+<p>B200 功耗比 H100 高 43%（1000W vs 700W），但总算力是 H100 的 3.6 倍。</p>
+<p>这意味着：</p>
+<ul>
+<li>数据中心散热设计需要升级</li>
+<li>每 MW 机架数减少，但总算力大幅提升</li>
+<li><strong>每 Token 电力成本实际下降了 50%+</strong></li>
+</ul>
+<h2>快速参考</h2>
+<p>| 指标 | H100 | H200 | B100 | B200 |</p>
+<p>|---|---|---|---|---|</p>
+<p>| 每 MW 卡数 | 1,428 | 1,428 | 1,428 | 1,000 |</p>
+<p>| 每 MW FP16 | 5.65 PFLOPS | 5.65 PFLOPS | 20.6 PFLOPS | 20 PFLOPS |</p>
+<p>| Token/MWh（静态） | 17.9 T | 21.6 T | 43.7 T | 36.0 T |</p>
+<p>| Token/MWh（@70%） | ~12.5 T | ~15 T | ~30.6 T | ~25 T |</p>
+<p>| 主要优势 | 成熟稳定 | 大显存 | 高算力 | 互联带宽 |</p>
+<p>*数据来源：NVIDIA 官方白皮书、AnandTech、Semianalysis 等分析报告，2024-2025年实测数据估算。*</p></article></main><footer><div class="wrap">© 2026 Livius · AI · Compute · Southeast Asia</div></footer></body></html>
