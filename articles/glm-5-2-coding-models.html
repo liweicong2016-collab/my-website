@@ -1,0 +1,304 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>智谱 Z.ai 正式开源 GLM-5.2 权重并上线 API:100 万上下文 + IndexShare + MIT 许可</title><style>*{box-sizing:border-box}body{margin:0;background:#070b14;color:#e8eaf0;font:16px/1.8 Inter,'Noto Sans SC',system-ui,sans-serif}.wrap{max-width:900px;margin:auto;padding:0 24px}.nav{border-bottom:1px solid #1e2d45;padding:18px 0}.nav a{color:#38bdf8;margin-right:18px;text-decoration:none}.hero{padding:70px 0 40px}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.15}.meta{color:#8b95a8}.article h2{margin-top:42px;color:#fbbf24}.article h3{color:#38bdf8}.article img{max-width:100%}blockquote{border-left:3px solid #38bdf8;padding-left:18px;color:#b6c1d2}</style></head><body><nav class="nav"><div class="wrap"><a href="https://liweicong2016-collab.github.io/my-website/">Web 首页</a><a href="https://liweicong2016-collab.github.io/tech-blog/posts/2026-06-17-glm-5-2/">Blog 原文</a></div></nav><main class="wrap"><header class="hero"><div class="meta">Livius's Tech Pulse · 2026-06-17</div><h1>智谱 Z.ai 正式开源 GLM-5.2 权重并上线 API:100 万上下文 + IndexShare + MIT 许可</h1></header><article class="article"><h1>智谱 Z.ai 正式开源 GLM-5.2 权重并上线 API:100 万上下文 + IndexShare + MIT 许可</h1>
+
+<blockquote>报告日期:2026-06-17 (Asia/Saigon)</blockquote>
+<blockquote>任务日期:2026-06-17</blockquote>
+<blockquote>报告语言:简体中文</blockquote>
+<blockquote>状态:已发布(基于 Z.ai 官方公告 + 多个独立二手源交叉核验,已三次更新纳入官方 Long-Horizon Task Evaluation + Arena.ai Code Arena 第三方独立数据)</blockquote>
+
+<h2>Executive Summary</h2>
+
+<p>2026 年 6 月 13 日,北京智谱 AI 的国际品牌 **Z.ai** 正式将旗舰大模型 **GLM-5.2** 的权重以 **MIT 协议** 开源,并同步上线官方 API。这是继 GLM-5(2 月 11 日)、GLM-5-Turbo(3 月 15 日)、GLM-5.1(4 月 7 日)之后四个月内的第四次旗舰级发布 ([marktechpost 报道](https://www.marktechpost.com/2026/06/14/z-ai-launches-glm-5-2-with-a-usable-1m-token-context-two-thinking-effort-levels-and-no-benchmarks-at-launch))。</p>
+
+<p>按 Z.ai 官方公告原文([Z.ai Blog GLM-5.2](https://z.ai/blog/glm-5.2),[X 公告](https://x.com/Zai_org/status/2065704919299235870))的定义,GLM-5.2 的&quot;四大新能力&quot;是:</p>
+
+<p>1. **Solid 1M Context** — &quot;A solid 1M-token context that stably sustains long-horizon work&quot;</p>
+<p>2. **Advanced Coding with Flexible Effort** — &quot;Stronger coding capabilities with multiple thinking effort levels to balance performance and latency&quot;</p>
+<p>3. **Improved Architecture** — IndexShare 复用 indexer,MTP 接受长度 +20%</p>
+<p>4. **Pure Open** — &quot;An MIT open-source license — no regional limits, technical access without borders&quot;</p>
+
+<p>GLM-5.2 的 1,000,000 token 上下文窗口(`glm-5.2[1m]`),相较 GLM-5.1 的 200K 窗口提升了 5 倍 ([docs.z.ai/.../latest-model](https://docs.z.ai/devpack/latest-model))。为支撑该窗口,智谱在底层的稀疏注意力中引入了 **IndexShare(索引共享)** 技术,官方原文是 **&quot;reuses the same indexer across every four sparse attention layers, reducing per-token FLOPs by 2.9× at a 1M context length&quot;**——比 GLM-5.1 时代每个 indexer 独立计算有 2.9× 的单 token FLOPs 下降([OpenLM 模型页](https://openlm.ai/glm-5.2/))。MTP 改进后,**接受长度在推测解码场景下提升 up to 20%**。</p>
+
+<p>模型继续采用 **GLM-5 系列的 MoE 架构:744B 总参 / 40B 激活参数**,与上游 GLM-5(arxiv 2602.15763 描述)及 DeepSeek V3 / Kimi K2 等同档位模型保持同代 ([arxiv 2602.15763](https://arxiv.org/abs/2602.15763))。GLM-5.2 暴露 **High** 与 **Max** 两档思考模式;Max 模式专供长链推理与复杂调试。官方 API 定价与 GLM-5.1 一致:**输入 $1.40 / 输出 $4.40 per 1M tokens** ([docs.z.ai/.../pricing](https://docs.z.ai/guides/overview/pricing),[KuCoin 报道](https://www.kucoin.com/news/flash/z-ai-launches-glm-5-2-with-1m-token-context-window-on-hugging-face))。</p>
+
+<p>值得注意的&quot;留白&quot;:Z.ai **没有在公告原文中同步发布传统 SWE-bench / Terminal-Bench / HLE 分数**——但 Z.ai **发布了自家 &quot;Long-Horizon Task Evaluation&quot; 三项 benchmark**:FrontierSWE (74.4%) 与 Opus 4.8 (75.1%) 几乎打平、PostTrainBench (34.3%) 略低于 Opus 4.8 (37.2%)、SWE-Marathon (13.0%) 显著低于 Opus 4.8 (26.0%)。Arena.ai Code Arena 第三方排行榜上 GLM-5.2 (Max) 排名 #2(1595 分),在被采样的模型中实际是 #1。</p>
+
+<h2>Research Questions</h2>
+
+<p>1. GLM-5.2 的发布主体、时间线与许可证是什么?</p>
+<p>2. GLM-5.2 的 MoE 架构(总参 / 激活参 / 专家数 / 注意力机制)与 GLM-5 基础模型有何关系?</p>
+<p>3. 1,000,000 token 上下文窗口的工程实现(IndexShare / MTP / DSA)如何工作?</p>
+<p>4. High / Max 两档思考模式的定位与推荐场景?</p>
+<p>5. 官方 API 定价、订阅档位,以及与 OpenRouter 的对接状态?</p>
+<p>6. Z.ai 是否在发布时同步公开任何基准测试数据?</p>
+<p>7. 第三方(媒体 / 社区)对 GLM-5.2 的早期反馈与争议点?</p>
+
+<h2>Method</h2>
+
+<p>| 阶段 | 工具 | 输出 |</p>
+<p>|---|---|---|</p>
+<p>| Plan | `scripts/init_research_run.py` | `tmp/research_plan.json` |</p>
+<p>| Scout | Tavily(`scripts/tavily.py`)+ `web_search` | `tmp/query_log.json` (≥4 query families:baseline / source-seeking / recency / benchmark-spec / contradiction) |</p>
+<p>| Harvest | `web_fetch` 抓取 Z.ai 官方 / OpenLM / HF / arxiv 摘要 / 媒体长文 + Z.ai 公告原文 | `tmp/source_registry.json` (90 sources, 9 primary fetched + 3 secondary fetched) |</p>
+<p>| Verify | `claim_ledger.json` 14 claims / `coverage_report.json` | 14 claims,11 verified + 3 partially_verified,coverage_score 1.0 |</p>
+<p>| Synthesize | `report_lint.py` → `validate_research_report.py` → `finalize_research_run.py` | 本报告 |</p>
+
+<p>完整方法学见仓库 `SOUL.md` 的 5 步流程。本次研究的关键升级是 **第二次迭代纳入了 Z.ai 官方公告原文(用户提供)**——这将原本依赖二手源转述的 IndexShare、1M 训练场景、MIT 范围三项主张,提升为**官方一手 verified 状态**。</p>
+
+<h2>Findings</h2>
+
+<h3>1. 发布主体、时间线与许可证</h3>
+
+<p>GLM-5.2 由 **Z.ai**(智谱 AI 的国际品牌)于 **2026-06-13** 正式发布。Z.ai 官方公告将其定位为:</p>
+
+<blockquote>*&quot;We're introducing GLM-5.2, our latest flagship model for long-horizon tasks. It marks a substantial leap in long-horizon task capability over its predecessor GLM-5.1 and, for the first time, delivers that capability on a solid 1M-token context.&quot;*</blockquote>
+<blockquote>— [Z.ai Blog GLM-5.2](https://z.ai/blog/glm-5.2)</blockquote>
+
+<p>模型权重同步上传至 Hugging Face,仓库为 [`zai-org/GLM-5.2`](https://huggingface.co/zai-org/GLM-5.2)。许可证为 **MIT**,官方原文用了更直白的措辞:</p>
+
+<blockquote>*&quot;Pure Open: An MIT open-source license — no regional limits, technical access without borders&quot;*</blockquote>
+<blockquote>— [Z.ai Blog GLM-5.2](https://z.ai/blog/glm-5.2)</blockquote>
+
+<p>注意&quot;**no regional limits, technical access without borders**&quot;——这是对 DeepSeek 等竞品在某些司法管辖区使用限制的明确对照。MIT 协议在该领域对开发者最友好,这一表述也意味着 Z.ai 不会像某些美国厂商那样对 EU/中国大陆/俄罗斯等地做地理封锁。</p>
+
+<p>GLM-5 系列的发布节奏:</p>
+
+<p>| 版本 | 发布日期 | 关键变化 |</p>
+<p>|---|---|---|</p>
+<p>| GLM-5 | 2026-02-11 | 744B MoE,DSA 注意力,异步 RL |</p>
+<p>| GLM-5-Turbo | 2026-03-15 | 推理优化,价格 $1.20 / $4.00 per 1M |</p>
+<p>| GLM-5.1 | 2026-04-07 | 200K 上下文,聚焦&quot;agentic coding&quot; |</p>
+<p>| **GLM-5.2** | **2026-06-13** | **1M 上下文,IndexShare,High/Max 双思考档,MIT 权重,Frontend 训练 4 大场景** |</p>
+
+<p>四次旗舰级发布压缩在四个月内,显示出 Z.ai 在智谱 2026-01-08 港股 IPO(募资约 43.5 亿港元 ≈ 5.58 亿美元)之后正以高强度节奏推进 ([KuCoin 报道](https://www.kucoin.com/news/flash/z-ai-launches-glm-5-2-with-1m-token-context-window-on-hugging-face))。</p>
+
+<h3>2. MoE 架构与训练背景</h3>
+
+<p>GLM-5.2 沿用 GLM-5 的基础架构:</p>
+
+<p>• **总参 / 激活参:744B / 40B** (256 专家 / 8 激活)</p>
+<p>• **稀疏注意力:DeepSeek Sparse Attention (DSA)** —— 一种基于 indexer 的 top-k 注意力选择,可将 attention 的二次开销降至接近线性 ([arxiv 2602.15763 摘要](https://arxiv.org/abs/2602.15763))</p>
+<p>• **训练规模:28.5T tokens**</p>
+<p>• **训练硬件:华为昇腾 + MindSpore** —— 与依赖 NVIDIA H100/H200 的西方前沿模型形成代差对照</p>
+<p>• **异步 RL**:post-training 阶段使用异步 RL 基础设施,将 generation 与 training 解耦,提升后训练效率</p>
+
+<blockquote>**参数数量说明**:本文最初描述的&quot;7530 亿 / 400 亿&quot;(对应 753B / 40B)与官方&quot;744B / 40B&quot;存在 9B 的差异;官方权威数字来自 [OpenLM](https://openlm.ai/glm-5.2)、[HF 模型卡](https://huggingface.co/zai-org/GLM-5.2)、[arxiv 2602.15763 摘要](https://arxiv.org/abs/2602.15763) — **744B / 40B / 256 专家 / 8 激活**。本报告以官方数字为准。</blockquote>
+
+<p>GLM-5 的整篇 arxiv 技术报告([2602.15763 v2](https://arxiv.org/abs/2602.15763),&quot;from Vibe Coding to Agentic Engineering&quot;)将 GLM-5 定位为&quot;从 vibe coding 转向 agentic engineering&quot;的过渡模型——这是 Z.ai 在 2026 年最强的产品叙事:模型不再只是补全代码片段,而是要在长程 agent loop 中承担&quot;规划 → 执行 → 测试 → 修复&quot;的完整工程任务。</p>
+
+<h3>3. 1M token 上下文与 IndexShare(官方一手描述)</h3>
+
+<p>GLM-5.2 的差异化卖点是 **1,000,000 token 的可用上下文窗口**,而不仅是&quot;理论支持&quot;。Z.ai 内部的模型标识为 `glm-5.2[1m]`,单次响应最多输出 **131,072 tokens** ([OpenLM](https://openlm.ai/glm-5.2/))。这一数字是 GLM-5.1 的 **5 倍**(200K → 1M)。</p>
+
+<p>官方公告对 1M 的描述是:</p>
+
+<blockquote>*&quot;Solid 1M Context: A solid 1M-token context that stably sustains long-horizon work.&quot;*</blockquote>
+<blockquote>*&quot;Supporting long-horizon tasks starts with making long context engineering-usable: the model must maintain quality across long, messy coding-agent trajectories, not just accept more tokens. A 1M context is easy to claim, but much harder to keep reliable under real engineering pressure.&quot;*</blockquote>
+<blockquote>— [Z.ai Blog GLM-5.2](https://z.ai/blog/glm-5.2)</blockquote>
+
+<p>**关键认知**:Z.ai 明确说&quot;a 1M context is easy to claim, but much harder to keep reliable&quot;——这是直接对同业&quot;挂羊头卖狗肉&quot;式 1M 营销的隐性攻击。Z.ai 把&quot;engineering-usable&quot;作为评估 1M 真正可用性的标准,而非&quot;在 Needle-in-a-Haystack 找得着&quot;。</p>
+
+<p>为此,公告明确披露了 **1M 训练专门覆盖的四大 coding-agent 场景**:</p>
+
+<p>1. **Large-scale implementation** — 大规模代码实现</p>
+<p>2. **Automated research** — 自动化研究</p>
+<p>3. **Performance optimization** — 性能优化</p>
+<p>4. **Complex debugging** — 复杂调试</p>
+
+<p>这四个场景的共同特征是:长程、多步、跨文件、需要维护 deep context。这也是 GLM-5.1 时代用户最常遇到能力瓶颈的场景。</p>
+
+<p>#### IndexShare 工程实现(官方描述)</p>
+
+<p>官方公告对 IndexShare 的描述是:</p>
+
+<blockquote>*&quot;Improved Architecture: We propose IndexShare, which reuses the same indexer across every four sparse attention layers, reducing per-token FLOPs by 2.9× at a 1M context length. We also improve GLM-5.2's MTP layer for speculative decoding, increasing the acceptance length by up to 20%.&quot;*</blockquote>
+<blockquote>— [Z.ai Blog GLM-5.2](https://z.ai/blog/glm-5.2)</blockquote>
+
+<p>这段话比 OpenLM 等二手转述更精准:</p>
+
+<p>• **IndexShare** 的定义是 &quot;reuses the same indexer across every four sparse attention layers&quot;——每 4 层共享一个 indexer,而非每层独立计算</p>
+<p>• **效果**:&quot;reducing per-token FLOPs by 2.9× at a 1M context length&quot;——1M 上下文下,单 token FLOPs 降低 2.9 倍</p>
+<p>• **MTP 改进**:&quot;increasing the acceptance length by up to 20%&quot;——MTP 在推测解码下接受长度最高提升 20%</p>
+
+<p>IndexShare 的思想与 DeepSeek DSA 的&quot;主注意力层 + 共享 indexer&quot;思路类似,但 GLM-5.2 进一步将 indexer 在 4 个连续层之间共享——这是 Z.ai 对 DSA 的工程化优化。VentureBeat 同期报道了 IndexCache 等独立稀疏注意力优化器,显示该方向是 2026 年推理栈的活跃优化点 ([VentureBeat](https://venturebeat.com/technology/indexcache-a-new-sparse-attention-optimizer-delivers-1-82x-faster-inference))。</p>
+
+<p>**应用场景**:官方文档列出的典型用例包括整库重构(40 文件 Python 数据管道单会话完成)、超长 agent loop、Claude Code drop-in 替代、超长文档分析(法规、论文、合规文档等)。这些场景在 GLM-5.1 时代需要 chunking / RAG,现在可以&quot;一锅端&quot;。</p>
+
+<h3>4. 思考模式:High 与 Max</h3>
+
+<p>官方公告描述:</p>
+
+<blockquote>*&quot;Advanced Coding with Flexible Effort: Stronger coding capabilities with multiple thinking effort levels to balance performance and latency.&quot;*</blockquote>
+<blockquote>— [Z.ai Blog GLM-5.2](https://z.ai/blog/glm-5.2)</blockquote>
+
+<p>公告原文只说&quot;multiple thinking effort levels&quot;,但 Z.ai 官方模型门户和第三方资料命名了两档:**High** 和 **Max**。</p>
+
+<p>| 模式 | 定位 | 推荐场景 |</p>
+<p>|---|---|---|</p>
+<p>| **High** | 速度 / 质量平衡 | 短 Q&amp;A、对话、单元测试补全 |</p>
+<p>| **Max** | 深度 CoT 推理 | 自动编程、复杂调试、agent loop |</p>
+
+<p>在 Claude Code 中,`/effort` 命令将 `xhigh` / `max` / `ultracode` 全部映射到 GLM-5.2 的 Max effort ([marktechpost 实战配置](https://www.marktechpost.com/2026/06/14/z-ai-launches-glm-5-2-with-a-usable-1m-token-context-two-thinking-effort-levels-and-no-benchmarks-at-launch))。这是 Z.ai 对长程任务&quot;开 Max&quot;的明确推荐。</p>
+
+<p>&quot;balance performance and latency&quot;这句措辞意味着 Z.ai 明确把&quot;延迟可控&quot;作为产品 KPI——这与某些模型&quot;无论什么 query 都跑最重 CoT&quot;的策略形成对比。</p>
+
+<h3>5. 官方 API 与 OpenRouter</h3>
+
+<p>**官方 API 定价**与 GLM-5.1 保持一致([docs.z.ai/.../pricing](https://docs.z.ai/guides/overview/pricing),[KuCoin 报道](https://www.kucoin.com/news/flash/z-ai-launches-glm-5-2-with-1m-token-context-window-on-hugging-face)):</p>
+
+<p>| 模型 | Input ($/M tok) | Output ($/M tok) |</p>
+<p>|---|---|---|</p>
+<p>| GLM-5 | 1.00 | 3.20 |</p>
+<p>| GLM-5-Turbo | 1.20 | 4.00 |</p>
+<p>| GLM-5.1 | 1.40 | 4.40 |</p>
+<p>| **GLM-5.2** | **1.40** | **4.40** |</p>
+
+<p>基础 URL 同样为 Anthropic 兼容 (`https://api.z.ai/api/anthropic`) 和 OpenAI 兼容 (`https://api.z.ai/api/coding/paas/v4`) 双端点。GLM Coding Plan 订阅(Lite / Pro / Max / Team,$18/月起)在发布当天即向所有档位用户开放([marktechpost](https://www.marktechpost.com/2026/06/14/z-ai-launches-glm-5-2-with-a-usable-1m-token-context-two-thinking-effort-levels-and-no-benchmarks-at-launch))。</p>
+
+<p>**Claude Code 典型配置**(`~/.claude/settings.json`):</p>
+
+<p>```json</p>
+<p>{</p>
+<p>&quot;env&quot;: {</p>
+<p>&quot;CLAUDE_CODE_AUTO_COMPACT_WINDOW&quot;: &quot;1000000&quot;,</p>
+<p>&quot;ANTHROPIC_DEFAULT_HAIKU_MODEL&quot;: &quot;glm-4.5-air&quot;,</p>
+<p>&quot;ANTHROPIC_DEFAULT_SONNET_MODEL&quot;: &quot;glm-5.2[1m]&quot;,</p>
+<p>&quot;ANTHROPIC_DEFAULT_OPUS_MODEL&quot;: &quot;glm-5.2[1m]&quot;</p>
+<p>}</p>
+<p>}</p>
+<p>```</p>
+
+<p>或将 Anthropic 兼容端点直接 export 到环境变量,然后 `claude` 启动即可([marktechpost 实战配置](https://www.marktechpost.com/2026/06/14/z-ai-launches-glm-5-2-with-a-usable-1m-token-context-two-thinking-effort-levels-and-no-benchmarks-at-launch))。</p>
+
+<p>**OpenRouter**:用户最初描述中提到 GLM-5.2 已&quot;接入&quot;OpenRouter。OpenRouter 列表页 [openrouter.ai/z-ai/glm-5.2](https://openrouter.ai/z-ai/glm-5.2) 存在,同厂模型 `z-ai/glm-5-turbo` 同步上架;然而在 2026-06-17 的快照中,GLM-5.2 的路由状态显示为&quot;not available&quot;或类似提示([OpenRouter 列表](https://openrouter.ai/z-ai/glm-5.2))。`/compare/z-ai/glm-5.2` 页面也已存在,说明 OpenRouter 已为其留位,但**实际可路由的 billing 状态需要后续验证**——海外开发者目前主要还是通过 Z.ai 官方 API 或自部署权重的方式使用。</p>
+
+<h3>6. 基准测试:官方 Long-Horizon Task Evaluation + Arena.ai 双重证据</h3>
+
+<p>之前的版本认为 Z.ai &quot;没公开任何 benchmark 数字&quot;——**这个判断需要修正**。用户提供了两份 Z.ai 官方 + 第三方基准证据:</p>
+
+<p>#### 6.1 Z.ai 官方 Long-Horizon Task Evaluation(用户提供的截图)</p>
+
+<p>Z.ai 在公告配图中明确给出了 **三项长程任务基准** 的具体分数,定位为 &quot;**Long-Horizon Task Evaluation**&quot;——这是 Z.ai 为 GLM-5.2 设计的自家评测体系,目标场景是 **20 小时 / 10 小时级别** 的 agent loop:</p>
+
+<p>| Benchmark | 时长 | GLM-5.2 | Opus 4.8 | Opus 4.7 | GPT-5.5 | Gemini 3.1 Pro |</p>
+<p>|---|---|---|---|---|---|---|</p>
+<p>| **FrontierSWE** (Dominance) | Max 20h | **74.4%** | 75.1% | 63.0% | 72.6% | 39.6% |</p>
+<p>| **PostTrainBench** | Max 10h | **34.3%** | 37.2% | 28.6% | 25.0% | 21.6% |</p>
+<p>| **SWE-Marathon** | Max 10h | **13.0%** | 26.0% | 16.0% | 12.0% | 4.0% |</p>
+
+<p>数据来源:[Z.ai Blog GLM-5.2 公告图](https://z.ai/blog/glm-5.2)、[X 公告图](https://x.com/Zai_org/status/2065704919299235870)</p>
+
+<p>**关键解读**:</p>
+<p>• **FrontierSWE** 是 Z.ai 第一次公布的自家编程基准,GLM-5.2 与 Opus 4.8 几乎打平(74.4% vs 75.1%,差距 &lt; 1pp)——这是 Z.ai &quot;**在长程 agent 编程上对标 Opus 4.8**&quot; 的最强声明。</p>
+<p>• **PostTrainBench** 上 GLM-5.2 (34.3%) 仍落后 Opus 4.8 (37.2%) 约 3pp,说明 post-training 流程的&quot;最终对齐&quot;仍是 Anthropic 的领先点。</p>
+<p>• **SWE-Marathon** 上 GLM-5.2 (13.0%) 落后 Opus 4.8 (26.0%) 整整 **2 倍**——这是 Z.ai 的明显短板,长程马拉松任务的工具调用 / 错误恢复仍需改进。</p>
+<p>• GPT-5.5 的存在(74.4/25.0/12.0)说明 Z.ai 把 OpenAI GPT-5.5 作为中位对标。</p>
+<p>• &quot;**Max 20h / Max 10h**&quot; 是关键时间盒——这些数字是&quot;机器最长跑 20 小时&quot;的累计成功率,不是单次 pass@1 率,跟 SWE-bench Pro 那种 &quot;120 分钟一题 pass@1&quot; 不是同一量级。</p>
+
+<p>**前瞻推论**:FrontierSWE 是否会成为行业新标准取决于:</p>
+<p>• (i) Z.ai 是否公开发布 benchmark 协议(任务列表、scoring 公式)</p>
+<p>• (ii) 第三方实验室(Hugging Face、Stanford CRFM 等)是否独立复现</p>
+<p>• (iii) 其他厂商(Anthropic、OpenAI、Kimi、DeepSeek)是否用同样任务来定位自己</p>
+
+<p>#### 6.2 Arena.ai Code Arena 第三方排行榜(arena.ai/leaderboard/code)</p>
+
+<p>[arena.ai/leaderboard/code](https://arena.ai/leaderboard/code) 是一个众包 ELO 风格的前端 / Web 开发基准,通过对模型在真实 WebDev 任务上的投票打分排名。2026-06-17 快照中,**GLM-5.2 (Max) 排名 #2,得分 1595(±16,1641 票)**——这是 Z.ai 在公开第三方 leaderboard 上拿到的最好成绩。</p>
+
+<p>| 排名 | 模型 | 分数 | CI | 票数 | 厂商 | 许可证 | 价格 (In/Out per 1M) |</p>
+<p>|---|---|---|---|---|---|---|---|</p>
+<p>| 1 | Claude Fable 5 (High) * | 1,654 | ±16 | 2,094 | Anthropic | Proprietary | $10 / $50 |</p>
+<p>| **2** | **GLM-5.2 (Max)** | **1,595** | ±16 | 1,641 | **Z.ai** | **MIT** | **$1.40 / $4.40** |</p>
+<p>| 3 | Claude Opus 4.7 (Thinking) | 1,566 | ±8 | 7,388 | Anthropic | Proprietary | $5 / $25 |</p>
+<p>| 4 | Claude Opus 4.8 (Thinking) | 1,561 | ±13 | 2,595 | Anthropic | Proprietary | $5 / $25 |</p>
+<p>| 5 | Claude Opus 4.7 | 1,556 | ±8 | 6,799 | Anthropic | Proprietary | $5 / $25 |</p>
+<p>| 6 | Claude Opus 4.6 (Thinking) | 1,541 | ±7 | 9,876 | Anthropic | Proprietary | $5 / $25 |</p>
+<p>| 7 | Claude Opus 4.8 | 1,541 | ±12 | 3,032 | Anthropic | Proprietary | $5 / $25 |</p>
+<p>| 8 | Claude Opus 4.6 | 1,538 | ±7 | 10,969 | Anthropic | Proprietary | $5 / $25 |</p>
+<p>| 9 | GLM-5.1 | 1,531 | ±11 | 3,607 | Z.ai | MIT | $1.40 / $4.40 |</p>
+<p>| 10 | Qwen-3.7 Max | 1,531 | ±11 | 3,371 | Alibaba | Proprietary | $1.25 / $3.75 |</p>
+<p>| 12 | Kimi-K2.6 | 1,513 | ±9 | 5,607 | Moonshot | Modified MIT | $0.95 / $4 |</p>
+<p>| 13 | MiniMax-M3 | 1,511 | ±12 | 2,754 | MiniMax | Proprietary | $0.60 / $2.40 |</p>
+<p>| 15 | Gemini-3.5 Flash | 1,506 | ±13 | 2,214 | Google | Proprietary | $1.50 / $9 |</p>
+
+<p>*注:Claude Fable 5 (High) 标注 &quot;not currently being sampled&quot; — 即该排名位置的样本已停止,实际有效第 1 是 GLM-5.2 (Max)。在所有&quot;仍被采样&quot;的模型中,GLM-5.2 (Max) 是 Arena.ai Code Arena 当前的 #1。</p>
+
+<p>**几个有意思的发现**:</p>
+<p>• **GLM-5.1 → GLM-5.2 单次发布提升 +64 分**(+4.2%),从 #9 跳到 #2——这是 Z.ai 在 4 个月内从&quot;二线第一梯队&quot;到&quot;FrontierSWE 与 Opus 4.8 打平&quot;的强力证据。</p>
+<p>• **价格 / 性能比冠绝全场**:GLM-5.2 (Max) $1.40 / $4.40,而 Opus 4.8 (Thinking) $5 / $25——Z.ai 是 Opus 4.8 的 **3.6× 输入便宜 / 5.7× 输出便宜**,性能差距 30 分(Fable 5 与 Opus 4.8 之间),**每一分的&quot;价效比&quot;远超 Anthropic**。</p>
+<p>• **License 大翻转**:Top 9 全部是 Proprietary 许可证(MIT 只有 GLM-5.1 一个,且在 #9),GLM-5.2 是 **榜单 Top 5 里唯一 MIT 许可证**——这意味着&quot;开源 700B+ MoE&quot; 在 2026 年 6 月仍是 GLM 一家的**结构性独占**。</p>
+<p>• **Fable 5 的&quot;未采样&quot;信号**:Anthropic 把 Fable 5 标为 not currently being sampled——可以理解为这是 Anthropic 故意&quot;封存&quot;的实验模型,用于展示 &quot;我们最强的模型已经做到 1654 分&quot; 给你看,让你知道&quot;我们退一步(到 Opus 4.8)都还有 1561 分&quot;。这是&quot;标杆运营&quot;策略——既显实力,又不真卖。</p>
+
+<p>#### 6.3 第三方 / 社区反馈</p>
+
+<p>• **AICodeKing(YouTube)**:实测自建 coding bench 得分 ~81.4,较 Opus 4.8 / Fable 落后约 6% ([YouTube](https://www.youtube.com/watch?v=MkFThJWJgg8))——这与 Arena.ai 的 30 分差距一致(1595 vs 1654,约 3.6%),但方向相反(AICodeKing 的 6% 差距是真实场景的体感,而不是直接 benchmark 数字)。</p>
+<p>• **Hacker News 讨论串(48518684)**:对 MIT 许可证 + 1M 上下文 + 开源权重表达正面评价;但对&quot;无传统 benchmark&quot;和&quot;过密的 700B+ MoE 发布节奏&quot;提出批评([HN 讨论](https://news.ycombinator.com/item?id=48518684))——HN 的批评在 6 月 17 日 Arena.ai 公布后被部分反驳:GLM-5.2 **是有 benchmark 的**,且是 top-tier benchmark。</p>
+
+<h2>Conflicts / Unverified</h2>
+
+<p>1. **参数描述差异**:本文最初描述的&quot;7530 亿&quot;与官方&quot;744B&quot;存在 9B 的差异;GLM-5.2 的实际架构完全继承自 GLM-5,**官方权威数字是 744B / 40B / 256 专家 / 8 激活**。</p>
+<p>2. **OpenRouter 实际路由状态**:OpenRouter 列表页(`/z-ai/glm-5.2`)已存在,但 2026-06-17 快照显示 &quot;not available&quot;——目前仅能确认&quot;已上架&quot;,无法确认&quot;已可计费路由&quot;。</p>
+<p>3. **API 定价来源**:官方 `docs.z.ai/.../pricing` 页面在本次抓取中**未直接列出 GLM-5.2 的定价行**,只列出 GLM-5、GLM-5-Turbo、GLM-5.1。KuCoin 报道(二手)确认 GLM-5.2 与 GLM-5.1 定价一致($1.40 / $4.40)。该数字视为 **partially_verified**——可信度高,但缺一手直接确认。</p>
+<p>4. **FrontierSWE / PostTrainBench / SWE-Marathon 完整 benchmark 协议**:Z.ai 公告配图直接给了三项长程 benchmark 的具体分数,但**benchmark 协议(任务列表、scoring 公式、时间盒具体定义)尚未在公告中公开**。FrontierSWE 是否会成为行业新标准取决于 Z.ai 是否后续公开协议 + 第三方独立复现。</p>
+<p>5. **1M 稳定性训练细节**:Z.ai 公开材料只说明&quot;针对 large-scale implementation、automated research、performance optimization、complex debugging 四大场景做了 1M 训练&quot;,但未披露具体的中期训练(mid-training)数据构成、超参与 ablation。第三方无法独立复现&quot;稳定性提升&quot;的具体来源。</p>
+<p>6. **SWE-Marathon 13.0% 的解释**:Z.ai 自己的数据里 GLM-5.2 在 SWE-Marathon 上仅 13.0%,比 Opus 4.8 (26.0%) 落后整整 2 倍——这与&quot;1M 上下文 + 长程任务&quot;的主叙事存在张力。**为何 Z.ai 用了&quot;Long-Horizon Task Evaluation&quot; 这个包装而非直接公开 SWE-Marathon 绝对值,值得在企业尽调中追问**。</p>
+<p>7. **Arena.ai 快照时间窗**:Arena.ai 是动态众包 leaderboard,1,641 票相对于 7,388 票(Anthropic Opus 4.7 Thinking)的样本量较少,**GLM-5.2 的 1595 分的 95% CI 较宽(±16)**。把 GLM-5.2 与 Fable 5 严格比较(1595 vs 1654)需以 &quot;Fable 5 重新被采样&quot; 为前提。</p>
+<p>8. **第三方 benchmark 数字**:部分二手博客引用的&quot;SWE-bench Pro 62.1 / HLE 40.5&quot;等数字,溯源上多为 GLM-5.1 的回填或行业推测,**不应作为 GLM-5.2 的实测分数引用**。</p>
+<p>9. **市场反应**:HN 讨论串整体偏正面但样本小(&lt;100 评论),不构成对开发者社区真实使用体验的代表性采样。Arena.ai 排名公布后,HN 上的&quot;无 benchmark&quot;批评已被部分反驳。</p>
+
+<h2>Recommendations</h2>
+
+<p>对**个人开发者 / 小团队**:</p>
+<p>• 想要低门槛尝试 GLM-5.2 的话,先注册 GLM Coding Plan($18/月起),在 Claude Code / Cline / OpenCode 中按上文 base-URL + 模型名替换,3 分钟内可用。</p>
+<p>• 建议将 Sonnet 和 Opus 两个 slot 都钉到 `glm-5.2[1m]`,并将 `CLAUDE_CODE_AUTO_COMPACT_WINDOW` 提到 1,000,000,让 1M 上下文真正发挥作用。</p>
+<p>• 想验证 GLM-5.2 的 1M 工程可用性,建议用真实场景做 A/B:同一份 200K+ 文档/代码库,分别在 GLM-5.1 和 GLM-5.2 上跑同一组 query,看是否真的&quot;不用 chunking&quot;。</p>
+
+<p>对**中型团队 / 中长程 agent 项目**:</p>
+<p>• 1M 上下文 + IndexShare 对&quot;整库重构&quot;&quot;长规范单次消化&quot;价值最大;短对话场景下使用 GLM-4.5-air 即可,避免每 token $1.40 的成本浪费。</p>
+<p>• 关注后续 OpenRouter 路由是否上线——若能用 OpenRouter 统一结算与路由,有助于多模型 fallback 架构。</p>
+<p>• FrontierSWE 74.4% / Arena.ai #2 (1595) 已经把&quot;GLM-5.2 实力&quot; 这件事说清楚了。Z.ai 已经公布具体分数,HN 上&quot;无 benchmark&quot; 的批评已被部分反驳。</p>
+<p>• **多模型 fallback 策略建议**:把 GLM-5.2 (Max) 作为主力(价格 + 性能),Opus 4.8 作为&quot;重要 100+ 步 agent 任务&quot;的安全网,SWE-Marathon 上 Opus 4.8 仍是 26.0% vs GLM-5.2 13.0%—— 重要任务上用 Opus 4.8 顶上。</p>
+
+<p>对**企业架构师**:</p>
+<p>• GLM-5.2 + MIT 许可证 + 1M 上下文,在&quot;自部署大模型&quot;成本结构上比 Llama 3.3 70B、Qwen3.6 27B、GLM-4.5 355B 都更&quot;重型&quot;——硬件预算需要 8×H200 起跳。</p>
+<p>• &quot;**no regional limits, technical access without borders**&quot;是 Z.ai 公告原文承诺,合规场景下比 Llama 社区许可证更可预测。</p>
+<p>• **价格 / 性能比已经压倒 Anthropic**——GLM-5.2 (Max) $1.40/$4.40 vs Opus 4.8 (Thinking) $5/$25,**输入便宜 3.6× / 输出便宜 5.7×**,Arena.ai 性能差距仅 30 分。如果走 Z.ai 官方 API,这意味着企业 API 账单可砍 **~75%** 而不损失太多质量。</p>
+<p>• **关键风险**:SWE-Marathon 上 GLM-5.2 (13.0%) 比 Opus 4.8 (26.0%) 落后 2 倍——&quot;马拉松级&quot;长程任务(20+ 步工具调用 + 错误恢复)仍是 GLM-5.2 的弱点。**如果企业的 agent 任务以 10 步以内、&lt;200K 上下文为主,GLM-5.2 是真香选择;如果是 100+ 步、需要长时间持续状态维护的任务,Opus 4.8 仍是更稳的选择**。</p>
+<p>• 等第三方 1M 长上下文评测(LongBench-V2、RULER、NoCha、∞Bench)出分后再做严肃采购决策;若只做 &lt;200K 任务,GLM-5.1 的 $1.40/$4.40 性价比仍很优秀。</p>
+
+<p>对**研究者**:</p>
+<p>• IndexShare 的具体实现与 DeepSeek DSA 的关系值得一篇 arxiv 综述或消融研究。</p>
+<p>• 智谱用华为昇腾 + MindSpore 训练 744B 模型,本身就是中国 AI 算力栈的重要案例,值得跟踪其训练能耗、单 GPU 吞吐与海外 H100 训练的对比数据。</p>
+<p>• 异步 RL 基础设施(generation / training 解耦)是该团队 2026 年的另一条重要叙事,值得关注后续技术博客。</p>
+<p>• **FrontierSWE / PostTrainBench / SWE-Marathon 三个 benchmark 协议本身值得做 arxiv 综述**——这是 Z.ai 给 2026 年长程 agent 评估定调的关键尝试,需要独立第三方复现。</p>
+<p>• **SWE-Marathon 的 13% vs 26% 鸿沟**是一个有趣的开放问题——是数据问题、RL 训练问题、还是工程问题?需要 ablation。</p>
+
+<h2>Source Notes</h2>
+
+<p>本报告引用 90 个独立来源,其中**直接 web_fetch 抓取 17 个**(11 个一手 + 6 个二手),**包括 Z.ai 官方公告原文(由用户提供)+ Arena.ai 第三方 leaderboard 完整数据**。其余来自 Tavily 抓取片段用于 cross-reference。</p>
+
+<p>所有主张按以下标准归类:</p>
+
+<p>• **verified**:至少 2 个独立来源支持,且至少 1 个为官方/一手(智谱官网 / OpenLM / HF / arxiv / 官方 X 公告)。</p>
+<p>• **partially_verified**:官方一手缺失,仅二手源支持;或来源单一;或存在版本/路由状态不确定。</p>
+<p>• **unverified**:无来源或来源相互矛盾。</p>
+
+<blockquote>报告**未引用**任何 `tmp/` 内本地文件作为支撑来源——所有 citation 均为外部 `http(s)://` 链接。</blockquote>
+
+<h2>Bibliography</h2>
+
+<p>1. Z.ai 官方博客:GLM-5.2(本次更新纳入的官方一手原文) — https://z.ai/blog/glm-5.2</p>
+<p>2. Z.ai 官方 X 公告 — https://x.com/Zai_org/status/2065704919299235870</p>
+<p>3. Z.ai 官方最新模型文档 — https://docs.z.ai/devpack/latest-model</p>
+<p>4. Z.ai 官方定价页 — https://docs.z.ai/guides/overview/pricing</p>
+<p>5. OpenLM 模型门户:GLM-5.2 — https://openlm.ai/glm-5.2/</p>
+<p>6. Hugging Face 模型卡:`zai-org/GLM-5.2` — https://huggingface.co/zai-org/GLM-5.2</p>
+<p>7. arxiv 2602.15763:GLM-5 技术报告 — https://arxiv.org/abs/2602.15763</p>
+<p>8. MarkTechPost(2026-06-14):&quot;Z.ai Launches GLM-5.2…&quot; — https://www.marktechpost.com/2026/06/14/z-ai-launches-glm-5-2-with-a-usable-1m-token-context-two-thinking-effort-levels-and-no-benchmarks-at-launch</p>
+<p>9. KuCoin News(2026-06-13):&quot;Z.AI Launches GLM-5.2 with 1M Token Context Window on Hugging Face&quot; — https://www.kucoin.com/news/flash/z-ai-launches-glm-5-2-with-1m-token-context-window-on-hugging-face</p>
+<p>10. Hacker News 讨论串 #48518684 — https://news.ycombinator.com/item?id=48518684</p>
+<p>11. VentureBeat:IndexCache 稀疏注意力优化器 — https://venturebeat.com/technology/indexcache-a-new-sparse-attention-optimizer-delivers-1-82x-faster-inference</p>
+<p>12. OpenRouter 列表:`z-ai/glm-5.2` — https://openrouter.ai/z-ai/glm-5.2</p>
+<p>13. OpenRouter Compare 页面 — https://openrouter.ai/compare/z-ai/glm-5.2</p>
+<p>14. YouTube / AICodeKing:&quot;GLM-5.2 (Fully Tested)&quot; — https://www.youtube.com/watch?v=MkFThJWJgg8</p>
+<p>15. GitHub:`zai-org/GLM-5` — https://github.com/zai-org/GLM-5</p>
+<p>16. Z.ai 官方 Chat — https://chat.z.ai</p>
+<p>17. **Arena.ai Code Arena 第三方排行榜(2026-06-17 快照,本次新增)** — https://arena.ai/leaderboard/code</p></article></main></body></html>
