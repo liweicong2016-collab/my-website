@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>中国互联网大厂的 Token 经济与 MaaS 商业化</title><meta name="description" content="中国互联网大厂的 Token 经济与 MaaS 商业化"><style>
+*{box-sizing:border-box}body{margin:0;background:#070b14;color:#e8eaf0;font:16px/1.8 Inter,'Noto Sans SC',system-ui,sans-serif}a{color:#38bdf8}.wrap{max-width:900px;margin:auto;padding:0 24px}.nav{border-bottom:1px solid #1e2d45;padding:18px 0}.nav a{margin-right:18px;text-decoration:none}.hero{padding:70px 0 40px}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.15;margin:14px 0}.meta{color:#8b95a8;font-size:14px}.article{padding-bottom:80px}.article h2{margin-top:42px;color:#fbbf24}.article h3{color:#38bdf8}.article img{max-width:100%;height:auto;border-radius:10px}.article blockquote{border-left:3px solid #38bdf8;padding-left:18px;color:#b6c1d2}.article table{width:100%;border-collapse:collapse}.article td,.article th{border:1px solid #2d3f5e;padding:8px}.article code{background:#111827;padding:2px 5px;border-radius:4px}footer{border-top:1px solid #1e2d45;padding:28px 0;color:#8b95a8}
+</style></head><body><nav class="nav"><div class="wrap"><a href="https://liweicong2016-collab.github.io/my-website/">Web 首页</a><a href="https://liweicong2016-collab.github.io/tech-blog/posts/china-token-maas-ppt-2026/">Blog 原文</a><a href="https://github.com/liweicong2016-collab/my-website">源码</a></div></nav><main class="wrap"><header class="hero"><div class="meta">Livius's Tech Pulse · 2026-06-04T00:55:00+08:00</div><h1>中国互联网大厂的 Token 经济与 MaaS 商业化</h1></header><article class="article"><blockquote><strong>核心判断</strong>：MaaS 正在成为云与 AI 应用之间的新计量层。Token 不只是成本单位，也是产品定价、生态补贴、算力调度和企业 ROI 的共同语言。</blockquote>
+<h2>三个震撼数字</h2>
+<p>| 数字 | 厂商 | 含义 |</p>
+<p>|---|---|---|</p>
+<p>| <strong>120 万亿+</strong> | 字节 豆包 | 日均 Token 使用量，C 端 + 企业 API 共同驱动 |</p>
+<p>| <strong>6 倍</strong> | 阿里 百炼 | 公共模型服务 Token 消耗三个月增长 |</p>
+<p>| <strong>50%-80%</strong> | 腾讯 TokenHub | 套餐相对按量 API 的折扣空间 |</p>
+<h2>章节导览</h2>
+<p>本文严格按 10 张原始研究 slide 复刻，<strong>配 10 张冷调深色 SVG 信息图</strong>：</p>
+<p>1. [执行摘要：三条主线](#exec-summary)</p>
+<p>2. [Token 经济：收入与成本耦合](#token-economics)</p>
+<p>3. [MaaS 市场：从 API 升级为 AI 操作系统](#maas-market)</p>
+<p>4. [字节火山引擎：用应用流量拉 Token 飞轮](#bytedance)</p>
+<p>5. [阿里百炼：让 AI 成为云的增长层](#alibaba)</p>
+<p>6. [腾讯混元 + TokenHub：聚合入口押注](#tencent)</p>
+<p>7. [竞争矩阵：三家从不同需求控制点切入](#matrix)</p>
+<p>8. [战略含义：重塑云、软件与开发者产品设计](#implications)</p>
+<p>9. [2026-2027 展望：从低价普惠到效率分层](#outlook)</p>
+<p>10. [主要来源](#sources)</p>
+<a id="exec-summary"></a>
+<h2>1. 执行摘要：三条主线决定 2026 年 MaaS 胜负</h2>
+<figure><img src="/tech-blog/images/maas-ppt/01-three-main-lines.svg" alt="三条主线：Token 规模化 / 成本曲线下探 / 生态入口重排"></figure>
+<p><strong>主线一：Token 规模化</strong> —— 日均调用量成为云厂商 AI 商业化第一指标。字节披露豆包日均 Token 使用量超 120 万亿，阿里披露百炼 Token 消耗三个月提升 6 倍。</p>
+<p><strong>主线二：成本曲线下探</strong> —— 价格从按量 API 走向输入/输出 Token、上下文长度、Batch、缓存、套餐包等多层结构，厂商用低价模型锁定开发者。</p>
+<p><strong>主线三：生态入口重排</strong> —— 阿里偏云与企业全栈，字节偏应用流量与内容/Agent，腾讯偏企业连接、微信生态与 TokenHub 聚合入口。</p>
+<blockquote><strong>投资与业务含义</strong>：MaaS 的核心不是单模型毛利，而是&quot;高频 Token 流量 + 低边际推理成本 + 应用生态转化&quot;的组合收益。</blockquote>
+<p>来源：火山引擎、阿里云百炼、腾讯云 TokenHub、公开报道</p>
+<a id="token-economics"></a>
+<h2>2. Token 经济：收入设计与推理成本耦合</h2>
+<figure><img src="/tech-blog/images/maas-ppt/02-token-economics.svg" alt="Token 经济公式：Token = usage + pricing + compute"></figure>
+<h3>收入端</h3>
+<ul>
+<li>按输入/输出 Token 分别计价，<strong>输出通常更贵</strong></li>
+<li>长上下文、思考模式、多模态、视频生成形成价格梯度</li>
+<li>Token Plan、包年包月和企业承诺消费把波动调用转成确定收入</li>
+</ul>
+<h3>成本端</h3>
+<ul>
+<li>GPU/国产 AI 芯片、HBM、网络与电力决定推理底层成本</li>
+<li>Batch 调用、上下文缓存、蒸馏、小模型路由压低单位成本</li>
+<li>Agent 长链路会放大 Token 消耗，也提高粘性与单客价值</li>
+</ul>
+<h3>关键变量 × 商业含义 × 管理重点</h3>
+<p>| 关键变量 | 商业含义 | 管理重点 |</p>
+<p>|---|---|---|</p>
+<p>| <strong>每百万 Token 单价</strong> | 决定开发者门槛与竞品替换成本 | 价格带、套餐、免费额度 |</p>
+<p>| <strong>单位推理成本</strong> | 决定 MaaS 毛利弹性 | 模型压缩、调度、缓存、芯片供给 |</p>
+<p>| <strong>Token 留存率</strong> | 决定是否从试用转为生产环境 | SLA、工具链、数据安全、Agent 框架 |</p>
+<blockquote><strong>一句话公式</strong>：<code>Token = usage + pricing + compute<code></blockquote>
+<a id="maas-market"></a>
+<h2>3. MaaS 市场：从模型 API 升级为 AI 操作系统</h2>
+<figure><img src="/tech-blog/images/maas-ppt/03-maas-stack.svg" alt="MaaS 三层堆栈：模型层 / 平台层 / 应用层"></figure>
+<p>| 层级 | 能力 | 价值捕获 | 竞争焦点 |</p>
+<p>|---|---|---|---|</p>
+<p>| <strong>模型层</strong> | 通用、推理、代码、多模态、视频、语音 | 按 Token/任务收费 | 性能、成本、上下文、开源/闭源策略 |</p>
+<p>| <strong>平台层</strong> | 模型市场、API 网关、评测、监控、数据治理 | 企业合同、套餐、云资源联动 | 开发体验、SLA、合规与私有化 |</p>
+<p>| <strong>应用层</strong> | Agent、办公、客服、营销、搜索、代码生成 | 订阅、增值、广告、电商转化 | 场景闭环、用户入口、工作流粘性 |</p>
+<blockquote><strong>2026 关键判断</strong>：竞争不再是&quot;谁有模型&quot;，而是谁能把模型嵌入企业流程与消费者入口，并把高频调用沉淀成可预测的 Token 收入。</blockquote>
+<a id="bytedance"></a>
+<h2>4. 字节火山引擎：用应用流量拉 Token 飞轮</h2>
+<figure><img src="/tech-blog/images/maas-ppt/04-bytedance.svg" alt="字节火山引擎：豆包 120 万亿 + 入口矩阵"></figure>
+<p><strong>核心数字：豆包日均 Token 使用量超 120 万亿</strong></p>
+<p>公开报道显示，豆包大模型日均 Token 使用量已超过 120 万亿，体现从 C 端应用到企业 API 的调用规模优势。</p>
+<h3>产品打法</h3>
+<p>豆包 2.0 系列覆盖 <strong>Pro、Lite、Mini、Code</strong> 等梯度，以不同能力/成本匹配 Agent、编程和通用场景。</p>
+<h3>商业化抓手</h3>
+<ul>
+<li><strong>火山方舟</strong>承接企业 API</li>
+<li><strong>豆包 / 即梦 / 抖音</strong>生态贡献应用场景</li>
+<li><strong>TRAE</strong> 等开发工具放大代码类 Token 消耗</li>
+</ul>
+<h3>SWOT</h3>
+<p>| 优势 | 约束 |</p>
+<p>|---|---|</p>
+<p>| C 端高频入口、内容生成场景丰富、价格激进 | 企业云心智弱于阿里/腾讯，需证明 SLA 与行业交付 |</p>
+<blockquote><strong>观察指标</strong>：企业 MaaS 收入、Token Plan 留存、Agent 应用转化</blockquote>
+<p>来源：新浪科技；火山引擎开发者社区，豆包 2.0 API</p>
+<a id="alibaba"></a>
+<h2>5. 阿里百炼：让 AI 成为云的增长层</h2>
+<figure><img src="/tech-blog/images/maas-ppt/05-alibaba.svg" alt="阿里百炼：3 月 6 倍 + 价格梯度"></figure>
+<p><strong>核心数字：百炼 Token 消耗三个月提升 6 倍</strong></p>
+<p>阿里管理层披露，百炼 MaaS 平台公共模型服务市场 Token 消耗三个月提升 6 倍。</p>
+<h3>价格结构</h3>
+<p>百炼官方价格页显示，Qwen 系列按 <strong>上下文长度、输入/输出、思考模式</strong> 分层；Batch 调用与上下文缓存提供折扣。</p>
+<h3>全栈叙事</h3>
+<p>从 <strong>AI Infra、芯片/服务器、模型、百炼平台到千问应用官网</strong>，阿里试图把 Token 收入与云资源消耗绑定。</p>
+<h3>SWOT</h3>
+<p>| 优势 | 约束 |</p>
+<p>|---|---|</p>
+<p>| 云客户基础、企业交付、开源 Qwen 生态、价格体系透明 | C 端超级入口相对分散，低价竞争压缩短期毛利 |</p>
+<blockquote><strong>观察指标</strong>：百炼收入占阿里云比例、企业 Agent 项目转生产率</blockquote>
+<p>来源：阿里云百炼官方价格页；新浪财经；每经网</p>
+<a id="tencent"></a>
+<h2>6. 腾讯混元 + TokenHub：聚合入口押注</h2>
+<figure><img src="/tech-blog/images/maas-ppt/06-tencent.svg" alt="腾讯 TokenHub：50-80% 折扣 + 聚合入口"></figure>
+<h3>平台入口</h3>
+<p><strong>腾讯云 TokenHub 定位为统一大模型服务入口</strong>，整合混元并引入第三方模型，覆盖对话、推理、代码、视觉、图像和视频等场景。</p>
+<p><strong>套餐折扣：50%-80%</strong> —— TokenHub 产品页强调套餐比 API 按量计费便宜 50%-80%，用预付费和用量包降低开发者边际成本感知。</p>
+<h3>模型迭代</h3>
+<p>混元 Hy3 preview 已开源发布，公开资料显示输入价约 <strong>1.2 元/百万 Tokens</strong>，并面向 Agent 开发者推出 Token Plan。</p>
+<h3>SWOT</h3>
+<p>| 优势 | 约束 |</p>
+<p>|---|---|</p>
+<p>| 微信/企微/腾讯会议/云与安全生态，聚合平台利于企业多模型治理 | 需要在自研模型心智与第三方聚合之间平衡价值捕获 |</p>
+<blockquote><strong>观察指标</strong>：TokenHub 付费包复购、混元开源生态、微信场景调用量</blockquote>
+<p>来源：腾讯云 TokenHub 产品页；腾讯云开发者社区</p>
+<a id="matrix"></a>
+<h2>7. 竞争矩阵：三家从不同需求控制点切入</h2>
+<figure><img src="/tech-blog/images/maas-ppt/07-matrix.svg" alt="三家对比矩阵：6 维度热力图"></figure>
+<p>| 维度 | 字节 | 阿里 | 腾讯 |</p>
+<p>|---|---|---|---|</p>
+<p>| <strong>核心入口</strong> | 豆包、抖音、即梦、TRAE、火山方舟 | 阿里云百炼、千问、企业云客户 | 腾讯云 TokenHub、混元、微信/企微生态 |</p>
+<p>| <strong>Token 增长来源</strong> | C 端高频交互、内容生成、编程 Agent | 企业应用、云上 AI 工作流、开源生态迁移 | 企业协作、微信生态、第三方模型聚合 |</p>
+<p>| <strong>定价风格</strong> | 高性价比模型 + 低门槛计划 | 分层透明价格 + Batch/缓存折扣 | 套餐锁价 + 聚合调用优惠 |</p>
+<p>| <strong>最大机会</strong> | 把 C 端流量训练成企业级 MaaS 收入 | 让 MaaS 成为阿里云最大产品线之一 | 成为企业多模型调用与治理入口 |</p>
+<p>| <strong>主要风险</strong> | 企业交付与合规心智建设 | 价格战与算力成本对毛利的压力 | 聚合平台稀释自研模型差异化 |</p>
+<blockquote>战略对比基于公开产品定位、价格页和 2026 年公开报道</blockquote>
+<a id="implications"></a>
+<h2>8. 战略含义：重塑云、软件与开发者产品设计</h2>
+<figure><img src="/tech-blog/images/maas-ppt/08-implications.svg" alt="影响图：云 / 企业 / 开发者 / 投资人 四象限"></figure>
+<h3>对云厂商</h3>
+<ul>
+<li>MaaS 将成为云资源的新前台，背后绑定 GPU、存储、网络和数据安全</li>
+<li>价格战不可避免，关键是用缓存、Batch、模型路由和自研芯片维持成本优势</li>
+</ul>
+<h3>对企业客户</h3>
+<ul>
+<li>采购标准从模型榜单分数转向 <strong>总拥有成本、稳定性、数据隔离和工作流集成</strong></li>
+<li>Agent 项目要建立 Token 预算、效果归因和自动降级策略</li>
+</ul>
+<h3>对开发者</h3>
+<ul>
+<li><strong>多模型路由、提示词缓存、上下文压缩、结果复用</strong>会成为应用利润率基本功</li>
+</ul>
+<h3>对投资者</h3>
+<ul>
+<li>应跟踪 <strong>Token 消耗、付费留存、单位推理成本、AI 云收入占比</strong>，而不是只看模型发布节奏</li>
+</ul>
+<a id="outlook"></a>
+<h2>9. 2026-2027 展望：从低价普惠到效率分层</h2>
+<figure><img src="/tech-blog/images/maas-ppt/09-outlook.svg" alt="2026-2027 outlook：趋势时间轴"></figure>
+<h3>三项预测</h3>
+<p>1. <strong>价格继续分层</strong>：旗舰模型涨价或稳价，Lite/Mini 模型承担普惠流量</p>
+<p>2. <strong>企业 MaaS 从试点转生产</strong>：Agent、客服、代码、营销内容先放量</p>
+<p>3. <strong>平台从卖 API 转向卖治理</strong>：模型市场、审计、路由、成本控制成为标配</p>
+<h3>建议</h3>
+<p>| 角色 | 建议 |</p>
+<p>|---|---|</p>
+<p>| <strong>厂商</strong> | 用 Token Plan 锁定高频开发者，同时公开 SLA 与成本优化能力 |</p>
+<p>| <strong>企业</strong> | 建立多供应商策略，按任务拆分模型层级，避免单一模型成本锁定 |</p>
+<p>| <strong>开发者</strong> | 把 Token 成本纳入产品设计，默认做缓存、压缩和模型路由 |</p>
+<a id="sources"></a>
+<h2>10. 主要来源</h2>
+<ul>
+<li>阿里云百炼模型价格页：help.aliyun.com/zh/model-studio/model-pricing</li>
+<li>腾讯云 TokenHub 产品页：cloud.tencent.com/product/tokenhub</li>
+<li>腾讯云开发者社区，混元 Hy3 preview：developer.cloud.tencent.com/article/2660040</li>
+<li>火山引擎开发者社区，豆包 2.0 API：developer.volcengine.com/articles/7610285824933445675</li>
+<li>新浪科技，豆包日均 Token 使用量超 120 万亿：finance.sina.com.cn/tech/roll/2026-04-02/doc-inhtazrx7826779.shtml</li>
+<li>新浪财经，百炼 Token 消耗三个月升 6 倍：finance.sina.com.cn/tob/2026-03-19/doc-inhrpspp8552821.shtml</li>
+<li>每经网，阿里云 MaaS 与 Agent 叙事：nbd.com.cn/articles/2026-05-21/4402582.html</li>
+</ul>
+<p>*Sources checked in June 2026*</p>
+<h2>一句话总结</h2>
+<blockquote><strong>MaaS 的胜负不取决于&quot;谁有最强模型&quot;，而取决于&quot;谁能把 Token 流量沉淀成可预测的云收入&quot;</strong> —— 这是 2026 年中国云市场的核心叙事。</blockquote></article></main><footer><div class="wrap">© 2026 Livius · AI · Compute · Southeast Asia</div></footer></body></html>
