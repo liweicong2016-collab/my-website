@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诺华 78 亿美元押注中国 mRNA：一针清空 B 细胞</title>
+<meta name="description" content="诺华 5.75 亿首付、最高 78 亿美元买下艾博生物的 mRNA 药物 ABO2203——用 mRNA 在体内现造双抗、一针清空 B 细胞的下一代技术。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&q=80" alt="DNA 双螺旋结构示意">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">BIOTECH · 生物医药</span>
+    <h1>诺华 78 亿美元押注中国 mRNA：一针清空 B 细胞</h1>
+    <p class="subtitle">诺华 5.75 亿首付、最高 78 亿美元，买下中国艾博生物一款 mRNA 药物——用 mRNA 在体内「现造」双特异性抗体，一针清空 B 细胞。</p>
+    <div class="hero-meta">
+      <span>📅 2026-10-02</span>
+      <span>⏱ ~5 min read</span>
+      <span>🏷️ 诺华 · 艾博生物 · mRNA · 自身免疫</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">诺华</span>
+      <span class="tag-pill">艾博生物</span>
+      <span class="tag-pill">mRNA</span>
+      <span class="tag-pill">T细胞衔接器</span>
+      <span class="tag-pill">自身免疫</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN 摘要（可选） ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>：Novartis struck a deal worth up to $7.8B for ABO2203, a Chinese mRNA drug that encodes a CD19×CD3 T-cell engager — a single subcutaneous shot that depletes B cells in vivo, achieving CAR-T-level depth at microgram doses.
+</div>
+
+<!-- ===== TL;DR 核心结论 ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>：这笔交易买的是「用 mRNA 在体内现造双抗」这条技术路线——半衰期从 2 小时拉到 19 天、CAR-T 级别的 B 细胞清除深度、皮下微克级给药，已在小规模临床（ITP 3 例 + B-NHL 9 例）验证概念。
+</div>
+
+<p>今天医药圈最值得聊的一件事，不是股价，是一笔 78 亿美元的技术交易。10 月 2 日，瑞士制药巨头诺华宣布，从苏州的艾博生物手里，买下一款 mRNA 药物的全球独家权益，外加艾博整个 RNA 平台其他项目的选择权。首付款 5.75 亿美元，后续里程碑最高 72 亿，再加销售分成——加起来最高 78 亿美元。</p>
+<p>这个数字放在中国 biotech 的 license-out 历史上，是又一个「超级 BD」。但真正值得说的不是钱，是这款药背后的技术路线：<strong>用 mRNA 在人体内「现造」双特异性抗体，一针下去把 B 细胞清零。</strong></p>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span> 这个药是什么</h2>
+<p>它叫 ABO2203。名字很工程化，但原理很性感。</p>
+<p>传统上，要清除 B 细胞（那些攻击自己身体、或者癌变的 B 细胞），有两条路：一是打单抗（比如利妥昔单抗），但只能清掉血液里的一部分；二是做 CAR-T，抽患者的 T 细胞体外改造再回输，能清得很深，但几十万美元、几周周期、还得先做淋巴清除预处理。</p>
+<p>ABO2203 走的是第三条路：它是一段包在脂质纳米颗粒（LNP）里的 mRNA。打进身体后，细胞就地把它翻译成一个「双特异性 T 细胞衔接器」（TCE）——一边抓 B 细胞（CD19），一边拉 T 细胞（CD3），让 T 细胞去把 B 细胞干掉。</p>
+<p>相当于把「造药」这件事，从药厂搬进了患者自己的细胞里。</p>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span> 为什么它技术上很牛</h2>
+<p>三个数字能说明问题。</p>
+<div class="bis-grid">
+<div class="bis-card cyan"><span class="val">19 天</span><span class="lab">半衰期（传统 TCE 仅 2 小时）</span></div>
+<div class="bis-card purple"><span class="val">CAR-T 级</span><span class="lab">B 细胞清除深度（清到骨髓/脾脏）</span></div>
+<div class="bis-card green"><span class="val">微克级</span><span class="lab">皮下注射剂量</span></div>
+</div>
+<p><strong>第一，半衰期。</strong>传统 TCE 药物（比如已上市的 Blinatumomab）半衰期只有 2 小时，病人要住院连着输 28 天。ABO2203 靠体内持续翻译，半衰期拉到 19 天（猴子数据），人体 7-11 天，皮下打一针就行。</p>
+<p><strong>第二，清除深度。</strong>它能把 B 细胞清到骨髓、淋巴结、脾脏这些「老巢」——这是传统 CD20 单抗做不到的地方。</p>
+<p><strong>第三，毒性。</strong>因为药物是「慢慢释放」而不是「峰值冲击」，细胞因子风暴（CRS）的风险大幅下降。</p>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span> 临床效果到底怎么样</h2>
+<p>数据还不多，但每一个都很硬。</p>
+<p>在自身免疫方向，今年 9 月 18 日发在《Cell》上的论文里，3 例难治性免疫性血小板减少症（ITP）患者，打了 ABO2203 之后，外周血和骨髓里的 B 细胞被快速、彻底清除，3 个人全部在 1 个月内完全缓解，血小板恢复，持续了 6 个月。全程没有细胞因子风暴，只有 1-2 级的轻微不良反应。</p>
+<p>更关键的是，B 细胞清除后再生的，是「幼稚 B 细胞」——意味着免疫系统可能被「重置」了，而不是简单压制。</p>
+<p>在肿瘤方向，AACR 2026 上，9 例复发难治的 B 细胞淋巴瘤患者的剂量爬坡数据，最大耐受剂量还没摸到。</p>
+<p>3 例 + 9 例，都是 Phase 1。离上市还远，但概念验证是成立的。</p>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span> 这事跟 AI 有什么关系</h2>
+<p>关系比你想的深。</p>
+<p>艾博生物今年 1 月刚任命了首位首席人工智能官，从 Moderna 挖来的。这个技术栈的核心环节——mRNA 序列设计（密码子优化、UTR 设计）、TCE 蛋白结构设计、LNP 脂质配方筛选——全都靠 AI 在加速。</p>
+<p>说白了，mRNA 药物本质是「用序列给人体编程」。既然是写代码，AI 就是那个编译器。诺华买的表面是一个分子，深层是「AI 驱动的 RNA 平台」的迭代速度。</p>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span> 这意味着什么</h2>
+<p>对患者：红斑狼疮、ITP、多发性硬化这些 B 细胞自身免疫病，现在要靠终身服药压制。这个技术可能把它们变成「打几针、免疫重置、长期缓解」。</p>
+<p>对行业：它把 CAR-T 那种天价个性化细胞治疗，降维成了随时可打的针剂。如果大样本临床能复制那 3 例的数据，这会是免疫治疗的一条新岔路。</p>
+<p>当然，风险也明摆着：数据太早期，长期 B 细胞清除的感染风险、重复给药的免疫原性，都还没答案。78 亿是「里程碑」不是「现金」，艾博要先把分子推过注册临床这道坎。</p>
+<p>但至少今天，中国 biotech 的技术，又让一家全球药企巨头心甘情愿掏了 5.75 亿首付。</p>
+</div>
+
+<div class="key-takeaways fade-up">
+<h3>🎯 Key Takeaways</h3>
+<ul>
+<li><strong>交易结构</strong>：5.75 亿首付 + 72 亿里程碑 + 销售分成，最高 78 亿美元，买下 ABO2203 全球权益 + RNA 平台其他项目选择权</li>
+<li><strong>技术路线</strong>：mRNA 编码 CD19×CD3 TCE，体内「现造」双抗，半衰期 2 小时 → 19 天，皮下微克级给药</li>
+<li><strong>临床验证</strong>：ITP 3 例全部 6 个月缓解（《Cell》）、B-NHL 9 例剂量爬坡，均为 Phase 1</li>
+<li><strong>AI 关系</strong>：艾博 2026 年 1 月设 CAIO，序列设计/蛋白设计/LNP 配方全由 AI 加速——「用序列给人体编程」</li>
+</ul>
+</div>
+
+<div class="related-section">
+<h2>📚 Related Reading</h2>
+<div class="related-grid">
+<a class="rel-card" href="../articles/china-token-going-global-2026.html"><div><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&q=80" alt=""><div class="rel-card-body"><h4>中国 Token 出海 2026：从价格战到全球份额的拐点</h4><p>中国技术出海的另一条线</p><span class="rel-card-tag">AI 出海</span></div></div></a>
+<a class="rel-card" href="../articles/china-multimodal-ai-leadership-2026.html"><div><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&q=80" alt=""><div class="rel-card-body"><h4>国内多模态 AI：LLM 追到半步之遥</h4><p>中国 AI 的技术位势</p><span class="rel-card-tag">多模态</span></div></div></a>
+<a class="rel-card" href="../articles/four-coding-models-comparison-2026.html"><div><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt=""><div class="rel-card-body"><h4>三个 coding 模型接力跑同一份代码</h4><p>AI 模型实战对比</p><span class="rel-card-tag">Coding</span></div></div></a>
+</div>
+</div>
+
+
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
