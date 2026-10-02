@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>好莱坞亲身下场：本·阿弗莱克的 16 人 AI 工作室 — Livius's Tech Pulse</title>
+<meta name="description" content="InterPositive：阿弗莱克 2022 年秘密创办的 16 人 AI 电影技术公司，2026 年 3 月被 Netflix 以 5.87 亿美元收购。它不做文生视频，而是为每个剧组训练专属后期模型。">
+<style>
+:root{--bg:#08090c;--surface:#101116;--border:rgba(255,255,255,.08);--text:#f4f4f5;--text2:#a1a1aa;--text3:#5b5e6b;--accent:#0ea5e9;--accent-hi:#38bdf8;--accent-dim:rgba(56,189,248,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-hi);text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:30px}
+.topbar a.back{color:var(--text2);font-size:13.5px}
+.hero img{width:100%;border-radius:14px;margin-bottom:26px;display:block}
+.badge{display:inline-block;font-size:12px;font-weight:700;color:#7dd3fc;border:1px solid rgba(56,189,248,.4);background:var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.5px;margin-bottom:10px;line-height:1.35}
+.meta{color:var(--text3);font-size:13.5px;margin-bottom:28px}
+.lead{font-size:16.5px;color:var(--text2);border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin-bottom:34px}
+h2{font-size:20px;font-weight:800;margin:40px 0 14px}
+h2 .num{color:var(--accent-hi);margin-right:8px}
+p{margin:0 0 16px;color:var(--text2);font-size:15.5px}
+p strong,li strong{color:var(--text)}
+ul,ol{margin:0 0 16px 22px;color:var(--text2);font-size:15px}
+li{margin-bottom:8px}
+blockquote{border-left:3px solid var(--accent);margin:18px 0;padding:10px 0 10px 18px;color:var(--text);font-size:15.5px}
+blockquote .src{display:block;margin-top:8px;font-size:12.5px;color:var(--text3)}
+.callout{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin:22px 0}
+.callout p{margin:0 0 8px;font-size:14.5px}
+.callout p:last-child{margin-bottom:0}
+.grades{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.grades th{text-align:left;color:var(--text3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--border)}
+.grades td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;margin-right:4px}
+.tag.a{background:rgba(52,211,153,.15);color:#6ee7b7}
+.tag.b{background:rgba(56,189,248,.15);color:#7dd3fc}
+.tag.c{background:rgba(251,191,36,.15);color:#fcd34d}
+.note{font-size:12.5px;color:var(--text3);margin-top:30px}
+.footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+.footer a{color:var(--text2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="back" href="../">← 全部文章</a><a class="back" href="../../">首页</a></div>
+  <div class="hero"><img src="cover-affleck-interpositive-opensource-video.jpg" alt="电影片场与 AI 神经网络交织的 21:3 横幅"></div>
+  <span class="badge">深度分析 · 好莱坞 × AI</span>
+  <h1>好莱坞亲身下场：本·阿弗莱克的 16 人 AI 工作室，把开源视频模型做成工业级生产管线</h1>
+  <div class="meta">2026年10月3日 · 基于公开网络调研 · 证据等级标注</div>
+  <div class="lead">本·阿弗莱克 2022 年秘密创办了一家 16 人的 AI 电影技术公司 InterPositive，今年 3 月被 Netflix 以 5.87 亿美元收购。它的打法不是"用 AI 生成电影"，而是拿开源模型、为每个剧组训练专属的后期模型。但先纠偏两个关键偏差：它不做文本生成视频；"H3 微调"的说法目前没有任何来源支持。</div>
+
+  <h2><span class="num">一</span>16 个人，5.87 亿美元：Netflix 买的是什么</h2>
+  <p>2026 年 3 月 5 日，Netflix 宣布收购 InterPositive。SEC 文件披露的价格是 <strong>5.87 亿美元现金</strong>。整个 16 人团队——工程师、研究员、创意人员——整体加入 Netflix，阿弗莱克本人任高级顾问。"16 人"这个数字经 Advanced Television、VP Land、Netflix 官方 LinkedIn 多方确认，不是传说。</p>
+  <p>先排除两个容易混淆的对象：Artists Equity 是阿弗莱克和马特·达蒙 2022 年创办的传统制片公司（出品《The Rip》《Animals》），不是 AI 公司；Staircase Studios AI 是《分歧者》制片人 Pouya Shahbazian 2025 年创办的另一家 AI 制片公司，走超低成本路线（单部预算低于 50 万美元，计划拍 30 部），和阿弗莱克无关。</p>
+  <p>Netflix 买的到底是什么？一句话：<strong>一条"每个剧组专属模型"的后期管线，外加"不对外销售"的独占权。</strong></p>
+  <blockquote>和一个工程师、研究员、创意人员组成的小团队一起，在一个有完整剧组配置的受控摄影棚里拍摄专有数据集……我想建一个能捕捉片场真实发生之事的工作流，用摄影师和导演本来就说的语言。<span class="src">—— 本·阿弗莱克，Netflix 收购声明，2026-03-05</span></blockquote>
+  <p>翻译一下：从 2022 年起，他们就在摄影棚里按真实制片流程拍数据，攒了一套"电影感"专用的训练集。然后每接一部戏，就用这部戏的 dailies 再训一个专属模型，专干这部戏的后期。</p>
+  <div class="callout">
+    <p><strong>关键约束：模型只改已有的画面，不生成新内容。</strong>36kr 英文报道特别点出，InterPositive 被严格限定为"工具"角色——没有任何图像生成或剧本写作功能。阿弗莱克要求"收窄数据集，只建聚焦电影制作技法的模型"。</p>
+    <p>为什么这个约束重要？因为它一次性绕开了好莱坞对 AI 最大的三个心结：演员肖像权、训练数据的 IP 污染、编剧工会的"AI 写作"红线。模型见过的数据就是本剧组拍的东西，产出也只服务于本剧组。</p>
+  </div>
+
+  <h2><span class="num">二</span>H3 到底是什么：2026 年夏天最火的开源视频模型</h2>
+  <p>既然"H3 微调"的说法站不住，那 H3 本身作为一条技术线，仍然值得单独说——因为它代表了开源视频模型在 2026 年达到的能力水位，而这正是"好莱坞敢用开源模型做生产"的前提。</p>
+  <p>MiniMax H3，<strong>330 亿参数</strong>的稠密单流全模态 Transformer，2026 年 8 月 3 日开源权重。一次生成 4–15 秒、24fps、原生 768p 视频，<strong>原生 32kHz 立体声音频和画面一起生成</strong>（是"同生"，不是后期配音）。文本编码器用的是 Qwen3-VL-32B，开源了 H3-Base、FL2VA、Ref2VA 几个检查点。</p>
+  <p>发布不到一个月，fal 基于 H3 权重做了后训练版本 H3 Max，在 Design Arena 图生视频榜上 Elo 1341 排名第一，5 秒 768p 视频约 2.46 秒推理完成——比实时还快。当然，这是厂商新闻稿的自称，跑分看看就好。</p>
+  <p>两点值得注意。第一，H3 的社区许可证据技术博客解读，排除了美国、欧盟、英国、韩国的本地部署——这个解读是 C 级证据，许可证原文未直接核验，但它指向一个真问题：<strong>开源权重不等于无条件商用</strong>，好莱坞这种法务敏感的行业，用之前一定会把许可证翻烂。第二，H3 的能力形态（短时长、高帧率、音画同生）决定了它适合"镜头级"任务，而不是"成片级"任务——这恰好和 InterPositive"只改已有 footage"的约束是同一种思路：AI 做不了导演，但能做一颗极好用的"数字镜头"。</p>
+
+  <h2><span class="num">三</span>"工业级"到底工业在哪：《Animals》是一次公开实验</h2>
+  <p>2026 年 10 月 9 日，阿弗莱克自编自导自演的《Animals》在 Netflix 上线。9 月 30 日 Bloomberg Screentime 上，阿弗莱克承认："I used [AI] for lots of things in that movie"——很多地方用了 AI，主要在后期，"让我们在某些情况下更快，做到了原本做不到的事"。</p>
+  <p>但他拒绝指认具体哪些镜头用了 AI。原话很有意思："要维护现实的幻觉"，就像魔术师不揭秘。THR 红毯采访里他说得更直白：这是一套离散的工具，"It's not about making fake people or replacing anybody, ever." 如果你能看出来哪里用了 AI，"那就搞砸了，就像一个糟糕的特效、糟糕的表演一样"。</p>
+  <div class="callout">
+    <p><strong>"工业级"的真实含义：不是 demo 好看，而是观众看不出来。</strong>电影工业对 AI 的验收标准从来不是"能不能生成"，而是"能不能混进正片而不穿帮"。《Animals》是第一部公开承认使用这套技术的真人电影——注意，是"公开承认"，实际用过的可能更多。</p>
+  </div>
+  <p>管线层面，综合多家报道：每部戏用 dailies 训专属模型 → 后期做调色、重打光、背景替换、连续性修复、缺失镜头补拍、钢丝擦除、镜头重构。另有单一行业信源称，InterPositive 正在并入 Netflix 统一 VFX 部门 Eyeline，工具仅限 Netflix 出品及创意伙伴使用，不对外销售——这条是 C 级，待核验。</p>
+  <p>成本数字呢？说实话，拿得出手的不多。Netflix 联合 CEO Ted Sarandos 称 2026 年约 300 部 Netflix 影视用了生成式 AI（多在后期）；纪录片《The American Experiment》的 AI 视觉元素据称"两倍速、一半成本"。但这些是 Netflix 整体的笼统说法，没有 InterPositive 专项的成本/时间数据。营销语言和可验证产出之间，差着至少一个数量级。</p>
+
+  <h2><span class="num">四</span>阿弗莱克这套话术，为什么前后一致</h2>
+  <p>阿弗莱克关于 AI 的公开表态，从 2024 年到现在几乎没变过，形成一条完整的言论链：</p>
+  <blockquote>AI can write you excellent imitative verse that sounds Elizabethan. It cannot write you Shakespeare.<span class="src">—— CNBC 投资者峰会，2024-11（AI 能写出很棒的伊丽莎白风格仿作，但写不出莎士比亚）</span></blockquote>
+  <blockquote>AI is a craftsman at best… Craft is knowing how to work, art is knowing when to stop.<span class="src">—— CNBC，2024-11（AI 充其量是工匠；工匠知道如何工作，艺术知道何时停手）</span></blockquote>
+  <blockquote>从 whole cloth 生成电影是 bullshit。<span class="src">—— Joe Rogan 播客，2026-01（但承认 AI 会像 VFX 一样成为工具）</span></blockquote>
+  <blockquote>人们以为 AI 是无中生有——"敲几个字电脑就给你一部电影"，根本不是这回事。<span class="src">—— Netflix 收购声明，2026-03-05</span></blockquote>
+  <blockquote>I don't worry about Skynet.<span class="src">—— Bloomberg Screentime，2026-09-30（真正担心的是"习得性无助"和教育）</span></blockquote>
+  <p>核心就一句话：<strong>AI 是工匠，不是艺术家；它接管的是"繁重、低创意、高成本"的环节，而不是创作本身。</strong>你可以说这是公关话术，但它和 InterPositive"只改已有 footage"的产品约束是严丝合缝的——话术和产品互相作证，这在硅谷式 AI 叙事里倒不多见。</p>
+  <p>当然，反噬也来了。Mediaweek 的批评很尖锐：他一边贬低 AI 的创作能力，一边把 AI 公司以 5.87 亿美元卖掉，之前还"under the radar"好几年。Reddit 和 TechRadar 上更多是工种焦虑：后期和 VFX 岗位会不会被吃掉。虚伪指控是否成立见仁见智，但"营销语言远超可验证产出"是事实：零公开 demo、零技术论文、基础模型匿名、《Animals》的 AI 用途刻意保密。</p>
+
+  <h2><span class="num">五</span>行业对照：四条路线，四种答案</h2>
+  <ul>
+    <li><strong>Lionsgate × Runway（2024-09）：专有供应商路线。</strong>用 2 万部片库训练专属模型，后有报道称效果不佳，转向投资 + 联合开发新 IP。教训：片库数据不等于生产数据。</li>
+    <li><strong>Staircase Studios（2025-03）：超低成本路线。</strong>自研 ForwardMotion 工作流，单部预算低于 50 万美元，计划 3–4 年拍 30 部。赌的是长尾内容供给爆发。</li>
+    <li><strong>迪士尼：先授权后退出。</strong>先和 OpenAI 合作，2026 年 4 月又退出。想用，又怕 IP 和肖像权的雷。</li>
+    <li><strong>Netflix × InterPositive（2026-03）：收购独占路线。</strong>5.87 亿美元买断，不对外销售，只服务自家出品和创意伙伴。</li>
+  </ul>
+  <p>四条路线背后是同一个战略分叉：<strong>用专有 API，还是用开源模型自己训？</strong>InterPositive 赌的是三件事：数据留在剧组本地（dailies 不出内网）；导演"拥有"衍生模型——阿弗莱克在 THR 采访里的原话是，"你不必把它交给全世界，他们没资格拿"（"They are not entitled to that."）；结构性护城河——基座模型商品化之后，壁垒上移到"per-production 微调 + 工作流 + 数据闭环"。</p>
+
+  <h2><span class="num">六</span>真正的变化：导演开始"拥有模型"</h2>
+  <p>好莱坞亲身下场，到底改变了什么？不是"AI 开始拍电影"——阿弗莱克自己都在骂这个叙事是 bullshit。真正的变化是<strong>生产资料的归属变了</strong>。</p>
+  <p>传统 VFX 时代，制片方买的是供应商的人时；Runway 时代，买的是 API 调用；InterPositive 模式下，剧组拥有的是一个<strong>为自己这部戏训练的专属模型</strong>——它记住了这部戏的光线、影调、演员的脸、美术的质感。杀青后这个模型就是这部戏的"数字资产"，续集、重映、衍生，接着用。</p>
+  <p>这也是 Netflix 花 5.87 亿美元的真正买点：不是 16 个人，而是一条"模型即剧组资产"的管线，外加"不卖给别人"的排他性。当基座模型被开源商品化，竞争就上移到谁有最好的 per-production 数据和工作流——而好莱坞最不缺的，恰恰是 per-production 数据和工作流。</p>
+  <p><strong>开源模型拆掉了"模型"这堵墙，好莱坞发现墙后面的地是自己的。</strong></p>
+
+  <h2><span class="num">七</span>证据等级与未验证清单</h2>
+  <table class="grades">
+    <tr><th>等级</th><th>含义</th><th>本文中的例子</th></tr>
+    <tr><td><span class="tag a">A</span></td><td>直接引言 / 官方声明</td><td>阿弗莱克 CNBC / Rogan / Bloomberg 原话（多家独立媒体转述一致）</td></tr>
+    <tr><td><span class="tag b">B</span></td><td>可信媒体交叉</td><td>16 人团队、5.87 亿美元（SEC 文件）、《Animals》用 AI、H3 技术规格</td></tr>
+    <tr><td><span class="tag c">C</span></td><td>单源 / 待核验</td><td>H3 许可证解读、并入 Eyeline VFX、4 项美国专利归属</td></tr>
+  </table>
+  <p>以下事实目前<strong>没有公开来源</strong>，看到任何信源声称它们都要打问号：InterPositive 的基础开源模型具体是哪个、LoRA 还是全量微调、训练算力与数据构成、H3 是否涉入、InterPositive 专项的成本/时间节省数字、阿弗莱克个人股权收益、收购是否有业绩对赌条款。</p>
+
+  <div class="note">研究方法说明：本文基于 2026-10-02 的公开网络调研，原始材料为英文一手报道（Reuters、Variety、Bloomberg 现场报道等）及多家媒体转述；中文引文为笔者翻译。凡标注"据称""单一信源"的，均未获交叉验证。</div>
+
+  <div class="footer">← <a href="../">全部文章</a> · <a href="../../">Livius's Tech Pulse 首页</a></div>
+</div>
+</body>
+</html>
