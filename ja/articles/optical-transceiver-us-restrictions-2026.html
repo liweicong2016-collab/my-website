@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>光模块的下半场：美国管制从“全面禁令”恐慌到“利润向上游转移”的推演</title>
-<meta name="description" content="从7月FCC 26-50到9月最终规则温和落地，再到9月25日两党法案转向联邦采购——复盘美国光模块管制三个月的三次反转，拆解大摩研报的政策逻辑，推演产业链利润如何向上游激光器与芯片环节转移。">
+<title>光モジュールの後半戦：米規制「全面禁止」パニックから「利益の上流移転」への読み筋</title>
+<meta name="description" content="7月のFCC 26-50から9月の最終規則の軟着陸、そして9月25日の超党派法案による連邦調達への転換へ—3ヶ月で3度の反転を振り返り、モルガン・スタンレー・ノートの政策ロ6ジックを読み解き、利益が米国のレーザー・チップ上流へ移るサプライチェーンを推演する。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -118,10 +118,10 @@ footer a:hover{text-decoration:underline}
 <body>
 <div id="progress-bar"></div>
 <div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
-<div class="lang-switch" data-current="zh">
-  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+<div class="lang-switch" data-current="ja">
+  <a class="lang-btn" data-lang="zh" href="#" aria-label="中文">中</a>
   <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
-  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn active" data-lang="ja" href="#" aria-label="日本語">日</a>
   <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
 </div>
 <a class="t4" href="../index.html">← Back</a></div></div>
@@ -131,119 +131,119 @@ footer a:hover{text-decoration:underline}
   <img class="hero-img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80" alt="Optical fiber network">
   <div class="hero-overlay"></div>
   <div class="hero-body">
-    <span class="tag">光模块 · 美国管制 · 2026-10</span>
-    <h1>光模块的下半场：美国管制从“全面禁令”恐慌到“利润向上游转移”的推演</h1>
-    <p class="subtitle">从7月FCC 26-50到9月最终规则温和落地，再到9月25日两党法案转向联邦采购——复盘三个月的三次反转，拆解大摩研报的政策逻辑。</p>
+    <span class="tag">光モジュール · 米規制 · 2026-10</span>
+    <h1>光モジュールの後半戦：米規制「全面禁止」パニックから「利益の上流移転」への読み筋</h1>
+    <p class="subtitle">7月のFCC 26-50から9月の最終規則の軟着陸、そして9月25日の超党派法案による連邦調達への転換—3ヶ月で3度の反転を振り返り、モルガン・スタンレー・ノートの政策ロ6ジックを読み解く。</p>
     <div class="hero-meta">
       <span>2026-10-02</span>
       <span>~9 min read</span>
-      <span>光模块 · 出口管制 · 产业链</span>
+      <span>光モジュール · 輸出規制 · サプライチェーン</span>
     </div>
     <div class="tag-row">
-      <span class="tag-pill">光模块</span>
+      <span class="tag-pill">光モジュール</span>
       <span class="tag-pill">FCC</span>
-      <span class="tag-pill">中际旭创</span>
-      <span class="tag-pill">新易盛</span>
-      <span class="tag-pill">产业链</span>
+      <span class="tag-pill">Innolight</span>
+      <span class="tag-pill">Eoptolink</span>
+      <span class="tag-pill">サプライチェーン</span>
     </div>
   </div>
 </div>
 
 <div class="key-takeaways fade-up">
-<h3>一句话结论</h3>
+<h3>一言結論</h3>
 <ul>
-<li>过去三个月，美国针对中国光模块的管制走完了<strong>“恐慌—缓和—加码”</strong>的完整循环：9月11日最终规则温和落地兑现“利空出尽”，但9月25日两党法案把战火烧向联邦政府采购——<strong>这出戏还有下半场</strong>。</li>
-<li>真正的故事不是“禁不禁”，而是<strong>下一代光通信的利润正在从中国模块厂向上游美国激光器与芯片环节转移</strong>。</li>
-<li><strong>激光器拿的是确定性，模块厂拿的是政策期权</strong>；而“按公司管还是按产地管”，是整个故事最关键的变量。</li>
+<li>この3ヶ月、米国の中国製光モジュール規制は<strong>「パニック—緩和—再強化」</strong>のフルサイクルを走破した。9月11日の最終規則の軟着陸で「悪材料出尽くし」が実現したが、9月25日の超党派法案は戦火を連邦調達へ移した——<strong>このドラマには後半戦がある</strong>。</li>
+<li>本当の話は「禁止か否か」ではなく、<strong>次世代光通信の利益が中国のモジュールメーカーから米国の上流レーザー・チップへ移っている</strong>ことだ。</li>
+<li><strong>レーザーが握るのは確実性、モジュールメーカーが握るのは政策オプション</strong>。そして「企業ベースか産地ベースか」が、この物語で最も重要な変数だ。</li>
 </ul>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">1</span>政策时间线：三个月，三次反转</h2>
+<h2><span class="num">1</span>政策タイムライン：3ヶ月、3度の反転</h2>
 <div class="tbl-wrap">
 <table class="tbl">
-<thead><tr><th>日期</th><th>事件</th><th>市场影响</th></tr></thead>
+<thead><tr><th>日付</th><th>出来事</th><th>市場への影響</th></tr></thead>
 <tbody>
-<tr><td><strong>7月22日</strong></td><td>FCC通过FCC 26-50，堵住“元器件漏洞”，光模块被纳入“逻辑硬件”管制范畴</td><td><span class="tg tg-n">预期升温</span></td></tr>
-<tr><td><strong>8月4日</strong></td><td>路透曝白宫起草全面禁令，中际旭创、新易盛双双大跌约10%</td><td><span class="tg tg-r">恐慌抛售</span></td></tr>
-<tr><td><strong>9月11日</strong></td><td>最终规则温和落地：光模块仅作举例、未被单独列为制裁品类，两家均未上名单</td><td><span class="tg tg-m">利空出尽</span></td></tr>
-<tr><td><strong>6月</strong></td><td>美国防部把中际旭创列入1260H清单（涉军企业名单）</td><td><span class="tg tg-n">长期压制</span></td></tr>
-<tr><td><strong>9月25日</strong></td><td>两党参议员提案：联邦敏感系统禁用中际旭创/新易盛光模块，设五年过渡期</td><td><span class="tg tg-r">战火转移</span></td></tr>
+<tr><td><strong>7月22日</strong></td><td>FCCがFCC 26-50を採択、「部品の抜け穴」を塞ぎ、光モジュールを「ロ6ジックハードウェア」規制の対象に</td><td><span class="tg tg-n">期待先行</span></td></tr>
+<tr><td><strong>8月4日</strong></td><td>ロイターがホワイトハウスの全面禁止案起草を報道、Innolight・Eoptolinkがともに約10%急落</td><td><span class="tg tg-r">パニック売り</span></td></tr>
+<tr><td><strong>9月11日</strong></td><td>最終規則は軟着陸：光モジュールは例示のみで、制裁カテゴリーに個別指定されず、両社ともリスト入りなし</td><td><span class="tg tg-m">悪材料出尽くし</span></td></tr>
+<tr><td><strong>6月</strong></td><td>米国防総省がInnolightを1260Hリスト（軍関連企業）に指定</td><td><span class="tg tg-n">長期的抑圧</span></td></tr>
+<tr><td><strong>9月25日</strong></td><td>超党派上院議員が提案：連邦の機微システムからInnolight/Eoptolinkの光モジュールを排除、5年の移行期間を設定</td><td><span class="tg tg-r">戦火の転移</span></td></tr>
 </tbody>
 </table>
 </div>
-<p>最终规则（108页全文）的核心口径：只有当设备使用了<strong>Covered List企业生产的“逻辑硬件”</strong>，才可能拿不到FCC授权。FCC明确拒绝了更激进的提案——没有把“受外国对手控制的所有企业”一并封杀。规则10月13日生效，仅面向未来，已有授权不受影响。</p>
+<p>最終規則（全文108ページ）の核心ロ6ジック：<strong>Covered List企業の「ロ6ジックハードウェア」</strong>を使った機器だけがFCC認可を得られない可能性がある。FCCはより強硬な提案——「外国敵対勢力に支配される全企業」の封殺——を明確に退けた。規則は10月13日発効、将来適用のみで、既存の認可には影響しない。</p>
 <div class="signal">
-<h3>关键信号</h3>
+<h3>重要なシグナル</h3>
 <ul>
-<li>管制从<strong>FCC设备授权</strong>蔓延到了<strong>政府采购</strong>——9月25日法案针对联邦敏感系统，点名中际旭创与新易盛。</li>
-<li>美国科技行业协会（ITI）8月13日曾致信FCC要求“不要把光模块列入黑名单”，理由是断供会拖慢数据中心部署、损害美国AI领导力——<strong>中国厂商的市场地位是FCC不敢下重手的硬约束</strong>。</li>
+<li>規制は<strong>FCC機器認可</strong>から<strong>政府調達</strong>へ拡大した——9月25日の法案は連邦の機微システムを対象とし、InnolightとEoptolinkを名指した。</li>
+<li>米テク業界団体ITIは8月13日、FCCに「光モジュールをブラックリストに入れないで」と要請した。供給遮断はデータセンター整備を遅らせ、米国のAIリーダーシップを損なうという理由だ——<strong>中国メーカーの市場地位が、FCCが強硬策に出られないハードな制約</strong>だ。</li>
 </ul>
 </div>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">2</span>大摩研报说了什么</h2>
-<div class="callout"><strong>先泼盆冷水：</strong>这份摩根士丹利机构客户简报不公开，市面流传的都是二手转述，65% BOM豁免、2028/2029时间线等关键数字无法核实——以下按“待核实的主张”来读，别拿来当事实下注。</div>
-<p>转述的主要内容：</p>
+<h2><span class="num">2</span>モルガン・スタンレー・ノートは何を言ったか</h2>
+<div class="callout"><strong>まず冷水を：</strong>このモルガン・スタンレーの機関投資家向けブリーフィングは非公開で、出回っているのはすべて二次的な伝聞だ。65% BOM免除や2028/2029年のタイムラインといった重要数字は検証不能——以下は「未検証の主張」として読んでほしい。事実として賭けてはいけない。</div>
+<p>伝聞の主な内容：</p>
 <ul>
-<li><strong>3.2T开始受限</strong>，针对中国制造的800G和1.6T不受影响——主力产品安全。</li>
-<li><strong>65%美国BOM含量可豁免</strong>：中国模块若BOM价值中65%来自美国即可进口；用美国DSP加美国激光器的中国模块已接近这一门槛。（与Citi研报提到的location-based清单逻辑能对上：要求≥65%美国本土含量，2029年起提至75%。）</li>
-<li><strong>InP（磷化铟）衬底是真正要盯的变量</strong>，而不是模块本身。</li>
-<li><strong>时间线</strong>：3.2T预计2028年开始爬坡，2029年前后更广泛采用，之后放量。</li>
-<li>整体思路从“立即替代中国供应”转向“<strong>决定下一代产品在哪里制造</strong>”。</li>
+<li><strong>3.2Tから規制対象</strong>、中国製の800Gと1.6Tは対象外——主力製品は安全。</li>
+<li><strong>65%の米国BOM含有率で免除</strong>、中国モジュールはBOM価値の65%が米国由来なら輸入可能。米国製DSP＋米国製レーザーの中国モジュールはすでにこの閾値に近い。（Citiレポートのlocation-basedリストのロジックとも整合：米国本土含有率65%以上を要求、2029年から75%へ引き上げ。）</li>
+<li><strong>InP（リン化インジウム）基板こそが本当に注視すべき変数</strong>であり、モジュール本体ではない。</li>
+<li><strong>タイムライン</strong>：3.2Tは2028年に立ち上がり開始、2029年前後に本格採用、その後量産。</li>
+<li>全体の発想は「中国供給の即時置換」から「<strong>次世代製品をどこで作るかを決める</strong>」へ。</li>
 </ul>
-<p><strong>短期推演</strong>：美股情绪面更好；A股中际旭创、新易盛“利空出尽”——最怕的全面禁令没出现，800G/1.6T主力产品安全，近两年订单不受影响。</p>
-<p><strong>长期推演</strong>：利润向上游转移。InP EML/CW光源是最大受益环节，利好LITE、COHR及有美国产能的AAOI；DSP、TIA/驱动环节AVGO、MRVL地位更稳；中国模块厂变成“美国芯片加中国组装”；InP衬底和铟成为链条最脆弱一环，也是中方最直接的反制筹码。</p>
+<p><strong>短期の読み</strong>：米株はセンチメントが良好。A株のInnolight・Eoptolinkは「悪材料出尽くし」——最も恐れた全面禁止は出ず、800G/1.6Tの主力製品は安全で、向こう2年の受注に影響なし。</p>
+<p><strong>長期の読み</strong>：利益は上流へ移る。InP EML/CW光源が最大の受益者——LITE、COHR、そして米国生産能力を持つAAOIに追い風。DSP・TIA/ドライバーのAVGO・MRVLの地位はさらに盤石。中国モジュールメーカーは「米国チップ＋中国組み立て」へ。InP基板とインジウムがチェーンで最も脆い環となり、中国側の最も直接的な報復カードでもある。</p>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">3</span>公开数据能对上什么</h2>
+<h2><span class="num">3</span>公開データで裏付けられること</h2>
 <ul>
-<li><strong>800G/1.6T正在放量</strong>：TrendForce预计2026年800G及以上出货约6300万只，是2025年的2.6倍；AI光模块市场规模约260亿美元、同比+57%。“主力产品安全”这个判断，基本面对得上。</li>
-<li><strong>瓶颈确实在上游</strong>：EML/CW激光器紧缺，Nvidia已提前锁定大块EML产能，交期排到2027年之后；InP衬底缺口超70%，订单排到2028年，价格两年涨了约2.5倍。</li>
-<li><strong>七家前十</strong>：全球前十大光模块厂商中有七家是中国公司；800G/1.6T高速市场中国厂商合计占出货量70%以上；中际旭创一家占全球数据中心光模块约27%。Coherent、Lumentum技术不差，但产能补不上这个缺口。</li>
+<li><strong>800G/1.6Tは量産拡大中</strong>：TrendForceは2026年の800G以上の出荷を約6300万個（2025年の2.6倍）と予測。AI光モジュール市場規模は約260億ドル、前年比+57%。「主力製品は安全」という判断は、ファンダメンタルズと整合する。</li>
+<li><strong>ボトルネックは確かに上流</strong>：EML/CWレーザーが逼迫し、Nvidiaはすでに大量のEML生産能力を先押さえ、納期は2027年以降。InP基板は70%超の不足で、受注は2028年まで埋まり、価格は2年で約2.5倍。</li>
+<li><strong>トップ10のうち7社</strong>：世界の光モジュール大手10社のうち7社が中国企業。800G/1.6Tの高速市場では中国メーカーが合計で出荷の70%以上。Innolight1社で世界のデータセンター光モジュールの約27%。CoherentやLumentumに技術の遲色はないが、このギャップを埋める生産能力がない。</li>
 </ul>
 <div class="signal">
-<h3>对转述观点的看法</h3>
+<h3>伝聞への見方</h3>
 <ul>
-<li>“利空出尽”成立的前提是管制只卡3.2T、800G/1.6T持续豁免——<strong>豁免口径收紧，这条逻辑第一个崩</strong>。</li>
-<li>利润向上游转移方向对，但<strong>定价权不是单向的</strong>：CSP都在签长约锁产能，上游想涨价也得看大客户脸色。</li>
-<li>InP衬底是反制筹码，但<strong>这是双刃的</strong>：中国自己也缺衬底（需求260–300万片，有效产能仅约75万片），打出去先疼的是自家光模块厂。</li>
-<li>3.2T在2028年爬坡技术上合理，但<strong>CPO/LPO可能绕过一部分pluggable需求</strong>——Nvidia的CPO交换机已量产，这是比FCC规则更结构性的变量。</li>
+<li>「悪材料出尽くし」が成り立つ前提は、規制が3.2Tに限定され、800G/1.6Tの免除が継続すること——<strong>免除の基準が引き締まれば、このロジックが最初に崩れる</strong>。</li>
+<li>利益の上流移転の方向は正しいが、<strong>価格決定権は一方向ではない</strong>：CSPはどこも長期契約で生産能力を押さえており、上流が値上げしたければ大口顧客の顔色をうかがうことになる。</li>
+<li>InP基板は報復カードだが、<strong>これは諸刃の剣</strong>：中国自身も基板不足だ（需要260～300万枚に対し、有効生産能力は約75万枚）。打ち出せば自国のモジュールメーカーが先に痛む。</li>
+<li>3.2Tの2028年立ち上がりは技術的には妥当だが、<strong>CPO/LPOがpluggable需覂の一部を迩回する可能性</strong>——NvidiaのCPOスイッチはすでに量産中で、FCC規則より構造的な変数だ。</li>
 </ul>
 </div>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">4</span>产业链推演：谁拿确定性，谁拿期权</h2>
+<h2><span class="num">4</span>サプライチェーン推演：誰が確実性を、誰がオプションを握るか</h2>
 <div class="bis-grid">
-<div class="bis-card green"><span class="val">激光器</span><span class="lab">最确定 · LITE / COHR<br>组装厂在哪建厂都得买</span></div>
-<div class="bis-card"><span class="val">DSP/驱动</span><span class="lab">地位更稳 · AVGO / MRVL<br>中国替代路线在美国走不通</span></div>
-<div class="bis-card orange"><span class="val">AAOI / FN</span><span class="lab">份额转移逻辑成立<br>但有location-based的坑</span></div>
-<div class="bis-card red"><span class="val">中国模块厂</span><span class="lab">“美国芯片+中国组装”<br>毛利被挤压，估值逻辑下修</span></div>
+<div class="bis-card green"><span class="val">レーザー</span><span class="lab">最も確実 · LITE / COHR<br>工場をどこに建てても買わざるを得ない</span></div>
+<div class="bis-card"><span class="val">DSP/ドライバー</span><span class="lab">地位は盤石 · AVGO / MRVL<br>中国の代替ルートは米国では通用しない</span></div>
+<div class="bis-card orange"><span class="val">AAOI / FN</span><span class="lab">シェア移転のロジックは成立<br>ただしlocation-basedの罠あり</span></div>
+<div class="bis-card red"><span class="val">中国モジュールメーカー</span><span class="lab">「米国チップ＋中国組み立て」<br>マージン圧縮、評価ロジック格下げ</span></div>
 </div>
-<p><strong>AAOI（美国制造）、飞驼（泰国）承接份额转移，逻辑成立但有个坑</strong>：location-based标准下，泰国、越南、马来西亚产的和中国产的一样算“foreign produced”。真按产地卡，东南亚转口这条路也走不通。</p>
-<p><strong>InP衬底与铟</strong>：链条最脆弱的一环，产能集中在中国，是中方最直接的反制筹码；但反制是双刃剑。云南锗业等国产6英寸产线，补的正是这块短板。</p>
+<p><strong>AAOI（米国製造）・Fabrinet（タイ）へのシェア移転、ロジックは成立するが罠がある</strong>：location-based基準では、タイ・ベトナム・マレーシア製も中国製と同様に「foreign produced」とみなされる。本当に産地で切るなら、東南アジア経由の迩回路も通じない。</p>
+<p><strong>InP基板とインジウム</strong>：チェーンで最も脆い環で、生産能力は中国に集中。中国側の最も直接的な報復カードだが、報復は諸刃の剣。Yunnan Germaniumなどの国産6インチラインが、まさにこの弱点を補っている。</p>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">5</span>关键变量：按公司还是按产地</h2>
+<h2><span class="num">5</span>重要な変数：企業ベースか産地ベースか</h2>
 <div class="punchline">
-<h3>一把尺子量所有政策</h3>
+<h3>すべての政策を測る一本の物差し</h3>
 <ul>
-<li><strong>按公司管</strong>：中际旭创、新易盛承压，AAOI、Coherent、Lumentum及东南亚产能吃到份额转移。</li>
-<li><strong>按产地管</strong>（location-based清单逻辑）：在“外国”生产的都算，泰国、越南、马来西亚产能一样受限，只有美国本土制造真正安全——份额转移逻辑大打折扣。</li>
+<li><strong>企業ベース</strong>：Innolight・Eoptolinkが圧迫を受け、AAOI・Coherent・Lumentumと東南アジアの生産能力がシェア移転を吸収する。</li>
+<li><strong>産地ベース</strong>（location-basedリストのロジック）：「外国」で作られたものはすべて対象——タイ・ベトナム・マレーシアの生産能力も同様に制限され、真に安全なのは米国本土製造のみ。シェア移転のロジックは大きく崩れる。</li>
 </ul>
-<p>后续所有政策文本，都值得用这一把尺子去量。</p>
+<p>今後のすべての政策文書は、この一本の物差しで測る価値がある。</p>
 </div>
 </div>
 
 <div class="bis-section fade-up">
-<h2><span class="num">6</span>结语</h2>
-<p>9月11日的温和落地兑现了“利空出尽”，但9月25日的提案说明这出戏还有下半场。短期看情绪与订单——800G/1.6T这两年确实安全；长期看谁卡住上游——激光器与DSP拿的是确定性，模块厂拿的是政策期权。</p>
-<p>而比“禁不禁”更值得记住的一句是：<strong>这场博弈的实质，是下一代光通信的利润向美国上游激光器和芯片环节转移</strong>。看懂这一点，比猜每一条政策的松紧重要得多。</p>
-<div class="ftrnote"><strong>说明：</strong>本文基于公开报道与机构研报的市场转述整理分析，其中大摩研报相关内容为二手转述、关键数字未经核实，不构成投资建议。政策进展以官方文本为准。主要公开来源：FCC Third Report and Order (FCC 26-50)；Federal Register 9/11/2026；Reuters 9/25/2026（两党法案）与8/4/2026（白宫禁令传闻）；SCMP 9/11/2026；EE Times；Mondaq FCC规则解读；TrendForce 800G出货预测。</div>
+<h2><span class="num">6</span>結び</h2>
+<p>9月11日の軟着陸は「悪材料出尽くし」を実現したが、9月25日の提案はこのドラマに後半戦があることを示した。短期はセンチメントと受注——800G/1.6Tはこの2年確かに安全。長期は誰が上流を握るか——レーザーとDSPが握るのは確実性、モジュールメーカーが握るのは政策オプションだ。</p>
+<p>そして「禁止か否か」より覚えておくべき一文：<strong>このゲームの本質は、次世代光通信の利益が米国の上流レーザー・チップへ移転すること</strong>だ。これを理解することは、個々の政策の緩急を予想するよりずっと重要だ。</p>
+<div class="ftrnote"><strong>注記：</strong>本稿は公開報道と機関レポートの市場伝聞をもとに整理・分析したもの。モルガン・スタンレー関連の内容は二次伝聞で、重要数字は未検証。投資助言ではない。政策の進展は公式文書を基準とすること。主要な公開情報源：FCC Third Report and Order (FCC 26-50)；Federal Register 9/11/2026；Reuters 9/25/2026（超党派法案）および8/4/2026（ホワイトハウス禁止報道）；SCMP 9/11/2026；EE Times；Mondaq FCC規則解説；TrendForce 800G出荷予測。</div>
 </div>
 
 <footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
@@ -266,8 +266,8 @@ footer a:hover{text-decoration:underline}
     if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\/,'/');}
     return pageUrl.replace(/\/(en|vi|ja)\/,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/, '$1/'+lang+'$2');
   }
-  // Default: ZH active, regardless of data-current attribute set in HTML
-  setActive('zh');
+  // Default: JA active, regardless of data-current attribute set in HTML
+  setActive('ja');
   ['zh','en','vi','ja'].forEach(function(lang){
     var btn=sw.querySelector('[data-lang="'+lang+'"]');
     if(btn)btn.href=localizedUrl(lang);
@@ -277,9 +277,9 @@ footer a:hover{text-decoration:underline}
       var lang=this.getAttribute('data-lang');
       setActive(lang);
       if(lang==='zh' && this.getAttribute('href')===pageUrl){
-        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+        e.preventDefault();showToast('すでに日本語です',1000);
       } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
-        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+        e.preventDefault();showToast('この言語版はまだ翻訳されていません',1400);
       }
     });
   });
