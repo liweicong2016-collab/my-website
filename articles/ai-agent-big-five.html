@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五个 Agent，五种授权答案 — 李维聪</title>
+<meta name="description" content="Instick、OpenAI Dots、GrokBot、Muse、Manus Q：五款近期主流 Agent 产品洞察。表面拼形态，底下拼的都是授权。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Serif SC','Songti SC',serif;background:#0a0a0f;color:#e8e6e0;line-height:2;font-size:18px;-webkit-font-smoothing:antialiased}
+a{color:#d4a853;text-decoration:none}
+.top{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid #222;padding:0 24px}
+.top-in{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.top a{font-size:14px;color:#999}.top a:hover{color:#fff}
+.hero{position:relative;height:62vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,.25),rgba(10,10,15,.92))}
+.hero-t{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 24px 48px;width:100%}
+.hero-t h1{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:2px;margin-bottom:12px}
+.hero-t .sub{color:#b8b4a8;font-size:16px}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px 100px}
+.meta{color:#8a877c;font-size:15px;text-align:center;margin:36px 0 6px}
+h2{font-size:28px;font-weight:800;margin:64px 0 8px;letter-spacing:3px;text-align:center}
+h2::after{content:'';display:block;width:56px;height:2px;background:#d4a853;margin:18px auto 0}
+p{margin:14px 0;text-align:justify}
+blockquote{border-left:3px solid #d4a853;margin:28px 0;padding:6px 0 6px 22px;color:#b8b4a8;font-size:17px}
+strong{color:#f0e6d2}
+.end{text-align:center;color:#8a877c;margin-top:70px;font-size:15px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in"><a href="../">← 首页</a><a href="https://liweicong2016-collab.github.io/tech-blog/posts/ai-agent-big-five/">博客版</a></div></div>
+<div class="hero"><img src="ai-agent-big-five-cover.jpg" alt="五个 AI Agent 产品洞察"><div class="hero-t"><h1>五个 Agent，五种授权答案</h1><div class="sub">近期主流 Agent 产品洞察 · 2026年10月2日</div></div></div>
+<div class="wrap">
+<div class="meta">李维聪 · 产品观察</div>
+
+<p>最近梳理了一场关于 AI Agent 的对谈，信息量很大。单看产品，五款 Agent 各有各的打法；但连起来看，我发现它们其实在回答同一个问题：<strong>用户凭什么把"替我办事"的权力交给你？</strong></p>
+
+<p>Agent 的本质就是授权与代理权。不给授权，它什么都做不了。五款产品，给出了五种不同的答案。</p>
+
+<h2>Instick：把门槛降到"打个电话"</h2>
+
+<p>这是最让我意外的案例。一家去年才注册的公司，估值已经到 100 亿美金——对比一下，李飞飞的世界模型公司卖掉时是 82 亿。</p>
+
+<p>它的打法反常识：<strong>不用下载 App</strong>。打电话、发短信、发邮件就是唤醒 AI 的入口，像用手机一样自然。</p>
+
+<p>核心逻辑就一条：别跟用户谈复杂的上下文和权限管理。授权是逐步拿到的——先解决 5 毛钱的问题，再解决 5 块、50 块的，等用户真觉得省心了，才把信用卡交出来。数据很说明问题：用户每天增长约 10%，三周后约 40% 的用户愿意把信用卡交给 Agent。</p>
+
+<p>这给所有做 Agent 的人提了个醒：技术人容易盯着架构酷不酷，却忽略用户的使用成本和教育成本够不够低。前台可以极简，后台再复杂都行，关键是站在用户那一侧。</p>
+
+<p>现阶段我的建议是"最小必要原则"：先搞清楚一个 Agent 的上限、下限和局限，再逐步放权。</p>
+
+<h2>OpenAI Dots：一个入口，管所有 Agent</h2>
+
+<p>如果说 Instick 做的是"入口极简"，Dots 赌的是"入口统一"。</p>
+
+<p>它的定位是全局 Agent 助理，有点像 Jarvis：作为唯一接口人帮你管理其他 Agent、查看进度，还自带 memory 系统，跨对话调用能力，不用自己在本地搭记忆体系。</p>
+
+<p>这个思路很性感，但也有硬伤：手机端暂时看不到，文件管理偏弱。Personal Agent 的故事讲的是"24 小时在身边的助理"，移动端是必经之地，桌面端再强也只是半程。</p>
+
+<h2>GrokBot：不做一个 Agent，做一支"小队"</h2>
+
+<p>马斯克这边的路子最有"组织味"。GrokBot 不像一个助理，更像一个工作小队：不同的 Agent 负责转写、脑洞、调研、开发等独立任务，Agent 之间可以通信，还能拉群协作。</p>
+
+<p>有意思的是，它用 Chat 的形态做出了 Agent 的效果，而且主动性更强——会主动发起请求和确认，而不是等你下指令。</p>
+
+<p>这指向一个下一阶段的方向：Agent 之间的组织协作。未来可能不是"一个人多个 Agent"，而是"一群 Agent 组成小队"替你干活。</p>
+
+<h2>Muse：从生活场景切入，先拿下"帮你买"</h2>
+
+<p>Muse 瞄准的是个人生活场景：做规划、比价、订票。它的授权方式很直接——让用户授权登录京东、淘宝等账户，然后替你执行。</p>
+
+<p>这个路径的聪明之处在于场景足够高频、价值足够直观。但挑战也明显：电商账户授权是最敏感的授权之一，用户凭什么信你？这又回到了 Instick 那道题：信任是逐步建立的，不是一次性索取的。</p>
+
+<h2>Manus Q：给 Agent 一个独立身份</h2>
+
+<p>这是五款里最大胆的一个。Manus Q 给 Agent 配了独立身份——手机号、邮箱、银行卡，与用户身份隔离。</p>
+
+<p>隔离恰恰是它的授权解法：因为身份独立，它可以获得更充分的授权，去做决策、去购买，而不用每次都来问你"可以吗"。</p>
+
+<p>这是一种全新的授权与身份形态。如果说其他四款还在"怎么让用户放心授权"上做文章，Manus Q 直接换了个思路：<strong>让 Agent 自己成为一个可被授权的主体</strong>。</p>
+
+<h2>连起来看：三条趋势</h2>
+
+<p>第一，<strong>Agent 正在从"步骤执行"走向"端到端任务交付"</strong>。大模型编程能力上来之后，用户不再想看它一步步操作，只想看到结果。</p>
+
+<p>第二，<strong>授权设计比模型能力更重要</strong>。更好的授权、给定范围的授权、身份授权——五款产品五种解法，但没有一款敢跳过这道题。</p>
+
+<p>第三，<strong>形态还在试错，别急着 All in</strong>。现在的阶段很像"百团大战"早期，产品形态和功能都在试。真正好的产品会自己找到用户；拖得足够久，有些学习成本可能自然消失。观望一下，不丢人。</p>
+
+<p>最后留几个问题，也是那场对谈没聊透的：Personal Agent 和办公 Agent 到底是什么关系？未来是一个人多个 Agent，还是一个 Agent 包打天下？最小必要原则在产品里怎么落地？欢迎聊聊。</p>
+
+<div class="end">— 全文完 —</div>
+</div>
+</body>
+</html>
