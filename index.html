@@ -38,7 +38,7 @@ a{color:inherit;text-decoration:none}
 .lang a.on{background:var(--accent);color:#fff}
 
 /* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;text-align:center;padding:110px 24px 0}
+.hero{position:relative;overflow:hidden;text-align:center;padding:64px 24px 0}
 .hero::before{content:'';position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(ellipse 60% 45% at 50% -5%, rgba(94,106,210,.16), transparent 70%),
@@ -51,10 +51,10 @@ a{color:inherit;text-decoration:none}
 .badge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#c3c9f5;
   border:1px solid rgba(94,106,210,.4);background:var(--accent-dim);border-radius:999px;padding:6px 16px;margin-bottom:26px}
 .badge i{width:6px;height:6px;border-radius:50%;background:var(--accent-hi);box-shadow:0 0 8px var(--accent-hi);font-style:normal}
-.hero h1{font-size:clamp(44px,7vw,76px);font-weight:800;letter-spacing:-2.5px;line-height:1.08;margin-bottom:22px}
+.hero h1{font-size:clamp(30px,4.5vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:16px}
 .hero h1 .grad{background:linear-gradient(180deg,#fff 40%,#9aa3f5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:17px;color:var(--text2);max-width:620px;margin:0 auto 38px;line-height:1.7}
-.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:70px}
+.hero-sub{font-size:15px;color:var(--text2);max-width:620px;margin:0 auto 28px;line-height:1.7}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:11px 22px;border-radius:8px;transition:all .15s;border:1px solid transparent;cursor:pointer;font-family:var(--font)}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:hover{background:var(--accent-hi);box-shadow:0 4px 24px rgba(94,106,210,.45)}
@@ -74,26 +74,21 @@ a{color:inherit;text-decoration:none}
 .lead{font-size:15px;color:var(--text2);max-width:600px;margin-bottom:36px}
 
 /* ---------- featured ---------- */
-.featured{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface);transition:border-color .2s, transform .2s}
+.featured{display:flex;align-items:center;gap:22px;padding:18px 22px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);transition:border-color .2s, transform .2s}
 .featured:hover{border-color:var(--border-hi);transform:translateY(-2px)}
-.fv{position:relative;min-height:380px;display:flex;align-items:flex-end;justify-content:center;padding:36px;overflow:hidden;
-  background:
-    radial-gradient(ellipse 90% 70% at 50% 110%, rgba(94,106,210,.35), transparent 70%),
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
-    #0b0c11;
-  background-size:auto,44px 44px,44px 44px,auto}
+.fv{width:140px;height:88px;min-height:0;flex-shrink:0;border-radius:10px;overflow:hidden;background:#0b0c11}
+.fv img{width:100%;height:100%;object-fit:cover;display:block}
 .bars{display:flex;align-items:flex-end;gap:14px;height:220px}
 .bars span{width:44px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#8f99ec,#5e6ad2 60%,rgba(94,106,210,.25));box-shadow:0 0 24px rgba(94,106,210,.25)}
 .bars span:nth-child(1){height:38%}.bars span:nth-child(2){height:55%}.bars span:nth-child(3){height:44%}
 .bars span:nth-child(4){height:72%}.bars span:nth-child(5){height:60%}.bars span:nth-child(6){height:92%}
 .fv-cap{position:absolute;top:22px;left:24px;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--text3);text-transform:uppercase}
 .fv-cap b{color:var(--accent-hi)}
-.fbody{padding:44px;display:flex;flex-direction:column;justify-content:center}
+.fbody{padding:0;flex:1;display:flex;flex-direction:column;justify-content:center}
 .fbody .tagrow{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
 .pill-tag{font-size:11.5px;font-weight:700;color:#c3c9f5;background:var(--accent-dim);border:1px solid rgba(94,106,210,.35);padding:3px 11px;border-radius:6px}
 .date{font-size:12px;color:var(--text3);font-weight:500}
-.fbody h3{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.8px;line-height:1.3;margin-bottom:14px}
+.fbody h3{font-size:18px;font-weight:700;letter-spacing:-.3px;line-height:1.4;margin-bottom:10px}
 .fbody p{font-size:14.5px;color:var(--text2);line-height:1.7;margin-bottom:26px}
 .fstats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px}
 .fstat b{display:block;font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
@@ -227,22 +222,12 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
     <div class="kicker">Featured</div>
     <h2 class="h2">重点报告</h2>
     <p class="lead">来自一线研究的深度行业分析</p>
-    <a class="featured reveal" href="articles/optical-transceiver-us-restrictions-2026.html" style="display:grid">
-      <div class="fv">
-        <div class="fv-cap"><b>光模块</b> · 美国管制 2026</div>
-        <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
+    <a class="featured reveal" href="articles/optical-transceiver-us-restrictions-2026.html">
+      <div class="fv"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80" alt="光模块"></div>
       <div class="fbody">
         <div class="tagrow"><span class="pill-tag">出口管制</span><span class="date">2026-10-02</span></div>
         <h3>光模块的下半场：美国管制从“全面禁令”恐慌到“利润向上游转移”的推演</h3>
-        <p>从7月FCC 26-50到9月温和落地，再到9月25日两党法案转向联邦采购——复盘三个月三次反转，拆解大摩研报的政策逻辑，推演产业链利润向上游转移。</p>
-        <div class="fstats">
-          <div class="fstat"><b>3<em>次</em></b><span>政策反转</span></div><div class="fstat"><b>65<em>%</em></b><span>美国BOM豁免线</span></div><div class="fstat"><b>2028</b><span>3.2T爬坡</span></div><div class="fstat"><b>27<em>%</em></b><span>中际全球份额</span></div>
-        </div>
-        <div class="fcta">
-          <span class="btn btn-primary">阅读全文</span>
-          <span class="btn btn-ghost">下载 PDF</span>
-        </div>
+        <span class="more">阅读全文 →</span>
       </div>
     </a>
   </section>
