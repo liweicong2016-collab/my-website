@@ -133,11 +133,11 @@ footer a:hover{text-decoration:underline}
   <div class="hero-body">
     <span class="tag">DeepSeek · 昇腾 · 2026-10</span>
     <h1>DeepSeek 开源昇腾基础组件：国模×国算深度耦合，软件生态墙出现系统性裂缝</h1>
-    <p class="subtitle">六个组件、一天之内、API 与 NVIDIA 版对齐——DeepSeek 把训练验证过的整套基础设施搬上昇腾 950，配套 128 卡超节点方案。</p>
+    <p class="subtitle">六个组件、一天之内、API 与 NVIDIA 版对齐，DeepSeek 把训练验证过的整套基础设施搬上昇腾 950，配套 128 卡超节点方案。</p>
     <div class="hero-meta">
-      <span>📅 2026-10-02</span>
-      <span>⏱ ~10 min read</span>
-      <span>🏷️ DeepSeek · 昇腾 · 国产算力</span>
+      <span>2026-10-02</span>
+      <span>~10 min read</span>
+      <span>DeepSeek · 昇腾 · 国产算力</span>
     </div>
     <div class="tag-row">
       <span class="tag-pill">DeepSeek</span>
@@ -150,17 +150,17 @@ footer a:hover{text-decoration:underline}
 </div>
 
 <div class="key-takeaways fade-up">
-<h3>🎯 一句话结论</h3>
+<h3>结论</h3>
 <ul>
-<li><strong>DeepSeek 把自家训练验证过的整套基础设施——从编程语言 TileLang，到 GEMM、分布式通信、注意力算子——一次性搬上了昇腾 950</strong>，API 与 NVIDIA 版对齐，性能宣称逼近硬件极限。</li>
-<li>这是国产大模型第一次以"自用验证过的软件栈"<strong>反向定义</strong>国产算力的软件生态，"软件生态墙"第一次出现了系统性的裂缝。</li>
-<li>配套昇腾 950 的 <strong>128 卡超节点方案</strong>：不止是开源，更是联合定义下一代训练/推理基础设施的入场券。</li>
+<li>DeepSeek 把自家训练验证过的整套基础设施，从编程语言 TileLang，到 GEMM、分布式通信、注意力算子，一次性搬上了昇腾 950，API 与 NVIDIA 版对齐，性能宣称逼近硬件极限。</li>
+<li>这是国产大模型第一次以"自用验证过的软件栈"反向定义国产算力的软件生态，"软件生态墙"第一次出现了系统性的裂缝。</li>
+<li>配套昇腾 950 的 128 卡超节点方案：不止是开源，更是联合定义下一代训练/推理基础设施的入场券。</li>
 </ul>
 </div>
 
 <div class="bis-section fade-up">
 <h2><span class="num">1</span>事件：9 月 30 日发生了什么</h2>
-<p>2026 年 9 月 30 日上午，DeepSeek 通过<strong>官方微信公众号</strong>宣布：正式开源面向华为昇腾算力平台的基础设施组件，涵盖 TileLang 高级语言编译工具、计算库、分布式通信库。路透、IT之家、CNMO 等多家媒体一致确认了时间和渠道。</p>
+<p>2026 年 9 月 30 日上午，DeepSeek 通过官方微信公众号宣布：正式开源面向华为昇腾算力平台的基础设施组件，涵盖 TileLang 高级语言编译工具、计算库、分布式通信库。路透、IT之家、CNMO 等多家媒体一致确认了时间和渠道。</p>
 <div class="tbl-wrap">
 <table class="tbl">
 <thead><tr><th>日期</th><th>事件</th><th>信源</th></tr></thead>
@@ -179,15 +179,15 @@ footer a:hover{text-decoration:underline}
 <div class="signal">
 <h3>🔍 细节信号</h3>
 <ul>
-<li>DeepGEMM-Ascend 和 DeepEP-Ascend 两个仓库在<strong>公告前 1 天和当天凌晨</strong>建仓——有备而来的"同日发布"，不是临时起意。</li>
-<li>NVIDIA 版 DeepGEMM / DeepEP 的 README 在 9 月 30 日当天<strong>主动添加了指向 Ascend 版本的 News 条目</strong>——DeepSeek 在 NVIDIA 的地盘上给昇腾版引流。</li>
+<li>DeepGEMM-Ascend 和 DeepEP-Ascend 两个仓库在公告前 1 天和当天凌晨建仓，有备而来的"同日发布"，不是临时起意。</li>
+<li>NVIDIA 版 DeepGEMM / DeepEP 的 README 在 9 月 30 日当天主动添加了指向 Ascend 版本的 News 条目，DeepSeek 在 NVIDIA 的地盘上给昇腾版引流。</li>
 </ul>
 </div>
 </div>
 
 <div class="bis-section fade-up">
 <h2><span class="num">2</span>开源了什么：六个组件，一套完整软件栈</h2>
-<p>这次不是开源一个算子，而是一套<strong>从语言到通信的完整栈</strong>：</p>
+<p>这次不是开源一个算子，而是一套从语言到通信的完整栈：</p>
 <div class="tbl-wrap">
 <table class="tbl">
 <thead><tr><th>组件</th><th>仓库</th><th>协议</th><th>昇腾版关键数据（项目方自测）</th></tr></thead>
@@ -207,70 +207,70 @@ footer a:hover{text-decoration:underline}
   <div class="bis-card purple"><span class="val">95<span style="font-size:14px">%</span></span><span class="lab">FlashMLA 硬件峰值达成率</span></div>
   <div class="bis-card orange"><span class="val">2–20<span style="font-size:14px">×</span></span><span class="lab">DeepSelect vs torch.topk</span></div>
 </div>
-<div class="ftrnote"><strong>⚠️ 证据提醒</strong>：以上性能数字均为项目方自测，无独立第三方复测；DeepEP-Ascend 仓库目前没有 LICENSE 文件，引用时注意——可能是疏漏，待后续提交观察。</div>
-<p>依赖关系（一手）：DeepGEMM-Ascend 依赖 tilelang 与 DeepJIT（运行时 JIT 编译）；DeepEP-Ascend 的 Ascend C 内核使用 HCCL/HCOMM、UBMEM、URMA。目标硬件统一为<strong>昇腾 950（950DT）+ CANN 9.2/9.20</strong>。</p>
+<div class="ftrnote">部分 证据提醒：以上性能数字均为项目方自测，无独立第三方复测；DeepEP-Ascend 仓库目前没有 LICENSE 文件，引用时注意，可能是疏漏，待后续提交观察。</div>
+<p>依赖关系（一手）：DeepGEMM-Ascend 依赖 tilelang 与 DeepJIT（运行时 JIT 编译）；DeepEP-Ascend 的 Ascend C 内核使用 HCCL/HCOMM、UBMEM、URMA。目标硬件统一为昇腾 950（950DT）+ CANN 9.2/9.20。</p>
 </div>
 
 <div class="bis-section fade-up">
 <h2><span class="num">3</span>"与 NVIDIA 版一一对应"：是真的，但有个细微差别</h2>
-<p><strong>核验结论：基本成立。</strong>NVIDIA 原版六个组件全部在 2026-09-30 同日获得了昇腾版本或后端。</p>
+<p>核验结论：基本成立。NVIDIA 原版六个组件全部在 2026-09-30 同日获得了昇腾版本或后端。</p>
 <div class="punchline">
-<h3>💡 细微差别</h3>
+<h3>细微差别</h3>
 <ul>
-<li>只有 DeepGEMM 和 DeepEP 开了独立的 <code>-Ascend</code> 仓库；FlashMLA、TileKernels、DeepSelect 是在<strong>同一仓库内新增昇腾后端</strong>。</li>
-<li>所以"一一对应"是<strong>功能/API 层面</strong>的对应——DeepGEMM-Ascend 声明 "fully API-compatible with DeepGEMM"，TileKernels 声明 "the same Python APIs run on both NVIDIA GPUs and Huawei NPUs"——而不是仓库数量的一一对应。</li>
+<li>只有 DeepGEMM 和 DeepEP 开了独立的 <code>-Ascend</code> 仓库；FlashMLA、TileKernels、DeepSelect 是在同一仓库内新增昇腾后端。</li>
+<li>所以"一一对应"是功能/API 层面的对应，DeepGEMM-Ascend 声明 "fully API-compatible with DeepGEMM"，TileKernels 声明 "the same Python APIs run on both NVIDIA GPUs and Huawei NPUs"，而不是仓库数量的一一对应。</li>
 </ul>
 </div>
 </div>
 
 <div class="bis-section fade-up">
 <h2><span class="num">4</span>为什么 TileLang 是关键：这次开源的"题眼"</h2>
-<p>TileLang 是什么？一句话：<strong>一个基于 TVM 编译器基础设施、采用 Python 式语法的面向高性能 AI 算子的领域专用语言（DSL），主打"编程简单 + 触达硬件性能上限"，定位是可跨芯片的 CUDA 替代编程层</strong>。北大团队主导，2025 年 1 月开源，路线先在英伟达成熟平台上验证——如今已承载 DeepSeek V4 系列模型训练中大部分算子的实现。</p>
+<p>TileLang 是什么？一句话：一个基于 TVM 编译器基础设施、采用 Python 式语法的面向高性能 AI 算子的领域专用语言（DSL），主打"编程简单 + 触达硬件性能上限"，定位是可跨芯片的 CUDA 替代编程层。北大团队主导，2025 年 1 月开源，路线先在英伟达成熟平台上验证，如今已承载 DeepSeek V4 系列模型训练中大部分算子的实现。</p>
 <div class="quote">"建立新一代自主可控的GPU软件生态，首要任务是建立一个通用、编程简单且能达到硬件性能上限的高级语言。TileLang正是在这一背景下诞生。" —— DeepSeek 公告原文</div>
 <div class="punchline">
-<h3>💡 三层意义</h3>
+<h3>三层意义</h3>
 <ul>
-<li><strong>降门槛</strong>：对昇腾 Ascend C 底层指令做封装，高级语言编程而"不损失硬件性能"。国产芯片最缺的不是峰值算力，是能让普通开发者写出高性能算子的工具。</li>
-<li><strong>解耦合</strong>：同一套 Python API 跑 NVIDIA GPU 和华为 NPU，运行时自动选后端——<strong>"一次编写，多架构运行"</strong>，把 CUDA 迁移成本问题转化为中立语言层的复用问题。</li>
-<li><strong>定标准</strong>：华为开放 Ascend C API 与 PTO ISA 支撑对接，配套 ASC-COMM 通信库——语言—算子库—通信库—超节点组网，完整软件栈成形。</li>
+<li>降门槛：对昇腾 Ascend C 底层指令做封装，高级语言编程而"不损失硬件性能"。国产芯片最缺的不是峰值算力，是能让普通开发者写出高性能算子的工具。</li>
+<li>解耦合：同一套 Python API 跑 NVIDIA GPU 和华为 NPU，运行时自动选后端，"一次编写，多架构运行"，把 CUDA 迁移成本问题转化为中立语言层的复用问题。</li>
+<li>定标准：华为开放 Ascend C API 与 PTO ISA 支撑对接，配套 ASC-COMM 通信库，语言、算子库、通信库、超节点组网，完整软件栈成形。</li>
 </ul>
 </div>
-<div class="ftrnote"><strong>⚠️ 证据提醒</strong>：公告原话"训练中用到的每一个 TileLang 算子，在昇腾上都有对应的高性能实现"是一手<strong>单方说法</strong>，无独立第三方验证；且 DeepEP-Ascend README 自承"更大规模与 combine 仍在优化"。绝对化表述之下有自我保留，读的时候打个折。</div>
+<div class="ftrnote">部分 证据提醒：公告原话"训练中用到的每一个 TileLang 算子，在昇腾上都有对应的高性能实现"是一手单方说法，无独立第三方验证；且 DeepEP-Ascend README 自承"更大规模与 combine 仍在优化"。绝对化表述之下有自我保留，读的时候打个折。</div>
 </div>
 
 <div class="bis-section fade-up">
 <h2><span class="num">5</span>昇腾 950 的 128 卡超节点：联合定义硬件用法</h2>
-<p>公告确认（一手）："双方紧密合作，<strong>共同推进基于昇腾 950 的 128 卡超节点方案</strong>，共同对计算与通信进行深度优化。"</p>
-<p>技术细节来自华为计算官微（经媒体转述，二手，未独立复核）：联合定义的 SuperPoD Flex / UBL128 组网方案，<strong>128 卡 3.2Tbps 单层交换 Scale-up、256K 卡两层交换 Scale-out</strong>，目标"超低时延推理和前沿基座模型的大规模训练"。</p>
+<p>公告确认（一手）："双方紧密合作，共同推进基于昇腾 950 的 128 卡超节点方案，共同对计算与通信进行深度优化。"</p>
+<p>技术细节来自华为计算官微（经媒体转述，二手，未独立复核）：联合定义的 SuperPoD Flex / UBL128 组网方案，128 卡 3.2Tbps 单层交换 Scale-up、256K 卡两层交换 Scale-out，目标"超低时延推理和前沿基座模型的大规模训练"。</p>
 <div class="signal">
 <h3>🔗 配套动作</h3>
 <ul>
-<li>华为把联合创新成果在 <strong>CANN 社区开源</strong>（低延迟推理部署、单卡/单机部署、大规模训练）——据量子位报道</li>
-<li>DeepEP-Ascend README（一手）：完整带宽需 Atlas 850E 的 Q3 商用固件，计划 <strong>2026-10-15 前后</strong>公开</li>
+<li>华为把联合创新成果在 CANN 社区开源（低延迟推理部署、单卡/单机部署、大规模训练），据量子位报道</li>
+<li>DeepEP-Ascend README（一手）：完整带宽需 Atlas 850E 的 Q3 商用固件，计划 2026-10-15 前后公开</li>
 </ul>
 </div>
 <div class="punchline">
-<h3>💡 解读</h3>
-<p>DeepSeek 不只是在"适配"昇腾，而是在和华为<strong>联合定义超节点这个形态的硬件应该怎么用</strong>。超节点是 2026 年大模型基础设施竞争的主战场——谁定义了超节点的软件栈，谁就定义了下一代训练/推理的入场券。</p>
+<h3>解读</h3>
+<p>DeepSeek 不只是在"适配"昇腾，而是在和华为联合定义超节点这个形态的硬件应该怎么用。超节点是 2026 年大模型基础设施竞争的主战场，谁定义了超节点的软件栈，谁就定义了下一代训练/推理的入场券。</p>
 </div>
 </div>
 
 <div class="bis-section fade-up">
 <h2><span class="num">6</span>生态意义：系统性拆除"软件生态墙"</h2>
-<p>此前昇腾的困境：硬件具备竞争力，但受制于 CUDA 生态的迁移成本，大量开发者难以把训练任务迁过来。芯片厂商自己建生态，缺的是<strong>真实 workload 的验证</strong>——没有头部模型在上面跑通，工具链再全也是纸面繁荣。</p>
+<p>此前昇腾的困境：硬件具备竞争力，但受制于 CUDA 生态的迁移成本，大量开发者难以把训练任务迁过来。芯片厂商自己建生态，缺的是真实 workload 的验证，没有头部模型在上面跑通，工具链再全也是纸面繁荣。</p>
 <div class="punchline">
-<h3>💡 这次不一样的三点</h3>
+<h3>这次不一样的三点</h3>
 <ul>
-<li><strong>铺"软件高速公路"</strong>：开源的不是 demo，是 DeepSeek 自己训练推理在用的算子库。开发者迁过来的不是"兼容层"，是"生产环境验证过的代码"。</li>
-<li><strong>模型厂商向下定义算力</strong>：历史上是芯片厂商求模型厂商适配；这次是头部模型厂商带着验证过的软件栈，<strong>反向定义</strong>算力平台的软件生态。议价权易手了。</li>
-<li><strong>中立语言层替代 CUDA 绑定</strong>：TileLang 的"一次编写，多架构运行"如果跑通，CUDA 的护城河就从"语言绑定"退化成"先发生态"——护城河还在，但变窄了。</li>
+<li>铺"软件高速公路"：开源的不是 demo，是 DeepSeek 自己训练推理在用的算子库。开发者迁过来的不是"兼容层"，是"生产环境验证过的代码"。</li>
+<li>模型厂商向下定义算力：历史上是芯片厂商求模型厂商适配；这次是头部模型厂商带着验证过的软件栈，反向定义算力平台的软件生态。议价权易手了。</li>
+<li>中立语言层替代 CUDA 绑定：TileLang 的"一次编写，多架构运行"如果跑通，CUDA 的护城河就从"语言绑定"退化成"先发生态"，护城河还在，但变窄了。</li>
 </ul>
 </div>
-<p>一句话：<strong>国产 AI 芯片竞争的焦点，正在从硬件性能转向"编程工具与算子体系"。</strong></p>
+<p>结论：国产 AI 芯片竞争的焦点，正在从硬件性能转向"编程工具与算子体系"。</p>
 </div>
 
 <div class="callout fade-up">
-  ⚠️ <strong>产业链视角（市场观点，非投资建议）</strong>：128 卡超节点放量 → 单卡功率密度和整机功耗墙抬升 → 电源管理（DrMOS/多相供电）单机价值量上升。以杰华特为例（<strong>研报口径，未经独立核实</strong>）：26H1 DrMOS 已在大算力客户率先放量，国产化份额有望持续提升，研报预期 26H2 及 27 年营收强势增长。注意：开源是必要非充分条件，兑现节奏取决于昇腾 950 超节点的实际出货。
+   产业链视角（市场观点，非投资建议）：128 卡超节点放量 → 单卡功率密度和整机功耗墙抬升 → 电源管理（DrMOS/多相供电）单机价值量上升。以杰华特为例（研报口径，未经独立核实）：26H1 DrMOS 已在大算力客户率先放量，国产化份额有望持续提升，研报预期 26H2 及 27 年营收强势增长。注意：开源是必要非充分条件，兑现节奏取决于昇腾 950 超节点的实际出货。
 </div>
 
 <div class="bis-section fade-up">
@@ -290,7 +290,7 @@ footer a:hover{text-decoration:underline}
 
 <div class="bis-section fade-up">
 <h2><span class="num">8</span>附录：DeepSeek 原始公告全文（复原）</h2>
-<div class="ftrnote"><strong>说明</strong>：WeChat 原文无法直接抓取。以下段落在 CNMO、IT之家/凤凰网、多家网易号报道中<strong>逐字一致</strong>，可视为接近原文的复原。CNMO（2026-10-02）引用最完整。</div>
+<div class="ftrnote">说明：WeChat 原文无法直接抓取。以下段落在 CNMO、IT之家/凤凰网、多家网易号报道中逐字一致，可视为接近原文的复原。CNMO（2026-10-02）引用最完整。</div>
 <div class="quote">
 建立新一代自主可控的GPU软件生态，首要任务是建立一个通用、编程简单且能达到硬件性能上限的高级语言。TileLang正是在这一背景下诞生。相对于英伟达的CUDA语言，TileLang编程更简单，能显著提高开发效率、简化代码逻辑；相对于其他同类高级语言，TileLang的编程模型可以充分发挥芯片特性，达到硬件性能上限。TileLang路线首先在英伟达成熟平台上得到验证，如今已承载DeepSeek V4系列模型训练中大部分算子的实现，是探索AGI新范式、开发高性能算子的核心工具。<br><br>
 本次开源的TileLang昇腾版本，对昇腾Ascend C底层指令进行封装，提供高级语言的编程方式，同时不损失硬件性能。目前，DeepSeek训练中用到的每一个TileLang算子，在昇腾上都有对应的高性能实现。DeepSeek希望TileLang昇腾版本作为开源工作，能对更多AI芯片建立高可用软件生态起到示范作用。<br><br>
@@ -299,7 +299,7 @@ footer a:hover{text-decoration:underline}
 </div>
 </div>
 
-<div class="ftrnote fade-up"><strong>信源</strong>：GitHub（tile-ai/tilelang、deepseek-ai/DeepGEMM-Ascend、DeepEP-Ascend、TileKernels、FlashMLA、DeepSelect，2026-10-02 直接抓取）；路透 2026-09-30；CNMO / IT之家公告转述；华为回应经新浪财经、量子位转述。调查方法与完整证据链见研究报告。</div>
+<div class="ftrnote fade-up">信源：GitHub（tile-ai/tilelang、deepseek-ai/DeepGEMM-Ascend、DeepEP-Ascend、TileKernels、FlashMLA、DeepSelect，2026-10-02 直接抓取）；路透 2026-09-30；CNMO / IT之家公告转述；华为回应经新浪财经、量子位转述。调查方法与完整证据链见研究报告。</div>
 
 <footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
 </div></div>
