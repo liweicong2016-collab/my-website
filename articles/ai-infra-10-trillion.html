@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从堆卡到堆电：美国 10 万亿美元 AI 基建狂潮的五个真相</title>
+<meta name="description" content="Forbes 称美国 AI 基建总投入或达 10 万亿美元。我拆了原文和 Anthropic 泄露招股书：最贵的不是 GPU，是 80% 照付不议的合同。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none}
+.t4:hover{color:#e8eaf0}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#38bdf8;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:#38bdf8;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(239,68,68,.15);border-left:4px solid #f87171;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f87171}
+.punchline{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(245,158,11,.06));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#38bdf8;margin:0 0 14px}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.quote{background:#111827;border-left:4px solid #38bdf8;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center}
+.bis-card .val{font-size:26px;font-weight:800;color:#38bdf8;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.orange .val{color:#fbbf24}.bis-card.green .val{color:#34d399}
+.foot{margin-top:40px;padding-top:24px;border-top:1px solid #1e2d45;font-size:13px;color:#94a3b8}
+@media(max-width:768px){.t4{display:none}.hero-body{padding:24px 20px}}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<header class="t"><div class="t2">
+<a class="t3" href="../index.html"><span class="dot"></span>LIWEICONG</a>
+<a class="t4" href="../index.html">← 返回首页</a>
+</div></header>
+<div class="c">
+<section class="hero">
+<img class="hero-img" src="cover-ai-infra-10-trillion.jpg" alt="10万亿美元基建狂潮：从堆卡到堆电">
+<div class="hero-overlay"></div>
+<div class="hero-body">
+<span class="tag">AI 洞察</span>
+<h1>从堆卡到堆电：美国 10 万亿美元 AI 基建狂潮的五个真相</h1>
+<p class="subtitle">Forbes 昨天发了篇长文，说美国 AI 基建总投入可能冲到 10 万亿美元，最早 2028 年就超过 19 世纪末的铁路狂热。我花了一晚上把原文和 Anthropic 泄露的招股书拆了一遍——今天最重要的一件事：这轮狂潮里最贵的不是 GPU，是"照付不议"的合同。</p>
+<div class="hero-meta"><span>📅 2026-10-03</span><span>⏱ 约 8 min read</span><span>✍ 李维聪</span></div>
+<div class="tag-row"><span class="tag-pill">AI 算力基础设施</span><span class="tag-pill">资本开支</span><span class="tag-pill">Anthropic</span><span class="tag-pill">数据中心</span></div>
+</div>
+</section>
+
+<div class="bis-grid">
+<div class="bis-card red"><span class="val">$10.3T</span><span class="lab">美国 AI 基建总投入上限估算（2032）</span></div>
+<div class="bis-card orange"><span class="val">$518B</span><span class="lab">Anthropic 十年基础设施承诺</span></div>
+<div class="bis-card"><span class="val">80%</span><span class="lab">不可撤销 / 照付不议比例</span></div>
+<div class="bis-card green"><span class="val">12%</span><span class="lab">数据中心用电占比预测（2028）</span></div>
+</div>
+
+<section class="bis-section">
+<h2><span class="num">1</span>Anthropic 的 5180 亿美元：80% 退不掉</h2>
+<p>Anthropic 泄露的 IPO 招股书显示，未来十年要在 AI 基础设施上花至少 <strong>5180 亿美元</strong>（Reuters 9 月 28 日披露，Forbes 10 月 2 日引用）。拆开看：Google 1111 亿（2026.4–2033.7）、Amazon 1100 亿（2026.5–2036.4）、微软 314 亿、Broadcom 设备租赁 1612 亿——其中约 <strong>80% 不可撤销，或"用不用都得付"</strong>。</p>
+<div class="quote">"If our actual spend falls short, we must pay Google the difference." —— Anthropic 招股书原话</div>
+<p>换句话说，Anthropic 把云成本从可变成本变成了固定负债。模型公司以前是"用多少付多少"的软件生意，现在变成了"先签十年租约再找客户"的重资产生意。（推断）IPO 时华尔街争的不会是"能不能拿到卡"，而是"利用率能不能覆盖固定账单"。</p>
+<p>所以呢，这就是<strong>算力金融化的美国版本</strong>。我之前报告里写过"算力金融化是最大风险"，美国人正在用法律合同把它制度化。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">2</span>200MW 园区 82 亿美元：三分之一是土和电</h2>
+<p>哥伦比亚大学 Van Nieuwerburgh 团队测算，一个 200MW 的 AI 训练园区总成本约 <strong>82 亿美元</strong>，其中三分之一是土地和电力基建，三分之二算力硬件。按这个单价，2026–2032 年规划新增的 200GW 对应约 <strong>8.2 万亿美元</strong>；而美国现有装机才 50GW，在建 36GW。</p>
+<p>美国能源部预计数据中心用电占比从 2023 年 4.4% 涨到 2028 年 <strong>12%</strong>，一半新建数据中心 2027 年就面临缺电。</p>
+<p>换句话说，瓶颈早就不是 GPU 了，是电。卡可以加单，电网扩容要 5–10 年。英伟达负责让你"买得到卡"，但没人负责让你"接得上电"。</p>
+<p>所以呢，选址逻辑变了：以前数据中心跟着光纤走，现在跟着变电站走。卖铲子的人从芯片厂变成了电力公司和土地商。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">3</span>水：每天 500 万加仑</h2>
+<p>hyperscale 数据中心每天最多用 <strong>500 万加仑</strong>水做冷却，全美科技巨头用水量从 2014 年 56 亿加仑涨到 2023 年 174 亿加仑。冷却约占数据中心能耗的 38%。</p>
+<p>这就是 Forbes 标题里"land, power, water and cement"四个词的由来——AI 基建的约束是土木工程约束，不是半导体约束。当地社区抗议、政客施压，卡的都是水和电，不是卡。</p>
+<p>亚马逊已经开始给社区写公开信"别拦我们建数据中心"，还宣布不再用 NDA——公关战开打，说明物理世界约束已经变成了政治约束。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">4</span>铁路狂热类比：重点不是泡沫，是谁收尸</h2>
+<p>Forbes 和 CBRE 都把这轮比作 1800 年代铁路狂热。CBRE 称 hyperscaler（Google、Amazon、微软）未来 5 年要投 <strong>3.7 万亿美元</strong>，定性为"historic"。铁路狂热的结果是过度建设→破产潮→整合，活下来的是整合者。</p>
+<div class="callout"><strong>独立判断：</strong>类比最有价值的部分不是"会不会破"，而是"破了之后谁收"。200GW 规划对 50GW 存量，4 倍扩张里一定有烂尾项目。手里有电、有地、有长约的玩家会成为收尸人——这次可能是电力公司和 REITs，不是模型公司。</div>
+<p>Anthropic 的 5180 亿里，xAI 的 845 亿是 90 天可取消的，AMD 的 200 亿+50 亿股票是攻守兼备的——聪明人都在合同里留逃生门。看总额不如看合同结构。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">5</span>缺口：材料没说什么——中国视角完全缺席</h2>
+<p>Forbes 全文没提中国一个字。美国在堆电（电力是第一约束），中国在堆什么？这是材料没说、但对我最重要的问题。</p>
+<p>我的判断是：中国版的约束不在电，在"卡从哪来"——国产算力的利用率和软件生态。这正好是我每天在客户侧打交道的东西。（推断）</p>
+<p>下一篇该写中国版的对照：美国堆电，中国堆卡——两边的约束函数完全不同。</p>
+</section>
+
+<section class="punchline">
+<h3>今日关键判断</h3>
+<ul>
+<li>Anthropic 80% 照付不议的合同结构，是算力金融化在美国的制度化版本，需求波动会直接变成利润挤压。</li>
+<li>AI 基建的瓶颈已从半导体转向土木工程：电（5–10 年扩容周期）、水、土地、社区政治。</li>
+<li>200GW 规划 vs 50GW 存量，4 倍扩张必有烂尾；有电、有地、有长约的是收尸人。</li>
+<li>合同里的逃生门（xAI 90 天可取消、AMD 股权绑定）比总额数字更值得看。</li>
+<li>中国版故事缺席：美国堆电，中国堆卡——两边的约束函数完全不同。</li>
+</ul>
+</section>
+
+<div class="foot">
+<p><strong>口径声明</strong>：$2.8T–$10.3T 为 Forbes 引用的第三方估算区间，未经交叉验证；Anthropic $518B 来自 Reuters 披露的泄露招股书，我没看到原文；"换句话说"段落为我的推断。</p>
+<p style="margin-top:8px">原文：Forbes，Giacomo Tognini，2026-10-02《Inside The Trillions Being Spent On The AI Data Center Buildout》</p>
+</div>
+</div>
+<script>
+const bar=document.getElementById('progress-bar');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+</script>
+</body>
+</html>
