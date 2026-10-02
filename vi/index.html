@@ -4,307 +4,231 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Livius's Tech Pulse — Hiểu biết công nghệ sâu</title>
-<meta name="description" content="AI · Điện toán · Bán dẫn · Đông Nam Á — phân tích công nghệ chuyên sâu từ thực địa">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="description" content="AI · Điện toán · Bán dẫn · Thị trường Đông Nam Á — hiểu biết công nghệ sâu từ thực địa">
 <style>
 :root{
-  --paper:#faf9f6; --paper2:#f2eee3; --card:#ffffff;
-  --ink:#1d1b16; --ink2:#5f5a4e; --ink3:#96907f;
-  --line:#e3ddd0; --line2:#d3ccba;
-  --accent:#9a3412; --accent-deep:#7c2a0e; --accent-soft:#f7e9df;
-  --serif:Georgia,'Noto Serif SC','Songti SC','SimSun',serif;
-  --sans:'Inter','Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
-  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --bg0:#0d2140; --bg1:#0a1830; --bg2:#081426;
+  --line:rgba(148,184,255,.13); --line-soft:rgba(148,184,255,.08);
+  --txt:#e9eef7; --mut:#93a4c4; --dim:#5f7194;
+  --acc:#7aa2f7; --acc-soft:rgba(122,162,247,.12);
+  --card:rgba(122,162,247,.045);
+  --r:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);
-  line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-::selection{background:var(--accent-soft)}
-.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
-.serif{font-family:var(--serif)}
-
-/* ---------- top nav ---------- */
-.nav{position:sticky;top:0;z-index:50;background:rgba(250,249,246,.92);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line)}
-.nav-inner{max-width:1080px;margin:0 auto;padding:0 28px;height:64px;
-  display:flex;align-items:center;gap:36px}
-.brand{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:.2px;white-space:nowrap}
-.brand em{font-style:normal;color:var(--accent)}
-.nav-links{display:flex;gap:28px;font-size:14px;margin-left:auto}
-.nav-links a{color:var(--ink2);padding:4px 0;border-bottom:2px solid transparent}
-.nav-links a:hover{color:var(--ink);border-bottom-color:var(--accent)}
-.langs{display:flex;border:1px solid var(--line2);border-radius:999px;overflow:hidden;flex:0 0 auto}
-.langs a{padding:5px 13px;font-size:12px;letter-spacing:.6px;color:var(--ink2);line-height:1.6}
-.langs a.on{background:var(--ink);color:var(--paper);font-weight:600}
-.langs a:not(.on):hover{background:var(--paper2);color:var(--ink)}
-
-/* ---------- masthead ---------- */
-.masthead{padding:88px 0 64px;border-bottom:1px solid var(--line)}
-.kicker{font-size:12px;letter-spacing:4px;color:var(--accent);font-weight:600;margin-bottom:22px}
-.masthead h1{font-family:var(--serif);font-weight:700;
-  font-size:clamp(46px,6.4vw,78px);line-height:1.18;letter-spacing:.5px;margin-bottom:20px}
-.standfirst{font-size:19px;color:var(--ink2);max-width:660px;line-height:1.75}
-.mastmeta{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);
-  display:flex;gap:14px;align-items:baseline;font-size:14px;color:var(--ink2);flex-wrap:wrap}
-.mastmeta b{font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:700}
-.mastmeta .dot{color:var(--line2)}
-
-/* ---------- sections ---------- */
-.section{padding:72px 0;border-bottom:1px solid var(--line)}
-.seclabel{font-size:12px;letter-spacing:4px;color:var(--accent);font-weight:600;margin-bottom:14px}
-.h2{font-family:var(--serif);font-size:34px;font-weight:700;margin-bottom:10px}
-.lead{color:var(--ink2);font-size:16px;margin-bottom:34px;max-width:640px}
-
-/* ---------- featured story ---------- */
-.lead-story{display:grid;grid-template-columns:1.05fr 1fr;background:var(--card);
-  border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.lead-visual{position:relative;min-height:380px;
+body{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  color:var(--txt); background:linear-gradient(180deg,var(--bg0) 0%,var(--bg1) 42%,var(--bg2) 100%);
+  min-height:100vh; -webkit-font-smoothing:antialiased; line-height:1.6;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    repeating-linear-gradient(90deg, transparent 0 46px, rgba(255,255,255,.045) 46px 47px),
-    repeating-linear-gradient(0deg, transparent 0 26px, rgba(255,255,255,.03) 26px 27px),
-    linear-gradient(155deg,#2e2820 0%,#1c1813 60%,#14110d 100%)}
-.lead-visual .bars{position:absolute;left:48px;right:48px;bottom:56px;height:150px;
-  display:flex;align-items:flex-end;gap:14px}
-.lead-visual .bars i{flex:1;border-radius:2px 2px 0 0;
-  background:linear-gradient(180deg,rgba(214,186,140,.85),rgba(214,186,140,.25))}
-.lead-visual .bars i.hot{background:linear-gradient(180deg,#d3652f,#8f3c14)}
-.lead-visual .glow{position:absolute;left:0;right:0;top:0;height:120px;
-  background:radial-gradient(60% 100% at 50% 0%,rgba(211,101,47,.16),transparent 70%)}
-.vtag{position:absolute;left:24px;bottom:22px;font-size:11px;letter-spacing:3px;
-  color:#d8cdb4;border:1px solid rgba(216,205,180,.35);padding:6px 14px;border-radius:2px}
-.lead-body{padding:46px 44px;display:flex;flex-direction:column;justify-content:center}
-.kicker-sm{font-size:11px;letter-spacing:3px;color:var(--accent);font-weight:600;margin-bottom:14px}
-.lead-body h2{font-family:var(--serif);font-size:31px;line-height:1.4;margin-bottom:14px}
-.lead-body .sum{color:var(--ink2);font-size:15.5px;margin-bottom:26px}
-.fstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
-  padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:26px}
-.fstat b{font-family:var(--serif);font-size:23px;display:block}
-.fstat b em{font-style:normal;color:var(--accent)}
-.fstat span{font-size:12px;color:var(--ink3)}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;font-size:14px;letter-spacing:.5px;padding:11px 26px;border-radius:2px;
-  border:1px solid var(--ink);transition:all .18s}
-.btn-solid{background:var(--ink);color:var(--paper)}
-.btn-solid:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
-.btn-ghost{color:var(--ink)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-
-/* ---------- news list ---------- */
-.topics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.topic{font-size:13px;color:var(--ink2);border:1px solid var(--line2);background:transparent;
-  border-radius:999px;padding:7px 18px;cursor:pointer;letter-spacing:.4px;font-family:var(--sans)}
-.topic:hover{border-color:var(--ink);color:var(--ink)}
-.topic.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.newslist{border-top:2px solid var(--ink);margin-top:26px}
-.nrow{display:grid;grid-template-columns:110px 150px 1fr auto 28px;gap:20px;align-items:start;
-  padding:26px 6px;border-bottom:1px solid var(--line);transition:background .15s}
-.nrow:hover{background:var(--card)}
-.nrow.hidden{display:none}
-.ndate{font-family:var(--mono);font-size:12.5px;color:var(--ink3);padding-top:5px;white-space:nowrap}
-.ncat{font-size:11.5px;letter-spacing:1.5px;color:var(--accent);font-weight:600;
-  border:1px solid var(--line2);border-radius:2px;padding:4px 10px;text-align:center;
-  white-space:nowrap;justify-self:start;margin-top:2px}
-.ntitle{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.45;display:block;margin-bottom:6px}
-.nrow:hover .ntitle{color:var(--accent-deep)}
-.nsum{font-size:14px;color:var(--ink2);line-height:1.65;display:block;max-width:640px}
-.nmeta{font-size:12.5px;color:var(--ink3);white-space:nowrap;padding-top:6px;font-family:var(--mono)}
-.narrow{font-size:18px;color:var(--ink3);padding-top:2px;transition:transform .15s}
-.nrow:hover .narrow{transform:translateX(4px);color:var(--accent)}
-
-/* ---------- subscribe ---------- */
-.subscribe .panel{border:1px solid var(--line2);background:var(--card);border-radius:4px;
-  padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.subscribe h3{font-family:var(--serif);font-size:30px;margin-bottom:12px}
-.subscribe p{color:var(--ink2);font-size:15px}
-.subform{display:flex;gap:10px}
-.subform input{flex:1;padding:13px 18px;font-size:15px;border:1px solid var(--line2);
-  border-radius:2px;background:var(--paper);color:var(--ink);font-family:var(--sans)}
-.subform input:focus{outline:none;border-color:var(--accent)}
-.subform button{background:var(--ink);color:var(--paper);border:1px solid var(--ink);
-  padding:13px 30px;font-size:14px;letter-spacing:1px;border-radius:2px;cursor:pointer;font-family:var(--sans)}
-.subform button:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
-
-/* ---------- footer ---------- */
-footer{padding:64px 0 0}
-.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px}
-.fbrand{font-family:var(--serif);font-weight:700;font-size:18px;margin-bottom:12px}
-.fbrand em{font-style:normal;color:var(--accent)}
-.fblurb{font-size:14px;color:var(--ink2);max-width:280px}
-.fcol h5{font-size:11px;letter-spacing:3px;color:var(--ink3);font-weight:600;margin-bottom:16px}
-.fcol a{display:block;font-size:14px;color:var(--ink2);padding:5px 0}
-.fcol a:hover{color:var(--accent)}
-.fbottom{border-top:1px solid var(--line);padding:22px 0 34px;display:flex;
-  justify-content:space-between;gap:16px;font-size:12.5px;color:var(--ink3);flex-wrap:wrap}
-.totop{position:fixed;right:28px;bottom:28px;width:46px;height:46px;border-radius:50%;
-  border:1px solid var(--line2);background:var(--card);color:var(--ink);font-size:18px;
-  cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(29,27,22,.1)}
-.totop.show{display:flex}
-.totop:hover{border-color:var(--accent);color:var(--accent)}
-
-@media(max-width:900px){
+    radial-gradient(900px 420px at 50% -80px, rgba(122,162,247,.14), transparent 65%),
+    radial-gradient(700px 500px at 88% 108%, rgba(64,86,178,.10), transparent 60%);}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(10,24,48,.72);border-bottom:1px solid var(--line-soft)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:700;font-size:1.02rem;letter-spacing:-.01em}
+.brand em{font-style:normal;background:linear-gradient(120deg,#a9c3ff,#7aa2f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;gap:30px;font-size:.88rem;color:var(--mut)}
+.nav-links a:hover{color:var(--txt)}
+.langs{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:rgba(13,33,64,.6)}
+.langs a{padding:6px 13px;font-size:.78rem;color:var(--mut);border-right:1px solid var(--line-soft)}
+.langs a:last-child{border-right:none}
+.langs a.on{background:var(--acc);color:#0a1830;font-weight:700}
+.langs a:not(.on):hover{color:var(--txt);background:rgba(122,162,247,.08)}
+/* hero */
+.hero{padding:150px 0 64px;text-align:left}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.22em;color:var(--acc);font-weight:600;margin-bottom:22px}
+.kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.2rem);font-weight:750;letter-spacing:-.035em;line-height:1.08;margin-bottom:14px}
+.hero h1 .g{background:linear-gradient(115deg,#c3d6ff 10%,#7aa2f7 60%,#5b7fd6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(1.25rem,2.4vw,1.7rem);font-weight:600;color:var(--txt);letter-spacing:-.01em;margin-bottom:14px}
+.hero p.d{color:var(--mut);font-size:1.02rem;max-width:640px;margin-bottom:40px}
+.stats{display:flex;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.stat{flex:1;padding:20px 24px 20px 0}
+.stat+.stat{border-left:1px solid var(--line-soft);padding-left:24px}
+.stat b{display:block;font-size:1.5rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--mut)}
+/* sections */
+.sec{padding:72px 0 8px}
+.lbl{font-size:.74rem;letter-spacing:.22em;color:var(--acc);font-weight:600;margin-bottom:14px}
+.sec h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
+.sec .sd{color:var(--mut);margin-bottom:30px}
+/* featured */
+.feat{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:var(--card);transition:transform .25s ease,box-shadow .25s ease}
+.feat:hover{transform:translateY(-3px);box-shadow:0 24px 60px -20px rgba(30,60,140,.55)}
+.fx{position:relative;min-height:340px;background:
+  linear-gradient(160deg,#10294f 0%,#0b1c38 55%,#081426 100%);overflow:hidden}
+.fx::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(122,162,247,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(122,162,247,.09) 1px,transparent 1px);
+  background-size:44px 44px}
+.bars{position:absolute;left:12%;right:12%;bottom:16%;top:30%;display:flex;align-items:flex-end;gap:7%;z-index:1}
+.bar{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#8fb0ff,#4a6db8);opacity:.92;position:relative;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) backwards}
+.bar:nth-child(odd){background:linear-gradient(180deg,#5f7fc9,#33507f)}
+.bar::after{content:"";position:absolute;top:-26%;left:0;right:0;height:26%;background:linear-gradient(180deg,transparent,rgba(143,176,255,.35));border-radius:5px 5px 0 0}
+@keyframes rise{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1)}}
+.fx-tag{position:absolute;left:20px;bottom:18px;z-index:2;font-size:.72rem;letter-spacing:.24em;color:#cfe0ff;
+  border:1px solid rgba(148,184,255,.35);padding:8px 14px;border-radius:8px;background:rgba(8,20,38,.55);backdrop-filter:blur(6px)}
+.fx-glow{position:absolute;width:340px;height:340px;right:-90px;top:-90px;border-radius:50%;
+  background:radial-gradient(circle,rgba(122,162,247,.28),transparent 65%);z-index:0}
+.fbody{padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
+.ftype{font-size:.78rem;color:var(--acc);letter-spacing:.08em;margin-bottom:10px;font-weight:600}
+.fbody h3{font-size:1.65rem;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px}
+.fbody>p{color:var(--mut);font-size:.95rem;margin-bottom:24px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.metric{border:1px solid var(--line-soft);border-radius:10px;padding:12px 10px;background:rgba(122,162,247,.05)}
+.metric b{display:block;font-size:1.25rem;font-weight:750;font-variant-numeric:tabular-nums;color:#dbe6ff}
+.metric span{font-size:.72rem;color:var(--mut)}
+.btns{display:flex;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;border-radius:10px;font-size:.9rem;font-weight:600;transition:.2s}
+.btn-p{background:var(--acc);color:#0a1830}
+.btn-p:hover{background:#93b4fa;box-shadow:0 8px 28px -8px rgba(122,162,247,.7)}
+.btn-g{border:1px solid var(--line);color:var(--txt)}
+.btn-g:hover{border-color:var(--acc);background:var(--acc-soft)}
+/* articles */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:.82rem;color:var(--mut);cursor:pointer;background:transparent;transition:.18s;font-family:inherit}
+.chip:hover{color:var(--txt);border-color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#0a1830;font-weight:700}
+.rows{margin-top:18px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:110px 130px 1fr auto;gap:20px;align-items:start;padding:24px 14px;border-bottom:1px solid var(--line-soft);transition:background .18s}
+.row:hover{background:rgba(122,162,247,.05)}
+.row.hidden{display:none}
+.rdate{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;color:var(--dim);padding-top:4px}
+.rcat{font-size:.74rem;font-weight:600;color:var(--acc);border:1px solid rgba(122,162,247,.35);border-radius:6px;padding:4px 10px;white-space:nowrap;background:var(--acc-soft)}
+.rmain h4{font-size:1.08rem;font-weight:650;letter-spacing:-.01em;margin-bottom:6px;line-height:1.45}
+.row:hover .rmain h4{color:#c3d6ff}
+.rmain p{font-size:.88rem;color:var(--mut);line-height:1.65}
+.rmeta{display:flex;align-items:center;gap:14px;font-size:.8rem;color:var(--dim);padding-top:4px;white-space:nowrap}
+.rmeta .arr{font-size:1.1rem;transition:transform .2s;color:var(--acc)}
+.row:hover .arr{transform:translateX(5px)}
+/* subscribe */
+.sub{margin:80px 0 0;border:1px solid var(--line);border-radius:18px;padding:56px 48px;text-align:center;
+  background:radial-gradient(600px 240px at 50% 0%,rgba(122,162,247,.12),transparent 70%),var(--card)}
+.sub h3{font-size:1.7rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+.sub p{color:var(--mut);margin-bottom:28px}
+.sub form{display:flex;gap:10px;max-width:480px;margin:0 auto}
+.sub input{flex:1;background:rgba(8,20,38,.6);border:1px solid var(--line);border-radius:10px;padding:13px 18px;color:var(--txt);font-size:.92rem;outline:none;font-family:inherit}
+.sub input:focus{border-color:var(--acc)}
+.sub input::placeholder{color:var(--dim)}
+.sub .ok{color:var(--acc);font-weight:600;min-height:1.6em;margin-top:14px;font-size:.9rem}
+/* footer */
+footer{margin-top:90px;border-top:1px solid var(--line-soft);padding:52px 0 34px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px}
+.fbrand{font-weight:700;font-size:1.05rem;margin-bottom:12px}
+.fbrand em{font-style:normal;background:linear-gradient(120deg,#a9c3ff,#7aa2f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fgrid p{color:var(--mut);font-size:.88rem;max-width:280px}
+.fcol h5{font-size:.76rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.fcol a{display:block;color:var(--mut);font-size:.9rem;margin-bottom:10px}
+.fcol a:hover{color:var(--txt)}
+.fbot{border-top:1px solid var(--line-soft);padding-top:24px;display:flex;justify-content:space-between;font-size:.8rem;color:var(--dim)}
+#totop{position:fixed;right:26px;bottom:26px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(13,33,64,.8);backdrop-filter:blur(10px);color:var(--acc);font-size:1.1rem;cursor:pointer;display:none;z-index:60;transition:.2s}
+#totop:hover{border-color:var(--acc)}
+@media(max-width:860px){
   .nav-links{display:none}
-  .masthead{padding:60px 0 44px}
-  .lead-story{grid-template-columns:1fr}
-  .lead-visual{min-height:240px}
-  .subscribe .panel{grid-template-columns:1fr;padding:36px 28px}
-  .nrow{grid-template-columns:1fr;gap:8px}
-  .nmeta{display:none}
+  .feat{grid-template-columns:1fr}
+  .fx{min-height:240px}
+  .row{grid-template-columns:1fr;gap:8px}
+  .rmeta{justify-content:flex-start}
   .fgrid{grid-template-columns:1fr 1fr}
-  .fstats{grid-template-columns:repeat(2,1fr)}
+  .sub form{flex-direction:column}
+  .stats{flex-direction:column}
+  .stat+.stat{border-left:none;border-top:1px solid var(--line-soft);padding-left:0}
 }
 </style>
+
 </head>
 <body id="top">
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="#top">Livius's <em>Tech Pulse</em></a>
-    <nav class="nav-links">
-      <a href="#top">Trang chủ</a><a href="#latest">Bài viết</a><a href="#featured">Báo cáo</a><a href="https://github.com/liweicong2016-collab/tech-blog" target="_blank" rel="noopener">Mã nguồn</a>
-    </nav>
-    <div class="langs">
-      <a href="../" class="">中</a><a href="../en/" class="">EN</a><a href="../ja/" class="">日</a><a href="./" class="on">VI</a>
-    </div>
-  </div>
-</header>
+<header class="nav"><div class="nav-in">
+  <a class="brand" href="#top">Livius's <em>Tech Pulse</em></a>
+  <nav class="nav-links"><a href="#top">Trang chủ</a><a href="#latest">Bài viết</a><a href="#featured">Báo cáo</a><a href="https://github.com/liweicong2016-collab/tech-blog">Mã nguồn</a></nav>
+  <div class="langs"><a href="../">中</a><a href="../en/">EN</a><a href="../ja/">日</a><a href="./" class="on">VI</a></div>
+</div></header>
 
-<section class="masthead">
-  <div class="wrap">
-    <div class="kicker">Phòng tin tức · NEWSROOM</div>
-    <h1>Hiểu biết công nghệ sâu</h1>
-    <p class="standfirst">Cảm nhận thực tế + dữ liệu cứng về AI Trung Quốc vươn ra toàn cầu, kinh tế điện toán và bán dẫn. Mỗi tuần một bài.</p>
-    <div class="mastmeta">
-      <span><b>15+</b> Báo cáo chuyên sâu</span><span class="dot">·</span>
-      <span><b>4</b> Ngôn ngữ</span><span class="dot">·</span>
-      <span><b>Hàng tuần</b> Cập nhật</span>
+<main class="wrap">
+<section class="hero">
+  <span class="kicker">Nghiên cứu chuyên sâu · RESEARCH</span>
+  <h1>Livius's <span class="g">Tech Pulse</span></h1>
+  <div class="sub">Hiểu biết công nghệ sâu</div>
+  <p class="d">Cảm nhận thực tế + dữ liệu cứng về AI Trung Quốc vươn ra toàn cầu, kinh tế điện toán và bán dẫn. Mỗi tuần một bài.</p>
+  <div class="stats"><div class="stat"><b>15+</b><span>Báo cáo chuyên sâu</span></div><div class="stat"><b>4</b><span>Ngôn ngữ</span></div><div class="stat"><b>Hàng tuần</b><span>Cập nhật</span></div></div>
+</section>
+
+<section class="sec" id="featured">
+  <div class="lbl">Tin nổi bật · FEATURED</div>
+  <div class="feat">
+    <div class="fx"><div class="fx-glow"></div><div class="bars"><div class="bar" style="height:42%;animation-delay:0.00s"></div><div class="bar" style="height:58%;animation-delay:0.08s"></div><div class="bar" style="height:50%;animation-delay:0.16s"></div><div class="bar" style="height:72%;animation-delay:0.24s"></div><div class="bar" style="height:64%;animation-delay:0.32s"></div><div class="bar" style="height:88%;animation-delay:0.40s"></div><div class="bar" style="height:100%;animation-delay:0.48s"></div></div>
+      <div class="fx-tag">IDC &middot; THAILAND 2026</div></div>
+    <div class="fbody">
+      <div class="ftype">Báo cáo ngành · Q2 2026</div>
+      <h3>Báo cáo chuyên sâu ngành IDC Thái Lan 2026</h3>
+      <p>Cục diện cạnh tranh và cơ hội đầu tư tại trung tâm dữ liệu Đông Nam Á. Giá trị chiến lược của Bangkok qua ba trục: điện năng, giấy phép và giá cả.</p>
+      <div class="metrics"><div class="metric"><b>240+</b><span>Trung tâm dữ liệu</span></div><div class="metric"><b>1.2GW</b><span>Công suất</span></div><div class="metric"><b>28%</b><span>Tăng trưởng/năm</span></div><div class="metric"><b>#3</b><span>Đông Nam Á</span></div></div>
+      <div class="btns">
+        <a class="btn btn-p" href="articles/thailand-idc-2026.html">Đọc báo cáo</a>
+        <a class="btn btn-g" href="articles/thailand-idc-2026.html">Tải PDF</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="featured">
-  <div class="wrap">
-    <div class="seclabel">Tin nổi bật · FEATURED</div>
-    <article class="lead-story">
-      <div class="lead-visual" aria-hidden="true">
-        <div class="glow"></div>
-        <div class="bars">
-          <i style="height:38%"></i><i style="height:56%"></i><i style="height:44%"></i>
-          <i class="hot" style="height:72%"></i><i style="height:60%"></i>
-          <i style="height:82%"></i><i class="hot" style="height:95%"></i><i style="height:68%"></i>
-        </div>
-        <span class="vtag">IDC · THAILAND 2026</span>
-      </div>
-      <div class="lead-body">
-        <div class="kicker-sm">Báo cáo ngành · Q2 2026</div>
-        <h2>Báo cáo chuyên sâu ngành IDC Thái Lan 2026</h2>
-        <p class="sum">Cục diện cạnh tranh và cơ hội đầu tư tại trung tâm dữ liệu Đông Nam Á. Giá trị chiến lược của Bangkok qua ba trục: điện năng, giấy phép và giá cả.</p>
-        <div class="fstats">
-          <div class="fstat"><b>240<em>+</em></b><span>Trung tâm dữ liệu</span></div>
-          <div class="fstat"><b>1.2<em>GW</em></b><span>Công suất</span></div>
-          <div class="fstat"><b>28<em>%</em></b><span>Tăng trưởng/năm</span></div>
-          <div class="fstat"><b>#3</b><span>Đông Nam Á</span></div>
-        </div>
-        <div class="actions">
-          <a class="btn btn-solid" href="thailand-idc.html">Đọc báo cáo</a>
-          <a class="btn btn-ghost" href="thailand-idc.html">Tải PDF</a>
-        </div>
-      </div>
-    </article>
-  </div>
+<section class="sec" id="latest">
+  <div class="lbl">Bài viết mới · LATEST</div>
+  <h2>Bài viết công nghệ</h2>
+  <p class="sd">Phân tích ngành chuyên sâu từ nghiên cứu thực địa</p>
+  <div class="chips"><button class="chip on" data-f="all">Tất cả</button><button class="chip" data-f="maas">MaaS</button><button class="chip" data-f="accel">Chip tăng tốc AI</button><button class="chip" data-f="ai">AI</button><button class="chip" data-f="mena">MENA</button><button class="chip" data-f="compute">Điện toán AI</button><button class="chip" data-f="token">Kinh tế Token</button><button class="chip" data-f="deep">Chuyên sâu</button></div>
+  <div class="rows"><a class="row" href="articles/domestic-maas-token-wars-2026.html" data-cat="maas"><span class="rdate">2026-06-02</span><span><span class="rcat">MaaS</span></span><span class="rmain"><h4>Đại chiến MaaS Trung Quốc 2026: Hai mặt trận của kinh tế Token</h4><p>Mô hình video và mô hình lập trình thành chiến trường thương mại hóa — logic định giá mới sau khi LLM phổ thông chạm đáy.</p></span><span class="rmeta"><span>8 min read</span><span class="arr">&rarr;</span></span></a><a class="row" href="articles/domestic-ai-accelerator-ecosystem-2026.html" data-cat="accel"><span class="rdate">2026-06-02</span><span><span class="rcat">Chip tăng tốc AI</span></span><span class="rmain"><h4>Quan sát thực địa hệ sinh thái chip tăng tốc AI nội địa</h4><p>6.841 mô hình, ngăn xếp lượng tử hóa, framework suy luận — mức độ trưởng thành thực sự của hệ sinh thái NPU nội địa.</p></span><span class="rmeta"><span>10 min read</span><span class="arr">&rarr;</span></span></a><a class="row" href="articles/andrej-karpathy-interviews.html" data-cat="ai"><span class="rdate">2026-05-28</span><span><span class="rcat">AI</span></span><span class="rmain"><h4>Andrej Karpathy: Tuyển tập phỏng vấn & bài nói đầy đủ</h4><p>Tổng hợp nội dung then chốt từ podcast, hội nghị, khóa học công khai và phỏng vấn truyền thông, kèm liên kết nguồn.</p></span><span class="rmeta"><span>7 min read</span><span class="arr">&rarr;</span></span></a><a class="row" href="articles/mena-companies-deep-report.html" data-cat="mena"><span class="rdate">2026-05-27</span><span><span class="rcat">MENA</span></span><span class="rmain"><h4>Báo cáo chuyên sâu kỳ lân internet Trung Đông</h4><p>Bản đồ ICT đằng sau định giá nghìn tỷ của 6 doanh nghiệp: đám mây, thanh toán, thương mại điện tử và hạ tầng khu vực.</p></span><span class="rmeta"><span>9 min read</span><span class="arr">&rarr;</span></span></a><a class="row" href="articles/middle-east-article.html" data-cat="compute"><span class="rdate">2026-05-23</span><span><span class="rcat">Điện toán AI</span></span><span class="rmain"><h4>Vốn Trung Đông, điện toán Đông Nam Á</h4><p>Dòng vốn, năng lượng, trung tâm dữ liệu và nhu cầu AI đang vẽ lại bản đồ điện toán Đông Nam Á.</p></span><span class="rmeta"><span>6 min read</span><span class="arr">&rarr;</span></span></a><a class="row" href="articles/token-economy-2026.html" data-cat="token"><span class="rdate">2026-05-23</span><span><span class="rcat">Kinh tế Token</span></span><span class="rmain"><h4>Kinh tế Token 2026: Liệu chúng ta có đang chứng kiến một cuộc cách mạng định giá?</h4><p>Từ lệnh gọi mô hình đến ngân sách doanh nghiệp — cách định giá Token đang định hình lại mô hình kinh doanh AI.</p></span><span class="rmeta"><span>7 min read</span><span class="arr">&rarr;</span></span></a><a class="row" href="articles/china-internet-ai-capabilities-2025.html" data-cat="deep"><span class="rdate">2026-06-04</span><span><span class="rcat">Chuyên sâu</span></span><span class="rmain"><h4>Năng lực AI của các ông lớn internet Trung Quốc 2025: phân tích ba chiều</h4><p>ByteDance, Alibaba, Tencent, Meituan, JD, Kuaishou — mổ xẻ cuộc đua AI Trung Quốc trên ba chiều.</p></span><span class="rmeta"><span>12 min read</span><span class="arr">&rarr;</span></span></a></div>
 </section>
 
-<section class="section" id="latest">
-  <div class="wrap">
-    <div class="seclabel">Bài viết mới · LATEST</div>
-    <h2 class="h2">Bài viết công nghệ</h2>
-    <p class="lead">Phân tích ngành chuyên sâu từ nghiên cứu thực địa</p>
-    <div class="topics" id="topics"><button class="topic on" data-f="all">Tất cả</button>
-<button class="topic" data-f="MaaS">MaaS</button>
-<button class="topic" data-f="Chip tăng tốc AI">Chip tăng tốc AI</button>
-<button class="topic" data-f="AI">AI</button>
-<button class="topic" data-f="MENA">MENA</button>
-<button class="topic" data-f="Điện toán AI">Điện toán AI</button>
-<button class="topic" data-f="Kinh tế Token">Kinh tế Token</button>
-<button class="topic" data-f="Chuyên sâu">Chuyên sâu</button></div>
-    <div class="newslist" id="newslist"><a class="nrow" href="articles/domestic-maas-token-wars-2026.html" data-cat="MaaS"><span class="ndate">2026-06-02</span><span class="ncat">MaaS</span><span class="nmain"><span class="ntitle">Đại chiến MaaS Trung Quốc 2026: Hai mặt trận của kinh tế Token</span><span class="nsum">Mô hình video và mô hình lập trình thành chiến trường thương mại hóa — logic định giá mới sau khi LLM phổ thông chạm đáy.</span></span><span class="nmeta">8 min read</span><span class="narrow">→</span></a>
-<a class="nrow" href="articles/domestic-ai-accelerator-ecosystem-2026.html" data-cat="Chip tăng tốc AI"><span class="ndate">2026-06-02</span><span class="ncat">Chip tăng tốc AI</span><span class="nmain"><span class="ntitle">Quan sát thực địa hệ sinh thái chip tăng tốc AI nội địa</span><span class="nsum">6.841 mô hình, ngăn xếp lượng tử hóa, framework suy luận — mức độ trưởng thành thực sự của hệ sinh thái NPU nội địa.</span></span><span class="nmeta">10 min read</span><span class="narrow">→</span></a>
-<a class="nrow" href="articles/andrej-karpathy-interviews.html" data-cat="AI"><span class="ndate">2026-05-28</span><span class="ncat">AI</span><span class="nmain"><span class="ntitle">Andrej Karpathy: Tuyển tập phỏng vấn & bài nói đầy đủ</span><span class="nsum">Tổng hợp nội dung then chốt từ podcast, hội nghị, khóa học công khai và phỏng vấn truyền thông, kèm liên kết nguồn.</span></span><span class="nmeta">7 min read</span><span class="narrow">→</span></a>
-<a class="nrow" href="articles/mena-companies-deep-report.html" data-cat="MENA"><span class="ndate">2026-05-27</span><span class="ncat">MENA</span><span class="nmain"><span class="ntitle">Báo cáo chuyên sâu kỳ lân internet Trung Đông</span><span class="nsum">Bản đồ ICT đằng sau định giá nghìn tỷ của 6 doanh nghiệp: đám mây, thanh toán, thương mại điện tử và hạ tầng khu vực.</span></span><span class="nmeta">9 min read</span><span class="narrow">→</span></a>
-<a class="nrow" href="articles/middle-east-article.html" data-cat="Điện toán AI"><span class="ndate">2026-05-23</span><span class="ncat">Điện toán AI</span><span class="nmain"><span class="ntitle">Vốn Trung Đông, điện toán Đông Nam Á</span><span class="nsum">Dòng vốn, năng lượng, trung tâm dữ liệu và nhu cầu AI đang vẽ lại bản đồ điện toán Đông Nam Á.</span></span><span class="nmeta">6 min read</span><span class="narrow">→</span></a>
-<a class="nrow" href="articles/token-economy-2026.html" data-cat="Kinh tế Token"><span class="ndate">2026-05-23</span><span class="ncat">Kinh tế Token</span><span class="nmain"><span class="ntitle">Kinh tế Token 2026: Phải chăng ta đang chứng kiến một cuộc cách mạng định giá?</span><span class="nsum">Từ lệnh gọi mô hình đến ngân sách doanh nghiệp — cách định giá Token tái định hình mô hình kinh doanh AI.</span></span><span class="nmeta">7 min read</span><span class="narrow">→</span></a>
-<a class="nrow" href="articles/china-internet-ai-capabilities-2025.html" data-cat="Chuyên sâu"><span class="ndate">2026-06-04</span><span class="ncat">Chuyên sâu</span><span class="nmain"><span class="ntitle">Năng lực AI của các ông lớn internet Trung Quốc 2025: phân tích ba chiều</span><span class="nsum">ByteDance, Alibaba, Tencent, Meituan, JD, Kuaishou — mổ xẻ cuộc đua AI Trung Quốc trên ba chiều.</span></span><span class="nmeta">12 min read</span><span class="narrow">→</span></a></div>
-  </div>
+<section class="sub">
+  <h3>Nhận phân tích chuyên sâu</h3>
+  <p>Mỗi tuần một bài. Hủy đăng ký bất cứ lúc nào, không spam.</p>
+  <form id="subf"><input id="sube" type="email" placeholder="you@example.com"><button class="btn btn-p" type="submit">Đăng ký</button></form>
+  <div class="ok" id="subok"></div>
 </section>
+</main>
 
-<section class="section subscribe">
-  <div class="wrap">
-    <div class="panel">
-      <div>
-        <h3>Nhận phân tích chuyên sâu</h3>
-        <p>Mỗi tuần một bài. Hủy đăng ký bất cứ lúc nào, không spam.</p>
-      </div>
-      <form class="subform" onsubmit="return false;">
-        <input type="email" placeholder="you@example.com" aria-label="email">
-        <button type="submit">Đăng ký</button>
-      </form>
-    </div>
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><div class="fbrand">Livius's <em>Tech Pulse</em></div><p>Cảm nhận thực tế + dữ liệu cứng. Về AI Trung Quốc, chi phí điện toán và bán dẫn.</p></div>
+    <div class="fcol"><h5>Điều hướng</h5><a href="#top">Trang chủ</a><a href="#latest">Bài viết</a><a href="#featured">Báo cáo</a></div>
+    <div class="fcol"><h5>Báo cáo</h5><a href="#featured">IDC Thái Lan 2026</a><a href="#featured">Mô hình nhỏ Ascend</a></div>
+    <div class="fcol"><h5>Theo dõi</h5><a href="https://github.com/liweicong2016-collab">GitHub</a><a href="https://liweicong2016-collab.github.io/tech-blog/">Tech Blog</a><a href="https://github.com/liweicong2016-collab/tech-blog">Mã nguồn</a></div>
   </div>
-</section>
+  <div class="fbot"><span>© 2026 Livius · All research for reference only</span><span>AI &middot; Compute &middot; Southeast Asia</span></div>
+</div></footer>
 
-<footer>
-  <div class="wrap">
-    <div class="fgrid">
-      <div>
-        <div class="fbrand">Livius's <em>Tech Pulse</em></div>
-        <p class="fblurb">Cảm nhận thực tế + dữ liệu cứng. Về AI Trung Quốc, chi phí điện toán và bán dẫn.</p>
-      </div>
-      <div class="fcol">
-        <h5>Điều hướng</h5>
-        <a href="#top">Trang chủ</a><a href="#latest">Bài viết</a><a href="#featured">Báo cáo</a>
-      </div>
-      <div class="fcol">
-        <h5>Báo cáo</h5>
-        <a href="thailand-idc.html">IDC Thái Lan 2026</a><a href="ascend-small-models.html">Mô hình nhỏ Ascend</a>
-      </div>
-      <div class="fcol">
-        <h5>Theo dõi</h5>
-        <a href="https://github.com/liweicong2016-collab" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://liweicong2016-collab.github.io/tech-blog/" target="_blank" rel="noopener">Tech Blog</a>
-        <a href="https://github.com/liweicong2016-collab/tech-blog" target="_blank" rel="noopener">Mã nguồn</a>
-      </div>
-    </div>
-    <div class="fbottom">
-      <span>© 2026 Livius · All research for reference only</span>
-      <span>AI · Compute · Southeast Asia</span>
-    </div>
-  </div>
-</footer>
+<button id="totop" aria-label="top">&uarr;</button>
+<script>var SUB_OK='Đã nhận. Chào mừng bạn.';</script>
 
-<button class="totop" id="totop" aria-label="top">↑</button>
 <script>
-(function(){
-  var chips=document.querySelectorAll('#topics .topic');
-  var rows=document.querySelectorAll('#newslist .nrow');
-  chips.forEach(function(ch){
-    ch.addEventListener('click',function(){
-      chips.forEach(function(c){c.classList.remove('on')});
-      ch.classList.add('on');
-      var f=ch.getAttribute('data-f');
-      rows.forEach(function(r){
-        r.classList.toggle('hidden', f!=='all' && r.getAttribute('data-cat')!==f);
-      });
+document.querySelectorAll('.chip').forEach(function(c){
+  c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});
+    c.classList.add('on');
+    var f=c.getAttribute('data-f');
+    document.querySelectorAll('.row').forEach(function(r){
+      r.classList.toggle('hidden', f!=='all' && r.getAttribute('data-cat')!==f);
     });
   });
-  var tt=document.getElementById('totop');
-  window.addEventListener('scroll',function(){
-    tt.classList.toggle('show', window.scrollY>600);
-  });
-  tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
-})();
+});
+var tt=document.getElementById('totop');
+window.addEventListener('scroll',function(){ tt.style.display = window.scrollY>600 ? 'block':'none'; });
+tt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+document.getElementById('subf').addEventListener('submit',function(e){
+  e.preventDefault();
+  var em=document.getElementById('sube').value.trim();
+  if(!em || em.indexOf('@')<0) return;
+  document.getElementById('subok').textContent = SUB_OK;
+  document.getElementById('sube').value='';
+});
 </script>
+
 </body>
 </html>
