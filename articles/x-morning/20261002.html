@@ -23,14 +23,23 @@ h2.sec{font-size:19px;font-weight:700;margin:38px 0 16px;padding-bottom:10px;bor
 .item .src{font-size:12.5px;color:var(--text3)}
 .item .src a{color:var(--accent-hi)}
 .footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+.fav-btn{background:none;border:0;cursor:pointer;font-size:17px;line-height:1;color:#8b8fa3;padding:2px 0 2px 10px;vertical-align:-1px}
+.fav-btn:hover{color:#fb7185;transform:scale(1.2)}
+.fav-btn.on{color:#fb7185}
+#fav-pin[hidden]{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="topbar"><a class="back" href="../">← X早报</a><a class="back" href="../../">首页</a></div>
+  <div class="topbar"><a class="back" href="../">← X早报</a><span><a class="back" href="favorites.html" style="margin-right:14px">♥ 精华集</a><a class="back" href="../../">首页</a></span></div>
   <span class="badge">X早报 · 每日 7:00 更新</span>
   <h1>2026年10月2日</h1>
   <div class="meta">过去 24 小时 · 361 个关注账号 · 591 条推文精选 · 每条均注明出处</div>
+
+  <section id="fav-pin" hidden>
+    <h2 class="sec">♥ 收藏置顶</h2>
+    <div id="fav-pin-list"></div>
+  </section>
 
   <h2 class="sec">🤖 大模型与 Agent</h2>
 
@@ -78,5 +87,6 @@ h2.sec{font-size:19px;font-weight:700;margin:38px 0 16px;padding-bottom:10px;bor
 
   <div class="footer">X早报每天 7:00（胡志明时间）更新，覆盖全部关注账号过去 24 小时动态。</div>
 </div>
+<script src="fav.js"></script>
 </body>
 </html>

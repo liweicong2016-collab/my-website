@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>♥ 精华集 — X早报收藏</title>
+<meta name="description" content="X早报收藏的精华帖汇总。">
+<style>
+:root{--bg:#08090c;--surface:#101116;--border:rgba(255,255,255,.08);--text:#f4f4f5;--text2:#a1a1aa;--text3:#5b5e6b;--accent:#5e6ad2;--accent-hi:#7c86e0;--accent-dim:rgba(94,106,210,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-hi);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:34px}
+.topbar a.back{color:var(--text2);font-size:13.5px}.topbar a.back:hover{color:var(--text)}
+.badge{display:inline-block;font-size:12px;font-weight:700;color:#fda4af;border:1px solid rgba(251,113,133,.4);background:rgba(251,113,133,.1);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:10px}
+.meta{color:var(--text3);font-size:13.5px;margin-bottom:34px}
+.item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.item h3{font-size:15.5px;font-weight:700;margin-bottom:8px;line-height:1.5}
+.item p{font-size:14px;color:var(--text2);margin-bottom:10px}
+.item .src{font-size:12.5px;color:var(--text3)}
+.item .src a{color:var(--accent-hi)}
+.fav-btn{background:none;border:0;cursor:pointer;font-size:17px;line-height:1;color:#8b8fa3;padding:2px 0 2px 10px;vertical-align:-1px}
+.fav-btn:hover{color:#fb7185;transform:scale(1.2)}
+.fav-btn.on{color:#fb7185}
+#fav-empty{text-align:center;color:var(--text3);padding:60px 0;font-size:15px;line-height:2}
+.footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);color:var(--text3);font-size:13px;text-align:center}
+button.danger{background:none;border:1px solid var(--border);color:var(--text3);border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer}
+button.danger:hover{color:#fb7185;border-color:rgba(251,113,133,.5)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="back" href="./">← X早报</a><a class="back" href="../../">首页</a></div>
+  <span class="badge">♥ 精华集</span>
+  <h1>我的收藏</h1>
+  <div class="meta" id="fav-meta"></div>
+  <div id="fav-list"></div>
+  <div id="fav-empty" hidden>还没有收藏。<br>在任意一期早报里，点击条目后的 ♡ 即可收藏到这里。</div>
+  <div class="footer"><button class="danger" id="fav-clear">清空全部收藏</button></div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="xmorning_favs";
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function render(){
+  var favs=load(),ids=Object.keys(favs).sort(function(a,b){return (favs[b].ts||0)-(favs[a].ts||0)});
+  var list=document.getElementById("fav-list"),empty=document.getElementById("fav-empty");
+  document.getElementById("fav-meta").textContent="共收藏 "+ids.length+" 条 · 保存在本浏览器";
+  list.innerHTML="";
+  empty.hidden=ids.length>0;
+  ids.forEach(function(id){
+    var f=favs[id],div=document.createElement("div");
+    div.className="item";
+    div.innerHTML='<h3>'+esc(f.t)+'</h3><p>'+esc(f.s)+'</p>'+
+      '<div class="src">引用自 <a href="'+esc(f.u)+'" target="_blank" rel="noopener">'+esc(f.h)+'</a>'+
+      (f.sec?' · '+esc(f.sec):'')+(f.d?' · '+esc(f.d):'')+
+      '<button class="fav-btn on" type="button" title="取消收藏">\u2665</button></div>';
+    div.querySelector(".fav-btn").onclick=function(){
+      var c=load();delete c[id];save(c);render();
+    };
+    list.appendChild(div);
+  });
+}
+document.getElementById("fav-clear").onclick=function(){
+  if(confirm("确定清空全部收藏吗?")){save({});render();}
+};
+render();
+})();
+</script>
+</body>
+</html>
