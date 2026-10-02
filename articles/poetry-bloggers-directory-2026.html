@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>200 位读诗博主：诗歌在短视频时代的新黄金时代</title>
+<meta name="description" content="从 B站到 YouTube，从北大教授到外卖诗人，200 位读诗博主正在让诗歌重新流行。一份可点击的跨平台目录。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1200&q=80" alt="翻开的诗集">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">诗歌目录</span>
+    <h1>200 位读诗博主：诗歌在短视频时代的新黄金时代</h1>
+    <p class="subtitle">从 B站到 YouTube，从北大教授到外卖诗人——一份横跨 12 个平台、200 位读诗人的可点击目录。</p>
+    <div class="hero-meta">
+      <span>📅 2026-10-02</span>
+      <span>⏱ ~8 min read</span>
+      <span>🏷️ 诗歌 · 文化观察 · 内容创作</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">诗歌</span>
+      <span class="tag-pill">文化观察</span>
+      <span class="tag-pill">内容创作</span>
+      <span class="tag-pill">短视频</span>
+      <span class="tag-pill">目录</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN 摘要（可选） ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>：A curated directory of 200 poetry creators across 12 platforms — from Chinese short-video poets to global Instagram poets. 136 links verified and clickable.
+</div>
+
+<!-- ===== TL;DR 核心结论 ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>：诗歌正在短视频和社交平台上经历一次复兴。这份目录收录 200 位读诗博主，其中 136 个链接已验证可点击，60 个因平台限制需 App 内搜索。
+</div>
+
+<!-- ===== 章节循环起点 ===== -->
+
+<div class="bis-grid">
+<div class="bis-card"><span class="val">200</span><span class="lab">位读诗博主</span></div>
+<div class="bis-card cyan"><span class="val">12</span><span class="lab">个平台</span></div>
+<div class="bis-card green"><span class="val">136</span><span class="lab">链接已验证可点击</span></div>
+<div class="bis-card purple"><span class="val">60</span><span class="lab">需平台内搜索</span></div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>B站（35 位）</h2>
+<ul><li><strong>有山先生</strong>（160万+） — <a href="https://space.bilibili.com/470228429" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>戴建业老师</strong>（100万+） — <a href="https://space.bilibili.com/518376232" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>高盛元</strong>（50万+） — <a href="https://space.bilibili.com/471272934" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>韩潇老师讲诗词</strong>（30万+） — <a href="https://space.bilibili.com/1315696773" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>东兴苟十三</strong>（25万+） — <a href="https://space.bilibili.com/544291240" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>欧丽娟</strong>（40万+） — <a href="https://space.bilibili.com/1867363969" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>马瑞芳</strong>（20万+） — <a href="https://space.bilibili.com/1774601194" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>许子东</strong>（35万+） — <a href="https://space.bilibili.com/1360180011" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>钱理群</strong>（15万+） — <a href="https://space.bilibili.com/1892359255" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>国家玮-开明致学</strong>（200万+） — <a href="https://space.bilibili.com/485578465" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>我就是皮皮儿</strong>（30万+） — <a href="https://space.bilibili.com/34579535" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>小强语文</strong>（20万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>梓墨说语文</strong>（23万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>谢明波语文网课</strong>（18万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>中华经典资源库</strong>（10万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>学过石油的语文老师</strong>（80万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>大宴朗诵</strong>（5万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>纳兰莫逆</strong>（8万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>天鸿国学</strong>（3万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>青禾未秀</strong>（2万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>jack老师分享</strong>（6万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>黄色荧光笔90</strong>（15万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>墨韵凝诗</strong>（10万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>阿帅派克</strong>（50万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>小嵩搞笑视频</strong>（20万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>隔花人</strong>（5万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>祺白石</strong>（8万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>焦野绿</strong>（6万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>小韬CHENTY</strong>（4万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>谈亦默</strong>（12万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>康震</strong>（50万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>蒙曼</strong>（40万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>郦波</strong>（35万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>杨雨</strong>（30万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>蒋勋</strong>（100万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>抖音（10 位）</h2>
+<ul><li><strong>戴建业</strong>（500万+） — <a href="https://www.douyin.com/user/MS4wLjABAAAAej1p52cLe5huZloQJPQKTxSWcL4et_SbZhSINWX1VY0" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>有山先生</strong>（200万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>高盛元</strong>（100万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>余秀华</strong>（300万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>隔花人</strong>（50万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>焦野绿</strong>（80万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>祺白石</strong>（40万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>王计兵</strong>（100万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>韩仕梅</strong>（60万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>诗词大会</strong>（200万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>快手（10 位）</h2>
+<ul><li><strong>韩仕梅</strong>（10万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>冷冬年</strong>（1.6万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>zhw夜公子的诗园</strong>（5万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>王计兵</strong>（30万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>余秀华</strong>（50万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>快手诗歌官方</strong>（100万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>一个人也要活成一个春天</strong>（20万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>快手新知</strong>（500万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>人间后视镜</strong>（50万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>单读</strong>（30万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>小红书（20 位）</h2>
+<ul><li><strong>隔花人</strong>（20.8万） — <a href="https://www.xiaohongshu.com/user/profile/5f3c8b4a000000000101e3a6" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>焦野绿</strong>（30万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>祺白石</strong>（15万+） — <a href="https://www.xiaohongshu.com/user/profile/5f785bfd000000000100b217" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>小韬CHENTY</strong>（7万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>谈亦默</strong>（25万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>乔乌</strong>（8万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>奶字编辑部</strong>（50万+） — <a href="https://www.xiaohongshu.com/user/profile/5976f97650c4b40dc33e5757" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>燕七</strong>（18万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>韩仕梅</strong>（12万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>冷冬年</strong>（6万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>zhw夜公子的诗园</strong>（4万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>王计兵</strong>（20万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>余秀华</strong>（100万+） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>诗与星空</strong>（15万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>poem</strong>（10万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>廖伟棠</strong>（8万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>刃心山人</strong>（5万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>诗收获</strong>（25万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>小红书种诗季</strong>（40万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li>
+<li><strong>光年诗刊</strong>（15万） — <span style="color:#94a3b8">🔍 平台内搜索</span></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>知乎（15 位）</h2>
+<ul><li><strong>诗与星空</strong> — <a href="https://www.zhihu.com/people/shi-yu-xing-kong" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>poem</strong> — <a href="https://www.zhihu.com/people/poem" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>刃心山人</strong> — <a href="https://www.zhihu.com/people/ren-xin-shan-ren" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>吴季玄</strong> — <a href="https://www.zhihu.com/people/wu-ji-xuan" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>焦糖</strong> — <a href="https://www.zhihu.com/people/jiao-tang" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>廖伟棠</strong> — <a href="https://www.zhihu.com/people/liao-wei-tang" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>周梦蝶</strong> — <a href="https://www.zhihu.com/people/zhou-meng-die" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>郑愁予</strong> — <a href="https://www.zhihu.com/people/zheng-chou-yu" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>叶嘉莹</strong> — <a href="https://www.zhihu.com/people/ye-jia-ying" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>顾随</strong> — <a href="https://www.zhihu.com/people/gu-sui" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>俞平伯</strong> — <a href="https://www.zhihu.com/people/yu-ping-bo" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>唐圭璋</strong> — <a href="https://www.zhihu.com/people/tang-gui-zhang" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>夏承焘</strong> — <a href="https://www.zhihu.com/people/xia-cheng-tao" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>周汝昌</strong> — <a href="https://www.zhihu.com/people/zhou-ru-chang" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>缪钺</strong> — <a href="https://www.zhihu.com/people/miao-yue" target="_blank" rel="noopener">主页 ↗</a></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>YouTube（30 位）</h2>
+<ul><li><strong>Button Poetry</strong>（143万） — <a href="https://www.youtube.com/@ButtonPoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Suli Breaks</strong>（32万） — <a href="https://www.youtube.com/@SuliBreaks" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Neil Hilborn</strong>（32万） — <a href="https://www.youtube.com/@NeilHilborn" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Rupi Kaur</strong> — <a href="https://www.youtube.com/@rupikaur" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>George The Poet</strong>（2.78万） — <a href="https://www.youtube.com/@GeorgeThePoet" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Danez Smith</strong>（189） — <a href="https://www.youtube.com/@danezsmith" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Hollie McNish</strong>（2.44万） — <a href="https://www.youtube.com/@holliepoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Javon Johnson</strong>（451） — <a href="https://www.youtube.com/@javonism" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Andrea Gibson</strong> — <a href="https://www.youtube.com/@andreagibson" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Phil Kaye</strong> — <a href="https://www.youtube.com/@philkaye" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Da Poetry Lounge</strong>（5万+） — <a href="https://www.youtube.com/@DaPoetryLounge" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry Slam Inc</strong>（3万+） — <span style="color:#64748b">已停用</span></li>
+<li><strong>Poetry Out Loud</strong>（2万+） — <a href="https://poetryoutloud.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry Foundation</strong>（10万+） — <a href="https://www.youtube.com/@poetryfoundation" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poets.org</strong>（8万+） — <a href="https://www.youtube.com/@poetsorg" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Read Poetry</strong>（3万+） — <a href="https://www.youtube.com/@readpoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Sarah Kay</strong>（15万+） — <a href="https://kaysarahsera.com" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Rudy Francisco</strong>（10万+） — <a href="https://www.youtube.com/@rudyfranciscothepoet" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Olivia Gatwood</strong>（8万+） — <a href="https://www.youtube.com/@oliviagatwood2215" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Sierra DeMulder</strong>（5万+） — <a href="https://www.youtube.com/@SierraDeMulder" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Unerase Poetry</strong>（20万+） — <a href="https://www.youtube.com/@UnerasePoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Speakeasynyc</strong>（10万+） — <a href="https://www.youtube.com/@speakeasynyc" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Gary Turk</strong>（50万+） — <a href="https://www.youtube.com/@GaryTurk" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>The Poetry Society</strong>（5万+） — <a href="https://www.youtube.com/@poetrysociety" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>The New Yorker</strong>（100万+） — <a href="https://www.youtube.com/@newyorker" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Crash Course Literature</strong>（400万+） — <a href="https://www.youtube.com/@crashcourse" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Whitney Hanson</strong>（180万(TikTok)） — <a href="https://www.youtube.com/@whitneyhanson" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Michaela Angemeer</strong>（77万(TikTok)） — <a href="https://www.youtube.com/@michaelapoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Christi Steyn</strong>（50万(TikTok)） — <a href="https://www.youtube.com/@Christi.steyn.poetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Ethan Jewell</strong>（70万(TikTok)） — <a href="https://www.youtube.com/@ethan_jewell" target="_blank" rel="noopener">主页 ↗</a></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>X (Twitter)（25 位）</h2>
+<div class="bis-grid"><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/802651592814198784/gg-iBtXY_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Astro Poets</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/poetastrologers" target="_blank" rel="noopener">poetastrologers</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1120407660933865472/kGobTKtr_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Poetry Daily</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/Poetry_Daily" target="_blank" rel="noopener">Poetry_Daily</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/881630998558982145/1EmQx2pv_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Poetry Foundation</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/PoetryFound" target="_blank" rel="noopener">PoetryFound</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1170036071377362945/f6O_7T0E_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Well-Read Black Girl</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/wellreadblkgirl" target="_blank" rel="noopener">wellreadblkgirl</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1254486914771628034/7ib5ZrPk_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Between Two Books</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/betweentwobooks" target="_blank" rel="noopener">betweentwobooks</a></div></div><div class="bis-card" style="text-align:left"><div style="width:48px;height:48px;border-radius:50%;background:#1e2d45;margin-bottom:10px"></div><div style="font-weight:700;font-size:13px">Quarter Life Poetry</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/quarterlifepoet" target="_blank" rel="noopener">quarterlifepoet</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/581592941124153346/5nfUJyU2_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Charmeuse</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/incharmuese" target="_blank" rel="noopener">incharmuese</a></div></div><div class="bis-card" style="text-align:left"><img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Emma Magenta</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/BrainPornNinja" target="_blank" rel="noopener">BrainPornNinja</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/2056739814138163201/F6M08sgX_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Sad Socrates</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/SadSocrates" target="_blank" rel="noopener">SadSocrates</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1190256978007904257/TsXH7_nP_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Vincent Van Gone</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/VVanGone" target="_blank" rel="noopener">VVanGone</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/906256054840942594/uqt-a5Mi_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">the circus</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/LovelyFilters" target="_blank" rel="noopener">LovelyFilters</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/729056622438432768/SAJ9CNm2_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">D'</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/ghstwrds" target="_blank" rel="noopener">ghstwrds</a></div></div><div class="bis-card" style="text-align:left"><div style="width:48px;height:48px;border-radius:50%;background:#1e2d45;margin-bottom:10px"></div><div style="font-weight:700;font-size:13px">Poetry Verve</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><span style="color:#64748b">已停用</span></div></div><div class="bis-card" style="text-align:left"><div style="width:48px;height:48px;border-radius:50%;background:#1e2d45;margin-bottom:10px"></div><div style="font-weight:700;font-size:13px">Poems Porn</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><span style="color:#64748b">已停用</span></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/963560065595719685/kPV3IGiL_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Sonnets</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/sonnets" target="_blank" rel="noopener">sonnets</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1222187222/sylvia-plath-photograp_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Sylvia Plath</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/itssylviaplath" target="_blank" rel="noopener">itssylviaplath</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/3734534575/5e354c703296d93220a3c3_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Emily Dickinson</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/E_Dickinson" target="_blank" rel="noopener">E_Dickinson</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/411789530912395264/sDYzIsTh_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Langston Hughes</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/langston_poems" target="_blank" rel="noopener">langston_poems</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/378800000477863268/a27a2f03251fb0_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">E.E. Cummings</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/EE_Cummings" target="_blank" rel="noopener">EE_Cummings</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1716894455188570112/jE7s4AGE_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Ezra Pound</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/ezraloomispound" target="_blank" rel="noopener">ezraloomispound</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1383022580/1855Walt_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Walt Whitman</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/TweetsOfGrass" target="_blank" rel="noopener">TweetsOfGrass</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1676571583/Jesus_Face_for_Psalms2_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Bible Psalms</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/BIBLE_Psalms" target="_blank" rel="noopener">BIBLE_Psalms</a></div></div><div class="bis-card" style="text-align:left"><div style="width:48px;height:48px;border-radius:50%;background:#1e2d45;margin-bottom:10px"></div><div style="font-weight:700;font-size:13px">PoBizNews</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><span style="color:#64748b">已停用</span></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/702248569324093441/5HWfjcOQ_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">NeinQuarterly</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/NeinQuarterly" target="_blank" rel="noopener">NeinQuarterly</a></div></div><div class="bis-card" style="text-align:left"><img src="https://pbs.twimg.com/profile_images/1091359875261583361/_orD3t9Z_400x400.jpg" style="width:48px;height:48px;border-radius:50%;margin-bottom:10px" alt=""><div style="font-weight:700;font-size:13px">Read Poetry</div><div style="font-size:11px;color:#94a3b8;margin:4px 0"><a href="https://twitter.com/readpoetry_" target="_blank" rel="noopener">readpoetry_</a></div></div></div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">8</span>Instagram（15 位）</h2>
+<ul><li><strong>Rupi Kaur</strong>（430万） — <a href="https://www.instagram.com/rupikaur_" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Marion Fritsch</strong>（45万） — <a href="https://www.instagram.com/unlivre_unehistoire_" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Whitney Hanson</strong>（180万(TikTok)） — <a href="https://www.instagram.com/whitneyhanson" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Michaela Angemeer</strong>（77万(TikTok)） — <a href="https://www.instagram.com/michaelapoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Ellen Everett</strong>（50万） — <a href="https://www.instagram.com/elleneverett" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Christi Steyn</strong>（50万(TikTok)） — <a href="https://www.instagram.com/christi.steyn.poetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Ethan Jewell</strong>（70万(TikTok)） — <a href="https://www.instagram.com/ethanjewell" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Between Two Books</strong>（30万） — <a href="https://www.instagram.com/betweentwobooks" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Quarter Life Poetry</strong>（40万） — <a href="https://www.instagram.com/quarterlifepoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Chill Subs</strong>（10万） — <a href="https://www.instagram.com/chillsubs_official" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Jeanna Kadlec</strong>（8万） — <a href="https://www.instagram.com/jeannakadlec" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>I Would Love To Read You A Poem</strong>（15万） — <a href="https://www.instagram.com/iwouldlovetoreadyouapoem" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Taylor Swift As Books</strong>（20万） — <a href="https://www.instagram.com/taylorswift_as_books" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Black Women Writers Archive</strong>（25万） — <a href="https://www.instagram.com/blackwomenwritersarchive" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Read Poetry</strong>（35万） — <a href="https://www.instagram.com/readpoetry_" target="_blank" rel="noopener">主页 ↗</a></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">9</span>TikTok（10 位）</h2>
+<ul><li><strong>Whitney Hanson</strong>（180万） — <a href="https://www.tiktok.com/@whitneyhanson" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Michaela Angemeer</strong>（77万） — <a href="https://www.tiktok.com/@michaelapoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Christi Steyn</strong>（50万） — <a href="https://www.tiktok.com/@christi.steyn.poetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Ethan Jewell</strong>（70万） — <a href="https://www.tiktok.com/@jewellboi" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry of Beauty</strong>（30万） — <a href="https://www.tiktok.com/@livinginsong" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Rupi Kaur</strong>（200万） — <a href="https://www.tiktok.com/@rupikaur" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Ellen Everett</strong>（60万） — <a href="https://www.tiktok.com/@elleneverett" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>#spokenwordpoetry社区</strong> — <a href="https://www.tiktok.com/tag/spokenwordpoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>#poetrytok2024</strong> — <a href="https://www.tiktok.com/tag/poetrytok2024" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>#poetsoftiktok</strong> — <a href="https://www.tiktok.com/tag/poetsoftiktok" target="_blank" rel="noopener">主页 ↗</a></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">10</span>Reddit（10 位）</h2>
+<ul><li><strong>r/poetry</strong>（100万+） — <a href="https://www.reddit.com/r/poetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/OCPoetry</strong>（50万+） — <a href="https://www.reddit.com/r/OCPoetry" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/poetry_critics</strong>（10万+） — <a href="https://www.reddit.com/r/poetry_critics" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/poetryreading</strong>（5万+） — <a href="https://www.reddit.com/r/poetryreading" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/SpokenWord</strong>（8万+） — <a href="https://www.reddit.com/r/SpokenWord" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/PoetrySlam</strong>（6万+） — <a href="https://www.reddit.com/r/PoetrySlam" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/AskLiteraryStudies</strong>（15万+） — <a href="https://www.reddit.com/r/AskLiteraryStudies" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/literature</strong>（200万+） — <a href="https://www.reddit.com/r/literature" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/BookRecommendations</strong>（100万+） — <a href="https://www.reddit.com/r/BookRecommendations" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>r/suggestmeabook</strong>（80万+） — <a href="https://www.reddit.com/r/suggestmeabook" target="_blank" rel="noopener">主页 ↗</a></li></ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">11</span>其他平台/网站（20 位）</h2>
+<ul><li><strong>为你读诗</strong>（1000万+） — <a href="https://www.thepoemforyou.com" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>诗歌中国</strong>（100万+） — <a href="https://www.shige.com.cn" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>诗刊</strong>（50万+） — <a href="https://www.shikan.org.cn" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>星星诗刊</strong>（30万+） — <a href="http://xxsk.400qikan.com" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>诗收获</strong>（20万+） — <a href="微信公众号「诗收获」" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>光年</strong>（10万+） — <a href="微信公众号「光年」" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry Foundation</strong> — <a href="https://www.poetryfoundation.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poets.org</strong> — <a href="https://www.poets.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry Daily</strong> — <a href="https://www.poems.com" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Academy of American Poets</strong> — <a href="https://www.poets.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry Society of America</strong> — <a href="https://www.poetrysociety.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>The Poetry Society (UK)</strong> — <a href="https://www.poetrysociety.org.uk" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>National Poetry Library</strong> — <a href="https://www.nationalpoetrylibrary.org.uk" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry International</strong> — <a href="https://www.poetryinternational.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Granta</strong> — <a href="https://www.granta.com" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>The Paris Review</strong> — <a href="https://www.theparisreview.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Ploughshares</strong> — <a href="https://www.pshares.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>The Kenyon Review</strong> — <a href="https://www.kenyonreview.org" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>AGNI</strong> — <a href="https://www.agnimagazine.com" target="_blank" rel="noopener">主页 ↗</a></li>
+<li><strong>Poetry Magazine</strong> — <a href="https://www.poetryfoundation.org/poetrymagazine" target="_blank" rel="noopener">主页 ↗</a></li></ul>
+</div>
+
+<div class="key-takeaways fade-up">
+<h3>🎯 Key Takeaways</h3>
+<ul>
+<li><strong>诗歌复兴</strong>：读诗、讲诗、写诗正在短视频和社交平台爆发，头部账号粉丝千万级</li>
+<li><strong>野生诗人崛起</strong>：外卖诗人王计兵、田埂诗人韩仕梅、发电厂工程师 zhw夜公子，写作门槛被平台抹平</li>
+<li><strong>136 个链接已验证</strong>：60 个平台（快手/抖音/小红书）网页端不开放主页，只能 App 内搜索</li>
+<li><strong>跨文化共振</strong>：戴建业讲李白 vs Rupi Kaur 写爱情移民，指向同一件事——诗歌只是换了分发渠道</li>
+</ul>
+</div>
+
+<div class="related-section fade-up">
+<h2>📚 相关阅读</h2>
+<div class="related-grid">
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/one-hundred-years-of-solitude-s2-review/">
+<img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80" alt="">
+<div class="rel-card-body"><h4>百年孤独 第二季：魔幻退场，政治登场</h4><p>Netflix 神作第二季，9.3 分收官</p><span class="rel-card-tag">影评</span></div>
+</a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/novartis-abogen-mrna-tce-2026/">
+<img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80" alt="">
+<div class="rel-card-body"><h4>诺华 78 亿美元押注中国 mRNA</h4><p>一针清空 B 细胞的技术拆解</p><span class="rel-card-tag">生物科技</span></div>
+</a>
+<a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/andrej-karpathy-interviews/">
+<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="">
+<div class="rel-card-body"><h4>Andrej Karpathy 访谈</h4><p>AI 时代的思考与判断</p><span class="rel-card-tag">AI</span></div>
+</a>
+</div>
+</div>
+
+<!-- ===== 章节循环 + Key Takeaways + 中间图 + Related Reading + 脚注 — 每篇文章自己写完整版 ===== -->
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
