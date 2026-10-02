@@ -148,9 +148,56 @@
     `;
   }
 
+
+  function addShareBar() {
+    if (!isArticlePage || document.querySelector(".share-bar")) return;
+    const container = document.querySelector(".article-body") || document.querySelector(".c");
+    if (!container) return;
+    const title = document.title || "";
+    const url = location.href;
+    const bar = document.createElement("div");
+    bar.className = "share-bar";
+    bar.innerHTML = `
+      <span class="share-label">一键转发</span>
+      <a class="share-btn" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}" title="分享到 X">X</a>
+      <button class="share-btn" data-act="copy" title="复制链接">复制链接</button>
+      ${navigator.share ? '<button class="share-btn" data-act="native" title="系统分享">更多</button>' : ''}
+      <span class="share-tip"></span>
+    `;
+    const style = document.createElement("style");
+    style.textContent = `
+      .share-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:36px 0 8px;padding:18px 20px;border:1px solid #1e2d45;border-radius:12px;background:#0d1321}
+      .share-label{font-size:13px;font-weight:700;color:#94a3b8;margin-right:4px}
+      .share-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);color:#38bdf8;font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .15s}
+      .share-btn:hover{background:rgba(56,189,248,.2);transform:translateY(-1px)}
+      .share-tip{font-size:12px;color:#34d399;min-height:16px}
+    `;
+    document.head.appendChild(style);
+    container.appendChild(bar);
+    const tip = bar.querySelector(".share-tip");
+    bar.querySelector('[data-act="copy"]').addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(url);
+        tip.textContent = "链接已复制";
+      } catch (e) {
+        const ta = document.createElement("textarea");
+        ta.value = url; document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); tip.textContent = "链接已复制"; }
+        catch (_) { tip.textContent = "复制失败，请手动复制地址栏"; }
+        ta.remove();
+      }
+      setTimeout(() => (tip.textContent = ""), 2000);
+    });
+    const nativeBtn = bar.querySelector('[data-act="native"]');
+    if (nativeBtn) nativeBtn.addEventListener("click", () => {
+      navigator.share({ title, url }).catch(() => {});
+    });
+  }
+
   ensureProgressBar();
   addReadingTime();
   addRelated();
+  addShareBar();
   markNavigation();
   normalizeFooter();
 }());
