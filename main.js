@@ -161,6 +161,7 @@
       <span class="share-label">一键转发</span>
       <a class="share-btn" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}" title="分享到 X">X</a>
       <button class="share-btn" data-act="copy" title="复制链接">复制链接</button>
+      <button class="share-btn" data-act="wechat" title="微信扫码转发">微信</button>
       ${navigator.share ? '<button class="share-btn" data-act="native" title="系统分享">更多</button>' : ''}
       <span class="share-tip"></span>
     `;
@@ -175,6 +176,37 @@
     document.head.appendChild(style);
     container.appendChild(bar);
     const tip = bar.querySelector(".share-tip");
+    bar.querySelector('[data-act="wechat"]').addEventListener("click", () => {
+      let modal = document.getElementById("wx-share-modal");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "wx-share-modal";
+        modal.innerHTML = `
+          <div class="wxm-bg"></div>
+          <div class="wxm-box">
+            <div class="wxm-title">微信扫码转发</div>
+            <img class="wxm-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}" alt="QR">
+            <div class="wxm-hint">微信扫一扫，在微信内打开后<br>点右上角转发给朋友 / 分享到朋友圈</div>
+            <button class="wxm-close">关闭</button>
+          </div>`;
+        const st = document.createElement("style");
+        st.textContent = `
+          #wx-share-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center}
+          #wx-share-modal .wxm-bg{position:absolute;inset:0;background:rgba(0,0,0,.65)}
+          #wx-share-modal .wxm-box{position:relative;background:#0d1321;border:1px solid #1e2d45;border-radius:16px;padding:28px 32px;text-align:center;max-width:320px}
+          #wx-share-modal .wxm-title{font-size:15px;font-weight:700;color:#e8eaf0;margin-bottom:16px}
+          #wx-share-modal .wxm-qr{width:200px;height:200px;border-radius:8px;background:#fff;padding:8px}
+          #wx-share-modal .wxm-hint{font-size:12.5px;color:#94a3b8;margin:14px 0 18px;line-height:1.7}
+          #wx-share-modal .wxm-close{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);color:#38bdf8;font-size:13px;padding:8px 28px;border-radius:8px;cursor:pointer;font-family:inherit}
+        `;
+        document.head.appendChild(st);
+        document.body.appendChild(modal);
+        modal.querySelector(".wxm-bg").addEventListener("click", () => modal.remove());
+        modal.querySelector(".wxm-close").addEventListener("click", () => modal.remove());
+      }
+      modal.style.display = "flex";
+    });
+
     bar.querySelector('[data-act="copy"]').addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(url);
