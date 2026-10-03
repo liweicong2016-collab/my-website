@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI洞察日报 · 10月3日：从堆卡到堆钱 — Livius's Tech Pulse</title>
+<meta name="description" content="AI洞察日报10月3日：亚马逊80亿美元芯片卖售回租、OpenAI排查每天烧50万美元、Anthropic 1亿美元培训1万部署工程师、DeepSeek开源昇腾工具链。">
+<style>
+:root{--bg:#08090c;--surface:#101116;--border:rgba(255,255,255,.08);--text:#f4f4f5;--text2:#a1a1aa;--text3:#5b5e6b;--accent:#0ea5e9;--accent-hi:#38bdf8;--accent-dim:rgba(56,189,248,.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-hi);text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 22px 90px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--border);margin-bottom:30px}
+.topbar a.back{color:var(--text2);font-size:13.5px}
+.hero img{width:100%;border-radius:14px;margin-bottom:26px;display:block}
+.badge{display:inline-block;font-size:12px;font-weight:700;color:#7dd3fc;border:1px solid rgba(56,189,248,.4);background:var(--accent-dim);border-radius:999px;padding:5px 14px;margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.5px;margin-bottom:10px;line-height:1.35}
+.meta{color:var(--text3);font-size:13.5px;margin-bottom:28px}
+.lead{font-size:16.5px;color:var(--text2);border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin-bottom:34px}
+h2{font-size:20px;font-weight:800;margin:40px 0 6px}
+.insight{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin:18px 0}
+.insight .k{font-size:13px;font-weight:700;color:var(--accent-hi);margin:12px 0 4px}
+.insight .k:first-child{margin-top:0}
+.insight p{font-size:14.5px;color:var(--text2);margin:0 0 4px}
+.risk{border:1px dashed rgba(56,189,248,.4);border-radius:12px;padding:20px 22px;margin:18px 0}
+.risk h2{margin-top:0}
+.verdict{background:var(--accent-dim);border-radius:12px;padding:20px 22px;margin:26px 0}
+.verdict ol{margin:8px 0 0 20px;font-size:14.5px;color:var(--text2)}
+.verdict li{margin-bottom:8px}
+.note{font-size:12.5px;color:var(--text3);margin-top:30px}
+.footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="back" href="./">← AI洞察日报</a><a class="back" href="../../">首页</a></div>
+  <div class="hero"><img src="cover-20261003.jpg" alt="AI洞察日报10月3日封面：芯片熔成金币——从堆卡到堆钱"></div>
+  <span class="badge">每日 8:30 更新</span>
+  <h1>AI洞察日报 · 10月3日：从堆卡到堆钱</h1>
+  <div class="meta">2026年10月3日 · 素材：互联网公开新闻 + X 时间线</div>
+  <div class="lead">今天的主线只有一个：<strong>AI 不缺故事了，缺的是把故事换成钱的金融工程</strong>。亚马逊把 80 亿美元芯片卖掉再租回来、Anthropic 掏 1 亿美元培训部署大军、OpenAI 为一次排查每天烧 50 万美元——算力的账，开始用金融的笔算。</div>
+
+  <h2>1. 亚马逊：80 亿美元芯片卖了再租回来</h2>
+  <div class="insight">
+    <div class="k">现象</div><p>据 FT/路透 10 月 2 日报道，亚马逊拟将约 80 亿美元的 Nvidia Grace Blackwell 芯片转入特殊目的公司（SPV）向投资者募资，再回租使用，覆盖美国 5 州十几座数据中心，亚马逊自身持股至多 10%。</p>
+    <div class="k">数据</div><p>80 亿美元，亚马逊持股 ≤10%。</p>
+    <div class="k">换句话说</div><p>数据中心的芯片第一次被当作资产证券化的标的。GPU 不再只是生产工具，它正在变成 ABS 的底层资产——"算力金融化"走完了一整步。</p>
+    <div class="k">所以呢</div><p>看算力投资，别只盯 GPU 出货量了，盯它的"金融包装"。回租利率才是这轮基建的真实成本。X 时间线上，@sama 昨天也亲自回应了 OpenAI–Cerebras 合作传闻，确认双方是"深度合作伙伴"、方向是速度前沿——供给侧的故事一边是绑定专用芯片，一边是把通用芯片金融化。两条腿，同一张账。</p>
+  </div>
+
+  <h2>2. OpenAI：解雇三名安全研究员，50PB 排查每天烧 50 万美元</h2>
+  <div class="insight">
+    <div class="k">现象</div><p>澎湃 10 月 1 日报道，OpenAI 解雇三名安全研究人员；公司为排查历史记录投入约 50PB 数据、用约 7000 块 GB200/GB300 GPU，每天成本超 50 万美元。截至 9 月 26 日，已向超 100 家机构通报。同期加州总检察长发出调查传票，FTC 启动行业性调查，15 州 AG 组成调查联盟。</p>
+    <div class="k">数据</div><p>50PB、7000 块 GB200/GB300、每天超 50 万美元、100+ 家机构、15 州。</p>
+    <div class="k">换句话说</div><p>AI 治理的成本从"罚款风险"变成了每天烧真金白银的排查支出。每天 50 万美元，光是"查账"这一项，一年就是 1.8 亿美元。</p>
+    <div class="k">所以呢</div><p>合规开始计入损益表。以后看 AI 公司的成本结构，得加一项"治理税"，而且是刚性支出。这条和昨天的"智能体闯澳政府网站"是同一话题链的新进展：事件的成本，正在从新闻变成账单。</p>
+  </div>
+
+  <h2>3. Anthropic：1 亿美元培训 1 万名部署工程师</h2>
+  <div class="insight">
+    <div class="k">现象</div><p>Anthropic 10 月 2 日启动 Claude Frontier Academy，承诺投入 1 亿美元，2027 年底前培训 1 万名"Frontier Deployed Engineer"；首批 8 家合作公司包括 Accenture、McKinsey、Morgan Stanley、澳洲联邦银行等。</p>
+    <div class="k">数据</div><p>1 亿美元、1 万名、8 家首批合作。</p>
+    <div class="k">换句话说</div><p>大模型公司终于承认了——模型进不了企业，不是模型不够强，是缺把模型钉进业务流程的人。1 万名部署工程师，就是 1 万个"人形 API 适配器"。</p>
+    <div class="k">所以呢</div><p>Agent 商业化的下一场战争不在模型榜单，在实施能力。谁手里有部署大军，谁就握着续费权。从卖 Token 到卖"人头"，这是商业模式的一次静默切换。</p>
+  </div>
+
+  <h2>4. DeepSeek 开源昇腾工具链：410 TFlops，摸到硬件极限的 95%</h2>
+  <div class="insight">
+    <div class="k">现象</div><p>据封面新闻 9 月 30 日报道，DeepSeek 开源昇腾版 TileLang 及 5 个配套组件；昇腾 950 稀疏注意力算子读取阶段达 410 TFlops，为硬件极限的 95%；基于昇腾预训练的模型已超 40 个。梁文锋称 DeepSeek 超 70% 算力用于训练，推理不足 30%。</p>
+    <div class="k">数据</div><p>410 TFlops（95% 硬件极限）、40+ 昇腾预训练模型、70% 算力用于训练。</p>
+    <div class="k">换句话说</div><p>国产算力的突围从来不是"造出卡"这一步，是"让卡跑满"这一步。95% 的利用率意味着昇腾的软件栈已经能吃掉几乎全部理论性能——这比发布新卡难得多。</p>
+    <div class="k">所以呢</div><p>看国产算力替代进度，别只问"卡对标到哪一代"，要问"生态里有多少模型在上面跑、跑到几成性能"。开源工具链是把锁，卡只是钥匙胚。</p>
+  </div>
+
+  <div class="risk">
+    <h2>⚠ 风险角：电力具身智能——8500 台 68 亿订单，但云深处转亏 880 万</h2>
+    <p style="font-size:14.5px;color:var(--text2)">电能革新经新浪财经 10 月 2 日报道：国网年内采购约 8500 台（5000 四足狗+500 人形+3000 双臂），总投资约 68 亿元；2026 年电力具身投资有望破 100 亿元。但云深处 2026 上半年营收 2.59 亿，却转亏 880 万元，毛利率从 52.83% 掉到 45.32%。具身智能的 B 端订单狂飙，但利润没跟上——"有单没利"是规模化前夜最危险的体位。昨天我说消费级场景先跑通（网球搭子 6000 台出海），今天补上另一半：工业场景有订单、没利润，现金流才是生死线。</p>
+  </div>
+
+  <div class="verdict">
+    <h2 style="margin-top:0">今日关键判断</h2>
+    <ol>
+      <li>算力金融化从隐性走向显性：80 亿美元芯片卖售回租，是 GPU 第一次被当作 ABS 底层资产。</li>
+      <li>"治理税"开始计入损益表：OpenAI 每天 50 万美元的排查成本，合规是刚性支出。</li>
+      <li>Agent 商业化的下一战场是实施能力：Anthropic 1 亿美元培训 1 万部署工程师就是信号。</li>
+      <li>国产算力替代的进度条看生态不看卡：410 TFlops 到硬件极限 95% 比新卡发布更重要。</li>
+      <li>具身智能 B 端"有单没利"：8500 台 68 亿订单背后，云深处转亏 880 万。</li>
+    </ol>
+  </div>
+
+  <div class="note"><strong>缺口</strong>：亚马逊 SPV 的回租利率、期限、投资人构成均未披露——算力金融化的真实成本口径缺失，卖售回租到底是省钱还是加杠杆，现在没法算。<br><br>口径声明：NVIDIA DGX Spark 64GB 版、腾讯租用 Oracle 芯片两条仅见媒体转述，数字以官方披露为准；DeepSeek 昇腾工具链消息约 9 月 30 日，略早于 24 小时窗口；雷蒙多观点转自 RFI 转述，未独立核实。</div>
+  <div class="footer">AI洞察日报 · 每日 8:30（胡志明时间）更新<br>方法论提炼自 5 份历史洞察报告</div>
+</div>
+</body>
+</html>
