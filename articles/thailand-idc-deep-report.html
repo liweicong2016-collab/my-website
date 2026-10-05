@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>泰国数据中心市场深度报告（2026年10月）</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-2: #1c2330;
+    --border: #2d3748;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent-2: #3fb950;
+    --accent-3: #d29922;
+    --accent-4: #f85149;
+    --accent-5: #bc8cff;
+    --line: #30363d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 48px 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 56px; }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  header .sub { color: var(--text-dim); font-size: 0.95rem; }
+  header .meta {
+    display: inline-flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  header .meta strong { color: var(--accent); font-weight: 600; }
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 16px;
+    border-left: 4px solid var(--accent);
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--accent-5);
+    margin: 24px 0 12px;
+  }
+  p { color: var(--text-dim); margin-bottom: 14px; font-size: 0.92rem; }
+  p strong { color: var(--text); }
+  .highlight-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+  }
+  .highlight-box.warn { border-left-color: var(--accent-4); }
+  .highlight-box.gold { border-left-color: var(--accent-3); }
+  .highlight-box.purple { border-left-color: var(--accent-5); }
+  .highlight-box .box-title {
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  .highlight-box ul { padding-left: 18px; color: var(--text-dim); }
+  .highlight-box li { margin-bottom: 6px; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .lbl { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
+    margin: 16px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  thead th {
+    text-align: left;
+    padding: 12px 14px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--text-dim);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(88,166,255,0.04); }
+  td.name { font-weight: 600; color: var(--text); }
+  td.mw { font-weight: 700; color: var(--accent-2); font-variant-numeric: tabular-nums; }
+  td.mw.gold { color: var(--accent-3); }
+  td.mw.red { color: var(--accent-4); }
+  td.mw-na { color: var(--text-dim); font-weight: 400; }
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .footnote {
+    margin-top: 64px;
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-3);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .footnote h3 { color: var(--text); font-size: 0.95rem; margin-bottom: 12px; font-weight: 600; }
+  .footnote ul { padding-left: 20px; }
+  .footnote li { margin-bottom: 6px; }
+  @media (max-width: 768px) {
+    body { padding: 32px 16px 64px; }
+    header h1 { font-size: 1.5rem; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .section-title { font-size: 1.15rem; }
+  }
+  @media (max-width: 480px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    header .meta { flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>泰国数据中心市场深度报告</h1>
+    <p class="sub">从容量扩张到可交付算力：市场、项目、能源与产业机会 · 2026 年 10 月</p>
+    <div class="meta">
+      <span>报告日期 <strong>2026-10-05</strong></span>
+      <span>核心口径 <strong>IT Load</strong></span>
+      <span>数据截至 <strong>2026-09</strong></span>
+    </div>
+  </header>
+
+  <!-- 执行摘要 -->
+  <div class="section">
+    <h2 class="section-title">执行摘要</h2>
+    <p>泰国数据中心市场正处于从传统"硬件租赁"向<strong>高附加值 AI 算力枢纽</strong>快速演化的阶段。泰国是东南亚增长最快的数据中心市场之一，2025 年市场规模约 <strong>18.9 亿美元</strong>，预计 2031 年达 <strong>49 亿美元</strong>，CAGR 约 <strong>17.21%</strong>；IT 负载容量预计从 2025 年的 <strong>0.77GW</strong> 增至 2030 年的 <strong>2.93GW</strong>，CAGR 高达 <strong>30.60%</strong>。[reference:11]</p>
+    <p>竞争格局呈"<strong>国际云巨头 + 中资互联网 + 本土电信运营商</strong>"三大阵营。BOI 在 2025 年批准 <strong>38 个</strong>数据中心项目，IT 负载合计 <strong>2,066MW</strong>，总投资 <strong>4,580 亿泰铢（约 145 亿美元）</strong>。[reference:12]</p>
+    <p><strong>核心风险是电力与水资源</strong>：电力接入申请达 <strong>35GW</strong>，接近全国 40GW 峰值需求，而 PDP 仅规划 8.8GW 数据中心配套电力。EEC 区域电网规划新增 1,150MW，但春武里、罗勇两府水资源偏紧。[reference:13]</p>
+  </div>
+
+  <!-- 一、市场规模 -->
+  <div class="section">
+    <h2 class="section-title">一、市场规模与增长轨迹</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">18.9 亿</div>
+        <div class="lbl">2025 年市场规模（美元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">22.2 亿</div>
+        <div class="lbl">2026 年预测（美元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">49 亿</div>
+        <div class="lbl">2031 年预测（美元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">17.21%</div>
+        <div class="lbl">CAGR（2026-2031）</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">0.77 GW</div>
+        <div class="lbl">2025 年 IT 负载</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">1.1 GW</div>
+        <div class="lbl">2026 年预测</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2.93 GW</div>
+        <div class="lbl">2030 年预测</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">30.60%</div>
+        <div class="lbl">CAGR（2025-2030）</div>
+      </div>
+    </div>
+
+    <p>泰国数据中心市场的增长由三重力量驱动：<strong>AI 算力需求外溢</strong>——超大规模云服务商加速在东南亚布局；<strong>数据主权合规</strong>——BOT 对金融机构的云外包规则推动数据本地化存储；<strong>政策激励</strong>——BOI 提供长达 13 年的企业所得税豁免。[reference:14]</p>
+  </div>
+
+  <!-- 二、区域格局 -->
+  <div class="section">
+    <h2 class="section-title">二、区域格局：曼谷双核与 EEC 崛起</h2>
+    <p>泰国数据中心地理格局呈"<strong>曼谷及周边 + EEC（东部经济走廊）</strong>"双核结构。曼谷及周边容量占比约 <strong>52%</strong>，EEC 约占 <strong>41%</strong>。EEC 正加速崛起为数据中心的新增长基地，预计 2028 年在建及计划投运容量达 <strong>149.9MW</strong>，接近曼谷及周边的两倍。[reference:15]</p>
+
+    <div class="highlight-box gold">
+      <div class="box-title">EEC 区域电网规划</div>
+      <ul>
+        <li>新增容量 <strong>1,150MW</strong>（400MW 已投运 + 750MW 在建）</li>
+        <li>罗勇 2 号变电站：150MW</li>
+        <li>Phanthong 变电站：250MW</li>
+        <li>春武里、罗勇两府水资源偏紧，北柳府可用水资源比例约 63%</li>
+      </ul>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>曼谷及周边</th>
+            <th>EEC（春武里/罗勇/北柳）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>容量占比</td>
+            <td>~52%</td>
+            <td>~41%</td>
+          </tr>
+          <tr>
+            <td>核心定位</td>
+            <td>企业托管、互联枢纽、云接入</td>
+            <td>超大规模、AI 训练、工业边缘</td>
+          </tr>
+          <tr>
+            <td>代表运营商</td>
+            <td>True IDC、STT GDC、NTT、AIS</td>
+            <td>True IDC EEC、GSA、SUPERNAP</td>
+          </tr>
+          <tr>
+            <td>电网状态</td>
+            <td>成熟，互联密集</td>
+            <td>升级中，1,150MW 新增容量</td>
+          </tr>
+          <tr>
+            <td>水资源</td>
+            <td>充足</td>
+            <td>春武里/罗勇偏紧，北柳 63%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 三、Colo 运营商 -->
+  <div class="section">
+    <h2 class="section-title">三、Colo 运营商竞争格局</h2>
+    <p>泰国 Colo 市场集中度中等，前五大运营商包括 <strong>True IDC、STT GDC、NTT、CS LoxInfo、United Information Highway</strong>。[reference:16]</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>运营商</th>
+            <th>已运营 IT</th>
+            <th>在建/规划</th>
+            <th>总管道</th>
+            <th>锚定/特征</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">True IDC（CP Group）</td>
+            <td class="mw">~30 MW</td>
+            <td class="mw gold">~350 MW</td>
+            <td class="mw red">~380 MW</td>
+            <td>East Bangna 35MW 园区；EEC AI 超大规模园区；缅甸仰光设施</td>
+          </tr>
+          <tr>
+            <td class="name">STT GDC</td>
+            <td class="mw">22 MW</td>
+            <td class="mw gold">26 MW</td>
+            <td class="mw red">48 MW</td>
+            <td>BKK1（22MW，2021运营）+ BKK2（24MW，2026 Q4）+ BKK3（2MW）</td>
+          </tr>
+          <tr>
+            <td class="name">GSA (Gulf+Singtel+AIS)</td>
+            <td class="mw">25.6 MW</td>
+            <td class="mw gold">~100 MW</td>
+            <td class="mw red">~125 MW</td>
+            <td>GSA01（2025年底）+ GSA02（2027 Q1）+ GSA05（120MW，建设中）</td>
+          </tr>
+          <tr>
+            <td class="name">SUPERNAP Thailand</td>
+            <td class="mw">~15 MW</td>
+            <td class="mw-na">—</td>
+            <td class="mw red">~15 MW</td>
+            <td>Tier IV 认证，春武里</td>
+          </tr>
+          <tr>
+            <td class="name">NTT / CS LoxInfo</td>
+            <td class="mw">~20 MW</td>
+            <td class="mw-na">—</td>
+            <td class="mw red">~20 MW</td>
+            <td>企业托管与互联</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 四、云厂商 -->
+  <div class="section">
+    <h2 class="section-title">四、云厂商布局</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>云厂商</th>
+            <th>布局</th>
+            <th>投资规模</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">AWS</td>
+            <td>曼谷/春武里 3 AZ</td>
+            <td class="mw gold">50 亿美元/15 年</td>
+            <td>2025 年 1 月上线</td>
+          </tr>
+          <tr>
+            <td class="name">Google Cloud</td>
+            <td>曼谷云区域</td>
+            <td class="mw gold">10 亿美元</td>
+            <td>2026 年 1 月上线</td>
+          </tr>
+          <tr>
+            <td class="name">Microsoft Azure</td>
+            <td>泰国 AI 数据中心</td>
+            <td class="mw gold">10 亿美元+</td>
+            <td>2024 年宣布，扩建中</td>
+          </tr>
+          <tr>
+            <td class="name">阿里云</td>
+            <td>曼谷两座数据中心</td>
+            <td class="mw-na">未披露</td>
+            <td>2022 年首座 + 2025 年第二座</td>
+          </tr>
+          <tr>
+            <td class="name">腾讯云</td>
+            <td>曼谷双 AZ</td>
+            <td class="mw-na">未披露</td>
+            <td>2021 年 6 月开服</td>
+          </tr>
+          <tr>
+            <td class="name">字节跳动/TikTok</td>
+            <td>曼谷、北榄、北柳</td>
+            <td class="mw red">250 亿美元</td>
+            <td>分阶段建设</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 五、能源约束 -->
+  <div class="section">
+    <h2 class="section-title">五、能源、水与交付约束</h2>
+
+    <div class="section-sub">电力</div>
+    <p>电力接入申请达 <strong>35GW</strong>，接近全国 40GW 峰值需求，而 PDP 仅规划 <strong>8.8GW</strong> 数据中心配套电力。EGAT 正升级 EEC 电网，新增 <strong>1,150MW</strong> 交付能力（400MW 已投运 + 750MW 在建）。[reference:17]</p>
+
+    <div class="highlight-box warn">
+      <div class="box-title">电价走势</div>
+      <ul>
+        <li>ERC 已批准 <strong>2026 年 1-4 月电价降至 3.88 泰铢/kWh</strong>（约 0.11 美元）[reference:18]</li>
+        <li>政府目标将电价降至 <strong>2.50 泰铢/kWh</strong>（约 0.07 美元）以内</li>
+        <li>直接 PPA 绿电成本 <strong>3.0-4.0 泰铢/kWh</strong>，低于常规电网 4.15-4.72 泰铢[reference:19]</li>
+      </ul>
+    </div>
+
+    <div class="section-sub">水资源</div>
+    <p>春武里、罗勇两府水资源偏紧，北柳府可用水资源比例约 <strong>63%</strong>。水电供给已成为 EEC 选址的核心约束。液冷技术从可选项变为 AI 园区的入场券，STT Bangkok 2 已支持混合冷却环境（空气 + 液体）。[reference:20]</p>
+
+    <div class="section-sub">绿色电力政策</div>
+    <div class="highlight-box purple">
+      <div class="box-title">UGT 与 Direct PPA 机制</div>
+      <ul>
+        <li><strong>UGT1</strong>：非源特定绿电，2025 年 7 月起已投入使用</li>
+        <li><strong>UGT2</strong>：源特定绿电，降低绿色溢价</li>
+        <li><strong>Direct PPA 试点</strong>：总规模 2,000MW，允许私营公司直接买卖绿电</li>
+        <li>极大满足出海企业的 ESG 考核要求[reference:21]</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 六、商业模式 -->
+  <div class="section">
+    <h2 class="section-title">六、商业模式变革：从"包租公"到"Token 工厂"</h2>
+    <p>泰国 IDC 市场正经历深刻的商业模式变革。<strong>电费上涨挤压传统模式</strong>：中东局势冲击国际油价，泰国工业用电成本面临上升压力（电费占传统 IDC 运营成本约 40%）。传统算力租赁毛利率仅 <strong>15%-25%</strong>，易陷价格战。</p>
+
+    <div class="highlight-box">
+      <div class="box-title">"Token 工厂"抗风险机制</div>
+      <ul>
+        <li>将"电力+GPU 算力"转化为 API 输出的 Token 接口</li>
+        <li>生成每百万 Token 综合成本约 <strong>$0.32</strong>，API 售价 <strong>$1.50-$3.00</strong></li>
+        <li>毛利率可高达 <strong>70%+</strong></li>
+        <li>即使电费上涨 40%，毛利率依然可稳定在 <strong>62%-65%+</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 七、东南亚三强对比 -->
+  <div class="section">
+    <h2 class="section-title">七、东南亚三强对比</h2>
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>对标维度</th>
+            <th>泰国</th>
+            <th>新加坡</th>
+            <th>马来西亚柔佛</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>增长潜能</td>
+            <td>最快（CAGR ~30%）</td>
+            <td>较低（受土地/能耗限制）</td>
+            <td>稳健（~10.86%）</td>
+          </tr>
+          <tr>
+            <td>工业电价</td>
+            <td><strong>$0.11-0.13/kWh</strong></td>
+            <td>$0.25-0.28/kWh</td>
+            <td>$0.08-0.11/kWh</td>
+          </tr>
+          <tr>
+            <td>土地成本</td>
+            <td>中等</td>
+            <td>极高</td>
+            <td>低</td>
+          </tr>
+          <tr>
+            <td>核心优势</td>
+            <td>本土巨头生态（正大）+ 主权 AI 独立性 + 绿电政策</td>
+            <td>成熟网络生态与金融中心</td>
+            <td>靠近新加坡 + 成本低廉</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>主权与生态优势</strong>：相比依赖新加坡溢出效应的马来西亚柔佛，泰国作为独立的大型经济体，具有更高的数据主权与地缘平衡能力。以 True IDC（正大集团 CP Group 旗下）为例，正大集团在电信（True Corporation）、零售与农业领域的深厚积淀，在拿地、电力审批及本地化场景落地方面具备强劲竞争力。</p>
+  </div>
+
+  <!-- 八、关键判断 -->
+  <div class="section">
+    <h2 class="section-title">八、关键判断</h2>
+    <div class="highlight-box">
+      <div class="box-title">1. 泰国是东南亚增速最快的市场，但兑现能力是核心变量</div>
+      <p>BOI 批准管道 IT 负载达 2,066MW，而实际运营容量与之存在显著差距。项目能否按期接电、获得客户合同并爬坡至计费容量，将决定市场的真实增长轨迹。</p>
+    </div>
+    <div class="highlight-box gold">
+      <div class="box-title">2. EEC 是未来五年的主战场，但水资源是硬约束</div>
+      <p>EEC 在建+计划容量达 149.9MW，接近曼谷的两倍。但春武里、罗勇两府水资源偏紧，液冷与再生水方案将成为项目获批的前置条件。</p>
+    </div>
+    <div class="highlight-box purple">
+      <div class="box-title">3. 中国企业的双轨模式正在成型</div>
+      <p>字节跳动（250 亿美元自建）+ 阿里云（两座数据中心）+ 腾讯云（双 AZ）+ 万国数据（10 亿美元）构成中资在泰国的多层次布局。泰国的监管环境相对宽松，未实施本土硬件管制或数据本地化强制要求，为中资运营商提供了独特的合规窗口。</p>
+    </div>
+    <div class="highlight-box warn">
+      <div class="box-title">4. 电力是 2027-2028 年最大的单点风险</div>
+      <p>35GW 电力接入申请 vs 8.8GW PDP 规划 vs 1,150MW EEC 近期增容，三者之间的巨大缺口意味着并网排队将成为项目投运的关键路径。尽调中应将"已签约供电协议 + 明确 energization 日期"列为与土地证同级的先决条件。</p>
+    </div>
+  </div>
+
+  <!-- 脚注 -->
+  <div class="footnote">
+    <h3>数据口径与来源说明</h3>
+    <ul>
+      <li><strong>IT 负载口径</strong>：仅计算数据中心实际可用于部署服务器的算力容量，已扣除冷却、配电等基础设施损耗。</li>
+      <li><strong>市场规模</strong>：Mordor Intelligence，2025 年 18.9 亿美元 → 2031 年 49 亿美元（CAGR 17.21%）。[reference:22]</li>
+      <li><strong>BOI 审批</strong>：2025 年批准 38 个项目，IT 负载合计 2,066MW，总投资 4,580 亿泰铢（约 145 亿美元）。[reference:23]</li>
+      <li><strong>电价</strong>：ERC 批准 2026 年 1-4 月电价 3.88 泰铢/kWh。[reference:24]</li>
+      <li><strong>绿色电力</strong>：UGT1/UGT2 已推出，Direct PPA 试点 2,000MW。[reference:25]</li>
+      <li><strong>运营商数据</strong>：STT GDC 曼谷园区 46MW（BKK1:22MW + BKK2:24MW + BKK3:2MW）；True IDC East Bangna 35MW 公用事业容量/30MW IT 负载。[reference:26]</li>
+      <li><strong>免责声明</strong>：本报告基于公开信息整理，部分容量数据存在口径差异与重叠，预测情景存在不确定性，仅供一般信息与研究参考。</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

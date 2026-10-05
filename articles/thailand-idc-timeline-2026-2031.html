@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>泰国数据中心 IT 容量时间线（2026-2031）· 修正版</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-2: #1c2330;
+    --border: #2d3748;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent-2: #3fb950;
+    --accent-3: #d29922;
+    --accent-4: #f85149;
+    --accent-5: #bc8cff;
+    --line: #30363d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 48px 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1180px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 64px; }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  header .sub { color: var(--text-dim); font-size: 0.95rem; }
+  header .meta {
+    display: inline-flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  header .meta strong { color: var(--accent); font-weight: 600; }
+  .overview {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 64px;
+  }
+  .ov-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .ov-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .ov-card .label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .ov-card .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .ov-card .unit { font-size: 0.75rem; color: var(--text-dim); font-weight: 400; }
+  .ov-card .sub2 { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
+  .timeline { position: relative; padding-left: 48px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-5), var(--accent-2));
+    opacity: 0.4;
+  }
+  .node { position: relative; margin-bottom: 56px; }
+  .node:last-child { margin-bottom: 0; }
+  .node::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 0 4px rgba(88,166,255,0.15);
+    z-index: 1;
+  }
+  .node.future::before { border-color: var(--accent-5); box-shadow: 0 0 0 4px rgba(188,140,255,0.15); }
+  .node.forecast::before { border-color: var(--accent-3); box-shadow: 0 0 0 4px rgba(210,153,34,0.15); }
+  .node.risk::before { border-color: var(--accent-4); box-shadow: 0 0 0 4px rgba(248,81,73,0.15); }
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .node-date {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .node-tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-current { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .tag-future { background: rgba(188,140,255,0.15); color: var(--accent-5); border: 1px solid rgba(188,140,255,0.3); }
+  .tag-forecast { background: rgba(210,153,34,0.15); color: var(--accent-3); border: 1px solid rgba(210,153,34,0.3); }
+  .tag-risk { background: rgba(248,81,73,0.15); color: var(--accent-4); border: 1px solid rgba(248,81,73,0.3); }
+  .node-capacity {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+  .cap-item { display: flex; align-items: baseline; gap: 6px; }
+  .cap-item .k { color: var(--text-dim); }
+  .cap-item .v { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .cap-item .v.green { color: var(--accent-2); }
+  .cap-item .v.purple { color: var(--accent-5); }
+  .cap-item .v.gold { color: var(--accent-3); }
+  .cap-item .v.red { color: var(--accent-4); }
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  thead th {
+    text-align: left;
+    padding: 12px 14px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(88,166,255,0.04); }
+  td.name { font-weight: 600; color: var(--text); }
+  td.loc { color: var(--text-dim); }
+  td.mw {
+    font-weight: 700;
+    color: var(--accent-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  td.mw.purple { color: var(--accent-5); }
+  td.mw.gold { color: var(--accent-3); }
+  td.mw.red { color: var(--accent-4); }
+  td.mw-na { color: var(--text-dim); font-weight: 400; }
+  td.note { color: var(--text-dim); font-size: 0.78rem; }
+  .phase-total {
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, rgba(88,166,255,0.08), rgba(188,140,255,0.08));
+    border: 1px solid rgba(88,166,255,0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .phase-total .label { font-size: 0.85rem; color: var(--text-dim); }
+  .phase-total .num { font-size: 1.1rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .matrix-section { margin-top: 80px; margin-bottom: 80px; }
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    border-left: 4px solid var(--accent);
+  }
+  .section-desc { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 24px; padding-left: 20px; }
+  .matrix-table td.mw { font-size: 0.82rem; }
+  .footnote {
+    margin-top: 64px;
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-3);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .footnote h3 {
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .footnote ul { padding-left: 20px; }
+  .footnote li { margin-bottom: 6px; }
+  .footnote strong { color: var(--accent-3); }
+  @media (max-width: 900px) {
+    .overview { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 768px) {
+    body { padding: 32px 16px 64px; }
+    header h1 { font-size: 1.5rem; }
+    .overview { grid-template-columns: repeat(2, 1fr); }
+    .timeline { padding-left: 36px; }
+    .node::before { left: -32px; }
+    .node-capacity { gap: 14px; font-size: 0.78rem; }
+    thead th, tbody td { padding: 8px 10px; }
+    .section-title { font-size: 1.1rem; }
+  }
+  @media (max-width: 480px) {
+    .overview { grid-template-columns: 1fr; }
+    header .meta { flex-direction: column; gap: 6px; }
+    .node-date { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>泰国数据中心 IT 容量时间线</h1>
+    <p class="sub">2026 年 Q3 — 2031 年 · IT 负载口径（IT Load）· 数据截至 2026 年 9 月</p>
+    <div class="meta">
+      <span>报告日期 <strong>2026-10</strong></span>
+      <span>口径 <strong>IT Load</strong></span>
+      <span>单位 <strong>MW</strong></span>
+      <span>曼谷占比 <strong>~52%</strong></span>
+    </div>
+  </header>
+
+  <!-- 概览 -->
+  <div class="overview">
+    <div class="ov-card">
+      <div class="label">当前运营</div>
+      <div class="value">~770 <span class="unit">MW</span></div>
+      <div class="sub2">2025年（Mordor）</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2026年底</div>
+      <div class="value">~1,100 <span class="unit">MW</span></div>
+      <div class="sub2">Mordor预测</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2027年底</div>
+      <div class="value">~1,500 <span class="unit">MW</span></div>
+      <div class="sub2">TDCA预测</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2030年</div>
+      <div class="value">2,930 <span class="unit">MW</span></div>
+      <div class="sub2">Mordor预测</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">BOI已批准</div>
+      <div class="value">2,066 <span class="unit">MW</span></div>
+      <div class="sub2">2025年38个项目</div>
+    </div>
+  </div>
+
+  <!-- 时间轴 -->
+  <div class="timeline">
+
+    <!-- 节点 1 -->
+    <div class="node">
+      <div class="node-header">
+        <span class="node-date">2025 年底（基线）</span>
+        <span class="node-tag tag-current">当前基线</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">全国运营 IT</span><span class="v">~770 MW</span></div>
+        <div class="cap-item"><span class="k">曼谷+周边</span><span class="v green">~52%</span></div>
+        <div class="cap-item"><span class="k">EEC 区域</span><span class="v purple">~41%</span></div>
+        <div class="cap-item"><span class="k">BOI 批准管道</span><span class="v gold">2,066 MW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>项目 / 运营商</th>
+              <th>地点</th>
+              <th>IT 容量</th>
+              <th>锚定租户 / 状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">True IDC East Bangna 园区</td>
+              <td class="loc">北榄府 Bang Sao Thong</td>
+              <td class="mw">~30 MW</td>
+              <td class="note">总公用事业容量 35MW，Tier III，多期模块化</td>
+            </tr>
+            <tr>
+              <td class="name">STT Bangkok 1</td>
+              <td class="loc">曼谷 Hua Mak</td>
+              <td class="mw">22 MW</td>
+              <td class="note">2021年9月运营，NVIDIA DGX Ready</td>
+            </tr>
+            <tr>
+              <td class="name">GSA Data Center 01</td>
+              <td class="loc">北榄府</td>
+              <td class="mw">25.6 MW</td>
+              <td class="note">Gulf+Singtel+AIS 合资，2025年底投运</td>
+            </tr>
+            <tr>
+              <td class="name">SUPERNAP Thailand</td>
+              <td class="loc">春武里</td>
+              <td class="mw">~15 MW</td>
+              <td class="note">Tier IV 认证，早期进入者</td>
+            </tr>
+            <tr>
+              <td class="name">AWS 泰国云区域</td>
+              <td class="loc">曼谷/春武里</td>
+              <td class="mw-na">追踪 200 MW</td>
+              <td class="note">2025年1月上线，承诺 50 亿美元/15 年</td>
+            </tr>
+            <tr>
+              <td class="name">Google 泰国云区域</td>
+              <td class="loc">曼谷</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">2026年1月上线，10 亿美元投资</td>
+            </tr>
+            <tr>
+              <td class="name">腾讯云 曼谷</td>
+              <td class="loc">曼谷/北榄</td>
+              <td class="mw-na">双 AZ</td>
+              <td class="note">2021年6月开服，双可用区部署</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 节点 2 -->
+    <div class="node future">
+      <div class="node-header">
+        <span class="node-date">2026 年底</span>
+        <span class="node-tag tag-future">爬坡期</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT（Mordor）</span><span class="v">~1,100 MW</span></div>
+        <div class="cap-item"><span class="k">本阶段新增</span><span class="v green">~330 MW</span></div>
+        <div class="cap-item"><span class="k">STT BKK2 投运</span><span class="v purple">+24 MW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项目 / 运营商</th>
+              <th>地点</th>
+              <th>新增 IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">STT Bangkok 2</td>
+              <td class="loc">曼谷 Hua Mak</td>
+              <td class="mw">24 MW</td>
+              <td class="note">2026 Q4 投入运营，支持液冷与 AI 负载</td>
+            </tr>
+            <tr>
+              <td class="name">True IDC EEC 超大规模项目 首期</td>
+              <td class="loc">罗勇府 EEC</td>
+              <td class="mw">100+ MW</td>
+              <td class="note">2026 Q3 投运，总投资超 770 亿泰铢</td>
+            </tr>
+            <tr>
+              <td class="name">GSA Data Center 02</td>
+              <td class="loc">北榄府</td>
+              <td class="mw">38 MW</td>
+              <td class="note">预计 2027 Q1 COD</td>
+            </tr>
+            <tr>
+              <td class="name">True IDC 春武里+北榄府 3 项目</td>
+              <td class="loc">春武里、北榄府</td>
+              <td class="mw">223 MW</td>
+              <td class="note">BOI 批准，总投资 453 亿泰铢，建设中</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">本阶段新增 IT 容量（部分项目爬坡中）</span>
+        <span class="num">~330 MW</span>
+      </div>
+    </div>
+
+    <!-- 节点 3 -->
+    <div class="node risk">
+      <div class="node-header">
+        <span class="node-date">2027 年中</span>
+        <span class="node-tag tag-risk">电力与并网关键期</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT（推算）</span><span class="v">~1,300-1,500 MW</span></div>
+        <div class="cap-item"><span class="k">EGAT EEC 电网增容</span><span class="v green">+1,150 MW</span></div>
+        <div class="cap-item"><span class="k">电力接入申请</span><span class="v red">35 GW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项目 / 运营商</th>
+              <th>地点</th>
+              <th>新增 IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">GSA Data Center 02</td>
+              <td class="loc">北榄府</td>
+              <td class="mw">38 MW</td>
+              <td class="note">2027 Q1 COD</td>
+            </tr>
+            <tr>
+              <td class="name">True IDC 第 7 数据中心</td>
+              <td class="loc">曼谷北部</td>
+              <td class="mw">~30 MW</td>
+              <td class="note">2026年6月动工，2027 Q3 投运</td>
+            </tr>
+            <tr>
+              <td class="name">STT Bangkok 3</td>
+              <td class="loc">曼谷 Pathumwan</td>
+              <td class="mw">2 MW</td>
+              <td class="note">互联枢纽定位，已运营</td>
+            </tr>
+            <tr>
+              <td class="name">TikTok 泰国 AI 数据枢纽 首期</td>
+              <td class="loc">曼谷、北榄府、北柳府</td>
+              <td class="mw-na">追踪 200 MW</td>
+              <td class="note">总投资 8420 亿泰铢（约 250 亿美元）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">本阶段新增 IT 容量合计</span>
+        <span class="num">~70 MW+</span>
+      </div>
+      <div class="footnote" style="margin-top:16px; border-left-color: var(--accent-4); background: rgba(248,81,73,0.05);">
+        <strong style="color: var(--accent-4);">⚠ 电力警示</strong>：EGAT 正升级 EEC 电网，新增 1,150MW 交付能力（400MW 已投运 + 750MW 在建）。但电力接入申请达 35GW，接近全国 40GW 峰值需求，PDP 仅规划 8.8GW 数据中心配套电力。春武里、罗勇两府水资源偏紧，北柳府可用水资源比例约 63%。[reference:5]
+      </div>
+    </div>
+
+    <!-- 节点 4 -->
+    <div class="node future">
+      <div class="node-header">
+        <span class="node-date">2027 年底</span>
+        <span class="node-tag tag-future">交付考验期</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT（TDCA 预测）</span><span class="v">~1,500 MW</span></div>
+        <div class="cap-item"><span class="k">BOI 批准剩余管道</span><span class="v gold">~2.0 GW</span></div>
+        <div class="cap-item"><span class="k">EEC 在建+计划</span><span class="v purple">149.9 MW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项目 / 运营商</th>
+              <th>地点</th>
+              <th>新增 IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">Skyline Data Center</td>
+              <td class="loc">北柳府</td>
+              <td class="mw">200 MW</td>
+              <td class="note">投资 460 亿泰铢，BOI 批准</td>
+            </tr>
+            <tr>
+              <td class="name">Gorilla Technology AI 园区</td>
+              <td class="loc">未披露</td>
+              <td class="mw">200 MW</td>
+              <td class="note">2026年7月动工</td>
+            </tr>
+            <tr>
+              <td class="name">Datasection GPU 基础设施</td>
+              <td class="loc">曼谷、Pathum Thani</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">投资 2.35 亿美元，高性能 GPU 服务器</td>
+            </tr>
+            <tr>
+              <td class="name">Bridge Data Centres 泰国园区</td>
+              <td class="loc">未披露</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">寻求 60 亿美元融资，已锁定水资源与替代能源</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">本阶段新增 IT 容量（部分项目延至 2028）</span>
+        <span class="num">~400 MW+</span>
+      </div>
+    </div>
+
+    <!-- 节点 5 -->
+    <div class="node forecast">
+      <div class="node-header">
+        <span class="node-date">2028 → 2031</span>
+        <span class="node-tag tag-forecast">远期预测</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">2030 年（Mordor）</span><span class="v">2,930 MW</span></div>
+        <div class="cap-item"><span class="k">2031 年市场规模</span><span class="v green">49 亿美元</span></div>
+        <div class="cap-item"><span class="k">CAGR（IT负载）</span><span class="v purple">30.6%</span></div>
+        <div class="cap-item"><span class="k">CAGR（市场规模）</span><span class="v gold">17.21%</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>项目 / 运营商</th>
+              <th>地点</th>
+              <th>IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">Gulf Development 远期规划</td>
+              <td class="loc">罗勇、北榄等</td>
+              <td class="mw gold">2,000 MW</td>
+              <td class="note">1,400 亿泰铢（43 亿美元）5 年计划，含 AI 基础设施</td>
+            </tr>
+            <tr>
+              <td class="name">True IDC EEC 项目后续期</td>
+              <td class="loc">罗勇府 EEC</td>
+              <td class="mw">累计 200+ MW</td>
+              <td class="note">AI 超大规模园区，分阶段建设</td>
+            </tr>
+            <tr>
+              <td class="name">Google Chonburi 数据中心</td>
+              <td class="loc">春武里</td>
+              <td class="mw">100 MW</td>
+              <td class="note">追踪容量，与 Gulf 合作的主权云项目（50MW）</td>
+            </tr>
+            <tr>
+              <td class="name">Microsoft 泰国 AI 数据中心</td>
+              <td class="loc">春武里 EEC</td>
+              <td class="mw">100 MW</td>
+              <td class="note">追踪容量，超 10 亿美元投资</td>
+            </tr>
+            <tr>
+              <td class="name">ByteDance/TikTok 全量建设</td>
+              <td class="loc">曼谷、北榄、北柳</td>
+              <td class="mw red">累计 200 MW</td>
+              <td class="note">总投资约 250 亿美元，分阶段交付</td>
+            </tr>
+            <tr>
+              <td class="name">Bridge Data Centres 扩张</td>
+              <td class="loc">未披露</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">60 亿美元贷款融资，已锁定水资源与替代能源</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">2031 年市场规模预测</span>
+        <span class="num">49 亿美元</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 运营商管道矩阵 -->
+  <div class="matrix-section">
+    <h2 class="section-title">Colo 运营商管道矩阵（精确到 MW）</h2>
+    <p class="section-desc">按 IT 负载口径汇总；部分运营商数据存在重叠，实际全国合计低于简单加总。</p>
+    <div class="table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>阵营</th>
+            <th>运营商</th>
+            <th>已运营</th>
+            <th>在建</th>
+            <th>规划/储备</th>
+            <th>总管道</th>
+            <th>锚定租户 / 特征</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3" style="background: rgba(88,166,255,0.06); color: var(--accent); font-weight: 600; font-size: 0.75rem; writing-mode: vertical-lr; text-align: center;">第一阵营<br>&gt;200MW</td>
+            <td class="name">True IDC（CP Group）</td>
+            <td class="mw">~30</td>
+            <td class="mw purple">~250</td>
+            <td class="mw gold">~100</td>
+            <td class="mw red">~380</td>
+            <td class="note">泰国最大运营商，East Bangna 35MW 园区</td>
+          </tr>
+          <tr>
+            <td class="name">Gulf Development / GSA</td>
+            <td class="mw">25.6</td>
+            <td class="mw purple">~100</td>
+            <td class="mw gold">2,000</td>
+            <td class="mw red">~2,125</td>
+            <td class="note">Gulf+Singtel+AIS 合资，泰国最大电力生产商背书</td>
+          </tr>
+          <tr>
+            <td class="name">ByteDance / TikTok</td>
+            <td class="mw-na">—</td>
+            <td class="mw purple">~200</td>
+            <td class="mw gold">—</td>
+            <td class="mw red">200</td>
+            <td class="note">250 亿美元投资，曼谷+北榄+北柳</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="background: rgba(188,140,255,0.06); color: var(--accent-5); font-weight: 600; font-size: 0.75rem; writing-mode: vertical-lr; text-align: center;">第二阵营<br>50-200MW</td>
+            <td class="name">STT GDC</td>
+            <td class="mw">22</td>
+            <td class="mw purple">24</td>
+            <td class="mw gold">2</td>
+            <td class="mw red">~48</td>
+            <td class="note">曼谷园区总设计 46MW</td>
+          </tr>
+          <tr>
+            <td class="name">Bridge Data Centres</td>
+            <td class="mw-na">—</td>
+            <td class="mw-na">未披露</td>
+            <td class="mw gold">未披露</td>
+            <td class="mw red">60 亿美元融资中</td>
+            <td class="note">贝恩资本旗下，已锁定水资源与替代能源</td>
+          </tr>
+          <tr>
+            <td class="name">Skyline Data Center</td>
+            <td class="mw-na">—</td>
+            <td class="mw purple">200</td>
+            <td class="mw-na">—</td>
+            <td class="mw red">200</td>
+            <td class="note">北柳府，投资 460 亿泰铢</td>
+          </tr>
+          <tr>
+            <td style="background: rgba(210,153,34,0.06); color: var(--accent-3); font-weight: 600; font-size: 0.75rem; writing-mode: vertical-lr; text-align: center;">云厂商自建</td>
+            <td class="name">AWS / Google / Microsoft</td>
+            <td class="mw">200+</td>
+            <td class="mw purple">100-200</td>
+            <td class="mw gold">未披露</td>
+            <td class="mw red">300-400</td>
+            <td class="note">AWS 50 亿美元/15 年；Google 10 亿；Microsoft 10 亿</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 脚注 -->
+  <div class="footnote">
+    <h3>数据口径与来源说明</h3>
+    <ul>
+      <li><strong>IT 负载口径</strong>：仅计算数据中心实际可用于部署服务器的算力容量，已扣除冷却、配电等基础设施损耗。电网侧需求约为 IT 负载的 1.3-1.5 倍。</li>
+      <li><strong>市场规模</strong>：Mordor Intelligence 口径，2025 年 18.9 亿美元 → 2031 年 49 亿美元（CAGR 17.21%）；IT 负载 2025 年 0.77GW → 2030 年 2.93GW（CAGR 30.6%）。[reference:6]</li>
+      <li><strong>BOI 审批</strong>：2025 年批准 38 个项目，IT 负载合计 2,066MW，总投资 4,580 亿泰铢（约 145 亿美元）。2026 年 1 月再批准 7 个项目，总投资约 960 亿泰铢。[reference:7]</li>
+      <li><strong>电价</strong>：ERC 已批准 2026 年 1-4 月电价降至 3.88 泰铢/kWh（约 0.11 美元）。[reference:8]</li>
+      <li><strong>电力约束</strong>：EGAT 正升级 EEC 电网，新增 1,150MW 交付能力（400MW 已投运 + 750MW 在建）。电力接入申请达 35GW，PDP 仅规划 8.8GW 数据中心配套电力。[reference:9]</li>
+      <li><strong>绿色电力政策</strong>：UGT1（非源特定绿电）和 UGT2（源特定绿电）已推出，Direct PPA 试点规模 2,000MW，允许私营公司直接买卖绿电。[reference:10]</li>
+      <li><strong>数据来源</strong>：综合 Mordor Intelligence、BOI、EGAT、STT GDC、True IDC 官方披露及行业研究交叉验证。</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
