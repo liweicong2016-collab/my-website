@@ -68,9 +68,9 @@ a{color:inherit;text-decoration:none}
 .lead{font-size:15px;color:var(--text2);max-width:600px;margin-bottom:18px}
 
 /* ---------- featured ---------- */
-.featured{display:flex;align-items:center;gap:22px;padding:18px 22px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);transition:border-color .2s, transform .2s}
-.featured:hover{border-color:var(--border-hi);transform:translateY(-2px)}
-.fv{width:140px;height:88px;min-height:0;flex-shrink:0;border-radius:10px;overflow:hidden;background:#0b0c11}
+.featured{display:grid;grid-template-columns:minmax(220px,2fr) minmax(0,1fr);gap:24px;padding:22px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);transition:border-color .2s, transform .2s, box-shadow .2s}
+.featured:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:0 14px 38px rgba(0,0,0,.45)}
+.fv{width:100%;aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:#0b0c11;flex-shrink:0}
 .fv img{width:100%;height:100%;object-fit:cover;display:block}
 .bars{display:flex;align-items:flex-end;gap:14px;height:220px}
 .bars span{width:44px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#8f99ec,#5e6ad2 60%,rgba(94,106,210,.25));box-shadow:0 0 24px rgba(94,106,210,.25)}
@@ -97,10 +97,10 @@ a{color:inherit;text-decoration:none}
 .topic.on{color:#fff;background:var(--accent-dim);border-color:rgba(94,106,210,.5)}
 
 /* ---------- cards ---------- */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:all .2s}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;grid-auto-rows:1fr}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:all .2s;min-height:380px}
 .card:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:0 16px 44px rgba(0,0,0,.45)}
-.cover{height:150px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.cover{aspect-ratio:16/10;max-height:160px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .cover img{width:100%;height:100%;object-fit:cover;display:block}
 .cover::after{content:'';position:absolute;inset:0;background:
   radial-gradient(ellipse 80% 90% at 70% 110%, rgba(255,255,255,.06), transparent 60%),
@@ -115,7 +115,7 @@ a{color:inherit;text-decoration:none}
 .c6{background:linear-gradient(135deg,#232a1e,#10130d)}
 .c7{background:linear-gradient(135deg,#1f2c3a,#0c1118)}
 .c8{background:linear-gradient(135deg,#2a1a3a,#120a1c)}
-.cbody{padding:22px;display:flex;flex-direction:column;flex:1}
+.cbody{padding:18px 20px;display:flex;flex-direction:column;flex:1;gap:8px}
 .cbody h3{font-size:16.5px;font-weight:700;line-height:1.45;letter-spacing:-.2px;margin-bottom:10px}
 .cbody h3 a:hover{color:var(--accent-hi)}
 .cbody p{font-size:13.5px;color:var(--text2);line-height:1.65;flex:1}
@@ -155,14 +155,16 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:960px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .featured{grid-template-columns:1fr}
-  .fv{min-height:280px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{min-height:340px}
+  .featured{grid-template-columns:1fr;gap:16px;padding:18px}
   .fgrid{grid-template-columns:1fr 1fr}
   .nav-links{display:none}
 }
 @media(max-width:640px){
-  .grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr;gap:16px}
+  .card{min-height:0}
+  .cover{aspect-ratio:16/9;max-height:220px}
   .stats{grid-template-columns:1fr}
   .stat+.stat{border-left:none;border-top:1px solid var(--border)}
   .fstats{grid-template-columns:repeat(2,1fr)}
@@ -230,7 +232,8 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
     <div class="topics">
       <button class="topic on">全部</button><button class="topic">AI 大模型</button><button class="topic">AI 芯片</button><button class="topic">算力租赁</button><button class="topic">东南亚 IDC</button><button class="topic">出口管制</button>
     </div>
-          <article class="card reveal">
+    <div class="grid">
+      <article class="card reveal">
         <div class="cover"><img src="assets/agent-architectures/视频.png" alt="四大Agent架构与42步案例交互演示" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">AI Agent</span><span class="date">2026-10-05</span></div>
@@ -489,6 +492,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
           <div class="cfoot"><span class="date">约6 min read</span><a class="more" href="articles/gpu-startup-rtx6000-vs-4090.html">阅读 →</a></div>
         </div>
       </article>
+    </div>
 
   </section>
 
