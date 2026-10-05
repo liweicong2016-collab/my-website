@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>马来西亚数据中心市场深度报告:柔佛的 8.5 GW 狂飙与 2027 电力硬约束</title>
+<meta name="description" content="{DESCRIPTION_160_CHARS}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80" alt="马来西亚数据中心市场深度报告">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">东南亚 · IDC 深度</span>
+    <h1>马来西亚数据中心市场深度报告:柔佛的 8.5 GW 狂飙与 2027 电力硬约束</h1>
+    <p class="subtitle">东南亚增长最快的数据中心市场。柔佛单极主导下的容量狂飙、AI 算力革命、中资双轨与美系锚定,以及 2027 年电力硬约束下的供需博弈。</p>
+    <div class="hero-meta">
+      <span>📅 2026-10-04</span>
+      <span>⏱ 约 18 min read</span>
+      <span>🏷️ 东南亚 · IDC · AIDC · 柔佛</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">马来西亚</span>
+      <span class="tag-pill">柔佛</span>
+      <span class="tag-pill">IDC</span>
+      <span class="tag-pill">AI 算力</span>
+      <span class="tag-pill">Firmus × OpenAI</span>
+    </div>
+  </div>
+</div>
+
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>: Malaysia has become Southeast Asia's fastest-growing data center market — 54.8 → 160.2 B USD (CAGR 19.56%) by 2031, with Johor holding 80% national capacity and 8.5 GW pipeline. Three-tier operator structure, US anchor + Chinese dual-track demand, and a 2027 power hard constraint make electricity the single biggest risk.
+</div>
+
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>:马来西亚已确立东南亚增长最快数据中心市场地位。柔佛运营 IT 容量 1,110 MW、管道 8,542 MW(亚太单一市场最大);2031 年规模 160.2 亿美元、CAGR 19.56%。TNB 已签供电协议累计 7.1 GW,提交申请约 11 GW(全国发电容量 40%),**2027 年半岛无新增燃气机组投运**——柔佛模式已验证,但 2027—2028 年的电力真空期将让所有人不舒服。
+</div>
+
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">160.2 B</span><span class="lab">2031E 市场规模(美元)</span></div>
+  <div class="bis-card orange"><span class="val">19.56%</span><span class="lab">2026—2031 CAGR</span></div>
+  <div class="bis-card green"><span class="val">1,110 MW</span><span class="lab">柔佛运营容量(2026 H1)</span></div>
+  <div class="bis-card red"><span class="val">8,542 MW</span><span class="lab">柔佛总管道(亚太最大)</span></div>
+  <div class="bis-card"><span class="val">11 GW</span><span class="lab">已提交电力申请(≈ 40% 全国发电容量)</span></div>
+</div>
+
+<section class="bis-section">
+<h2><span class="num">1</span>市场总览:54.8 → 160.2 亿美元的规模曲线</h2>
+<p>马来西亚数据中心市场正处于历史性扩张期。市场规模从 2020 年的 23.6 亿美元增至 2025 年的 <strong>54.8 亿美元</strong>,预计 2026 年达 65.5 亿美元,2031 年增至 <strong>160.2 亿美元</strong>,2026—2031 年预测 CAGR 约 <strong>19.56%</strong>;同期运营电力负载预计从 2025 年的 730 MW 增至 2026 年的约 1,102 MW、2031 年的约 3,340 MW,平均机架密度将从 20 kW/架提升至 40 kW/架。另一口径下,超大规模数据中心市场 2025 年为 60.4 亿美元,2031 年预计达 <strong>401.7 亿美元</strong>,CAGR 高达 <strong>37.15%</strong>——反映 AI 负载占比快速提升带来的结构性重估。</p>
+<p>增长的斜率在 2023 年后显著抬升。运营负载从 2020 年仅 75 MW 起步,2024 年达 405 MW;<strong>JLL 预测全国容量将从约 1,025 MW 增至 2026 年底的 2,055 MW 左右,一年接近翻倍</strong>,其中柔佛一地 2026 年在建容量即达 1,500 MW。资本层面,2021 年至 2025 年中政府累计批准超过 <strong>1,444 亿令吉</strong>的 140 余个数据中心项目;仅 2026 年第一季度,数据中心与云计算就以 346 亿令吉、33 个项目获批,投资动能未见衰减。</p>
+<p>本轮扩张由三重力量叠加驱动。<strong>首要动力是新加坡的溢出效应</strong>:新加坡 2019—2022 年实质暂停大型数据中心审批,解封后又以约 12% 的电网占比上限和 PUE ≤ 1.3 的严苛标准限量放行,迫使云厂商与运营商将 bulk 算力南迁 30 公里至新山。<strong>第二重动力是 AI 工作负载的机架密度革命</strong>:GB200 NVL72 级液冷机架将单架功率推至 120 kW 以上,AirTrunk JHB1/JHB2 合计超 420 MW 的 AI 就绪容量接近满租,直接推升单位面积产值与预租速度。<strong>第三重动力是政策体系的主动性</strong>:MyDIGITAL 战略、MSC/MD Status 十年免税、MIDA 数字投资办公室"一站式"审批与"绿色通道"将项目审批周期系统性压缩。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">2</span>地理格局:柔佛 80% 与「双集群」结构</h2>
+<p>柔佛州占全国运营容量的约 <strong>80%</strong>,已运营 IT 容量约 <strong>1,110 MW</strong>(2026 年上半年,居亚太第三,仅次于东京与新加坡),在建 602 MW,总管道达 <strong>8,542 MW,为亚太任何单一市场之最</strong>。柔佛内部形成三大集群:Iskandar Puteri–Nusajaya(DayOne、AirTrunk JHB3/4)、Kulai–Sedenak 走廊(YTL 绿色园区、BDC MY06/MY07、PDG JH1、Vantage JHB1)以及新山—Pasir Gudang 新兴带(Racks Central 510 MW 园区)。该州已吸引约 <strong>350 亿美元</strong>投资,柔佛—新加坡特别经济区(JS-SEZ)叠加 2026 年底通车的 RTS 捷运,正将"算力卫星城"的地理红利固化为制度红利。</p>
+<p>与之相对,<strong>吉隆坡—雪兰莪(Klang Valley / Cyberjaya)集群</strong>保留了第二极的功能定位:作为国家级企业托管、运营商互联与云接入枢纽,承载 Equinix、NTT、AIMS、Keppel、Vantage KUL 校区、EdgeConneX 与 NEXTDC 等存量设施,并承接 Google(Elmina 园区 20 亿美元)、Microsoft 吉隆坡云区域等内向型需求。东西两翼亦开始萌动:砂拉越凭借 6.2 GW 水电基础争取碳中和算力园区,槟城、吉打依托半导体生态提供预制化模块的短链供应。未来五年市场的主旋律,将是柔佛"超大规模 + AI 训练"与巴生谷"企业互联 + 数据主权"的双集群分工持续深化。</p>
+<p>供需紧张在价格端体现得淋漓尽致:柔佛托管空置率仅约 <strong>0.7%</strong>(2026 年 6 月),显著低于新加坡的约 4.9% 与曼谷的 23.3%;批发价格约 <strong>110–150 美元/kW/月</strong>,约为新加坡(330–475 美元)的三分之一。成本端同样占优:柔佛土地价格较新加坡折让最高达 60%,建设成本约 690–960 万美元/MW,商业电价约 0.129 美元/kWh,约为新加坡的一半。</p>
+<p>但成本优势正被政策与基础设施成本部分对冲:数据中心用户被重新划入超高压电价档后,电费预计上涨 <strong>10–15%</strong>,一座 100 MW 设施年增成本约 6,300 万令吉;柔佛水务局已要求新建项目配置水回用与零液体排放冷却规格,使空冷系统资本支出提高 15–25%。换言之,柔佛的低成本叙事正在被"获得电力与水资源的排队成本"重新定义——<strong>谁先锁定变电站与供水协议,谁才真正拥有成本优势</strong>。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">3</span>Colo 运营商三阵营:Bridge / YTL / AirTrunk 领跑</h2>
+<p>马来西亚 Colo 市场集中度中等偏上:YTL Data Center Holdings、Bridge Data Centres 与 Vantage Data Centers 三家合计持有全国运营容量的 35% 以上,前五家合计约 40–58%(因统计口径与是否含云厂商自建而异)。按总管道规模可分为三个阵营。</p>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">~2,980 MW</span><span class="lab">Bridge Data Centres 总管道</span></div>
+  <div class="bis-card orange"><span class="val">~2,750 MW</span><span class="lab">YTL Power 总管道</span></div>
+  <div class="bis-card green"><span class="val">~700 MW</span><span class="lab">AirTrunk 总管道</span></div>
+  <div class="bis-card"><span class="val">~973 MW</span><span class="lab">DayOne 总管道</span></div>
+  <div class="bis-card orange"><span class="val">~587 MW</span><span class="lab">Vantage 总管道</span></div>
+</div>
+<p><strong>Bridge Data Centres(BDC)</strong>是柔佛超大规模叙事的开拓者:MY06(Sedenak)2022 年 10 月以破纪录的 314 天建设周期交付一期,字节跳动为锚定租户;此后 BDC 将 Megaspeed 获分配的 68.4 MW 容量整体转给云服务商 Zenlayer,并将 MY06 扩建至约 508 MW IT 容量,同时推进 Ulu Tiram 的 MY07(供电协议 400 MW、IT 负载 374 MW,配备东南亚首个数据中心专用中水回用厂)。BDC 在马来西亚累计投资超 <strong>100 亿令吉</strong>,加上正从 Paragon Globe 购入的 Plentong 47.9 英亩地块,其柔佛管道仍在向 3 GW 迈进。</p>
+<p><strong>YTL Power</strong> 的独特性在于"电力—可再生能源—土地—光纤—GPU—AI 云"全栈一体化。2025 年 10 月底,其与 NVIDIA 合作的全国首座 NVIDIA 驱动 AI 数据中心投运——JDC2 内 20 MW 设施配备液冷 GB200 NVL72 系统,并获得 NVIDIA Exemplar Cloud 认证;JDC1(48 MW,Sea 集团为锚定租户)32 MW 已运营,JDC3(80 MW)一半已于 2025 年 9 月投产,JDC4(40 MW)已签约美国超大规模客户分三期投运。园区规划 500–600 MW,配套 500 MW 自建光伏,YTL AI Cloud 同步承载马来西亚首个主权大模型 ILMU;分析师预计其数据中心业务对集团利润贡献将从 2027 财年的约 24% 升至 2029 财年的约 40%。</p>
+<p><strong>AirTrunk</strong>(黑石旗下)以"AI 就绪 + 满租"验证需求厚度:JHB1(约 150 MW,马来西亚首个 AI 就绪超大规模数据中心)与 JHB2(约 270 MW)合计超 420 MW IT 负载、接近满租且进度超前于投资计划;JHB3/JHB4(Iskandar Puteri,各约 140 MW)采用 100% 再生水冷却,其在马来西亚累计承诺投资约 <strong>68 亿美元</strong>。</p>
+<p>第二阵营中,<strong>DayOne</strong> 是最激进的算力化玩家:Nusajaya 园区当前 240 MW IT 功率托管约 <strong>28.2 万颗 H100 等效</strong>算力,2026 年 Q4 Building 7–10 投运后将跃升至 <strong>473 MW / 58.4 万颗</strong>,资本成本达 179 亿美元;其 390 MW 在役容量为 TNB 最大客户群体之一,并通过 CRESS 机制锁定 500 MW 可再生能源(21 年期)。资本动作同样密集:35.4 亿令吉伊斯兰+离岸银团绿色融资(亚洲数据中心最大伊斯兰融资)、45 亿美元 C 轮、传闻中的 200 亿美元估值 IPO 或 MGX 收购,以及 6 月以 3.98 亿令吉增持 JS-SEZ 内地块。新进入者方面,STT GDC、NEXTDC、TM Nxera、Bitdeer、Racks Central(510 MW 园区,ESR 支持)、Empyrion、Digital Halo 等构成 2027—2028 年的下一波供给梯队。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">4</span>云厂商:美系自建 + 中资三层</h2>
+<p>美系云厂商以自建/合建方式完成对马来西亚的锚定式布局。<strong>AWS</strong> 2024 年 8 月在 Cyberjaya 上线三可用区马来西亚区域,累计投资承诺 <strong>62 亿美元(约 292 亿令吉)至 2037/38 年</strong>;<strong>Microsoft</strong> 2025 年 5 月推出吉隆坡 Malaysia West 云区域(22 亿美元),2025 年 11 月又宣布在柔佛建设东南亚第三区域(SEA 3);<strong>Google</strong> 投资 20 亿美元在雪兰莪 Elmina 建设首座数据中心兼云区域;<strong>Oracle</strong> 亦宣布超过 65 亿美元的云基建计划。美系阵营的共同逻辑是数据主权合规与区域 AI 训练推理容量的双重卡位。</p>
+<p>中资厂商形成更立体的"<strong>三层布局</strong>":<strong>租赁层</strong>——字节跳动作为 BDC MY06 锚定租户,其在新山与古来的电力规划容量预计 2027 年达 <strong>960 MW</strong>,同时通过 Aolani Cloud 以约 500 套 Blackwell 系统(3.6 万颗 B200)获得算力直供;<strong>自建云区域层</strong>——阿里云 2026 年 6 月上线柔佛区域,使其在马来西亚数据中心总数达 5 座(吉隆坡 3AZ + 柔佛 2 座),为其东南亚最大部署;腾讯云 2026 年 8 月宣布柔佛云区域(最多 3 个 AZ,其中 2 个已运营);<strong>生态层</strong>——DayOne、BDC(秦淮数据系)等中资背景运营商构成承载层。</p>
+<p>这一双轨/三层结构具有清晰的战略含义:受出口管制约束的中资 AI 负载,以"马来西亚电力 + 全球云/运营商壳层 + 境外可合规采购的 GPU"组合实现算力落地,使马来西亚成为中美算力链条的关键中继节点。马来西亚政府 2026 年预算中 <strong>59 亿令吉</strong>的 AI 专项拨款与"国家 AI 办公室"的设立,进一步强化了官方背书;但这也使该国数据中心需求与全球 AI 资本开支周期、以及地缘政治对芯片流转的政策变动高度耦合。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">5</span>AI 算力:Firmus × OpenAI 与「AI 工厂」化</h2>
+<p>马来西亚正从"数据中心承接地"升级为"AI 工厂输出地"。2026 年 9 月 8 日,澳大利亚 AI 基础设施公司 <strong>Firmus</strong> 宣布与 <strong>OpenAI</strong> 签署多年期战略协议:OpenAI 成为其马来西亚两座 AI 工厂的锚定客户,使其全客户签约总容量突破 <strong>900 MW</strong>;项目将部署 NVIDIA 下一代 <strong>Vera Rubin NVL72</strong> 机架级系统,基于 DSX AI Factory 平台与 Firmus 自研 HyperCube 预制化液冷模块整合——该交易恰好落在 Firmus 估值 105 亿美元的融资与 ASX 上市窗口期,被视为亚太 AI 基础设施资产证券化的标志性事件。</p>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">900+ MW</span><span class="lab">Firmus 全客户签约容量</span></div>
+  <div class="bis-card orange"><span class="val">58.4 万</span><span class="lab">DayOne H100 等效算力(2026 Q4)</span></div>
+  <div class="bis-card green"><span class="val">3.6 万</span><span class="lab">字节跳动 B200(GPU)</span></div>
+</div>
+<p>AI 算力项目的密集落地带来三重结构性变化。<strong>其一是融资结构的伊斯兰金融创新与绿色化</strong>:DayOne 的 150 亿令吉伊斯兰银团、STT GDC 的 13.7 亿美元绿色融资、PDG 与 YTL 的绿色贷款,使马来西亚成为亚太数据中心绿色/伊斯兰金融的工程样板,也抬高了后进入者的资金门槛。<strong>其二是技术栈的液冷化</strong>:从 YTL 的 GB200 NVL72 到 Firmus 的 HyperCube,直接芯片液冷从可选项变为 AI 园区的入场券。<strong>其三是需求主体的迁移</strong>:锚定客户从"云厂商"扩展至 OpenAI 这类模型公司,需求的资本开支属性更强、合同期限更长、但对电力交付确定性的要求也成倍提高——这将 2027 年电力供需矛盾直接转化为 AI 算力落地节奏的单点风险。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">6</span>结构性约束:电力、水、政策、人才</h2>
+<p><strong>电力是 2027 年最大的单点风险</strong>。TNB 数据显示,数据中心用电已占半岛电网总需求的 <strong>3%</strong>(2025 年前九个月),<strong>同比增长三倍</strong>;截至 2025 年 9 月已签署 <strong>49 份供电协议(ESA),代表未来需求 7.1 GW</strong>,其中 29 个项目(3.8 GW)已并网——相当于半岛系统容量的约 13%;官方预测 2030 年数据中心用电达 7.7 GW、2040 年达 <strong>20.9 GW</strong>。Wood Mackenzie 测算仅柔佛一州需求已达约 3.8 GW、占半岛数据中心需求的过半;已提交的电力申请累计约 <strong>11 GW,相当于全国发电容量的 40%</strong>。</p>
+<p>供给侧的错配在于时序:半岛电网 2027 年<strong>无新增燃气机组投运</strong>(下一轮大规模发电集中于 2028—2031 年,合计约 8.3 GW),而 TNB 428 亿令吉的 RP4(2025—2027)输配电资本开支主要用于既有网络强化,132/275 kV 变电站建设周期 3–5 年,无法匹配数据中心 18–24 个月的建造周期。结果是一种"<strong>事实上的并网排队</strong>":瓶颈已从发电容量转移至变电站与输电接入的交付时点,电力接入函上的 energization 日期取代土地与审批成为项目的关键路径——对租户而言,2027 年投运项目的实际带电时间存在系统性后移风险。</p>
+<p><strong>水、政策与合规</strong>同样不容忽视:水资源约束在柔佛尤为突出——一座 50 MW 数据中心日耗水相当于 2,200 户家庭,2025 年 11 月起柔佛州要求投资者将水冷扩建<strong>推迟约 18 个月(至 2027 年年中)</strong>,并暂停高耗水设施的新审批。政策端的另一道闸门是 2026 年 2 月 24 日安瓦尔总理的公开确认:非 AI 数据中心的新申请审批"约两年前"已实质停止;柔佛自 2024 年 6 月起的特别协调委员会已否决约 30% 的申请,2026 年 7 月起联邦层面设立数据中心工作组对电力与水容量进行审批前核查。</p>
+<p>合规与地缘维度同样不可忽视:2025 年马来西亚发生的出口管制违规事件曾波及大型云园区并影响融资信心,高性能算力集群面临更严格的客户尽职调查;雪兰莪项目审查已出现 30% 本地含量的期望。与此同时,议会数据显示全国数据中心实际用电仅 603 MW、对申报最大需量 1,276 MW 的利用率约 <strong>40%</strong>(政府目标 85%),"<strong>低利用率 + 高申报</strong>"的错配本身就是政策收紧的重要论据,也是判断规划管道真实转化率时必须打的折扣。</p>
+<p><strong>人才与本地化</strong>是第四重约束:数据中心运营就业密度低(单设施通常 30–50 名全职员工),但电气、暖通、液冷与网络工程的高度技能岗位供不应求;马来西亚半导体战略计划培养 6 万名高技能工程人才,部分正是为承接数据中心运维与建设梯队。更深层的政策诉求是价值链本地化——政府反复强调数据中心投资必须带来"高薪就业与知识转移",而不仅是充当外国算力的"房东";YTL AI Cloud / ILMU 主权模型与 2026 年预算 59 亿令吉 AI 拨款,正是将算力基础设施转化为本土 AI 能力的官方路径。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">7</span>2027—2030 情景:基准 / 乐观 / 悲观</h2>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">~2.0 GW</span><span class="lab">2026 年底(基准,翻倍)</span></div>
+  <div class="bis-card orange"><span class="val">~3.0 GW</span><span class="lab">2027 年中(并网排队高峰)</span></div>
+  <div class="bis-card red"><span class="val">~4.0 GW</span><span class="lab">2027—2028 供需最紧</span></div>
+  <div class="bis-card green"><span class="val">3.3—6.4 GW</span><span class="lab">2030—2031 综合预测</span></div>
+</div>
+<p><strong>基准情景</strong>(概率最高):2026 年底运营容量如期翻倍至约 2 GW,但 2027 年新增带电容量受并网节奏压制,实际利用率与申报容量的缺口扩大,批发价格维持上行;电力接入确定性取代地价成为运营商第一竞争变量,YTL 等一体化玩家与已锁定 TNB 全容量协议者(PDG、DayOne)获得超额份额。<strong>乐观情景</strong>:RP4 电网投资提前释放容量 + 东盟电网与砂拉越水电输入落地,2028 年供给拐点提前,IT 负载高增速路径部分兑现。<strong>悲观情景</strong>:AI 资本开支周期回落叠加电力交付延迟,规划管道转化率低于 50%,市场进入 2028 年左右的局部过剩与洗牌——目前 0.7% 的空置率与一年三倍的用电增速尚未给出这一信号,但 40% 的申报利用率已是需要持续跟踪的领先指标。</p>
+</section>
+
+<section class="bis-section">
+<h2><span class="num">8</span>竞争策略与关键判断</h2>
+<p><strong>柔佛模式已验证,但红利正在重定价。</strong>毗邻新加坡的地理套利、低成本电力土地与制度化的审批加速,使柔佛在三年内跃升为亚太第三大容量集群;然而地价、电价(超高压档 +10–15%)、水合规成本与并网排队正在系统性收窄套利空间,先发者的锁定优势(ESA、土地、水权)构成最深的护城河。</p>
+<p><strong>电力是 2027 年唯一的硬约束,且是全局性的。</strong>11 GW 的电力申请对 25 GW 级半岛电网的压力、2027 年零新增气电的真空期、变电站 3–5 年的建设周期,三者叠加意味着 2027 年投运节奏将由 TNB 的 energization 日历而非运营商的施工日历决定。项目尽调中"已签约 ESA + 明确 energization 日期"应列为与土地证同级的先决条件。</p>
+<p><strong>中资双轨 + 美系锚定的需求结构使市场深度全球化。</strong>字节跳动(租赁+直采)、阿里/腾讯(自建区域)、DayOne/BDC(中资运营商)与 AWS/Microsoft/Google/Oracle(美系自建)构成多元需求底座,需求与全球 AI capex 周期、美元利率及芯片出口政策高度耦合;Firmus×OpenAI 交易进一步将马来西亚绑定在全球模型公司的算力版图上,既放大上行弹性,也引入政策外生冲击的尾部风险。</p>
+<p><strong>政策筛选机制利好头部、出清长尾。</strong>非 AI 审批冻结、PUE ≤ 1.6/1.4 的效率门槛、30% 申请否决率与利用率核查,实质上是监管机构替市场做了一次供给侧改革:拥有 AI 锚定客户、绿电协议与全栈能力的头部运营商将获得几乎全部增量配额,第三阵营中缺乏锚定租户的项目面临无限期延迟或退出。</p>
+</section>
+
+<section class="punchline">
+<h3>今日关键判断</h3>
+<ul>
+  <li>柔佛运营 1,110 MW + 管道 8,542 MW 已锁定东南亚 AIDC 第二枢纽地位,2031 年中位预测 3,340 MW、超大规模路径 6.4 GW。</li>
+  <li>三阵营格局明确:第一阵营(Bridge / YTL / AirTrunk)合计管道 ~6,400 MW,占绝对优势;第二阵营(DayOne / Vantage / PDG / EdgeConneX)合计 ~2,260 MW。</li>
+  <li>需求端美系 + 中资双轨:Firmus × OpenAI 锚定 900+ MW、字节跳动规划 960 MW、DayOne 58.4 万颗 H100 等效算力,2027 年是政策筛选窗口。</li>
+  <li>2027 年电力硬约束是全局性的:11 GW 申请对 25 GW 半岛电网、零新增气电、变电站 3–5 年建设周期,energization 日期取代土地证成关键路径。</li>
+  <li>政策筛选利好头部、出清长尾:非 AI 审批冻结 + PUE ≤ 1.6/1.4 + 30% 申请否决率 = 监管替市场做了一次供给侧改革。</li>
+</ul>
+</section>
+
+<div class="foot">
+<p><strong>口径声明</strong>:本报告基于公开信息整理与交叉验证,部分运营商容量数据存在口径差异与重叠,预测情景存在不确定性。容量数据按 IT 负载口径,数据截至 2026 年 9 月。</p>
+<p style="margin-top:8px">主要来源:Ken Research、Mordor Intelligence、AMRO、Cushman & Wakefield、Coloprice、YTL Power 公告、DataCenterDynamics、Mingtiandi、Epoch AI、TechRepublic、DigiTimes、AWS 官方页面、InsightPulseHub、Underhyped.ai、Arizton 等 28 家公开资料交叉验证。</p>
+</div>
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
