@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四大 Agent 架构与 42 步案例：办公、编程、视频与个人助理 — Livius's Tech Pulse</title>
+<meta name="description" content="用可交互的架构图和具体任务步骤，理解四类 Agent 各自的工作机制。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Serif SC','Songti SC',serif;background:#0a0a0f;color:#e8e6e0;line-height:2;font-size:18px;-webkit-font-smoothing:antialiased}
+a{color:#d4a853;text-decoration:none}
+.top{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid #222;padding:0 24px}
+.top-in{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.top a{font-size:14px;color:#999}.top a:hover{color:#fff}
+.hero{position:relative;height:62vh;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,.25),rgba(10,10,15,.92))}
+.hero-t{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 24px 48px;width:100%}
+.hero-t h1{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:2px;margin-bottom:12px}
+.hero-t .sub{color:#b8b4a8;font-size:16px}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px 100px}
+.meta{color:#8a877c;font-size:15px;text-align:center;margin:36px 0 6px}
+h2{font-size:28px;font-weight:800;margin:64px 0 8px;letter-spacing:3px;text-align:center}
+h2::after{content:'';display:block;width:56px;height:2px;background:#d4a853;margin:18px auto 0}
+h3{font-size:20px;font-weight:700;margin:32px 0 8px;color:#f0e6d2}
+p{margin:14px 0;text-align:justify}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;line-height:1.6}
+table th,table td{padding:10px 12px;border-bottom:1px solid rgba(212,168,83,.18);text-align:left;vertical-align:top}
+table th{color:#d4a853;font-weight:600;background:rgba(212,168,83,.05)}
+ul,ol{margin:14px 0;padding-left:22px}
+blockquote{border-left:3px solid #d4a853;margin:28px 0;padding:6px 0 6px 22px;color:#b8b4a8;font-size:17px}
+strong{color:#f0e6d2}
+.refresh-note{margin:60px 0 0;padding-top:24px;border-top:1px solid rgba(212,168,83,.25)}
+.refresh-note h2{font-size:22px;letter-spacing:2px;margin-top:0}
+.refresh-note h2::after{width:42px;background:rgba(212,168,83,.5)}
+.refresh-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;line-height:1.6}
+.refresh-table th,.refresh-table td{padding:10px 12px;border-bottom:1px solid rgba(212,168,83,.18);text-align:left;vertical-align:top}
+.refresh-table th{color:#d4a853;font-weight:600;background:rgba(212,168,83,.05)}
+.end{text-align:center;color:#8a877c;margin-top:70px;font-size:15px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in"><a href="../">← 全部文章</a><a href="../../">首页</a></div></div>
+
+<div class="hero"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&q=80&fit=crop&h=171" alt="四大 Agent 架构与 42 步案例"><div class="hero-t"><h1>四大 Agent 架构与 42 步案例：办公、编程、视频与个人助理</h1><div class="sub">用可交互的架构图和具体任务步骤，理解四类 Agent 各自的工作机制</div></div></div>
+
+<div class="wrap">
+<div class="meta">2026-10-05 · 发布即刷注</div>
+
+<p>办公、编程、视频和个人助理都可以采用模型、工具与记忆组成的 Agent 基础能力。但从具体任务出发，四类系统需要保存的状态、执行环境和判断成功的方式有明显区别。</p>
+<p>这份演示把架构放在左侧，把完整案例放在右侧。点击任意步骤，架构中对应的模块会高亮；也可以开启自动演示，观察任务如何从用户目标进入规划、执行、检查和交付。</p>
+<p><a href="/tech-blog/agent-architectures/">→ 打开交互演示：四大 Agent 架构与逐步案例</a></p>
+
+<h2>四类架构，四种工作机制</h2>
+<table>
+<tr><th>场景</th><th>架构重心</th><th>具体案例</th><th>步骤数</th></tr>
+<tr><td>办公</td><td>组织权限与可恢复的业务流程</td><td>跨部门会议及纪要协作</td><td>10</td></tr>
+<tr><td>编程</td><td>仓库版本、隔离修改与真实验证</td><td>修复无效令牌被误放行的接口</td><td>10</td></tr>
+<tr><td>视频</td><td>分镜任务、参考资产与异步生成</td><td>15 秒智能耳机广告</td><td>12</td></tr>
+<tr><td>个人</td><td>情境、偏好、授权与操作核对</td><td>周末杭州两日游</td><td>10</td></tr>
+</table>
+
+<p><strong>办公 Agent</strong> 的核心是把跨系统业务流程协调完整。它需要知道谁可以访问什么材料、哪一步需要审批，以及接口超时后是否已经产生业务结果。流程状态、幂等和补偿为恢复任务提供基础。</p>
+<p><strong>编程 Agent</strong> 的核心是让修改与证据对应。理解仓库、保留起始版本、在独立工作区修改，再运行真正的构建和测试。失败时要分清代码错误、环境问题与已有失败，通过后才能形成可评审变更。</p>
+<p><strong>视频 Agent</strong> 的核心是组织镜头级生产。创意要被转成有编号、时长和参考资产的分镜任务；独立镜头可以并行，失败镜头可以局部重做。素材版本和时间轴把图像、视频、音乐与字幕汇成可验收的成片。</p>
+<p><strong>个人 Agent</strong> 的核心是把个性化服务做可信。它要区分明确指令和历史偏好，依据当前情境做计划，在已有授权内执行，并核对真实结果。长期记忆需要可查看、可修改、可删除，主动提醒要遵守授权与通知规则。</p>
+
+<h2>如何阅读交互演示</h2>
+<p>先选择一个场景，再从 Step 1 开始。右侧每一步都包含「做什么」和「具体怎么做」的示例，下方显示本步产物。左侧高亮的是参与这一动作的模块，一个步骤可能同时涉及记忆、工具和结果校验。</p>
+<blockquote>连线动画表示流转方向；自动演示是教学播放，不代表系统正在替你执行会议、代码修改、视频生成或预订。</blockquote>
+
+<h2>四个完整案例</h2>
+<p>以下均为教学示例。价格、时段和任务结果不是实时查询或已经执行的记录。架构是场景规划，不是对商业产品内部实现的披露；MCP 是可选连接方式，实际系统也可通过原生 API 或应用自动化接入。</p>
+
+<h3>办公 Agent · 案例：安排跨部门评审会，并分发会议纪要（10 步）</h3>
+<table>
+<tr><th>步骤</th><th>动作</th></tr>
+<tr><td>Step 1</td><td>理解任务 — 本周组织三部门评审会，30 分钟，提前发送材料。</td></tr>
+<tr><td>Step 2</td><td>读取组织与权限 — 查询三位负责人身份，只检索请求人有权访问的项目材料。</td></tr>
+<tr><td>Step 3</td><td>查询可用时段 — 三人共同空闲时间为周四 14:00–14:30。</td></tr>
+<tr><td>Step 4</td><td>编排任务依赖 — 先确认时段，再预订会议室，随后发送邀请与附件。</td></tr>
+<tr><td>Step 5</td><td>处理必要审批 — 若会议室需要负责人审批，保存流程状态并等待回复。</td></tr>
+<tr><td>Step 6</td><td>执行预约与通知 — 预约会议室 A，发送邀请；同一请求使用幂等键。</td></tr>
+<tr><td>Step 7</td><td>核对实际结果 — 通知接口超时后先查发送记录，再决定是否重试。</td></tr>
+<tr><td>Step 8</td><td>整理会议纪要 — 依据会议材料记录决策、负责人、期限。</td></tr>
+<tr><td>Step 9</td><td>校验并按授权分发 — 核对纪要与原始记录，将确认版本发送给参会人。</td></tr>
+<tr><td>Step 10</td><td>汇总与更新状态 — 报告会议安排、纪要链接、完成项及仍需人工处理的事项。</td></tr>
+</table>
+
+<h3>编程 Agent · 案例：修复无效令牌被误放行的登录接口（10 步）</h3>
+<table>
+<tr><th>步骤</th><th>动作</th></tr>
+<tr><td>Step 1</td><td>明确验收条件 — 无效令牌返回 401；有效令牌访问接口仍返回 200。</td></tr>
+<tr><td>Step 2</td><td>记录仓库基线 — 记录起始提交和已有修改，在独立工作区进行任务操作。</td></tr>
+<tr><td>Step 3</td><td>检索认证调用链 — 定位 auth 中间件、令牌校验函数和对应测试。</td></tr>
+<tr><td>Step 4</td><td>复现并确认原因 — 校验异常被捕获后仍调用 next()，导致错误放行。</td></tr>
+<tr><td>Step 5</td><td>设计最小修复 — 异常分支返回 401 并终止处理，保留有效令牌的正常路径。</td></tr>
+<tr><td>Step 6</td><td>应用补丁与回归用例 — 修改异常处理，同时新增「无效令牌拒绝访问」的测试。</td></tr>
+<tr><td>Step 7</td><td>运行真实验证 — 执行认证相关测试，再运行修改范围对应的构建与检查。</td></tr>
+<tr><td>Step 8</td><td>分析失败并重修 — 若有效令牌测试也失败，检查修复是否错误截断正常分支。</td></tr>
+<tr><td>Step 9</td><td>检查差异和证据 — 确认补丁未覆盖无关修改，验证结果对应最终代码版本。</td></tr>
+<tr><td>Step 10</td><td>准备 PR 与评审反馈 — PR 说明原因、修复行为及测试；CI 或评审反馈再进入修复循环。</td></tr>
+</table>
+
+<h3>视频 Agent · 案例：制作 15 秒科幻风格智能耳机广告（12 步）</h3>
+<table>
+<tr><th>步骤</th><th>动作</th></tr>
+<tr><td>Step 1</td><td>明确制作规格 — 15 秒、16:9、卖点降噪与空间音效。</td></tr>
+<tr><td>Step 2</td><td>形成创意脚本 — 喧嚣都市 → 戴上耳机 → 宁静太空 → 产品落版。</td></tr>
+<tr><td>Step 3</td><td>拆分镜头与时长 — S1 都市 3s / S2 戴耳机 4s / S3 太空 5s / S4 落版 3s = 15s。</td></tr>
+<tr><td>Step 4</td><td>固定参考资产 — 黑色机身、银色标识、蓝紫灯光、同一人物参考图。</td></tr>
+<tr><td>Step 5</td><td>编写逐镜头生成输入 — 每镜头提示词、参考图、支持参数。</td></tr>
+<tr><td>Step 6</td><td>调度镜头生成 — 按依赖提交，独立镜头并行，记录任务 ID、预算、配额。</td></tr>
+<tr><td>Step 7</td><td>生成配音与音乐 — 配音 + 城市噪声转氛围音。</td></tr>
+<tr><td>Step 8</td><td>逐镜头质检与重生成 — 失败镜头局部重做。</td></tr>
+<tr><td>Step 9</td><td>组装画面时间轴 — 3/4/5/3 秒排列镜头，转场顺畅。</td></tr>
+<tr><td>Step 10</td><td>音画与字幕合成 — 字幕对齐太空镜头，结尾品牌名与卖点。</td></tr>
+<tr><td>Step 11</td><td>渲染并验收成片 — 导出 1920×1080，核对时长、画幅、产品外观、音画同步。</td></tr>
+<tr><td>Step 12</td><td>交付与保留制作记录 — 交付成片、分镜表、素材清单、生成参数。</td></tr>
+</table>
+
+<h3>个人 Agent · 案例：规划周末杭州两日游并设置提醒（10 步）</h3>
+<table>
+<tr><th>步骤</th><th>动作</th></tr>
+<tr><td>Step 1</td><td>理解目标与约束 — 从上海出发，周末杭州两日游，预算 1500 元，少走路。</td></tr>
+<tr><td>Step 2</td><td>读取偏好与日程 — 读取明确保存的靠窗偏好，检查本周末是否已有其他安排。</td></tr>
+<tr><td>Step 3</td><td>查询车次、酒店与路线 — 查询往返车次、地铁附近酒店和西湖周边路线。</td></tr>
+<tr><td>Step 4</td><td>组合并核算方案 — 交通 300 + 酒店 500 + 餐饮 300 + 市内 150 = 1250 元。</td></tr>
+<tr><td>Step 5</td><td>检查授权与必要确认 — 已有授权内设置提醒；超出授权展示订单等待确认。</td></tr>
+<tr><td>Step 6</td><td>执行已授权操作 — 按确认方案预约车票或创建日历；无授权保留候选。</td></tr>
+<tr><td>Step 7</td><td>核对订单与防重复 — 提交超时后先查订单，确认成功再报告，避免重复预订。</td></tr>
+<tr><td>Step 8</td><td>创建出发提醒 — 在已授权日历中设置「出发前 60 分钟检查证件和乘车站」。</td></tr>
+<tr><td>Step 9</td><td>汇总行程和待办 — 提供两日路线、预算、订单状态，指出尚未完成的预订。</td></tr>
+<tr><td>Step 10</td><td>管理记忆与主动服务 — 用户确认后保存偏好；只按授权事件触发提醒。</td></tr>
+</table>
+
+<h2>从架构到建设</h2>
+<p>先完成一条可以核对结果的任务链，再扩大自动化范围：办公先验证一个跨系统流程，编程先修复一个真实缺陷，视频先制作一段可局部重做的短片，个人先完成一个明确指令。任务变复杂时，再增加执行器、连接器、并行调度或主动服务。</p>
+<p>对每个任务，最后都要能说明产物在哪里、哪些步骤真正执行、哪些证据支持完成状态，以及仍有哪些待办或验证局限。</p>
+
+<div class="refresh-note">
+<h2>2026-10-05 刷注</h2>
+<p><em>本文写于 2026-10-05。<strong>2026-10-05 刷注</strong>针对四类 Agent 架构 / 42 步案例与 10/5 时点的代次 / 工具链最新口径补注，不重写"办公 / 编程 / 视频 / 个人 Agent 四种工作机制"的核心叙事。</em></p>
+<table class="refresh-table">
+<thead><tr><th>2026-10-05 原文口径</th><th>2026-10-05 最新口径（刷注与发布同日）</th></tr></thead>
+<tbody>
+<tr><td>办公 Agent：组织权限与可恢复的业务流程</td><td><strong>未变</strong>：跨部门会议 + 纪要分发的 10 步流程仍是办公主线</td></tr>
+<tr><td>编程 Agent：仓库版本 / 隔离修改 / 真实验证</td><td><strong>未变</strong>：fix-token 10 步仍是编程 Agent 的代表性 case study</td></tr>
+<tr><td>视频 Agent：分镜任务 / 参考资产 / 异步生成</td><td><strong>未变</strong>：15 秒智能耳机广告 12 步仍是视频 Agent 教学案例</td></tr>
+<tr><td>个人 Agent：情境 / 偏好 / 授权 / 操作核对</td><td><strong>未变</strong>：周末杭州两日游 10 步仍是个 Agent 教学案例</td></tr>
+<tr><td>MCP 是可选连接方式</td><td><strong>未变</strong>：MCP 在 2026-10 仍是主流连接协议；原生 API / 应用自动化是并行路径</td></tr>
+<tr><td>"42 步" 全部 4 类场景步骤之和（10+10+12+10=42）</td><td><strong>未变</strong>：步骤数与场景配对映射</td></tr>
+<tr><td>步骤对应本步产物（Step 1~12 输出）</td><td><strong>未变</strong>：每步产物字段保留</td></tr>
+<tr><td>互动演示入口 /tech-blog/agent-architectures/</td><td><strong>未变</strong>：入口地址在 10/5 时点不变</td></tr>
+<tr><td>架构模块：模型 / 工具 / 记忆 / 结果校验</td><td><strong>未变</strong>：四类基础模块不分先后</td></tr>
+<tr><td>"自动演示是教学播放，不代表系统正在替你执行"</td><td><strong>未变</strong>：免责声明</td></tr>
+<tr><td>脱敏口径：O1 / O3 / AL 中资互联网公司名</td><td><strong>未变</strong>：本文未直接引用中资互联网公司名</td></tr>
+<tr><td>模型代次</td><td><strong>未变</strong>：本文不引用具体模型版本；办公 / 编程 / 视频 / 个人 Agent 编排对模型版本不敏感</td></tr>
+</tbody>
+</table>
+<p><strong>结论保留</strong>：四类 Agent（办公 / 编程 / 视频 / 个人）= 四种工作机制 + 42 步案例对应四类典型产物——与 2026-10-05 发布时结论方向一致，<strong>没有反转</strong>。</p>
+<p><em>刷注口径：MCP 2026-10 仍是主流协议、办公 / 编程 / 视频 / 个人 Agent 编排对模型代次不敏感、互动演示入口不变。</em></p>
+</div>
+
+<div class="end">— 全文完 —</div>
+</div>
+</body>
+</html>

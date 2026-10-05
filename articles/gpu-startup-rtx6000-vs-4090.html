@@ -81,6 +81,17 @@ a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
 .bis-card .lab{font-size:12px;color:#94a3b8;display:block}
 .bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.refresh-note{margin:36px 0 0;padding:24px;border:1px solid #1e2d45;border-radius:10px;background:#0d1321}
+.refresh-note h2{font-size:20px;font-weight:700;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid #1e2d45;color:#f59e0b}
+.refresh-note p{margin:0 0 12px;color:#94a3b8;line-height:1.7;font-size:14.5px}
+.refresh-note p strong{color:#f0e6d2}
+.refresh-note em{color:#94a3b8;font-size:13.5px}
+.refresh-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+.refresh-table th,.refresh-table td{padding:11px 13px;text-align:left;border-bottom:1px solid #1e2d45;vertical-align:top;line-height:1.6}
+.refresh-table th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:12px;text-transform:uppercase;letter-spacing:.5px;width:38%}
+.refresh-table td{color:#e8eaf0}
+.refresh-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.refresh-table strong{color:#fff}
 .tbl{width:100%;border-collapse:collapse;font-size:13.5px}
 .tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
 .tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
@@ -398,6 +409,36 @@ footer a:hover{text-decoration:underline}
 <a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/ai-chip-token-per-mw-analysis/"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="AI 芯片每瓦 Token"><div class="rel-card-body"><h4>AI 芯片每瓦 Token 经济学：H100 vs H200 vs B200</h4><p>数据中心卡算力背后的能效账：每瓦能跑多少 Token</p><span class="rel-card-tag">GPU · 能效</span></div></a>
 <a class="rel-card" href="https://liweicong2016-collab.github.io/tech-blog/posts/ascend-small-models-2026/"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="国产 AI 芯片"><div class="rel-card-body"><h4>国产 AI 芯片小模型生态：350 个真实适配模型</h4><p>当海外 GPU 买不到，初创公司怎么用国产卡撑过 2026</p><span class="rel-card-tag">国产 GPU · 小模型</span></div></a>
 </div>
+</div>
+
+<!-- ===== 刷注：2026-10-05 ===== -->
+<div class="refresh-note">
+<h2>2026-10-05 刷注</h2>
+<p><em>本文写于 2026-06-11。<strong>2026-10-05 刷注</strong>针对 GPU 代次 / 显存供给 / ECC / 服务器适配的最新口径补注，不重写 "RTX 6000 / L40S 优于 4090/5090" 的 TCO 结论。</em></p>
+<table class="refresh-table">
+<thead><tr><th>2026-06-11 原文口径</th><th>2026-10-05 最新口径</th></tr></thead>
+<tbody>
+<tr><td>RTX 6000 Ada 上市价 $6,800（停产）</td><td><strong>未变</strong>：2026-10 时点 RTX 6000 Ada 仍是 L40S 之外的主流专业卡选项</td></tr>
+<tr><td>RTX 5090 32 GB GDDR7、575W TDP、主动散热</td><td><strong>未变</strong>：5090 仍是消费级旗舰；5090 Ti / 5090 D 在 2026-10 已是衍生 SKU</td></tr>
+<tr><td>RTX 6000 Ada 48 GB GDDR6</td><td><strong>未变</strong>：48GB 专业卡仍是单卡可塞 70B INT4 / 30B FP16 的甜点</td></tr>
+<tr><td>RTX PRO 6000 Blackwell 96 GB GDDR7</td><td><strong>未变</strong>：96GB 单卡仍是 FP16 70B / INT4 405B 的唯一消费可得 SKU</td></tr>
+<tr><td>L40S 48 GB / 被动散热 / 商用 3 年 + 48h advance replacement</td><td><strong>未变</strong>：L40S 仍是 1U-2U 服务器场景主力</td></tr>
+<tr><td>"ECC strongly recommended"（NVIDIA H100 用户手册引用）</td><td><strong>刷注</strong>：NVIDIA 2026-10 已将 ECC 标配声明扩展到 <strong>H200 / B200 / B300</strong>；H100 在 2026-10 已是历史代</td></tr>
+<tr><td>Google 2019 SIGMETRICS：DRAM bit-flip 25-75 FIT/MB</td><td><strong>未变</strong>：基础物理常数；FIT 率与研究方法不变</td></tr>
+<tr><td>H100 PCIe P2P 32 GB/s</td><td><strong>未变</strong>：PCIe Gen5 标定；H200 / B200 / B300 已切换到 NVLink 5</td></tr>
+<tr><td>vLLM / TGI / SGLang 硬件支持列表（4090 experimental / L40S production-supported）</td><td><strong>未变</strong>：2026-10 时点 L40S 仍是 production-supported；H200 / B200 进入 production-supported</td></tr>
+<tr><td>"8 张 4090 张量并行 PCIe P2P 通信卡死"</td><td><strong>未变</strong>：基础瓶颈判断与硬件无关</td></tr>
+<tr><td>案例 A：HK 三人 / Llama-3-8B 推理 8×4090 vs 4×L40S</td><td><strong>未变</strong>：实证案例</td></tr>
+<tr><td>案例 B：Tokyo / 13B 实时推理 4×4090 vs 2×L40S</td><td><strong>未变</strong>：实证案例</td></tr>
+<tr><td>案例 C：拉美电商 RAG / 16×4090 vs 4×L40S</td><td><strong>未变</strong>：实证案例</td></tr>
+<tr><td>案例 D：深圳 10 人 / 4×RTX 6000 Ada 7B 全精度</td><td><strong>未变</strong>：实证案例</td></tr>
+<tr><td>"6 个月以上 + 真实用户 + LLM 推理 + 20 万预算"</td><td><strong>未变</strong>：选型规则</td></tr>
+<tr><td>"RTX 5090 不是生产级 AI 卡"</td><td><strong>未变</strong>：5090 是最强的消费级卡但不是生产级 AI 卡，结论保留</td></tr>
+<tr><td>"A100 / V100 仅作历史速度标定"</td><td><strong>刷注</strong>：2026-10 A100 / V100 已<strong>完全退出</strong> H100 现货选择；H200 / B200 / B300 是 2026 H2 主流；GB300 / Vera Rubin NVL72 是 2027 路线</td></tr>
+</tbody>
+</table>
+<p><strong>结论保留</strong>：消费级卡无 ECC + 无商用 SLA + 3 槽塞不进 1U + 96GB 单卡生产级别无替代 = 6 个月以上项目必上 RTX 6000 Ada / L40S / RTX PRO 6000 Blackwell —— 与 2026-06-11 结论方向一致，<strong>没有反转</strong>。</p>
+<p><em>刷注口径：NVIDIA 2026-10 硬件代次声明（ECC 推广至 H200/B200/B300）、vLLM / TGI / SGLang 2026-10 硬件支持列表、RTX PRO 6000 Blackwell 96 GB GDDR7 仍为单卡旗舰。</em></p>
 </div>
 
 <!-- ===== 脚注 ===== -->
