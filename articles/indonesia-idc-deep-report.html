@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>印尼数据中心市场深度洞察报告（2026年10月）</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel-2: #1c2330;
+    --border: #2d3748; --text: #e6edf3; --text-dim: #8b949e;
+    --accent: #58a6ff; --accent-2: #3fb950; --accent-3: #d29922;
+    --accent-4: #f85149; --accent-5: #bc8cff; --line: #30363d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.75;
+    padding: 48px 24px 96px; -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1020px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 56px; }
+  header h1 {
+    font-size: 2rem; font-weight: 700; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 50%, #3fb950 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 14px;
+  }
+  header .sub { color: var(--text-dim); font-size: 0.95rem; max-width: 720px; margin: 0 auto; }
+  header .meta {
+    display: inline-flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+    margin-top: 20px; padding: 12px 24px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 12px;
+    font-size: 0.85rem; color: var(--text-dim);
+  }
+  header .meta strong { color: var(--accent); font-weight: 600; }
+
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 1.4rem; font-weight: 700; color: var(--text);
+    margin-bottom: 8px; padding-left: 16px; border-left: 4px solid var(--accent);
+  }
+  .section-desc { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 24px; padding-left: 20px; }
+  .section-sub {
+    font-size: 1.05rem; font-weight: 600; color: var(--accent-5);
+    margin: 28px 0 12px; padding-left: 4px;
+  }
+  p { color: var(--text-dim); margin-bottom: 14px; font-size: 0.92rem; }
+  p strong { color: var(--text); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
+  .stat-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px; text-align: center;
+  }
+  .stat-card .num {
+    font-size: 1.4rem; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .num.green { color: var(--accent-2); }
+  .stat-card .num.purple { color: var(--accent-5); }
+  .stat-card .num.gold { color: var(--accent-3); }
+  .stat-card .num.red { color: var(--accent-4); }
+  .stat-card .lbl { font-size: 0.72rem; color: var(--text-dim); margin-top: 6px; }
+
+  .highlight-box {
+    background: var(--panel); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-2); border-radius: 10px;
+    padding: 20px 24px; margin: 20px 0; font-size: 0.9rem;
+  }
+  .highlight-box.warn { border-left-color: var(--accent-4); }
+  .highlight-box.gold { border-left-color: var(--accent-3); }
+  .highlight-box.purple { border-left-color: var(--accent-5); }
+  .highlight-box.blue { border-left-color: var(--accent); }
+  .highlight-box .box-title {
+    font-weight: 700; color: var(--text); margin-bottom: 10px; font-size: 0.95rem;
+  }
+  .highlight-box ul { padding-left: 18px; color: var(--text-dim); }
+  .highlight-box li { margin-bottom: 8px; }
+  .highlight-box li strong { color: var(--text); }
+
+  .table-wrap {
+    overflow-x: auto; border: 1px solid var(--border);
+    border-radius: 12px; background: var(--panel); margin: 16px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  thead th {
+    text-align: left; padding: 12px 14px; background: var(--panel-2);
+    color: var(--text-dim); font-weight: 600; font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--text-dim); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(88,166,255,0.04); }
+  td.name { font-weight: 600; color: var(--text); }
+  td.mw { font-weight: 700; color: var(--accent-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.mw.purple { color: var(--accent-5); }
+  td.mw.gold { color: var(--accent-3); }
+  td.mw.red { color: var(--accent-4); }
+  td.mw-na { color: var(--text-dim); font-weight: 400; }
+
+  .footnote {
+    margin-top: 64px; padding: 24px; background: var(--panel);
+    border: 1px solid var(--border); border-left: 3px solid var(--accent-3);
+    border-radius: 10px; font-size: 0.82rem; color: var(--text-dim); line-height: 1.8;
+  }
+  .footnote h3 { color: var(--text); font-size: 0.95rem; margin-bottom: 12px; font-weight: 600; }
+  .footnote ul { padding-left: 20px; }
+  .footnote li { margin-bottom: 6px; }
+
+  @media (max-width: 768px) {
+    body { padding: 32px 16px 64px; }
+    header h1 { font-size: 1.5rem; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .section-title { font-size: 1.15rem; }
+  }
+  @media (max-width: 480px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    header .meta { flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>印尼数据中心市场深度洞察报告</h1>
+    <p class="sub">从容量扩张到AI算力枢纽：市场规模、竞争格局、电力约束与液冷技术演进</p>
+    <div class="meta">
+      <span>报告日期 <strong>2026-10-05</strong></span>
+      <span>核心口径 <strong>IT Load</strong></span>
+      <span>数据截至 <strong>2026-09</strong></span>
+    </div>
+  </header>
+
+  <!-- 执行摘要 -->
+  <div class="section">
+    <h2 class="section-title">执行摘要</h2>
+    <p>印度尼西亚数据中心市场正经历由 <strong>AI大模型出海、本土数字化转型与高密液冷技术演进</strong> 三重力量驱动的快速增长期。市场规模从2025年的 <strong>16.1亿美元</strong> 增至2026年的 <strong>18.3亿美元</strong>，预计2031年达 <strong>34.8亿美元</strong>，CAGR约 <strong>13.71%</strong>。[reference:0]以AI及配套算力口径计算，2026-2030年CAGR可达 <strong>28.7%</strong>。</p>
+    <p>竞争格局呈 <strong>“本土龙头 + 跨国中立IDC + 中资云厂商”</strong> 三足鼎立。DCI Indonesia以 <strong>119MW</strong> 运营容量领跑，BDx Indonesia锁定 <strong>1.2GVA+</strong> 电力，PDG JC3获 <strong>8.56亿美元</strong> 绿色融资。中资深度嵌入：字节跳动存量约 <strong>43MW</strong>，腾讯云投资 <strong>5亿美元</strong> 建设第三座数据中心。</p>
+    <p><strong>核心约束是电力与并网</strong>：数据中心电力管道预计2034年达 <strong>25,297MW</strong>，现有接入容量仅 <strong>1,990.5 MVA</strong>，需在2027-2028年集中完成 <strong>6,884MW</strong> 和 <strong>7,798MW</strong> 的接入。[reference:1]</p>
+  </div>
+
+  <!-- 一、市场规模 -->
+  <div class="section">
+    <h2 class="section-title">一、市场规模与爆发动能</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">16.1 亿</div>
+        <div class="lbl">2025年市场规模（美元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num green">18.3 亿</div>
+        <div class="lbl">2026年预测（美元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num purple">34.8 亿</div>
+        <div class="lbl">2031年预测（美元）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num gold">13.71%</div>
+        <div class="lbl">CAGR（2025-2031）</div>
+      </div>
+    </div>
+
+    <p>印尼数据中心市场的增速在东南亚处于领先梯队。Mordor Intelligence数据显示，市场规模从2025年 <strong>14.4亿美元</strong> 增至2026年 <strong>18.3亿美元</strong>，至2031年达 <strong>34.8亿美元</strong>。[reference:2]若以AI及配套算力口径计算，2026-2030年CAGR可达 <strong>28.7%</strong>，反映出AI工作负载对机架密度和单位面积产值的结构性提升。</p>
+
+    <div class="highlight-box blue">
+      <div class="box-title">数据中心建设管线</div>
+      <ul>
+        <li>待建项目 <strong>32个</strong> 新数据中心，预计新增超 <strong>925万平方英尺</strong> 白区面积</li>
+        <li>约 <strong>1.9GW</strong> IT负载容量处于建设管线中</li>
+        <li>雅加达在建电力容量超 <strong>1.4GW</strong>，占绝对主导地位[reference:3]</li>
+        <li>2030年后规划容量合计约 <strong>4.8GW</strong>，DCI与BDx两家预计掌握 <strong>46%（约2.2GW）</strong>[reference:4]</li>
+      </ul>
+    </div>
+
+    <div class="section-sub">核心驱动力</div>
+    <p><strong>AI大模型出海</strong> 是最直接的催化剂。字节跳动、阿里巴巴与腾讯等头部厂商将印尼作为东南亚核心算力据点。字节跳动存量机房容量约 <strong>43MW</strong>，规划/在建 <strong>107MW</strong>，2026年新增规划达 <strong>100MW</strong>，远期规模超 <strong>250MW</strong>。<strong>本土数字化转型</strong> 提供持续需求底座：印尼2.72亿人口的数字消费激增，数字经济规模预计2026年达 <strong>1300亿美元</strong>。<strong>政策激励</strong> 方面，经济特区内允许 <strong>100%外资持股</strong>，企业所得税免税期最长可达 <strong>20年</strong>。[reference:5]</p>
+  </div>
+
+  <!-- 二、区域格局 -->
+  <div class="section">
+    <h2 class="section-title">二、区域格局：雅加达单极与巴淡岛崛起</h2>
+
+    <div class="section-sub">雅加达-西爪哇：绝对核心</div>
+    <p>雅加达及周边地区占全国运营容量约 <strong>75%</strong>。雅加达拥有 <strong>71个</strong> 数据中心、<strong>36家</strong> 运营商，在建电力容量 <strong>1,847MW</strong>。[reference:6]Cikarang一个区就承担了全国 <strong>47%</strong> 的运营容量。大雅加达地区以50家客户和 <strong>1,047 MVA</strong> 接入容量领先，西爪哇紧随其后，63家客户和 <strong>1,036.36 MVA</strong>。</p>
+
+    <div class="section-sub">巴淡岛：新加坡溢出与合规枢纽</div>
+    <p>巴淡岛凭借距新加坡仅 <strong>35分钟</strong> 船程的区位优势，成为“合规+低成本+低延迟”的第二落点。Nongsa数字园区提供 <strong>20年免税、100%外资持股</strong> 的政策礼包。[reference:7]巴淡岛数据中心产业年增长率达 <strong>22%</strong>，高于全国平均增速。BW Digital在Nongsa数字园的IT负载容量达 <strong>120MW</strong>，DayOne正在开发 <strong>450MW</strong> 超大规模数据中心，Oracle也已选择Nongsa数字园建设云区域。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>区域</th><th>核心定位</th><th>代表运营商</th><th>关键特征</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">雅加达 / 西爪哇</td>
+            <td>企业托管、云接入、超大规模</td>
+            <td>DCI、BDx、PDG、STT GDC</td>
+            <td>占全国~75%运营容量，Cikarang承担47%</td>
+          </tr>
+          <tr>
+            <td class="name">巴淡岛</td>
+            <td>新加坡溢出、合规枢纽、AI算力</td>
+            <td>DayOne、BW Digital、Oracle</td>
+            <td>距新加坡35分钟，20年免税，年增22%</td>
+          </tr>
+          <tr>
+            <td class="name">Jatiluhur（西爪哇）</td>
+            <td>AI超大规模园区</td>
+            <td>BDx CGK4</td>
+            <td>640MW园区，845 MVA电力锁定</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 三、竞争格局 -->
+  <div class="section">
+    <h2 class="section-title">三、Colo运营商竞争格局</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>运营商</th><th>已运营(MW)</th><th>在建(MW)</th><th>规划/储备(MW)</th><th>总管道(MW)</th><th>核心定位</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">DCI Indonesia</td>
+            <td class="mw">119</td>
+            <td class="mw purple">36</td>
+            <td class="mw gold">~1,600+</td>
+            <td class="mw red">~1,755</td>
+            <td>本土龙头，6家全球云厂商入驻</td>
+          </tr>
+          <tr>
+            <td class="name">BDx Indonesia</td>
+            <td class="mw">~89</td>
+            <td class="mw purple">~100</td>
+            <td class="mw gold">640</td>
+            <td class="mw red">~829</td>
+            <td>NVIDIA DGX-Ready，1.2GVA+电力锁定</td>
+          </tr>
+          <tr>
+            <td class="name">PDG</td>
+            <td class="mw">45</td>
+            <td class="mw purple">~60</td>
+            <td class="mw gold">244</td>
+            <td class="mw red">~518</td>
+            <td>JC3获8.56亿美元绿色融资</td>
+          </tr>
+          <tr>
+            <td class="name">Digital Edge</td>
+            <td class="mw">29</td>
+            <td class="mw purple">30.1</td>
+            <td class="mw gold">441</td>
+            <td class="mw red">~500</td>
+            <td>GIIC园区500MW，可扩至1GW</td>
+          </tr>
+          <tr>
+            <td class="name">NeutraDC</td>
+            <td class="mw">90</td>
+            <td class="mw-na">—</td>
+            <td class="mw gold">110</td>
+            <td class="mw red">200</td>
+            <td>Telkom旗下，与PLN合作扩容</td>
+          </tr>
+          <tr>
+            <td class="name">STT GDC</td>
+            <td class="mw">18</td>
+            <td class="mw purple">24</td>
+            <td class="mw gold">292</td>
+            <td class="mw red">~334</td>
+            <td>雅加达园区总管道360MW+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-sub">DCI Indonesia：本土龙头</div>
+    <p>DCI是印尼最大的本土中立数据中心运营商，运营容量 <strong>128MW</strong>，长期目标超 <strong>300MW</strong>。[reference:8]旗下JK1-JK5已投运，JK6（36MW）于2025年6月投运，为印尼最大单体数据中心。远期规划包括H2 Campus（Karawang，600MW+，配30MW太阳能农场）和H5 Sky Bintan（Bintan，1GW+，毗邻新加坡）。</p>
+
+    <div class="section-sub">BDx Indonesia：AI就绪先锋</div>
+    <p>BDx与Indosat Ooredoo Hutchison及Lintasarta合资，核心项目为Jatiluhur CGK4 AI数据中心园区，规划总容量 <strong>640MW</strong>，分6栋建筑建设。首栋 <strong>120MW</strong> 预计 <strong>2027年初</strong> 投运，采用 <strong>direct-to-chip液冷</strong> 架构，支持单机架最高 <strong>500kW</strong> 功率密度。园区已获 <strong>NVIDIA DGX-Ready Colocation</strong> 认证，并锁定PLN <strong>845 MVA</strong> 电网容量，属于BDx在印尼 <strong>1.2GVA+</strong> 电力布局的一部分。[reference:9]</p>
+
+    <div class="section-sub">PDG：绿色融资标杆</div>
+    <p>PDG在印尼部署JC1-JC2（12MW）及JC3（120MW园区，首期60MW），JC3获 <strong>8.56亿美元</strong> 绿色融资。JC3专为高密度AI算力设计，采用液冷技术，是雅加达首批液冷园区之一。</p>
+  </div>
+
+  <!-- 四、中资布局 -->
+  <div class="section">
+    <h2 class="section-title">四、中资企业布局：三层结构与双轨模式</h2>
+
+    <div class="highlight-box purple">
+      <div class="box-title">中资“三层布局”</div>
+      <ul>
+        <li><strong>租赁层</strong>：字节跳动作为BDC等运营商的锚定租户，存量 <strong>43MW</strong> + 在建 <strong>107MW</strong>，远期超 <strong>250MW</strong></li>
+        <li><strong>自建云区域层</strong>：阿里云运营两座数据中心，2026年新增第三座；腾讯云拥有3座数据中心（<strong>50MW+</strong>），2026年再投 <strong>5亿美元</strong> 建设第三座[reference:10]</li>
+        <li><strong>生态层</strong>：万国数据（GDS）在巴淡岛布局，润泽科技规划巴淡岛360MW项目</li>
+      </ul>
+    </div>
+
+    <p><strong>标杆案例</strong>：腾讯云最突出的成绩是帮助印尼最大科技集团 <strong>GoTo将Gojek的出行、配送业务整体迁上云</strong>——这是东南亚规模最大的迁云项目，同时还在为比亚迪、阿斯利康等跨国企业提供云服务。华为云雅加达3个可用区 <strong>利用率达90.99%</strong>，可用性99.99%、时延20毫秒。</p>
+
+    <p><strong>投资规模</strong>：字节跳动约 <strong>28亿美元</strong>，腾讯云 <strong>5亿美元</strong>（至2030年），阿里云节点扩容。此外，DAMAC Digital投资 <strong>23亿美元</strong> 建设AI-ready数据中心，润泽/秦淮在巴淡岛布局大型园区。</p>
+  </div>
+
+  <!-- 五、能源约束 -->
+  <div class="section">
+    <h2 class="section-title">五、能源、水与交付约束</h2>
+
+    <div class="section-sub">电力：核心瓶颈</div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num red">1,990.5</div>
+        <div class="lbl">现有接入容量（MVA）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num gold">6,884</div>
+        <div class="lbl">2027年需接入（MW）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num red">7,798</div>
+        <div class="lbl">2028年需接入（MW）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">25,297</div>
+        <div class="lbl">2034年电力管道（MW）</div>
+      </div>
+    </div>
+
+    <p>印尼电力供应面临结构性挑战。虽然全国存在约 <strong>9GW</strong> 过剩发电容量（主要在爪哇和苏门答腊），但站点级接入需 <strong>3-12个月</strong>。PLN已接入 <strong>159家</strong> 数据中心，总容量 <strong>2,038 MVA</strong>。[reference:11]数据中心电力管道预计 <strong>2034年达25,297MW</strong>，需在2027-2028年集中完成 <strong>6,884MW</strong> 和 <strong>7,798MW</strong> 接入。</p>
+
+    <div class="highlight-box warn">
+      <div class="box-title">重点项目电力锁定</div>
+      <ul>
+        <li><strong>BDx CGK4</strong>：<strong>845 MVA</strong>（PLN），另探索Jatiluhur水电站水电供应</li>
+        <li><strong>DayOne巴淡岛</strong>：<strong>511 MVA</strong>（PLN Batam），印尼迄今最大数据中心购电协议</li>
+        <li><strong>Digital Edge</strong>：<strong>2×725 MVA</strong>（PLN）</li>
+      </ul>
+    </div>
+
+    <div class="section-sub">水资源与可再生能源</div>
+    <p>巴淡岛Nongsa数字园规划的数据中心群日用水量预计达 <strong>2,900万升</strong>，相当于巴淡岛现有供水的 <strong>8.4%</strong>。BDx CGK4选址Jatiluhur大坝附近，可获得充足的清洁水源。PLN积极发展可再生能源并推出绿色电价和可再生能源证书。Pertamina地热能源（PGE）确认地热可作为基载可再生能源支撑数据中心和AI生态系统。</p>
+  </div>
+
+  <!-- 六、液冷技术演进 -->
+  <div class="section">
+    <h2 class="section-title">六、技术演进：液冷加速渗透</h2>
+    <p>随着高功率密度GPU集群（H100、Blackwell）的导入，印尼数据中心建设正迅速从传统风冷转向风冷+液冷混合及全液冷架构。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>项目</th><th>运营商</th><th>液冷方案</th><th>功率密度</th><th>状态</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">CGK4 Jatiluhur</td>
+            <td>BDx</td>
+            <td>Direct-to-chip液冷</td>
+            <td class="mw">500kW/机架</td>
+            <td>2027年初首栋投运</td>
+          </tr>
+          <tr>
+            <td class="name">JC3 Bekasi</td>
+            <td>PDG</td>
+            <td>液冷设计</td>
+            <td class="mw-na">高密度AI</td>
+            <td>建设中</td>
+          </tr>
+          <tr>
+            <td class="name">CGK Campus GIIC</td>
+            <td>Digital Edge</td>
+            <td>Direct-to-chip液冷</td>
+            <td class="mw-na">AI负载</td>
+            <td>2026 Q4首期</td>
+          </tr>
+          <tr>
+            <td class="name">STT Jakarta 2/3</td>
+            <td>STT GDC</td>
+            <td>风冷+液冷混合</td>
+            <td class="mw">>15kW/机架</td>
+            <td>2026-2027投运</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>液冷供应链本地化进展</strong>：LG电子的600kW CDU获Nvidia认证，已获得雅加达Sinar Mas数据中心冷却项目。这表明液冷设备供应链正在向印尼本地延伸。STT Jakarta 3已集成支持传统风冷和先进 <strong>Liquid-to-Chip冷却</strong> 的基础设施，可容纳NVIDIA H200/B200等最新GPU集群。[reference:12]</p>
+  </div>
+
+  <!-- 七、政策框架 -->
+  <div class="section">
+    <h2 class="section-title">七、政策框架</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>政策维度</th><th>具体内容</th><th>影响</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">外资持股</td>
+            <td>2021年第49号总统令，数据中心允许 <strong>100%外资持股</strong>[reference:13]</td>
+            <td>降低市场进入门槛</td>
+          </tr>
+          <tr>
+            <td class="name">企业所得税豁免</td>
+            <td>经济特区内最长 <strong>20年</strong> 免税期，按投资规模分档[reference:14]</td>
+            <td>显著降低前期税负</td>
+          </tr>
+          <tr>
+            <td class="name">进口设备增值税</td>
+            <td>经济特区内 <strong>增值税豁免</strong>，降低capex约11%</td>
+            <td>降低设备采购成本</td>
+          </tr>
+          <tr>
+            <td class="name">OSS审批系统</td>
+            <td>在线单一提交，审批周期压缩至最短 <strong>10周</strong></td>
+            <td>加速项目落地</td>
+          </tr>
+          <tr>
+            <td class="name">数据主权</td>
+            <td>政府和金融信息须存储在境内基础设施</td>
+            <td>推动本地云区域建设</td>
+          </tr>
+          <tr>
+            <td class="name">TKDN本地含量</td>
+            <td>美国企业ICT/数据中心产品可获豁免，允许进口专用服务器与冷却系统</td>
+            <td>降低合规压力</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 八、关键判断 -->
+  <div class="section">
+    <h2 class="section-title">八、关键判断</h2>
+
+    <div class="highlight-box blue">
+      <div class="box-title">1. 印尼是东南亚增速最快的市场之一，但兑现能力取决于电网</div>
+      <p>电力管道25,297MW vs 现有接入1,990.5 MVA，2027-2028年需集中完成超14GW接入，电网建设速度是核心变量。已锁定PLN大容量供电协议者（BDx、DayOne、Digital Edge）获得超额份额。</p>
+    </div>
+
+    <div class="highlight-box purple">
+      <div class="box-title">2. 中资“三层布局”已成型</div>
+      <p>字节跳动（租赁+自建）、阿里/腾讯（自建云区域）、万国数据/润泽（生态层）构成中资在印尼的立体布局。腾讯云GoTo迁云项目是东南亚最大规模迁云案例，验证了中资云服务商的本地化能力。</p>
+    </div>
+
+    <div class="highlight-box gold">
+      <div class="box-title">3. 液冷从可选变为必选</div>
+      <p>BDx CGK4（500kW/机架）、PDG JC3、Digital Edge CGK Campus全面采用direct-to-chip液冷。LG CDU获Nvidia认证并落地雅加达，液冷供应链正在向印尼本地延伸。</p>
+    </div>
+
+    <div class="highlight-box">
+      <div class="box-title">4. 巴淡岛是合规与溢出双重红利的受益者</div>
+      <p>距新加坡35分钟、20年免税、100%外资持股，BMI将其定位为“监管合规枢纽”。DayOne 450MW、Firmus 360MW、BW Digital 120MW构成巴淡岛的核心管道。</p>
+    </div>
+
+    <div class="highlight-box warn">
+      <div class="box-title">5. 地方审批合规是项目交付的关键风险点</div>
+      <p>2026年9月30日，西爪哇省长要求CGK4停止施工，原因是必要许可尚未取得、环境影响评估未完成。这表明即使在政策激励框架下，地方层面的审批合规仍是项目交付的关键风险。</p>
+    </div>
+  </div>
+
+  <!-- 脚注 -->
+  <div class="footnote">
+    <h3>数据口径与来源说明</h3>
+    <ul>
+      <li><strong>IT负载口径</strong>：仅计算数据中心实际可用于部署服务器的算力容量，已扣除冷却、配电等基础设施损耗。</li>
+      <li><strong>市场规模</strong>：Mordor Intelligence，2025年16.1亿美元 → 2026年18.3亿美元 → 2031年34.8亿美元（CAGR 13.71%）。</li>
+      <li><strong>运营容量基线</strong>：DC Atlas显示全国96个数据中心、78个运营、1,943MW在建；DCI Indonesia运营119MW；BDx Indonesia运营89MW。</li>
+      <li><strong>电力约束</strong>：PLN接入159家数据中心，容量2,038 MVA；2034年电力管道25,297MW；BDx锁定845 MVA，DayOne签署511 MVA购电协议。</li>
+      <li><strong>政策框架</strong>：2021年第49号总统令允许数据中心100%外资持股；经济特区最长20年企业所得税免税期。</li>
+      <li><strong>液冷技术</strong>：BDx CGK4采用direct-to-chip液冷，支持500kW/机架；STT Jakarta 3支持Liquid-to-Chip冷却。</li>
+      <li><strong>免责声明</strong>：本报告基于公开信息整理与交叉验证，部分运营商容量数据存在口径差异与重叠，预测情景存在不确定性，仅供一般信息与研究参考。</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
