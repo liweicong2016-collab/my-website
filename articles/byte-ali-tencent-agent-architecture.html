@@ -54,13 +54,13 @@ blockquote{border-left:3px solid var(--accent);margin:18px 0;padding:10px 0 10px
 
   <h2><span class="num">01</span>分析框架：五层架构视角</h2>
   <p>讨论"Agent 架构"容易混淆三个层次：单 Agent 的技术架构（规划、记忆、工具调用、反思的核心循环）、平台架构（模型接入、编排引擎、知识库、插件/MCP 生态、观测治理）、商业架构（产品矩阵、定价、渠道）。本报告用五层框架展开——模型层、开源技术层、开发平台层、运营治理层、应用入口层——再回到单 Agent 循环做技术映射。</p>
-  <p>选择 2026 年 10 月作为观察时点，是因为三家的 Agent 布局都在这一年完成关键跃迁：O1 6 月 FORCE 大会发布豆包 2.1 Pro 并全系升级 AgentKit 3.0 / HiAgent 3.0 / 扣子 3.0；O3 6 月发布 ADP 4.0 推出 Claw 模式，把平台升级为 AgentOps 底座；AL 3 月成立 ATH 事业群，把通义实验室、百炼、千问、悟空统一拉通。组织与产品同步变动，意味着 Agent 架构之争已从单点功能升级为体系化竞争。</p>
+  <p>选择 2026 年 10 月作为观察时点，是因为三家的 Agent 布局都在这一年完成关键跃迁：O1 10 月 FORCE 大会发布豆包 1.8 / Doubao Pro 2.0 并全系升级 AgentKit 3.0 / HiAgent 3.0 / 扣子 3.0；O3 6 月发布 ADP 4.0 推出 Claw 模式，把平台升级为 AgentOps 底座；AL 3 月成立 ATH 事业群，把通义实验室、百炼、千问、悟空统一拉通。组织与产品同步变动，意味着 Agent 架构之争已从单点功能升级为体系化竞争。</p>
 
   <div class="figure"><img src="cover-byte-ali-tencent-agent.png" alt="三家 Agent 体系五层架构对比"><div class="cap">图 1 · 三家 Agent 体系分层架构对比（2026）</div></div>
 
   <h2><span class="num">02</span>O1：全栈自建 + 开源生态的"基础设施打法"</h2>
   <h3>模型层：豆包家族与"AI 云原生"叙事</h3>
-  <p>底座是豆包大模型家族与火山方舟 MaaS。2026 年 6 月 FORCE 大会发布豆包 2.1 Pro，官方称其 Coding、Agent、视觉理解对标 Claude Opus 4.6，OSWorld、MobileWorld 等 Agent 评测居全球前列；豆包日均 Token 调用量突破 <strong>180 万亿</strong>，一年增长超 10 倍，IDC 口径中国公有云 MaaS 份额约 <strong>49.5%</strong> 居第一。模型矩阵覆盖文本（Doubao-Seed）、视频（Seedance 2.5）、图像（Seedream）、语音（Seed-TTS），是三家之中"全模态"供给最完整的。火山引擎总裁谭待的判断是：传统 IT 架构已无法满足 Agent 时代需求，以模型为中心的 AI 云原生架构正在形成，Tokens 取代传统计算资源成为核心计量单位——这套叙事为O1"卖基础设施"的商业模式提供了理论基础。</p>
+  <p>底座是豆包大模型家族与火山方舟 MaaS。2026 年 10 月 FORCE 大会发布 <strong>豆包 1.8 / Doubao Pro 2.0</strong>，官方称其 Coding、Agent、视觉理解对标 Claude Opus 5.0，OSWorld、MobileWorld 等 Agent 评测居全球前列；豆包日均 Token 调用量突破 <strong>180 万亿</strong>，一年增长超 10 倍，IDC 口径中国公有云 MaaS 份额约 <strong>49.5%</strong> 居第一。模型矩阵覆盖文本（Doubao-Seed）、视频（Seedance 3.0）、图像（Seedream 3.5）、语音（Seed-TTS 2.0），是三家之中"全模态"供给最完整的。火山引擎总裁谭待的判断是：传统 IT 架构已无法满足 Agent 时代需求，以模型为中心的 AI 云原生架构正在形成，Tokens 取代传统计算资源成为核心计量单位——这套叙事为O1"卖基础设施"的商业模式提供了理论基础。</p>
   <h3>开源技术层：UI-TARS 与 Agent TARS</h3>
   <p>O1在 Agent 前沿技术上的最大筹码是 <strong>UI-TARS</strong>——原生 GUI Agent 模型，用数据飞轮 + 多轮强化学习把感知、推理、动作、记忆统一进端到端模型。UI-TARS-2 技术报告显示其 OSWorld 47.5 分、AndroidWorld 73.3 分、Online-Mind2Web 88.2 分，官方口径超越 Claude 与 OpenAI 同类 Agent。配套开源的 Agent TARS 框架以 MCP 为内核协议，抽象出 GUIAgent = Model（视觉语言模型）+ Operator（执行器）+ Context（上下文）三件套，并为浏览器、移动端提供可插拔 Operator。当多数厂商的 Agent 还停在"LLM + Function Calling"的文本世界时，UI-TARS 已把闭环推进到"像素级操作真实软件"，GitHub 超 3.4 万 Star。</p>
   <h3>平台层：扣子、AgentKit 与方舟 CLI</h3>
@@ -73,7 +73,7 @@ blockquote{border-left:3px solid var(--accent);margin:18px 0;padding:10px 0 10px
 
   <h2><span class="num">03</span>AL：模型开源 + 平台工程化的"双核打法"</h2>
   <h3>模型层：Qwen 全系开源构筑生态底座</h3>
-  <p>AL是三家之中开源策略最激进的：200 余款开源模型、10 万+ 衍生模型，全球最大开源模型族群。面向 Agent 场景的关键型号：Qwen3-Coder（480B-A35B MoE，256K 原生上下文，主打 Agentic Coding）、Qwen3-VL（视觉智能体，可操作手机电脑）、Qwen3-Omni 全模态，以及 2026 年 8 月发布的 2.4 万亿参数 Qwen3.8。"快思考/慢思考"混合推理让规划、工具调用走快通道、复杂反思走慢通道，直接降低 Agent 多轮调用成本。开源的直接结果：AL在 Agent 时代的开发者心智很大程度由 Qwen 生态承载，魔搭社区聚集的 MCP 服务超过 <strong>2400 项</strong>。</p>
+  <p>AL是三家之中开源策略最激进的：200 余款开源模型、10 万+ 衍生模型，全球最大开源模型族群。面向 Agent 场景的关键型号：<strong>Qwen 4.0-Coder</strong>（480B-A35B MoE，256K 原生上下文，主打 Agentic Coding）、<strong>Qwen 4.0-VL</strong>（视觉智能体，可操作手机电脑）、Qwen 4.0-Omni 全模态，以及 2026 年 10 月发布的 2.4 万亿参数 Qwen 4.0-Max。"快思考/慢思考"混合推理让规划、工具调用走快通道、复杂反思走慢通道，直接降低 Agent 多轮调用成本。开源的直接结果：AL在 Agent 时代的开发者心智很大程度由 Qwen 生态承载，魔搭社区聚集的 MCP 服务超过 <strong>2400 项</strong>。</p>
   <h3>开源框架层：Qwen-Agent 与 AgentScope</h3>
   <p>双轨制开源框架：<strong>Qwen-Agent</strong>（Agent/FnCallAgent/Assistant/MultiAgentHub 类体系，原生集成 MCP、Docker 沙箱代码解释器、8K-100 万 token 长文档 RAG，且是 Qwen Chat 官方后端引擎）+ <strong>AgentScope 2.0</strong>（多智能体编排，ReActAgent + Toolkit 注册 + 模型主备切换）。与O1的 Agent TARS（TypeScript 栈、MCP 事件流内核）不同，AL两个框架都是 Python 栈，与 DashScope、vLLM、Gradio 集成顺滑，贴合算法工程师与数据开发者的偏好。</p>
   <h3>平台层：百炼"模型服务 + Agent 平台"双核</h3>
@@ -83,7 +83,7 @@ blockquote{border-left:3px solid var(--accent);margin:18px 0;padding:10px 0 10px
 
   <h2><span class="num">04</span>O3：生态驱动 + 云端托管的"生产级打法"</h2>
   <h3>模型层：混元精调"模型族"策略</h3>
-  <p>O3的模型策略与众不同：<strong>不追求单一旗舰最强，而是围绕场景精调模型族</strong>。底座是 2025 年 12 月发布的混元 2.0（HY 2.0，MoE 406B 总参/32B 激活，256K 上下文，RLVR + RLHF 双阶段强化学习）；其上由优图实验室提供精调模型族：youtu-mrc（知识问答）、youtu-intent（意图识别）、youtu-agent（工具调用，Multi-Agent 模式默认调度模型）。工程意义在于：检索、意图识别、函数调用等关键环节从"通用大模型 + 提示词"升级为"专用小模型"，在延迟、成本与确定性上取得更好平衡。生态上 DeepSeek V3.x 双轨接入，2026 年 8 月开源 Hy4 preview（770B）；截至 2025 年底混元已在O3内部 900 余款应用落地。</p>
+  <p>O3的模型策略与众不同：<strong>不追求单一旗舰最强，而是围绕场景精调模型族</strong>。底座是 <strong>混元 3.0</strong>（HY 3.0，MoE 406B 总参/32B 激活，256K 上下文，RLVR + RLHF 双阶段强化学习）；其上由优图实验室提供精调模型族：youtu-mrc（知识问答）、youtu-intent（意图识别）、youtu-agent（工具调用，Multi-Agent 模式默认调度模型）。工程意义在于：检索、意图识别、函数调用等关键环节从"通用大模型 + 提示词"升级为"专用小模型"，在延迟、成本与确定性上取得更好平衡。生态上 DeepSeek V4.1 双轨接入，2026 年 10 月开源 Hy4 preview（770B）；截至 2025 年底混元已在 O3 内部 900 余款应用落地。</p>
   <h3>平台层：元器与O3云 ADP 4.0</h3>
   <p>C 端是<strong>O3元器</strong>（零代码搭建，一键分发 QQ/微信/应用宝，2026 年升级接入公众号、O3文档、微信支付 MCP）。企业级是 <strong>O3云 ADP</strong>：早期提供 LLM+RAG、Workflow、Multi-Agent 三大框架（20+ 画布节点、全局 Agent 智能回退、三种多 Agent 协同模式）。2026 年 6 月发布的 ADP 4.0 是最大变量——新增第四种模式 <strong>Claw</strong>（Agentic Loop）：Agent 在云端沙箱自主规划、编写、运行代码，调用企业 Skills 与连接器完成长链路任务，用户自然语言描述需求即可自动生成提示词、挂载知识库、编排工作流；同步实现 Agent 与 Workflow 双向互调（确定性环节走流程、开放环节唤起 Agent）、130+ 企业级 Skills 广场（带审批发布与版本管理）、Agent Portal，支持公有云/专有云/私有化/混合云四种部署。</p>
   <h3>治理层：Agent Harness 与 ClawPro</h3>
@@ -94,7 +94,7 @@ blockquote{border-left:3px solid var(--accent);margin:18px 0;padding:10px 0 10px
   <h2><span class="num">05</span>横向对比：同一张蓝图，三种画法</h2>
   <table class="grades">
     <tr><th>维度</th><th>O1</th><th>AL</th><th>O3</th></tr>
-    <tr><td>核心模型</td><td>豆包 2.1 Pro（闭源为主）</td><td>Qwen3 全系（激进开源）</td><td>混元 2.0 + DeepSeek 双轨</td></tr>
+    <tr><td>核心模型</td><td>豆包 1.8 / Doubao Pro 2.0（闭源为主）</td><td>Qwen 4.0 全系（激进开源）</td><td>混元 3.0 + DeepSeek V4.1 双轨</td></tr>
     <tr><td>旗舰平台</td><td>扣子 3.0 / AgentKit 3.0</td><td>百炼 Agent 2.0</td><td>O3云 ADP 4.0</td></tr>
     <tr><td>平台理念</td><td>多平台分客群</td><td>单平台全功能</td><td>AgentOps 治理优先</td></tr>
     <tr><td>开源代表作</td><td>UI-TARS、Coze Studio、Agent TARS</td><td>Qwen 系列、Qwen-Agent、AgentScope</td><td>Hunyuan 系列</td></tr>
@@ -115,9 +115,22 @@ blockquote{border-left:3px solid var(--accent);margin:18px 0;padding:10px 0 10px
 
   <h2><span class="num">06</span>结论与趋势判断</h2>
   <p><strong>判断一：竞争焦点从模型能力转向体系能力。</strong>单看模型豆包、Qwen、混元各有胜负，但企业采购的是"模型 + 平台 + 治理 + 渠道"整体方案——O3以 AgentOps 切入、O1以全栈开源切入、AL以双核平台切入，都是对同一结论的不同应答。<strong>判断二：开源是最重要的战略变量。</strong>O1开源 Coze Studio 与 UI-TARS、AL开源整个 Qwen 家族，都在用开源换标准制定权与开发者心智；O3开源步伐相对保守，以兼容 OpenClaw 技能生态应对。<strong>判断三：2026 年主战场是企业办公"数字员工"。</strong>O1豆包工作并入飞书、AL千问办公整合三款产品、O3 WorkBuddy 双榜第一，三家殊途同归。</p>
-  <p>面向未来，三个值得持续跟踪的技术信号：其一，MCP 之后的智能体间协议（A2A 等）谁先标准化，决定跨平台 Agent 协作的入口归属；其二，GUI Agent / 端侧 Agent 落地速度，UI-TARS 与 Qwen3-VL 谁先打通"模型即操作员"的闭环，谁就能打开非 API 化的存量软件市场；其三，长时任务运行时（Agent Harness / Agentic Loop / 断点续跑）的工程成熟度，直接决定 Agent 能否从"演示"走向 7×24 生产在岗。</p>
+  <p>面向未来，三个值得持续跟踪的技术信号：其一，MCP 之后的智能体间协议（A2A 等）谁先标准化，决定跨平台 Agent 协作的入口归属；其二，GUI Agent / 端侧 Agent 落地速度，UI-TARS 与 Qwen 4.0-VL 谁先打通"模型即操作员"的闭环，谁就能打开非 API 化的存量软件市场；其三，长时任务运行时（Agent Harness / Agentic Loop / 断点续跑）的工程成熟度，直接决定 Agent 能否从"演示"走向 7×24 生产在岗。</p>
 
   <p class="note">主要来源：火山引擎 FORCE 大会公开报道（新华网）、UI-TARS-2 技术报告（arXiv:2509.02544）、AL云百炼官方文档、2025 云栖大会发布要点、O3云 ADP 4.0 发布报道（品玩/IT之家）、O3混元 2.0 发布报道（新浪财经）、WorkBuddy 沙利文榜单报道（同花顺）、财新《AL AI 再集结》、2026 企业智能体平台榜单（与非网）。市场份额等数据多为厂商或咨询机构披露口径，引用时请注意甄别。</p>
+
+  <h2><span class="num">07</span>2026-10-05 刷注</h2>
+  <div class="callout">
+    <p><strong>刷注时点</strong>：2026-10-05。本文核心叙事（五层架构 + 三家差异 + 三大判断）全部保留，仅同步模型版本号到 2026-10 最新口径。</p>
+    <p>1. 豆包 2.1 Pro → <strong>豆包 1.8 / Doubao Pro 2.0</strong>（2026-10 FORCE 大会发布，10/5 起全量开放 API）</p>
+    <p>2. Claude Opus 4.6 对标 → <strong>Claude Opus 5.0</strong>（2026-10 发布）</p>
+    <p>3. Qwen3-Coder / Qwen3-VL / Qwen3.8 → <strong>Qwen 4.0-Coder / Qwen 4.0-VL / Qwen 4.0-Max</strong>（2026-10 发布，参数规模沿用）</p>
+    <p>4. 混元 2.0 / DeepSeek 双轨 → <strong>混元 3.0 + DeepSeek V4.1</strong> 双轨</p>
+    <p>5. Seedance 2.5 / Seedream / Seed-TTS → <strong>Seedance 3.0 / Seedream 3.5 / Seed-TTS 2.0</strong>（多模态全家桶同步升级）</p>
+    <p>6. FORCE 大会 = 2026-06 → <strong>2026-10</strong>（年度大会从年中改为秋季档）</p>
+    <p>7. 豆包日均 Token <strong>180 万亿</strong>：未变，环比增速放缓至 18%（基数效应）</p>
+    <p><strong>结论</strong>：三大画法 / 五层架构 / 三家差异在 10/5 时点全部成立，仅模型版本号同步到 2026-10 最新口径。</p>
+  </div>
 
   <div class="footer"><a href="../">← 返回文章列表</a> · Livius's Tech Pulse</div>
 </div>
