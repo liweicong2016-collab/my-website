@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>马来西亚数据中心 IT 容量时间线（2026-2031）· 更新版</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-2: #1c2330;
+    --border: #2d3748;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent-2: #3fb950;
+    --accent-3: #d29922;
+    --accent-4: #f85149;
+    --accent-5: #bc8cff;
+    --line: #30363d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 48px 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 64px; }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  header .sub { color: var(--text-dim); font-size: 0.95rem; }
+
+  header .meta {
+    display: inline-flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  header .meta strong { color: var(--accent); font-weight: 600; }
+
+  /* 概览条 */
+  .overview {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 64px;
+  }
+
+  .ov-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .ov-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+  .ov-card .label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .ov-card .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ov-card .unit { font-size: 0.75rem; color: var(--text-dim); font-weight: 400; }
+  .ov-card .sub2 { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
+
+  /* 时间轴 */
+  .timeline { position: relative; padding-left: 48px; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-5), var(--accent-2));
+    opacity: 0.4;
+  }
+
+  .node { position: relative; margin-bottom: 56px; }
+  .node:last-child { margin-bottom: 0; }
+
+  .node::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 0 4px rgba(88,166,255,0.15);
+    z-index: 1;
+  }
+
+  .node.future::before { border-color: var(--accent-5); box-shadow: 0 0 0 4px rgba(188,140,255,0.15); }
+  .node.forecast::before { border-color: var(--accent-3); box-shadow: 0 0 0 4px rgba(210,153,34,0.15); }
+  .node.risk::before { border-color: var(--accent-4); box-shadow: 0 0 0 4px rgba(248,81,73,0.15); }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .node-date {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .node-tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-current { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .tag-future { background: rgba(188,140,255,0.15); color: var(--accent-5); border: 1px solid rgba(188,140,255,0.3); }
+  .tag-forecast { background: rgba(210,153,34,0.15); color: var(--accent-3); border: 1px solid rgba(210,153,34,0.3); }
+  .tag-risk { background: rgba(248,81,73,0.15); color: var(--accent-4); border: 1px solid rgba(248,81,73,0.3); }
+
+  .node-capacity {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+
+  .cap-item { display: flex; align-items: baseline; gap: 6px; }
+  .cap-item .k { color: var(--text-dim); }
+  .cap-item .v { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .cap-item .v.green { color: var(--accent-2); }
+  .cap-item .v.purple { color: var(--accent-5); }
+  .cap-item .v.gold { color: var(--accent-3); }
+  .cap-item .v.red { color: var(--accent-4); }
+
+  /* 表格 */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+
+  thead th {
+    text-align: left;
+    padding: 12px 14px;
+    background: var(--panel-2);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(88,166,255,0.04); }
+
+  td.name { font-weight: 600; color: var(--text); }
+  td.loc { color: var(--text-dim); }
+  td.mw {
+    font-weight: 700;
+    color: var(--accent-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  td.mw.purple { color: var(--accent-5); }
+  td.mw.gold { color: var(--accent-3); }
+  td.mw.red { color: var(--accent-4); }
+  td.mw-na { color: var(--text-dim); font-weight: 400; }
+  td.note { color: var(--text-dim); font-size: 0.78rem; }
+
+  /* 阶段合计 */
+  .phase-total {
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, rgba(88,166,255,0.08), rgba(188,140,255,0.08));
+    border: 1px solid rgba(88,166,255,0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .phase-total .label { font-size: 0.85rem; color: var(--text-dim); }
+  .phase-total .num { font-size: 1.1rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  /* 运营商管道矩阵 */
+  .matrix-section { margin-top: 80px; margin-bottom: 80px; }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .section-desc { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 24px; padding-left: 20px; }
+
+  .matrix-table td.mw { font-size: 0.82rem; }
+
+  /* 脚注 */
+  .footnote {
+    margin-top: 64px;
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-3);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .footnote h3 {
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .footnote ul { padding-left: 20px; }
+  .footnote li { margin-bottom: 6px; }
+  .footnote strong { color: var(--accent-3); }
+
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .overview { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 32px 16px 64px; }
+    header h1 { font-size: 1.5rem; }
+    .overview { grid-template-columns: repeat(2, 1fr); }
+    .timeline { padding-left: 36px; }
+    .node::before { left: -32px; }
+    .node-capacity { gap: 14px; font-size: 0.78rem; }
+    thead th, tbody td { padding: 8px 10px; }
+    .section-title { font-size: 1.1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .overview { grid-template-columns: 1fr; }
+    header .meta { flex-direction: column; gap: 6px; }
+    .node-date { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>马来西亚数据中心 IT 容量时间线</h1>
+    <p class="sub">2026 年 Q3 — 2031 年 · IT 负载口径（IT Load）· 数据截至 2026 年 9 月</p>
+    <div class="meta">
+      <span>报告日期 <strong>2026-10</strong></span>
+      <span>口径 <strong>IT Load</strong></span>
+      <span>单位 <strong>MW</strong></span>
+      <span>柔佛占比 <strong>~80%</strong></span>
+    </div>
+  </header>
+
+  <!-- 概览 -->
+  <div class="overview">
+    <div class="ov-card">
+      <div class="label">当前运营</div>
+      <div class="value">~1.5 <span class="unit">GW</span></div>
+      <div class="sub2">柔佛 1,110MW</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2026 年底</div>
+      <div class="value">~2.0-2.1 <span class="unit">GW</span></div>
+      <div class="sub2">一年翻倍</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2027 年中</div>
+      <div class="value">~2.8-3.0 <span class="unit">GW</span></div>
+      <div class="sub2">并网排队高峰</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2027 年底</div>
+      <div class="value">~3.5-4.0 <span class="unit">GW</span></div>
+      <div class="sub2">供需最紧阶段</div>
+    </div>
+    <div class="ov-card">
+      <div class="label">2031 年预测</div>
+      <div class="value">3.3-6.4 <span class="unit">GW</span></div>
+      <div class="sub2">中位 3,340MW</div>
+    </div>
+  </div>
+
+  <!-- 时间轴 -->
+  <div class="timeline">
+
+    <!-- ===== 节点 1：2026 Q3 ===== -->
+    <div class="node">
+      <div class="node-header">
+        <span class="node-date">2026 Q3（现状）</span>
+        <span class="node-tag tag-current">当前基线</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT</span><span class="v">~1.1-1.5 GW</span></div>
+        <div class="cap-item"><span class="k">柔佛运营</span><span class="v green">1,110 MW</span></div>
+        <div class="cap-item"><span class="k">柔佛在建</span><span class="v purple">602 MW</span></div>
+        <div class="cap-item"><span class="k">柔佛管道</span><span class="v gold">8,542 MW</span></div>
+        <div class="cap-item"><span class="k">空置率</span><span class="v red">0.7%</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>项目 / 运营商</th>
+              <th>地点</th>
+              <th>IT 容量</th>
+              <th>锚定租户 / 状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">DayOne Nusajaya</td>
+              <td class="loc">柔佛 Gelang Patah</td>
+              <td class="mw">240 MW（当前）</td>
+              <td class="note">28.2 万颗 H100 等效；2026 Q4 跃升至 473MW / 58.4 万颗</td>
+            </tr>
+            <tr>
+              <td class="name">Bridge DC MY06</td>
+              <td class="loc">柔佛 Sedenak</td>
+              <td class="mw">~508 MW（规划）</td>
+              <td class="note">字节跳动锚定；Megaspeed 68.4MW 转给 Zenlayer</td>
+            </tr>
+            <tr>
+              <td class="name">YTL Power JDC1-JDC3</td>
+              <td class="loc">柔佛 Kulai</td>
+              <td class="mw">150 MW（运营）</td>
+              <td class="note">Sea 集团为 JDC1 锚定租户；含 20MW NVIDIA GB200</td>
+            </tr>
+            <tr>
+              <td class="name">AirTrunk JHB1/JHB2</td>
+              <td class="loc">柔佛</td>
+              <td class="mw">~420 MW</td>
+              <td class="note">接近满租；全球云及 AI 客户</td>
+            </tr>
+            <tr>
+              <td class="name">PDG JH1</td>
+              <td class="loc">柔佛 Sedenak</td>
+              <td class="mw">52 MW（一期）</td>
+              <td class="note">全球最大科技公司；12 个月交付</td>
+            </tr>
+            <tr>
+              <td class="name">Vantage KUL1</td>
+              <td class="loc">Cyberjaya</td>
+              <td class="mw">31 MW</td>
+              <td class="note">KUL14 的 16MW 全租单一客户</td>
+            </tr>
+            <tr>
+              <td class="name">EdgeConneX Cyberjaya</td>
+              <td class="loc">Cyberjaya</td>
+              <td class="mw">6 MW（运营）</td>
+              <td class="note">KL CBD Tier 3 认证；一期 22.4MW Q1 2026</td>
+            </tr>
+            <tr>
+              <td class="name">Bitdeer A102</td>
+              <td class="loc">柔佛</td>
+              <td class="mw">9.5 MW</td>
+              <td class="note">已售罄</td>
+            </tr>
+            <tr>
+              <td class="name">TM Nxera 首批</td>
+              <td class="loc">柔佛 Iskandar Puteri</td>
+              <td class="mw">20 MW</td>
+              <td class="note">70% 已预售；Singtel 合资</td>
+            </tr>
+            <tr>
+              <td class="name">NTT / Keppel / AIMS</td>
+              <td class="loc">巴生谷</td>
+              <td class="mw">~105 MW</td>
+              <td class="note">NTT 29MW + Keppel 26.6MW + AIMS 50MW</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== 节点 2：2026 年底 ===== -->
+    <div class="node">
+      <div class="node-header">
+        <span class="node-date">2026 年底</span>
+        <span class="node-tag tag-future">一年翻倍</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT</span><span class="v">~2.0-2.1 GW</span></div>
+        <div class="cap-item"><span class="k">本阶段新增</span><span class="v green">~500-900 MW</span></div>
+        <div class="cap-item"><span class="k">JLL 预测</span><span class="v purple">2,055 MW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项目 / 运营商</th>
+              <th>地点</th>
+              <th>新增 IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">DayOne Nusajaya B7-B10</td>
+              <td class="loc">柔佛 Nusajaya</td>
+              <td class="mw">+233 MW</td>
+              <td class="note">园区从 240MW 跃升至 473MW，2026 Q4 投运</td>
+            </tr>
+            <tr>
+              <td class="name">YTL JDC4</td>
+              <td class="loc">柔佛 Kulai</td>
+              <td class="mw">40 MW</td>
+              <td class="note">已签约美国超大规模客户，分三期投运</td>
+            </tr>
+            <tr>
+              <td class="name">YTL JDC5</td>
+              <td class="loc">柔佛 Kulai</td>
+              <td class="mw">80 MW</td>
+              <td class="note">JDC3 一半已于 2025 年 9 月投产，剩余爬坡</td>
+            </tr>
+            <tr>
+              <td class="name">Digital Halo JHB1</td>
+              <td class="loc">柔佛</td>
+              <td class="mw">20 MW</td>
+              <td class="note">已封顶，Q4 2026 运营，全租单一客户</td>
+            </tr>
+            <tr>
+              <td class="name">STT Johor 1 首座</td>
+              <td class="loc">柔佛 Nusa Cemerlang</td>
+              <td class="mw">16 MW</td>
+              <td class="note">2026 年底全面投运，园区规划 166MW</td>
+            </tr>
+            <tr>
+              <td class="name">Empyrion MY1 首期</td>
+              <td class="loc">柔佛 Nusajaya SILC</td>
+              <td class="mw-na">40 MW（推迟）</td>
+              <td class="note">原定 Q4 2026，推迟至 Q1 2027</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">本阶段实际新增（扣除推迟项目）</span>
+        <span class="num">~389 MW</span>
+      </div>
+    </div>
+
+    <!-- ===== 节点 3：2027 年中 ===== -->
+    <div class="node future">
+      <div class="node-header">
+        <span class="node-date">2027 年中</span>
+        <span class="node-tag tag-risk">电力硬约束</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT（推算）</span><span class="v">~2.8-3.0 GW</span></div>
+        <div class="cap-item"><span class="k">本阶段新增</span><span class="v green">~400-500 MW</span></div>
+        <div class="cap-item"><span class="k">关键约束</span><span class="v red">2027 年无新增气电</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项目 / 运营商</th>
+              <th>地点</th>
+              <th>新增 IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">Empyrion MY1 首期</td>
+              <td class="loc">柔佛 Nusajaya SILC</td>
+              <td class="mw">40 MW</td>
+              <td class="note">从 2026 Q4 推迟至 Q1 2027 RFS</td>
+            </tr>
+            <tr>
+              <td class="name">Bitdeer A201</td>
+              <td class="loc">柔佛新山</td>
+              <td class="mw">21.7 MW</td>
+              <td class="note">2027 年 1 月通电，70%+ 已签订购电协议</td>
+            </tr>
+            <tr>
+              <td class="name">Equinix JH2 首期</td>
+              <td class="loc">柔佛</td>
+              <td class="mw">7.2 MW</td>
+              <td class="note">首期 1,100 机柜，Q1 2027 启动</td>
+            </tr>
+            <tr>
+              <td class="name">Racks Central RCJM 1</td>
+              <td class="loc">柔佛</td>
+              <td class="mw">90 MW</td>
+              <td class="note">ESR 支持，510MW 园区首期，Q1 2027</td>
+            </tr>
+            <tr>
+              <td class="name">TM Nxera 剩余容量</td>
+              <td class="loc">柔佛 Iskandar Puteri</td>
+              <td class="mw">44 MW</td>
+              <td class="note">首期 64MW 中的剩余，Q1 2027 投运</td>
+            </tr>
+            <tr>
+              <td class="name">YTL Kulai 新增</td>
+              <td class="loc">柔佛 Kulai</td>
+              <td class="mw">200 MW</td>
+              <td class="note">2027 年 Q1 投入营运，迈向 500MW</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">本阶段新增 IT 容量合计</span>
+        <span class="num">~403 MW</span>
+      </div>
+      <div class="footnote" style="margin-top:16px; border-left-color: var(--accent-4); background: rgba(248,81,73,0.05);">
+        <strong style="color: var(--accent-4);">⚠ 电力警示</strong>：TNB 已签署 49 份供电协议（7.1GW），其中 29 个项目（3.8GW）已并网。半岛电网 2027 年无新增燃气机组投运，下一轮 8.3GW 集中投运在 2028-2031 年。实际带电时间存在系统性后移风险。
+      </div>
+    </div>
+
+    <!-- ===== 节点 4：2027 年底 ===== -->
+    <div class="node future">
+      <div class="node-header">
+        <span class="node-date">2027 年底</span>
+        <span class="node-tag tag-risk">供需最紧</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">运营 IT（推算）</span><span class="v">~3.5-4.0 GW</span></div>
+        <div class="cap-item"><span class="k">本阶段新增</span><span class="v green">~200-400 MW</span></div>
+        <div class="cap-item"><span class="k">电力申请累计</span><span class="v red">~11 GW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项目 / 运营商</th>
+              <th>地点</th>
+              <th>新增 IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">Equinix JH2 第二期</td>
+              <td class="loc">柔佛</td>
+              <td class="mw">7.2 MW</td>
+              <td class="note">第二期 1,125 机柜，Q3 2027 启动</td>
+            </tr>
+            <tr>
+              <td class="name">Bitdeer A202</td>
+              <td class="loc">柔佛新山</td>
+              <td class="mw">65.1 MW</td>
+              <td class="note">2027 Q3 投运，园区合计达 86.8MW</td>
+            </tr>
+            <tr>
+              <td class="name">STT Johor 1 扩建</td>
+              <td class="loc">柔佛 Nusa Cemerlang</td>
+              <td class="mw">累计 166 MW</td>
+              <td class="note">园区规划容量全部释放，13.7 亿美元绿色融资</td>
+            </tr>
+            <tr>
+              <td class="name">Empyrion MY1 后续</td>
+              <td class="loc">柔佛 Nusajaya</td>
+              <td class="mw">累计 200 MW</td>
+              <td class="note">五栋楼各 40MW，分五期建设</td>
+            </tr>
+            <tr>
+              <td class="name">YTL JDC11</td>
+              <td class="loc">柔佛 Kulai</td>
+              <td class="mw">80 MW</td>
+              <td class="note">建设中，预计 2027 年底完工</td>
+            </tr>
+            <tr>
+              <td class="name">Privasia Silverstreams 首期</td>
+              <td class="loc">霹雳 Bagan Datuk</td>
+              <td class="mw">10 MW</td>
+              <td class="note">首期预计 2027 年底或 2028 年初投运</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">本阶段新增 IT 容量合计</span>
+        <span class="num">~178 MW+</span>
+      </div>
+    </div>
+
+    <!-- ===== 节点 5：2028-2031 ===== -->
+    <div class="node forecast">
+      <div class="node-header">
+        <span class="node-date">2028 → 2031</span>
+        <span class="node-tag tag-forecast">远期预测</span>
+      </div>
+      <div class="node-capacity">
+        <div class="cap-item"><span class="k">2031 中位</span><span class="v">3,340 MW</span></div>
+        <div class="cap-item"><span class="k">2031 乐观</span><span class="v green">6.4 GW</span></div>
+        <div class="cap-item"><span class="k">2030 官方 DC 用电</span><span class="v red">7.7 GW</span></div>
+        <div class="cap-item"><span class="k">2040 官方 DC 用电</span><span class="v red">20.9 GW</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>项目 / 运营商</th>
+              <th>地点</th>
+              <th>IT 容量</th>
+              <th>关键节点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">Gamuda Port Dickson 项目 1</td>
+              <td class="loc">森美兰 Port Dickson</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">2026 Q4 动工，2028 Q3 完工</td>
+            </tr>
+            <tr>
+              <td class="name">Gamuda Port Dickson 项目 2</td>
+              <td class="loc">森美兰 Port Dickson</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">2026 Q4 动工，2028 Q4 完工</td>
+            </tr>
+            <tr>
+              <td class="name">Leighton Asia 柔佛项目</td>
+              <td class="loc">柔佛新山</td>
+              <td class="mw">57.6 MW</td>
+              <td class="note">六栋托管楼，2028 年完工</td>
+            </tr>
+            <tr>
+              <td class="name">Cyberjaya 新数据中心</td>
+              <td class="loc">雪兰莪 Cyberjaya</td>
+              <td class="mw-na">未披露</td>
+              <td class="note">投资 25 亿令吉，预计 2028 年完工</td>
+            </tr>
+            <tr>
+              <td class="name">Bitdeer AI 扩展目标</td>
+              <td class="loc">柔佛新山</td>
+              <td class="mw">累计 350 MW</td>
+              <td class="note">目标 2028 Q1 前达到 350MW AI 云容量</td>
+            </tr>
+            <tr>
+              <td class="name">YTL Kulai 总计</td>
+              <td class="loc">柔佛 Kulai</td>
+              <td class="mw gold">累计 1.2 GW</td>
+              <td class="note">目标 2030 年前达 1.2GW</td>
+            </tr>
+            <tr>
+              <td class="name">YTL Sedenak 园区</td>
+              <td class="loc">柔佛 Sedenak</td>
+              <td class="mw purple">1.2-1.5 GW</td>
+              <td class="note">与 JLand Group 合作，远期规划</td>
+            </tr>
+            <tr>
+              <td class="name">Firmus × OpenAI</td>
+              <td class="loc">柔佛（推测）</td>
+              <td class="mw red">>900 MW</td>
+              <td class="note">全客户签约容量；Vera Rubin NVL72 + HyperCube 液冷</td>
+            </tr>
+            <tr>
+              <td class="name">字节跳动 × Aolani</td>
+              <td class="loc">柔佛（推测）</td>
+              <td class="mw red">~100 MW+</td>
+              <td class="note">500 套 Blackwell 系统（3.6 万颗 B200）；2027 年初扩至 2.2 万颗 GPU</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="phase-total">
+        <span class="label">2031 年全国 IT 容量综合预测</span>
+        <span class="num">3.3 - 6.4 GW</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 运营商管道矩阵 -->
+  <div class="matrix-section">
+    <h2 class="section-title">Colo 运营商管道矩阵（精确到 MW）</h2>
+    <p class="section-desc">按 IT 负载口径汇总；部分运营商数据存在重叠，实际全国合计低于简单加总。</p>
+    <div class="table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>阵营</th>
+            <th>运营商</th>
+            <th>已运营</th>
+            <th>在建</th>
+            <th>规划/储备</th>
+            <th>总管道</th>
+            <th>锚定租户 / 特征</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3" style="background: rgba(88,166,255,0.06); color: var(--accent); font-weight: 600; font-size: 0.75rem; writing-mode: vertical-lr; text-align: center;">第一阵营<br>&gt;700MW</td>
+            <td class="name">Bridge Data Centres</td>
+            <td class="mw">>300</td>
+            <td class="mw purple">~880</td>
+            <td class="mw gold">>1,800</td>
+            <td class="mw red">~2,980</td>
+            <td class="note">字节跳动 MY06 锚定；贝恩资本旗下</td>
+          </tr>
+          <tr>
+            <td class="name">YTL Power</td>
+            <td class="mw">150</td>
+            <td class="mw purple">202</td>
+            <td class="mw gold">~2,400</td>
+            <td class="mw red">~2,750</td>
+            <td class="note">电力一体化 + NVIDIA Exemplar 认证</td>
+          </tr>
+          <tr>
+            <td class="name">AirTrunk（黑石）</td>
+            <td class="mw">~150</td>
+            <td class="mw purple">~270</td>
+            <td class="mw gold">~280</td>
+            <td class="mw red">~700</td>
+            <td class="note">JHB1/JHB2 近满租；承诺 68 亿美元</td>
+          </tr>
+          <tr>
+            <td rowspan="4" style="background: rgba(188,140,255,0.06); color: var(--accent-5); font-weight: 600; font-size: 0.75rem; writing-mode: vertical-lr; text-align: center;">第二阵营<br>200-700MW</td>
+            <td class="name">DayOne（GDS 分拆）</td>
+            <td class="mw">390</td>
+            <td class="mw purple">83</td>
+            <td class="mw gold">500+</td>
+            <td class="mw red">~973</td>
+            <td class="note">Nusajaya 28.2 万颗 H100 等效</td>
+          </tr>
+          <tr>
+            <td class="name">Vantage（DigitalBridge）</td>
+            <td class="mw">31</td>
+            <td class="mw purple">256</td>
+            <td class="mw gold">300</td>
+            <td class="mw red">~587</td>
+            <td class="note">KUL2 追加 30 亿美元投资</td>
+          </tr>
+          <tr>
+            <td class="name">PDG（华平）</td>
+            <td class="mw">52</td>
+            <td class="mw purple">148</td>
+            <td class="mw gold">200</td>
+            <td class="mw red">400</td>
+            <td class="note">JH1 一期 12 个月交付</td>
+          </tr>
+          <tr>
+            <td class="name">EdgeConneX</td>
+            <td class="mw">6</td>
+            <td class="mw purple">45</td>
+            <td class="mw gold">250</td>
+            <td class="mw red">~300</td>
+            <td class="note">500MW+ AI 就绪分布式布局</td>
+          </tr>
+          <tr>
+            <td style="background: rgba(210,153,34,0.06); color: var(--accent-3); font-weight: 600; font-size: 0.75rem; writing-mode: vertical-lr; text-align: center;">第三阵营<br>&lt;200MW</td>
+            <td class="name">STT GDC / NEXTDC / TM Nxera / Bitdeer 等</td>
+            <td class="mw">~50</td>
+            <td class="mw purple">~50</td>
+            <td class="mw gold">~100</td>
+            <td class="mw red">65-166</td>
+            <td class="note">细分市场与本地需求</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 脚注 -->
+  <div class="footnote">
+    <h3>数据口径与来源说明</h3>
+    <ul>
+      <li><strong>IT 负载口径</strong>：仅计算数据中心实际可用于部署服务器的算力容量，已扣除冷却、配电等基础设施损耗。不等同于电网连接容量（PUE 要求托管 ≤1.6、超大规模 ≤1.4）。</li>
+      <li><strong>柔佛 vs 全国</strong>：柔佛占全国运营容量约 80%，已运营 IT 容量 1,110MW（2026 年上半年，居亚太第三）；全国管道含在建与规划达 8,542MW。</li>
+      <li><strong>电力约束</strong>：TNB 已签署 49 份供电协议（7.1GW），29 个项目（3.8GW）已并网；已提交电力申请累计约 11GW，相当于全国发电容量约 40%。半岛电网 2027 年无新增燃气机组投运。</li>
+      <li><strong>2027 年推算</strong>：基于在建项目交付节奏与 TNB energization 日历推算，实际投运可能受并网排队影响后移。</li>
+      <li><strong>2031 年预测</strong>：行业研究预测运营 IT 负载 3,340MW（中位）；超大规模市场 CAGR 37.15% 的高增速路径部分兑现则可达 6.4GW。</li>
+      <li><strong>Empyrion MY1</strong>：首期 40MW 从 2026 Q4 推迟至 2027 Q1，已在本时间线中调整。</li>
+      <li><strong>数据来源</strong>：综合 JLL、高力国际、Mordor Intelligence、Wood Mackenzie、TNB 披露、各运营商公告及行业媒体交叉验证。</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
