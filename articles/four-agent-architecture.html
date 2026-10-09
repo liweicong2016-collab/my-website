@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>四个 Agent,一张架构图 — 李维聪</title>
+<meta name="description" content="把办公、编程、视频、个人四类 Agent 收进同一张架构图。沿用 Brij Pandey 的视觉语法:7 模块 + 红色虚线流 + 左侧 Guardrails。">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0a0a0f;color:#e8e6e0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid #1a1a22;padding:0 24px}
+.top-in{max-width:1280px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:14px;color:#d4a853;letter-spacing:1px;font-weight:600}
+.brand small{color:#7e8a8e;font-weight:400;margin-left:8px;letter-spacing:0}
+.wrap{max-width:1280px;margin:0 auto;padding:32px 24px 80px}
+h1{margin:0 0 6px;font-size:30px;font-weight:800;letter-spacing:2px}
+h1 .en{font-family:Georgia,serif;color:#d4a853;font-weight:400;font-size:22px;margin-left:8px;letter-spacing:0}
+.intro{color:#9a9690;font-size:15px;max-width:920px;margin:8px 0 0}
+.intro strong{color:#f0e6d2}
+.theme-toggle{display:flex;gap:6px;align-items:center;margin:24px 0 0}
+.theme-toggle span{color:#7e8a8e;font-size:13px;letter-spacing:1px;margin-right:4px}
+.theme-toggle button{font:inherit;font-size:13px;border:1px solid #2a2a35;border-radius:6px;background:rgba(20,20,28,.6);padding:7px 14px;cursor:pointer;color:#b8b4a8}
+.theme-toggle button[aria-selected=true]{background:linear-gradient(180deg,#3d3520,#2a2517);color:#f0e6d2;border-color:#d4a853;box-shadow:0 0 0 1px rgba(212,168,83,.3) inset}
+.tabs{display:flex;gap:6px;margin:14px 0 18px;flex-wrap:wrap}
+.tabs button{font:inherit;font-size:14px;border:1px solid #2a2a35;border-radius:7px;background:rgba(20,20,28,.6);padding:8px 16px;cursor:pointer;color:#b8b4a8;letter-spacing:1px;transition:all .15s}
+.tabs button:hover{background:rgba(40,40,55,.7);color:#fff}
+.tabs button[aria-selected=true]{background:linear-gradient(180deg,#3d3520,#2a2517);color:#f0e6d2;border-color:#d4a853;box-shadow:0 0 0 1px rgba(212,168,83,.3) inset}
+.tabs button .pill{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.frame{position:relative;background:#fcfcfa;border-radius:10px;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.scene{display:none;width:100%;height:auto}
+.scene.active{display:block}
+.diagram-pair{display:block;line-height:0}
+.diagram-pair img{display:block;width:100%;height:auto;max-width:100%}
+.diagram-pair .dark{display:none}
+body.theme-dark .diagram-pair .light{display:none}
+body.theme-dark .diagram-pair .dark{display:block}
+.caption{margin:14px 0 0;font-size:14px;color:#9a9690;line-height:1.7}
+.caption strong{color:#d4a853}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:32px 0 0}
+.legend-item{background:rgba(255,255,255,.03);border:1px solid #1f1f28;border-radius:8px;padding:14px 16px}
+.legend-item h3{margin:0 0 4px;font-size:14px;color:#f0e6d2;font-weight:700;letter-spacing:1px}
+.legend-item h3 .pill{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.legend-item p{margin:0;font-size:13px;color:#9a9690;line-height:1.6}
+.legend-item p strong{color:#d4a853}
+.takeaway{margin:48px 0 0;padding:24px;background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.25);border-radius:10px}
+.takeaway h2{margin:0 0 10px;font-size:18px;color:#d4a853;letter-spacing:1px}
+.takeaway p{margin:8px 0;font-size:14px;color:#c8c4b8;line-height:1.7}
+.end{text-align:center;color:#7e8a8e;margin-top:60px;font-size:13px;letter-spacing:2px}
+@media (max-width:720px){
+  .tabs button{font-size:12px;padding:7px 12px}
+  h1{font-size:24px}
+  .legend{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in"><div class="brand">李维聪<small>·  架构图集</small></div></div></div>
+<div class="wrap">
+
+<h1>四个 Agent,一张架构图<span class="en">Four Agents, One Architecture</span></h1>
+<p class="intro">把<strong>办公 / 编程 / 视频 / 个人</strong>四类 Agent 收进同一张图。沿用 Brij Pandey 的视觉语法 —— <strong>7 个核心模块 + 红色虚线流 + 左侧 Guardrails 侧条</strong>。模型、连接器、观测底座可以共用,差异化体现在控制机制、状态模型与失败处理上。</p>
+
+<div class="theme-toggle">
+  <span>主题:</span>
+  <button id="theme-light" aria-selected="true">☀ 亮色 Brij</button>
+  <button id="theme-dark" aria-selected="false">🌙 暗色 Web</button>
+</div>
+
+<div class="tabs" role="tablist">
+  <button data-scene="0" aria-selected="true"><span class="pill" style="background:#c6776c"></span>总览 · Overview</button>
+  <button data-scene="1" aria-selected="false"><span class="pill" style="background:#42669e"></span>办公 · Office</button>
+  <button data-scene="2" aria-selected="false"><span class="pill" style="background:#7a5ab2"></span>编程 · Coding</button>
+  <button data-scene="3" aria-selected="false"><span class="pill" style="background:#b67a4b"></span>视频 · Video</button>
+  <button data-scene="4" aria-selected="false"><span class="pill" style="background:#3e7d76"></span>个人 · Personal</button>
+</div>
+
+<div class="frame">
+
+<section class="scene" id="scene-0" data-name="总览" data-sub="四个场景共用的统一架构">
+  <div class="diagram-pair">
+    <img class="light" src="four-agent-architecture-overview.png" alt="总览 Agent 架构图 · 亮色">
+    <img class="dark" src="four-agent-architecture-overview-dark.png" alt="总览 Agent 架构图 · 暗色">
+  </div>
+</section>
+
+<section class="scene" id="scene-1" data-name="办公" data-sub="组织与流程驱动">
+  <div class="diagram-pair">
+    <img class="light" src="four-agent-architecture-office.png" alt="办公 Agent 架构图 · 亮色">
+    <img class="dark" src="four-agent-architecture-office-dark.png" alt="办公 Agent 架构图 · 暗色">
+  </div>
+</section>
+
+<section class="scene" id="scene-2" data-name="编程" data-sub="仓库与验证驱动">
+  <div class="diagram-pair">
+    <img class="light" src="four-agent-architecture-coding.png" alt="编程 Agent 架构图 · 亮色">
+    <img class="dark" src="four-agent-architecture-coding-dark.png" alt="编程 Agent 架构图 · 暗色">
+  </div>
+</section>
+
+<section class="scene" id="scene-3" data-name="视频" data-sub="分镜与资产驱动">
+  <div class="diagram-pair">
+    <img class="light" src="four-agent-architecture-video.png" alt="视频 Agent 架构图 · 亮色">
+    <img class="dark" src="four-agent-architecture-video-dark.png" alt="视频 Agent 架构图 · 暗色">
+  </div>
+</section>
+
+<section class="scene" id="scene-4" data-name="个人" data-sub="事件与个人记忆驱动">
+  <div class="diagram-pair">
+    <img class="light" src="four-agent-architecture-personal.png" alt="个人 Agent 架构图 · 亮色">
+    <img class="dark" src="four-agent-architecture-personal-dark.png" alt="个人 Agent 架构图 · 暗色">
+  </div>
+</section>
+
+</div>
+
+<p class="caption" id="caption">
+  <strong>看图指南:</strong> 中央纵向主流程走 "目标 → 规划 → 推理 → 思考 / 行动 / 输入 → 反思 → 结果";左侧 <strong>Memory</strong> 提供上下文,右侧 <strong>Tool + MCP</strong> 提供执行;<strong>左侧红色条 = Guardrails &amp; Safety</strong> 横切监督。中间那一行 <strong>Specific 机制</strong>才是四个 Agent 真正的区别。
+</p>
+
+<div class="legend">
+  <div class="legend-item"><h3><span class="pill" style="background:#42669e"></span>办公 Agent</h3><p>主导机制:<strong>持久化业务工作流</strong>。状态对象 = 流程实例 / 审批 / 回执 / 责任人。失败处理:<strong>等待审批 · 核对回执 · 跨系统补偿</strong>。</p></div>
+  <div class="legend-item"><h3><span class="pill" style="background:#7a5ab2"></span>编程 Agent</h3><p>主导机制:<strong>隔离修改与执行验证循环</strong>。状态对象 = 代码版本 / 工作区 / 补丁 / 测试证据。失败处理:<strong>修改 / 测试 / 归因 / 重修 / 评审反馈</strong>。</p></div>
+  <div class="legend-item"><h3><span class="pill" style="background:#b67a4b"></span>视频 Agent</h3><p>主导机制:<strong>镜头依赖图 + 异步任务调度</strong>。状态对象 = 镜头任务 / 素材版本 / 生成参数 / 时间轴。失败处理:<strong>生成 / 检查 / 局部重生成 / 成片验收</strong>。</p></div>
+  <div class="legend-item"><h3><span class="pill" style="background:#3e7d76"></span>个人 Agent</h3><p>主导机制:<strong>授权事件触发 + 个性化决策</strong>。状态对象 = 情境快照 / 授权 / 操作状态 / 记忆来源。失败处理:<strong>感知 / 规划 / 授权 / 核对 / 记忆更新</strong>。</p></div>
+</div>
+
+<div class="takeaway">
+  <h2>结论</h2>
+  <p><strong>共用底座,但场景专属架构不能省略。</strong>模型、连接器、观测、身份可以共用。差异化落在控制机制(状态模型 / 流程引擎 / 工作区 / 调度器 / 授权引擎)、状态对象(流程实例 / 代码版本 / 镜头任务 / 情境快照)与失败处理上。</p>
+  <p><strong>第一阶段建设优先级:</strong>办公 = 一个 IM 入口 + 流程引擎 + 两个业务连接器,先把等待审批和幂等打通;编程 = 一个独立工作区 + 真实验证 + PR 草稿;视频 = 一个参考资产库 + 并行任务调度 + 镜头级重生成;个人 = 授权事件引擎 + 来源可信的记忆 + 主动提醒边界。</p>
+  <p>Guardrails &amp; Safety 横切:<strong>权限继承 / 越权检索过滤 / 重复请求去重 / 产物证据链 / 人工升级阈值</strong>。五项必须在第一阶段就内置。</p>
+</div>
+
+<div class="end">— 全 26 — 架构 × 场景 × 差异 —</div>
+
+</div>
+
+<script>
+const CAPTIONS = [
+  `<strong>总览图:</strong> 把四类 Agent 的差异化合并到 "Specific 机制" 行,只展示共有的主流程、记忆、工具、反思。Guardrails 红条左侧贯穿,监督权限、越权、幂等、证据链、人工升级。`,
+  `<strong>办公 Agent:</strong> 主导机制 = <strong>持久化业务工作流</strong>。Specific 行的 "流程状态持久化 · 等待审批后继续" 是这类的核心差异;Memory 装组织 / 权限 / 制度;Tool 装日历 / 会议室 / 邮件 / 文档。`,
+  `<strong>编程 Agent:</strong> 主导机制 = <strong>隔离修改 + 执行验证循环</strong>。Specific 行的 "隔离工作区 · 保留已有用户修改" 是这类的核心差异;Memory 装仓库 / 符号 / 规范;Tool 装代码检索 / 终端 / Git。`,
+  `<strong>视频 Agent:</strong> 主导机制 = <strong>镜头依赖图 + 异步任务调度</strong>。Specific 行的 "镜头 A…N 并行 · 音轨独立生成" 是这类的核心差异;Memory 装产品参考 / 品牌 / 风格;Tool 装图像视频生成 / 配音 / 剪辑。`,
+  `<strong>个人 Agent:</strong> 主导机制 = <strong>授权事件触发 + 个性化决策</strong>。Specific 行的 "已有授权内执行 · 必要时等待确认" 是这类的核心差异;Memory 装偏好 / 来源 / 置信度;Tool 装日历 / 地图 / 出行预订。`
+];
+
+const themeBtns = document.querySelectorAll('.theme-toggle button');
+
+function applyTheme(t) {
+  document.body.classList.toggle('theme-light', t === 'light');
+  document.body.classList.toggle('theme-dark', t === 'dark');
+  themeBtns.forEach(b => b.setAttribute('aria-selected', (b.id === 'theme-' + t) ? 'true' : 'false'));
+  try { localStorage.setItem('four_agent_theme', t); } catch(e) {}
+}
+
+themeBtns.forEach(b => b.addEventListener('click', () => applyTheme(b.id.replace('theme-', ''))));
+try { applyTheme(localStorage.getItem('four_agent_theme') || 'light'); } catch(e) { applyTheme('light'); }
+
+let scene = 0;
+
+function render() {
+  document.querySelectorAll('.scene').forEach((el, i) => {
+    el.classList.toggle('active', i === scene);
+  });
+  document.querySelectorAll('.tabs button').forEach((b, i) =>
+    b.setAttribute('aria-selected', i === scene ? 'true' : 'false')
+  );
+  document.getElementById('caption').innerHTML = CAPTIONS[scene];
+}
+
+document.querySelectorAll('.tabs button').forEach((b, i) =>
+  b.addEventListener('click', () => { scene = i; render(); })
+);
+
+render();
+</script>
+</body>
+</html>
