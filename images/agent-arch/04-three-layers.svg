@@ -1,21 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580">
-<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#d4a853"/></marker>
-<marker id="g" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#8f8fa3"/></marker></defs>
-<rect width="1200" height="580" fill="#0a0a0f"/>
-<text x="600" y="52" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="24" font-weight="700" fill="#e8e8ef">Workflow / Skill / 模型：三层怎么分</text>
-<text x="600" y="80" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">不是互斥，是分工</text>
-<rect x="60" y="130" width="360" height="240" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="240.0" y="257.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">Workflow</text>
-<text x="240" y="285" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">管理相对确定的依赖与执行约束</text>
-<text x="240" y="320" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">可预测、可复跑</text>
-<rect x="420" y="130" width="360" height="240" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="600.0" y="257.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">Skill</text>
-<text x="600" y="285" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">组织可复用的方法与判断标准</text>
-<text x="600" y="320" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">阈值、例外、证据要求</text>
-<rect x="780" y="130" width="360" height="240" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="960.0" y="257.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">模型</text>
-<text x="960" y="285" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">处理需要根据结果继续判断的部分</text>
-<text x="960" y="320" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">灵活探索、临场适应</text>
-<path d="M420,250 L780,250" stroke="#d4a853" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#a)"/>
-<text x="600" y="232" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="13" font-weight="400" fill="#8f8fa3">↑ 提高确定性</text>
-<path d="M780,250 L1140,250" stroke="#d4a853" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#a)"/>
-<text x="960" y="232" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="13" font-weight="400" fill="#8f8fa3">↑ 提高确定性</text>
-<rect x="60" y="420" width="1080" height="110" rx="10" fill="#1b1b26" stroke="#d4a853" stroke-width="2"/><text x="600.0" y="469.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">「薄 Harness 厚 Skills」的真实含义</text><text x="600.0" y="495.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" fill="#8f8fa3">Harness 越薄，模型越自由；Skills 越厚，判断越可靠。自由与可靠之间的张力，就是全部设计空间</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+<defs><linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#d4a853" stop-opacity="0.85"/><stop offset="1" stop-color="#d4a853" stop-opacity="0.25"/></linearGradient></defs>
+<rect width="1200" height="600" fill="#0a0a0f"/>
+<text x="600" y="54" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="25" font-weight="700" fill="#e8e8ef">Workflow / Skill / 模型：三层怎么分</text>
+<text x="600" y="84" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">不是互斥，是分工 —— 确定性往左，自由度往右</text>
+<rect x="60" y="130" width="360" height="230" rx="10" fill="#14141c" stroke="#2a2a3a"/>
+<text x="240" y="190" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="22" font-weight="700" fill="#e8e8ef">Workflow</text>
+<text x="240" y="240" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">管理相对确定的依赖与执行约束</text>
+<text x="240" y="300" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">可预测 · 可复跑 · 有约束</text>
+<rect x="420" y="130" width="360" height="230" rx="10" fill="#14141c" stroke="#2a2a3a"/>
+<text x="600" y="190" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="22" font-weight="700" fill="#e8e8ef">Skill</text>
+<text x="600" y="240" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">组织可复用的方法与判断标准</text>
+<text x="600" y="300" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">阈值 · 例外 · 证据要求</text>
+<rect x="780" y="130" width="360" height="230" rx="10" fill="#14141c" stroke="#2a2a3a"/>
+<text x="960" y="190" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="22" font-weight="700" fill="#e8e8ef">模型</text>
+<text x="960" y="240" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">处理需要根据结果继续判断的部分</text>
+<text x="960" y="300" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">灵活探索 · 临场适应</text>
+<rect x="60" y="398" width="1080" height="6" rx="3" fill="url(#bar)"/>
+<text x="60" y="432" text-anchor="start" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="13" font-weight="400" fill="#8f8fa3">确定性高</text>
+<text x="1140" y="432" text-anchor="end" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="13" font-weight="400" fill="#8f8fa3">确定性低 · 自由度大</text>
+<rect x="60" y="470" width="1080" height="96" rx="10" fill="#1b1b26" stroke="#d4a853" stroke-width="2"/>
+<text x="600" y="506" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="18" font-weight="700" fill="#e8e8ef">「薄 Harness 厚 Skills」的真实含义</text>
+<text x="600" y="538" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" font-weight="400" fill="#d4a853">Harness 越薄，模型越自由；Skills 越厚，判断越可靠。自由与可靠之间的张力，就是全部设计空间</text>
 </svg>
