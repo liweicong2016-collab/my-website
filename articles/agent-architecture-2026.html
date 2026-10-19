@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>薄 Harness 厚 Skills：2026 Agent 架构的一次完整拆解</title>
+<meta name="description" content="Agent 不是更聪明的聊天框。它的核心是把模型在运行中做出的判断，接进一个可验证、可恢复的执行过程——四组职责、工具设计、上下文口径、Skill 分层、生命周期与评测。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础 ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#f59e0b;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#f59e0b,#f87171,#a78bfa);z-index:999;width:0%;transition:width .1s}
+
+/* ===== 顶部导航 ===== */
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 主容器 ===== */
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+
+/* ===== Hero 头图 ===== */
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:280px;object-fit:cover;display:block;border-radius:16px 16px 0 0}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,rgba(7,11,20,.2),rgba(7,11,20,.9));border-radius:16px 16px 0 0}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f59e0b;color:#070b14;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+
+/* ===== 章节卡片 ===== */
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070b14;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+
+/* ===== 强调块 ===== */
+.callout{background:rgba(245,158,11,.15);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f59e0b}
+.signal{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#f59e0b;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#f59e0b;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #f59e0b;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+
+/* ===== 数字卡 + 表格 ===== */
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#f59e0b;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.cyan .val{color:#38bdf8}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(245,158,11,.08);font-weight:700;color:#f59e0b;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(245,158,11,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+
+/* ===== Key Takeaways + 相关文章 ===== */
+.key-takeaways{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#f59e0b;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.related-section{margin:48px 0 0}
+.related-section h2{font-size:20px;font-weight:800;color:#e8eaf0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #1e2d45;display:flex;align-items:center;gap:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rel-card{background:#0d1321;border:1px solid #1e2d45;border-radius:12px;overflow:hidden;transition:transform .25s,box-shadow .25s;text-decoration:none;display:block}
+.rel-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+.rel-card img{width:100%;height:130px;object-fit:cover;display:block}
+.rel-card-body{padding:16px}
+.rel-card-body h4{font-size:13.5px;font-weight:700;color:#e8eaf0;margin:0 0 6px;line-height:1.4}
+.rel-card-body p{font-size:11.5px;color:#94a3b8;margin:0;line-height:1.5}
+.rel-card-tag{display:inline-block;background:rgba(245,158,11,.08);color:#f59e0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:6px;margin-top:8px}
+
+/* ===== 文章正文 + EN 块 + 页脚 ===== */
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body blockquote{background:#0d1321;border-left:4px solid #f59e0b;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#94a3b8}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#f59e0b}
+.en-block{background:rgba(56,189,248,.05);border-left:3px solid #38bdf8;padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px;color:#cbd5e1}
+.en-block strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#f59e0b;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:200px}.related-grid,.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a><a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<!-- ===== HERO ===== -->
+<div class="hero fade-up">
+  <img class="hero-img" src="../images/agent-arch/cover-agent-architecture-2026.jpg" alt="薄 Harness 厚 Skills — 2026 Agent 架构拆解">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">AGENT ARCHITECTURE</span>
+    <h1>薄 Harness 厚 Skills</h1>
+    <p class="subtitle">把模型的判断，接进一个可验证、可恢复的执行过程</p>
+    <div class="hero-meta">
+      <span>📅 2026-10-19</span>
+      <span>⏱ ~12 min read</span>
+      <span>🏷️ AI · Agent · 架构</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">AI</span>
+      <span class="tag-pill">Agent</span>
+      <span class="tag-pill">架构设计</span>
+      <span class="tag-pill">Harness</span>
+      <span class="tag-pill">工程方法</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EN 摘要（可选） ===== -->
+<div class="en-block fade-up">
+  <strong>EN Summary</strong>：An agent is not a smarter chat box. Its real value is compressing the layer between the user and the outcome — taking over part of the work humans used to do: understanding intent, choosing information and tools, adjusting the next step from feedback. This piece breaks down the four responsibility groups, tool design, context semantics, skill layering, lifecycle and evaluation.
+</div>
+
+<!-- ===== TL;DR 核心结论 ===== -->
+<div class="callout fade-up">
+  ⚠️ <strong>核心结论</strong>：Agent 的系统设计，核心是把模型运行中做出的判断，接进一个可验证、可恢复的执行过程。判断一个场景适不适合 Agent，看四个条件：信息能否取得、工具能否使用、结果能否验证、失败能否恢复。多 Agent 是最后手段，不是默认答案。
+</div>
+
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li><strong>Agent
+的产品价值不是”更聪明”，而是压缩用户和结果之间的中间层。</strong>
+它接过了一部分原本由人来做的工作：理解目标、选信息和工具、根据执行反馈改下一步。</li>
+<li><strong>判断一个场景适不适合
+Agent，看四个条件</strong>：信息能否取得、工具能否使用、结果能否验证、失败能否恢复。比套架构有用得多。</li>
+<li><strong>工具设计的真正难点不在”能调”，在”调得对、读得懂结果、失败后知道怎么办”。</strong>
+一个 <code>success: false</code> 支持不了恢复。</li>
+<li><strong>企业 Agent
+卡住的地方，多数不在模型，而在信息进入模型之前</strong> ——
+口径没定义清楚，检索再多也白搭。</li>
+<li><strong>多 Agent 是最后手段，不是默认答案。</strong>
+加密之前先回答：工作能否独立、各自要什么信息、结果谁来收、怎么证明完成。</li>
+</ul>
+<hr />
+<h2 id="一把一句话拆开看">一、把一句话拆开看</h2>
+<p>把这样一个任务交给 AI：</p>
+<blockquote>
+<p>看看这个客户最近的订单和沟通记录，判断他为什么迟迟没有续约，整理一份跟进建议。等我确认后，把消息发给他。</p>
+</blockquote>
+<p>这句话很短。要做完它，系统得：</p>
+<ol type="1">
+<li>识别客户是谁，取得访问权限</li>
+<li>查询订单系统、沟通记录、合同状态</li>
+<li>判断信息够不够，不够就继续查</li>
+<li>发现订单和沟通记录冲突，回去核实</li>
+<li>生成建议，等人确认</li>
+<li>执行发送</li>
+<li>检查消息是不是真的发出去了</li>
+</ol>
+<p>中间还可能遇到权限不足、用户临时改要求。</p>
+<p><strong>这就是 Agent
+要处理的那一类任务：需要根据现场情况不断作出判断的任务。</strong></p>
+<p>这句话里最容易被忽略的是第 7 步。前面六步都能”看起来完成”，只有第 7
+步是业务事实。</p>
+<hr />
+<h2 id="二agent-到底新在哪">二、Agent 到底新在哪</h2>
+<p>传统软件把能力拆成菜单和页面。用户找到客户、查订单、翻沟通记录，再去消息系统里完成跟进。<strong>流程中的行为大量发生在人身上，软件提供功能，人负责把功能串起来。</strong></p>
+<p>Agent 接过了其中一部分”串”的工作。</p>
+<p>但要理解这个变化，得先分清三个东西：</p>
+<p><strong>大模型</strong>提供理解、推理和生成。<strong>工具</strong>让系统取得信息、执行操作。<strong>Agent</strong>
+通过运行机制，把模型判断和工具执行接成一个循环。</p>
+<p>循环长这样：</p>
+<figure>
+<img src="../images/agent-arch/01-loop.svg"
+alt="Agent 执行的完整循环：模型判断与程序执行交替推进，人工只在关键点介入" />
+<figcaption aria-hidden="true">Agent
+执行的完整循环：模型判断与程序执行交替推进，人工只在关键点介入</figcaption>
+</figure>
+<p><em>图 1 — 一次 Agent 执行的完整循环</em></p>
+<p><strong>工作流</strong>提前组织控制路径：先查询、再分类、再生成报告。<strong>Agent</strong>
+把一部分路径选择交给模型，让它根据反馈继续判断。</p>
+<p>这不是谁取代谁。一个规则清楚的报销流程，完全可以把节点固定下来，只在票据理解的位置用模型。一个复杂的故障排查，则可能需要不断读取新证据、调整方向。</p>
+<p><strong>自主程度应该跟着任务需要变化，而不是跟着技术热度变化。</strong></p>
+<hr />
+<h2 id="三四组职责一张图定位问题">三、四组职责：一张图定位问题</h2>
+<p>把系统放进一张职责图里，后面所有设计都能落到具体位置：</p>
+<figure>
+<img src="../images/agent-arch/02-four-areas.svg"
+alt="Agent 系统的四组职责：任务与控制、判断与执行、状态与资料、观察与改进" />
+<figcaption aria-hidden="true">Agent
+系统的四组职责：任务与控制、判断与执行、状态与资料、观察与改进</figcaption>
+</figure>
+<p><em>图 2 — 四组职责，任何一次故障都能归到其中一格</em></p>
+<p>四组职责对应四类问题。不要求拆成四个服务，但<strong>任何一次故障都能归到这四格里</strong>：</p>
+<ul>
+<li>工具问题 → 影响<strong>行动</strong></li>
+<li>上下文问题 → 影响<strong>判断依据</strong></li>
+<li>恢复问题 → 影响<strong>任务持续</strong></li>
+<li>评测问题 → 影响<strong>验收</strong></li>
+</ul>
+<p>分清以后，排查就有了方向。把所有失败都归为”模型不行”，项目就失去了迭代空间。</p>
+<hr />
+<h2 id="四工具从能调到调得对">四、工具：从”能调”到”调得对”</h2>
+<p>给 Agent
+接接口，真正的难点不是技术对接，是<strong>把接口变成它能够准确选择、正确使用、理解反馈的能力</strong>。</p>
+<h3 id="名字就是选择规则">4.1 名字就是选择规则</h3>
+<p>假设有三个工具：<code>智能查询</code>、<code>增强查询</code>、<code>高级查询</code>。</p>
+<p>模型不知道你脑子里的业务背景。它只能依据名称、描述、参数和历史结果来选。<strong>这三个名字没说明什么时候用哪个，模型就很难稳定选择。</strong></p>
+<p>更清楚的设计是按业务职责表达：</p>
+<ul>
+<li>根据订单号查当前状态</li>
+<li>根据客户和时间范围批量查订单</li>
+<li>检索公开资料</li>
+</ul>
+<p>而且工具描述还要交代<strong>不适用的情况</strong>，避免能力重叠。</p>
+<h3 id="数量要围绕任务收敛">4.2 数量要围绕任务收敛</h3>
+<p>把每个底层接口原样暴露，模型会反复寻找。把所有操作塞进一个万能工具，参数又复杂到看不懂。</p>
+<p><strong>合适的粒度只能通过真实任务验证</strong>，不能靠设计阶段的直觉。</p>
+<h3 id="确定性的转换留给程序">4.3 确定性的转换留给程序</h3>
+<p>用户说”发到项目群”。模型表达目标，系统解析候选对象、检查权限、映射内部
+ID。同名对象无法唯一确定时，返回候选项或要求澄清。</p>
+<p>模型可以继续使用工具返回的稳定
+ID，但<strong>不应该承担凭空构造、反复转抄复杂标识的负担</strong>。</p>
+<h3 id="失败信息要够用">4.4 失败信息要够用</h3>
+<p>工具返回的不只是执行结果，也是下一轮判断的依据。</p>
+<pre><code>{&quot;success&quot;: false}</code></pre>
+<p><strong>这个不够。</strong>
+身份过期、查询为空、版本冲突、网络超时，需要的处理方式完全不同。</p>
+<p>一个像样的冲突返回长这样：</p>
+<pre class="json"><code>{
+  &quot;status&quot;: &quot;conflict&quot;,
+  &quot;code&quot;: &quot;STALE_CONTEXT&quot;,
+  &quot;observed_version&quot;: 142,
+  &quot;current_version&quot;: 144,
+  &quot;next_action&quot;: &quot;读取新增消息，重新判断是否发送&quot;
+}</code></pre>
+<p>关键不在格式，在<strong>它告诉模型下一步该干什么</strong>。</p>
+<h3 id="工具是否设计完整四个环节自检">4.5
+工具是否设计完整，四个环节自检</h3>
+<figure>
+<img src="../images/agent-arch/03-tool-check.svg"
+alt="工具设计完整性的四个环节：选得对、调得动、读得懂、失败后知道怎么办" />
+<figcaption
+aria-hidden="true">工具设计完整性的四个环节：选得对、调得动、读得懂、失败后知道怎么办</figcaption>
+</figure>
+<p><em>图 3 — 工具设计自检，缺一个就是半成品</em></p>
+<p>四个环节缺一个，工具就是半成品。</p>
+<hr />
+<h2 id="五上下文口径比检索难">五、上下文：口径比检索难</h2>
+<p>客户跟进任务里，模型需要知道：客户是谁、当前订单怎么样、最近聊过什么、哪些要求已经确认。</p>
+<p><strong>企业里很多”模型不懂业务”的问题，其实发生在信息进入模型之前。</strong></p>
+<ul>
+<li>“退款”是申请退款，还是已经退回资金？</li>
+<li>“本月销售额”按下单、付款还是确认收货算？</li>
+<li>两个系统里的客户名称，是不是同一个对象？</li>
+</ul>
+<p><strong>口径不清楚，模型没法替组织达成共识。</strong>
+这不是检索能解决的，是数据治理和业务规则整理。</p>
+<p>还有一些判断依据根本没进系统。客户经理为什么觉得这个客户还值得跟，供应商为什么不肯按原数量补货
+——
+这些可能在聊天记录、Excel、甚至某个人脑子里。<strong>系统记录了最后的结果，未必记录形成结果的过程。</strong></p>
+<h3 id="进入上下文的方式比数量重要">5.1 进入上下文的方式比数量重要</h3>
+<p>一份十万行的订单数据，应该保存在文件或数据库里，让程序过滤聚合，再把结果和出处交给模型。</p>
+<p><strong>判断所需的信息要充分，进入上下文的方式要有选择。</strong></p>
+<h3 id="压缩要保住什么">5.2 压缩要保住什么</h3>
+<p>长任务会不断产生历史。压缩能减少体积，但必须保住：</p>
+<ul>
+<li>原始目标</li>
+<li>最新约束</li>
+<li>已确认的决定</li>
+<li>失败原因</li>
+<li>未完成事项</li>
+<li>重要证据的地址</li>
+</ul>
+<p>一段”前期分析完成”的摘要，如果没说哪些已核实、接下来等谁决定，<strong>就很难支持可靠恢复</strong>。</p>
+<h3 id="四类信息分开管理">5.3 四类信息分开管理</h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务状态</td>
+<td>现在做到哪里</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>业务知识</td>
+<td>规则与方法</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>长期记忆</td>
+<td>跨任务可复用的稳定信息</td>
+<td>很慢</td>
+</tr>
+<tr>
+<td>执行存档</td>
+<td>原始结果与日志</td>
+<td>只增</td>
+</tr>
+</tbody>
+</table>
+<p>一次出差地点不能轻易写成长期住址。聊天摘要里的付款状态，也不能替代执行前对订单系统的查询。</p>
+<p><strong>记忆是帮助继续工作的派生信息，关键业务事实必须能回查。</strong></p>
+<hr />
+<h2
+id="六skill把老师傅的判断写成流程">六、Skill：把老师傅的判断写成流程</h2>
+<p>工具回答”能做什么”。Skill 进一步说明”这类事应该怎么做”。</p>
+<p>搜索工具能找到海外达人。但”找到适合某个品牌的达人”还要判断：在哪些平台搜、怎么组合关键词、哪些账号要排除、怎么判断活跃度和匹配度、<strong>数据不足时是否继续补查</strong>。</p>
+<p><strong>这里最难的，经常是那些老大难的标准问题：到多少算好，到多少算坏。</strong></p>
+<p>这些阈值、例外和证据要求，才是值得沉淀的经验。写出”搜索、筛选、生成报告”不难。难的是告诉它：什么情况该补查、什么情况可以淘汰、什么情况必须回来问人。</p>
+<h3 id="一个真实的权衡">6.1 一个真实的权衡</h3>
+<p>出海营销 Agent 的实现，经历过几轮调整：</p>
+<ol type="1">
+<li><strong>让模型直接生成代码</strong> →
+简单任务可以，串联长业务步骤时稳定性不足</li>
+<li><strong>接成外部工作流</strong> →
+执行路径明确了，但模型难以理解和调整内部环节</li>
+<li><strong>拆成工具</strong> →
+固定路径能保顺序，用户却想在中间改条件；完全临时编排又增加不确定性</li>
+</ol>
+<p><strong>冲突很具体：用户既要任务稳定完成，又要已经完成一半的工作可以修改。</strong></p>
+<p>这不是确定性问题，是权衡问题。</p>
+<h3 id="可解释性来自可复查的证据">6.2 可解释性来自可复查的证据</h3>
+<p>咨询交付类的流程更清楚：抓视频、清洗、检查资料范围、分词、生成报告。</p>
+<p>假设分析师看完分词结果，要求把两个词归并再重新看结论。这是对<strong>已有环节</strong>的修改，不需要重新抓视频。</p>
+<p>但如果系统只保存了最终报告，内部流程又封成一个从头跑到尾的工具，<strong>它就缺少从中间继续的条件</strong>。</p>
+<p>要支持这个需求，得保存：原始数据、清洗结果、分词参数、中间产物，以及各阶段之间的依赖。</p>
+<p>改分词 → 只重做受影响的分析和报告。改视频筛选条件 →
+重新确认资料范围，再更新下游。</p>
+<p><strong>新报告还要关联新的参数和数据版本，避免旧结论混入新产物。</strong></p>
+<h3 id="三层怎么分">6.3 三层怎么分</h3>
+<figure>
+<img src="../images/agent-arch/04-three-layers.svg"
+alt="Workflow、Skill、模型三层分工：确定性往左，自由度往右" />
+<figcaption
+aria-hidden="true">Workflow、Skill、模型三层分工：确定性往左，自由度往右</figcaption>
+</figure>
+<p><em>图 4 — 三层不是互斥，是分工</em></p>
+<p>三层可以在同一项任务里协作，不是互斥关系。</p>
+<p>拆分的粒度围绕<strong>可独立执行、可检查、可重跑的业务步骤</strong>。过大的封装难调整，过碎的拆分会增加选择和组合成本。</p>
+<hr />
+<h2 id="七多-agent先证明它必要">七、多 Agent：先证明它必要</h2>
+<p>当一个 Agent 任务变多，容易想到”再加几个
+Agent”。<strong>这可能是最常见的工程错误。</strong></p>
+<p>增加执行者之前，先回答四个问题：</p>
+<ol type="1">
+<li>这些工作能否独立进行？</li>
+<li>各自需要什么信息？</li>
+<li>结果由谁接收？</li>
+<li>怎样证明完成了？</li>
+</ol>
+<p>几个相互独立的调研，可以分头读资料，再由主 Agent 汇总。每个子 Agent
+维护局部上下文，也能减轻主流程的信息负担。</p>
+<p>但如果多个任务密集依赖同一份最新状态 —— 几个 Agent
+同时改同一个订单，或修改相互依赖的代码 ——
+<strong>协调成本会迅速上升</strong>。</p>
+<h3 id="委派要写清楚六件事">7.1 委派要写清楚六件事</h3>
+<p>目标、范围、输入、可用工具、输出格式、验收条件。</p>
+<p>“帮我研究一下”容易带回一篇需要重新理解的长文。要求明确的证据、结论字段和待确认事项，才有利于后续整合。</p>
+<h3 id="验证者必须看实物">7.2 验证者必须看实物</h3>
+<p>验证者应该读取<strong>实际产物、测试结果或业务回执</strong>。如果它只看到执行者的自我总结，就可能再次认可同一个错误。</p>
+<p><strong>换个模型，也不保证错误相互独立。</strong></p>
+<hr />
+<h2
+id="八生命周期任务状态不是对话记录">八、生命周期：任务状态不是对话记录</h2>
+<p>一次任务能跑完，不代表它能持续运行。</p>
+<ul>
+<li>用户关掉页面，任务还继续吗？</li>
+<li>确认流程停了两小时，怎么恢复？</li>
+<li>进程重启后，哪些动作已经完成？</li>
+<li>发消息超时了，该重发还是先查结果？</li>
+</ul>
+<p><strong>要区分两种东西：对话记录和任务状态。</strong></p>
+<p>用户可以换个对话继续同一项任务。一次任务也可能因失败产生多次运行。系统需要追踪：目标、已执行步骤、已产生的业务效果。</p>
+<p>用户说”接着做”，应该能恢复明确的任务状态。模型说”完成了”，要核验交付物和业务状态。</p>
+<h3 id="有外部效果的动作最危险">8.1 有外部效果的动作最危险</h3>
+<p>生成草稿可以重新计算。<strong>改订单、付款、发消息，要先确认此前是否生效。</strong></p>
+<p>超时或取消，也不能证明旧执行者已经停止。恢复任务时要防止新旧执行者重复写入。</p>
+<p><strong>可靠恢复需要同时保存两件事：工作进度，和已经发生的业务效果。</strong></p>
+<h3 id="预算要进任务控制">8.2 预算要进任务控制</h3>
+<p>运行时间、步数、费用、并发、重复失败次数，都应该设上限。</p>
+<p>连续遇到相同错误时，系统应当暂停、改策略、或交给人。</p>
+<p><strong>模型有能力继续尝试，不意味着系统应该无限允许它继续执行。</strong></p>
+<hr />
+<h2 id="九评测从需求阶段开始">九、评测：从需求阶段开始</h2>
+<p>很多团队把评测模块放在最后做。<strong>但评测应该从需求阶段就开始。</strong></p>
+<p>产品定义典型输入、任务类型和预期结果；研发明确可用能力与执行约束；测试把它们组织成可重复运行的用例。</p>
+<p>企业任务可以先分四类：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>典型需求</th>
+<th>验收重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>知识问答</td>
+<td>解释一条业务规则</td>
+<td>依据、版本与适用条件</td>
+</tr>
+<tr>
+<td>查询</td>
+<td>查看订单或客户状态</td>
+<td>对象、范围、时间与实际数据</td>
+</tr>
+<tr>
+<td>报告</td>
+<td>生成分析与建议</td>
+<td>数据来源、计算、结论与呈现</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>修改信息或发送消息</td>
+<td>授权、参数、实际效果与写回状态</td>
+</tr>
+</tbody>
+</table>
+<p>复杂任务会跨越几类。开篇那个客户跟进，就同时包含查询、分析、执行。</p>
+<h3 id="分清工具返回任务结果业务收益">9.1
+分清工具返回、任务结果、业务收益</h3>
+<ul>
+<li>接口返回成功，有时只表示<strong>已经受理</strong></li>
+<li>Agent 说”发送完成”，不等于<strong>实际发送回执</strong></li>
+<li><strong>任务完成的证据，应该能在产物或业务状态里找到</strong></li>
+</ul>
+<h3 id="过程约束也要进评测">9.2 过程约束也要进评测</h3>
+<p>发送前是否取得有效确认？是否访问了权限范围外的数据？是否产生重复操作？</p>
+<p>这些不是”结果对不对”的问题，是”过程合不合规”的问题。</p>
+<p>对于合法路径本来就有多种的任务，不必强求工具顺序一致。先查订单还是先看沟通记录都可以。<strong>目标是否达成、约束是否遵守、成本是否合理，才是主要判断。</strong></p>
+<h3 id="trace-不等于推理过程">9.3 Trace 不等于推理过程</h3>
+<p>Trace
+记录执行过程：输入、配置版本、信息来源、工具请求、执行结果、确认记录、最终状态。</p>
+<p><strong>它提供可观察的运行证据，不是模型内部推理的完整记录。</strong></p>
+<p>有了这些，团队才能区分：对象找错了、工具选错了、参数填错了、接口失败了、上下文丢约束了、还是授权没传到执行端。</p>
+<p>修复位置不同，处理方式完全不同。</p>
+<h3 id="通过率必须说明分母">9.4 通过率必须说明分母</h3>
+<p>大量简单任务的成功，可能掩盖少数关键任务的失败。<strong>不同类型要分开看，重要约束单独设门槛。</strong></p>
+<p>一次成功只证明这一次成功。重复运行才能看出波动。涉及写入的，要在隔离环境恢复初始状态。</p>
+<p>改模型、Prompt、工具或 Skill
+时，记录版本并跑回归。<strong>除了调试过的用例，还要保留未参与调试的样本，检查改善能不能泛化。</strong></p>
+<hr />
+<h2 id="十结语薄-harness-厚-skills">十、结语：薄 Harness 厚 Skills</h2>
+<p>过去做任务用 Workflow，现在慢慢开始用
+Agent。<strong>目的不是追新，是想提升工作流的泛化能力。</strong></p>
+<p>但泛化能力不是白来的。Agent
+系统设计的核心，是把模型在运行中做出的判断，接进一个<strong>可验证、可恢复</strong>的执行过程。</p>
+<ul>
+<li>模型负责灵活理解与探索</li>
+<li>程序保证执行规则</li>
+<li>人承担关键决策与责任</li>
+</ul>
+<p>工具、上下文、Skill、多
+Agent、运行环境和评测，都围绕这条主线展开。</p>
+<p>所以”薄 Harness 厚 Skills”这句话的真正含义是：<strong>Harness
+越薄，模型越自由；Skills 越厚，判断越可靠。</strong></p>
+<p>自由和可靠之间的张力，就是这套系统全部的设计空间。</p>
+<hr />
+<p><em>本文整理自 2026 年 Agent
+工程实践的一批公开方法与一线项目经验。文中架构图用 SVG
+重绘，可单独取用。</em></p>
+
+<!-- ===== 章节循环 + Key Takeaways + 中间图 + Related Reading + 脚注 — 每篇文章自己写完整版 ===== -->
+
+</div></div>
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=window.pageYOffset,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<script src="../main.js"></script></body></html>
