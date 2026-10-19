@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580">
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#d4a853"/></marker>
+<marker id="g" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#8f8fa3"/></marker></defs>
+<rect width="1200" height="580" fill="#0a0a0f"/>
+<text x="600" y="52" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="24" font-weight="700" fill="#e8e8ef">工具是否设计完整：四个环节自检</text>
+<text x="600" y="80" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">缺一个，工具就是半成品</text>
+<rect x="60" y="140" width="252" height="170" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="186.0" y="232.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">① 选得对</text>
+<text x="186" y="268" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">名字和描述</text>
+<text x="186" y="292" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">能否稳定选中</text>
+<path d="M312,225 L340,225" stroke="#d4a853" stroke-width="2" fill="none" marker-end="url(#a)"/>
+<rect x="352" y="140" width="252" height="170" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="478.0" y="232.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">② 调得动</text>
+<text x="478" y="268" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">参数清晰</text>
+<text x="478" y="292" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">权限到位</text>
+<path d="M604,225 L632,225" stroke="#d4a853" stroke-width="2" fill="none" marker-end="url(#a)"/>
+<rect x="644" y="140" width="252" height="170" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="770.0" y="232.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">③ 读得懂</text>
+<text x="770" y="268" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">返回信息</text>
+<text x="770" y="292" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">够不够判断</text>
+<path d="M896,225 L924,225" stroke="#d4a853" stroke-width="2" fill="none" marker-end="url(#a)"/>
+<rect x="936" y="140" width="252" height="170" rx="10" fill="#14141c" stroke="#2a2a3a" stroke-width="1"/><text x="1062.0" y="232.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">④ 失败后</text>
+<text x="1062" y="268" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">出错时知道</text>
+<text x="1062" y="292" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="15" font-weight="400" fill="#8f8fa3">该怎么办</text>
+<rect x="60" y="370" width="1120" height="120" rx="10" fill="#1b1b26" stroke="#2a2a3a" stroke-width="1"/><text x="620.0" y="424.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="19" font-weight="600" fill="#e8e8ef">失败返回的四个档次</text><text x="620.0" y="450.0" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="14" fill="#8f8fa3">身份过期 · 查询为空 · 版本冲突 · 网络超时 —— 处理方式完全不同，一个 success:false 支持不了恢复</text>
+<text x="600" y="530" text-anchor="middle" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif" font-size="16" font-weight="600" fill="#d4a853">好的失败信息不是「报错了」，是「下一步该干什么」</text>
+</svg>
