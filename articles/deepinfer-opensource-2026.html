@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepInfer 开源：降本军备赛进到引擎层，但线上全家桶还没交出来</title>
+<meta name="description" content="DeepSeek 开源离线推理核 DeepInfer（Apache-2.0）与协议层 deepseek-recipe（MIT）。闲时 cache miss 为每百万 token 输入 $0.15、输出 $0.60；KV cache、PD 分离与多副本均衡未开源，硬件白名单仅 NVIDIA SM100 与昇腾 950。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:16px 16px 0 0;background:#070b14}
+.hero-overlay{position:absolute;top:0;left:0;right:0;aspect-ratio:16/9;background:linear-gradient(to bottom,rgba(7,11,20,0) 72%,rgba(7,11,20,.28));border-radius:16px 16px 0 0;pointer-events:none}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f87171;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:#38bdf8;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul,.bis-section ol{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(239,68,68,.15);border-left:4px solid #f87171;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f87171}
+.signal{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#a78bfa;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(245,158,11,.06));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#38bdf8;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #38bdf8;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#38bdf8;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.orange .val{color:#fbbf24}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(56,189,248,.08);font-weight:700;color:#38bdf8;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(56,189,248,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(245,158,11,.05));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#38bdf8;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.article-fig{margin:18px 0 6px}
+.article-fig img{width:100%;border-radius:12px;border:1px solid #1e2d45;display:block;background:#070b14}
+.article-fig figcaption{text-align:center;font-size:12.5px;color:#94a3b8;margin-top:10px;line-height:1.55}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;color:#7dd3fc;background:rgba(56,189,248,.08);padding:1px 6px;border-radius:5px}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#38bdf8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:auto}.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="zh">
+  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c"><div class="article-body">
+
+<div class="hero fade-up">
+  <img class="hero-img" src="cover-deepinfer-opensource.jpg" alt="DeepInfer 开源封面：Apache-2.0 离线推理核与 MIT 协议层，线上全家桶仍缺 KV cache、PD 分离与多副本均衡">
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <span class="tag">DeepSeek · DeepInfer · 2026-10</span>
+    <h1>DeepInfer 开源：降本军备赛进到引擎层，但线上全家桶还没交出来</h1>
+    <p class="subtitle">支撑 V4.1-Flash 的离线推理核和协议层开了，编解码能对齐官方 API。KV cache、Prefill/Decode 分离、多副本负载均衡没放；硬件白名单只有 NVIDIA SM100 与昇腾 950。</p>
+    <div class="hero-meta">
+      <span>2026-10-21</span>
+      <span>~8 min read</span>
+      <span>基于 2026-10-20 公开仓库 / 官方定价核验</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">DeepSeek</span>
+      <span class="tag-pill">DeepInfer</span>
+      <span class="tag-pill">推理引擎</span>
+      <span class="tag-pill">昇腾 950</span>
+      <span class="tag-pill">开源</span>
+    </div>
+  </div>
+</div>
+
+<div class="ftrnote fade-up">名称说明：流通稿里的「Deepinfra」是口误，指的是 DeepSeek 推理框架 <strong>DeepInfer</strong>。下文一律用正式名。</div>
+
+<div class="key-takeaways fade-up">
+<h3>结论</h3>
+<ul>
+<li>DeepSeek 把支撑 V4.1-Flash 线上服务的<strong>离线推理核</strong> <a href="https://github.com/deepseek-ai/DeepInfer">DeepInfer</a>（Apache-2.0）和协议层 <a href="https://github.com/deepseek-ai/deepseek-recipe">deepseek-recipe</a>（MIT）开源了。对私有化最值钱的，是和官方 API 同款的编解码对齐。</li>
+<li>README 写得很实在：KV cache 系统、Prefill/Decode 分离、多副本负载均衡<strong>没放</strong>。硬件白名单只有 <strong>NVIDIA SM100</strong> 与 <strong>华为昇腾 950</strong>。</li>
+<li>$0.15 / $0.6 是<strong>闲时 cache miss</strong> 价，不是全日统一价。真正拉开账单的是 cache hit。</li>
+<li>一句话：<strong>降本军备赛进入开源引擎阶段；缺的三块基建才是完整线上形态。</strong></li>
+</ul>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">1</span>发生了什么</h2>
+<p>全网还在猜 V4.1 Flash 如何把每百万 token 输入压到约 <strong>$0.15</strong>、输出约 <strong>$0.6</strong> 时，DeepSeek 自己掀了底牌：用开源仓库交出生产推理路径里可复用的那一层。交出来的是两件东西，角色不一样，协议也不一样。</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>仓库</th><th>协议</th><th>角色</th></tr></thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/deepseek-ai/DeepInfer">deepseek-ai/DeepInfer</a></td>
+<td><span class="tg tg-m">Apache-2.0</span></td>
+<td>离线推理引擎：优化算子、分布式推理、投机解码、SWA Bounded Replay、结构化输出等</td>
+</tr>
+<tr>
+<td><a href="https://github.com/deepseek-ai/deepseek-recipe">deepseek-ai/deepseek-recipe</a></td>
+<td><span class="tg tg-p">MIT</span>（不是 Apache）</td>
+<td>协议转换 + prompt / tokenizer。<strong>不跑推理</strong>，对齐官方 API 行为</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="signal">
+<h3>定位要分开读</h3>
+<ul>
+<li>README 写它 powers production services，但开源交付物明确是 <strong>offline inference</strong>。</li>
+<li>媒体转述「后续新模型推理代码会持续合入」——<strong>README 无此句</strong>。当软承诺，勿当 SLA。</li>
+</ul>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">2</span>定价：别把闲时价当成牌面</h2>
+<p>官方 <a href="https://api-docs.deepseek.com/quick_start/pricing/">API Pricing</a>（<code>deepseek-flash</code> / V4.1-Flash）把价格拆成闲时、高峰，以及 cache 命中与否。传播层常说的那组数字，只覆盖其中一格。</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>口径</th><th>输入</th><th>输出</th></tr></thead>
+<tbody>
+<tr><td><strong>闲时 · cache miss</strong></td><td><strong>$0.15 / 1M</strong></td><td><strong>$0.60 / 1M</strong></td></tr>
+<tr><td>高峰</td><td>$0.30</td><td>$1.20</td></tr>
+<tr><td><strong>闲时 · cache hit</strong></td><td><strong>~$0.003</strong></td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<div class="bis-grid">
+  <div class="bis-card"><span class="val">$0.15</span><span class="lab">闲时 cache miss · 输入 / 1M</span></div>
+  <div class="bis-card orange"><span class="val">$0.60</span><span class="lab">闲时 cache miss · 输出 / 1M</span></div>
+  <div class="bis-card green"><span class="val">~$0.003</span><span class="lab">闲时 cache hit · 输入 / 1M</span></div>
+  <div class="bis-card purple"><span class="val">$1.20</span><span class="lab">高峰 · 输出 / 1M</span></div>
+</div>
+<div class="punchline">
+<h3>工程上真正吃账单的三项</h3>
+<p>传播层常把「$0.15 / $0.6」说成统一价。Agent 账单真正吃的是 <strong>cache-hit 率 × 峰谷窗口 × 工具调用轮次</strong>。真正杀招是 cache hit，不是把闲时 miss 价当成全日牌面。</p>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">3</span>README 里最该看的边界</h2>
+<p>已开源的功能属实：高性能算子、Attention DP/CP、MoE EP+EPLB、DSpark 投机解码、SWA bounded replay、异步调度、batch-invariant、结构化输出等。边界比功能清单更重要——README 把三块线上基建明确留在仓库外面。</p>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>内容</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>高性能算子、Attention DP/CP、MoE EP+EPLB</td><td><span class="tg tg-m">已开源</span></td></tr>
+<tr><td>DSpark 投机解码、SWA bounded replay</td><td><span class="tg tg-m">已开源</span></td></tr>
+<tr><td>异步调度、batch-invariant、结构化输出</td><td><span class="tg tg-m">已开源</span></td></tr>
+<tr><td>KV cache 系统</td><td><span class="tg tg-r">明确未开源</span></td></tr>
+<tr><td>Prefill / Decode <strong>分离部署</strong></td><td><span class="tg tg-r">明确未开源</span></td></tr>
+<tr><td>DP 多副本负载均衡</td><td><span class="tg tg-r">明确未开源</span></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>硬门槛：</strong>仅认 NVIDIA <strong>Blackwell SM100</strong> 与华为 <strong>Ascend 950</strong>（CUDA 13 / CANN 9.2）。模型仅限 <strong>DeepSeek-V4.1-Flash</strong>。消费级卡免谈。</p>
+<figure class="article-fig fade-up">
+  <img src="fig-deepinfer-missing-pieces.jpg" alt="开源交付物与线上全家桶对照：已开源算子与调度，未开源 KV cache、PD 分离、多副本均衡；硬件仅 SM100 与昇腾 950">
+  <figcaption>图：开源交付物 vs 线上全家桶。缺的三块才是完整形态。硬件白名单只有 NVIDIA SM100 与昇腾 950。</figcaption>
+</figure>
+<div class="callout">
+<strong>对谁有用。</strong>私有化团队优先吃的是 recipe：它抹平「本地服务 vs 官方 API」的格式与工具调用温差，这比再吹一遍开源口号更值钱。单卡开发者不必凑部署热闹，继续调几毛钱官方 API，比自己搭集群划算。
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">4</span>产业信号：推理先于预训练，再一次被写进白名单</h2>
+<p>硬件白名单把 <strong>SM100 与昇腾 950</strong> 并列进第一梯队生产路径。这和此前野村专家纪要、Bloomberg 等公开口径同向：国产加速器在<strong>推理 / Serving</strong> 渗透快于大规模预训练。</p>
+<div class="punchline">
+<h3>这句话能写到哪一步</h3>
+<ul>
+<li>大训仍偏 Nvidia 的叙事<strong>未被推翻</strong>。</li>
+<li>适配订单应跟 <strong>Serving、算子、recipe</strong>。</li>
+<li>别写成「已替代预训练」。</li>
+</ul>
+</div>
+<p>这与 2026-09-30 DeepSeek 开源昇腾六大基础组件（TileLang / DeepGEMM-Ascend 等）是同一条「亲写底层」曲线：模型厂向下定义算力软件栈，芯片厂跟着工程现实走。组件那一次的拆解见 <a href="deepseek-ascend-opensource-2026.html">DeepSeek 开源昇腾基础组件</a>。</p>
+<div class="quote">降本军备赛进到开源引擎这一层。完整线上形态，仍然取决于 README 写明没放的三块：KV cache、Prefill/Decode 分离、多副本负载均衡。</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">5</span>给三类人的动作清单</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>角色</th><th>动作</th></tr></thead>
+<tbody>
+<tr>
+<td>企业私有化 / 国产算力适配架构师</td>
+<td>优先吃透 <strong>deepseek-recipe</strong> 编解码对齐 + DeepInfer 内核算子；对照 SM100 / 950 环境与 CANN / CUDA 版本</td>
+</tr>
+<tr>
+<td>Agent / API 选型</td>
+<td>先算 cache-hit × 峰谷 × Harness，再比榜单；别只盯名义 token 价</td>
+</tr>
+<tr>
+<td>单卡个人开发者</td>
+<td>不必凑部署热闹；用官方 API</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">6</span>证据边界</h2>
+<div class="tbl-wrap">
+<table class="tbl">
+<thead><tr><th>等级</th><th>内容</th></tr></thead>
+<tbody>
+<tr>
+<td><span class="tg tg-m">一手已核验</span></td>
+<td>两仓库存在、协议、README 硬件 / 模型白名单、未开源三组件、官方闲时 / 高峰 / cache 价</td>
+</tr>
+<tr>
+<td><span class="tg tg-n">媒体转述</span></td>
+<td>「新模型推理代码持续合入」——README 无此句</td>
+</tr>
+<tr>
+<td><span class="tg tg-p">观点</span></td>
+<td>「让行业生产线长成它的形状」——传播修辞，非官方声明，本文不把它当结论</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ftrnote">核验时点：2026-10-20 的公开仓库与官方定价页。本文日期 2026-10-21。性能数字、出货量、以及「已替代预训练」都不在本次可引用范围内。</div>
+</div>
+
+<div class="bis-section fade-up">
+<h2><span class="num">7</span>信源</h2>
+<ul>
+<li><a href="https://github.com/deepseek-ai/DeepInfer">https://github.com/deepseek-ai/DeepInfer</a></li>
+<li><a href="https://github.com/deepseek-ai/deepseek-recipe">https://github.com/deepseek-ai/deepseek-recipe</a></li>
+<li><a href="https://api-docs.deepseek.com/quick_start/pricing/">https://api-docs.deepseek.com/quick_start/pricing/</a>（<code>deepseek-flash</code> / V4.1-Flash 闲时、高峰、cache 价）</li>
+<li>DeepSeek V4.1 Flash 官方发布说明（HBM/SSD KV 压缩、峰谷机制）</li>
+</ul>
+</div>
+
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(lang){
+    sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.classList.add('active');
+    sw.setAttribute('data-current',lang);
+  }
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\/,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\/,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/, '$1/'+lang+'$2');
+  }
+  setActive('zh');
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(lang);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script>
+</body>
+</html>
