@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿里出海的两条路：重资产电商走得慢，AI 应用想走得快</title>
+<meta name="description" content="把阿里系 App 的最新月活放在一起看，规律很清楚。国内有三个接近十亿月活的超级入口。海外最大的几个电商 App，月活加起来只有淘宝的三分之一左右。国内这套能力出海，靠的是仓、车、补贴这些重资产，所以走得慢。现在阿里押注的新变量是 AI 应用，它更轻，也可能走得更快。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:16px 16px 0 0;background:#070b14}
+.hero-overlay{position:absolute;top:0;left:0;right:0;aspect-ratio:16/9;background:linear-gradient(to bottom,rgba(7,11,20,0) 72%,rgba(7,11,20,.28));border-radius:16px 16px 0 0;pointer-events:none}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f87171;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:#38bdf8;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul,.bis-section ol{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(239,68,68,.15);border-left:4px solid #f87171;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f87171}
+.signal{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#a78bfa;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(245,158,11,.06));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#38bdf8;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #38bdf8;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#38bdf8;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.orange .val{color:#fbbf24}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(56,189,248,.08);font-weight:700;color:#38bdf8;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(56,189,248,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(245,158,11,.05));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#38bdf8;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.article-fig{margin:18px 0 6px}
+.article-fig img{width:100%;border-radius:12px;border:1px solid #1e2d45;display:block;background:#070b14}
+.article-fig figcaption{text-align:center;font-size:12.5px;color:#94a3b8;margin-top:10px;line-height:1.55}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;color:#7dd3fc;background:rgba(56,189,248,.08);padding:1px 6px;border-radius:5px}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#38bdf8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:auto}.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+
+.article-body hr{border:0;border-top:1px solid #1e2d45;margin:36px 0}
+.article-body h2 .sec{color:#38bdf8;margin-right:6px}
+
+
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="zh">
+  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c">
+<div class="hero fade-up visible">
+  <div class="hero-body">
+    <span class="tag">阿里巴巴 · 出海 · 2026-10</span>
+    <h1>阿里出海的两条路：重资产电商走得慢，AI 应用想走得快</h1>
+    <p class="subtitle">Livius's Tech Pulse · AI · 算力 · 半导体 · 东南亚市场</p>
+    <div class="hero-meta">
+      <span>2026-10-28</span>
+      <span>约3 min read</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">阿里巴巴</span><span class="tag-pill">出海</span><span class="tag-pill">AI应用</span><span class="tag-pill">东南亚</span><span class="tag-pill">Lazada</span><span class="tag-pill">千问</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+<p>把阿里系 App 的最新月活放在一起看，规律很清楚。国内有三个接近十亿月活的超级入口。海外最大的几个电商 App，月活加起来只有淘宝的三分之一左右。国内这套能力出海，靠的是仓、车、补贴这些重资产，所以走得慢。现在阿里押注的新变量是 AI 应用，它更轻，也可能走得更快。</p>
+<h2>一、国内：三个十亿级入口</h2>
+<p>QuestMobile 2026 年 6 月数据：淘宝月活 9.83 亿，支付宝 9.52 亿，高德地图 9.13 亿（二手，置信度：中）。支付宝属于蚂蚁集团，是阿里的关联公司，不在阿里报表里。第二梯队是闲鱼和淘宝闪购。闲鱼月活 2.17 亿，同比增长约 20%（QM 年度报告，2026-01）。淘宝闪购模块 2026 年 3 月月活 2.27 亿（QM）。</p>
+<p>这些 App 的共同点是交易和本地生活，不是内容。阿里在国内的护城河，是供给、支付、地图和履约连成的一张网。</p>
+<figure class="article-fig fade-up visible"><img src="alibaba_chart_domestic_vs_overseas.png" alt="阿里系 App 月活对比"></figure>
+<h2>二、海外：电商有规模，但只是国内的零头</h2>
+<p>按 Similarweb 2024–25 年的均值：AliExpress 月活约 1.59 亿，Lazada 约 1.09 亿（二手，置信度：中）。Daraz 官网自称月活 4000 万（官方，置信度：中）。三者简单相加约 3.1 亿，大约是淘宝的三分之一。而且用户有重复，口径也不同。</p>
+<p>Trendyol、Miravia 都没有公开月活。阿里 2026 财年公告提到已处置 Trendyol 的本地生活业务。公告也说 AIDC 季度亏损大幅收窄、接近盈亏平衡，主要靠物流优化。换句话说，海外电商的重点已经从抢用户转向算账。</p>
+<figure class="article-fig fade-up visible"><img src="alibaba_chart_overseas_vs_taobao.png" alt="海外电商月活 vs 淘宝"></figure>
+<h2>三、为什么重资产电商走得慢</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>维度</th><th>国内</th><th>海外</th></tr></thead><tbody><tr><td>支付</td><td>支付宝 9.52 亿月活</td><td>各国钱包割裂，Alipay+ 无公开用户数</td></tr><tr><td>地图/本地生活</td><td>高德 9.13 亿</td><td>无海外版</td></tr><tr><td>履约</td><td>菜鸟 + 自有网络</td><td>需逐国建仓、对接本地物流</td></tr><tr><td>竞争对手</td><td>拼多多、抖音电商</td><td>Shopee、Temu、TikTok Shop</td></tr></tbody></table></div>
+<p>电商出海要逐个国家复制物流和支付，每个市场都要重新投钱。国内的生态协同搬不出去，所以海外 App 的规模天然受限。</p>
+<h2>四、AI 应用：第二条路</h2>
+<p>千问是这两年阿里增长最快的产品。QuestMobile 数据显示，2026 年 9 月千问月活 1.58 亿，同比增长约 50 倍，排名 AI 原生 App 第二（二手，置信度：高）。阿里财报口径是全端月活超过 3 亿（2026 年 2 月）。两者差异来自口径：前者只算单个 App，后者包括所有入口。夸克月活 1.59 亿（AICPB，2026-06，置信度：中）。</p>
+<p>千问的特别之处是接入了淘宝、高德、飞猪和支付宝。也就是说，AI 成了国内生态的新入口。</p>
+<p>海外方面，Qwen Chat（Qwen Studio）没有公开用户数。B2B 采购助手 Accio 在 2025 年 9 月月活约 150 万，2026 年企业用户超过 1000 万（二手，置信度：低）。AI 应用不需要建仓，跨境成本低。但目前海外数据很少，还谈不上走得快，只能说是一种可能。</p>
+<h2>五、东南亚观察：Lazada</h2>
+<p>Lazada 是阿里在东南亚的主阵地，月活约 1.1 亿，量级明显低于 Shopee。2025 财年阿里称 Lazada 的单位经济效益持续改善。2026 财年 AIDC 接近盈亏平衡。我的判断是，Lazada 未来拼的不是月活，而是单位经济和品牌供给。如果千问的购物助手能力能复制到 Lazada，它可能成为差异化的抓手。不过这一点目前还没有公开证据。</p>
+<h2>结论</h2>
+<ol><li>国内是十亿级的交易入口，护城河在生态协同，而不在单个 App。</li><li>海外电商月活合计约为淘宝的三分之一，重点已经转向盈利，用户规模很难快速放大。</li><li>AI 是第二条路：国内千问已经被验证，海外还缺数据，值得持续观察。</li></ol>
+<hr>
+<p><strong>口径说明</strong>：数据截至 2026-10-28。QuestMobile、AICPB、Similarweb 和官方口径不同，跨产品只比较量级。标注“二手”的数字转引自媒体报道。天猫、1688、钉钉、UC、饿了么、飞猪、菜鸟、大麦，以及海外的 Trendyol、Miravia、DingTalk、Alipay+，均无可靠的公开用户数，本文不做估算。本文不构成任何投资建议。</p>
+<p><strong>来源</strong>：QuestMobile（经腾讯新闻、新浪财经、界面新闻转引）、AICPB、阿里巴巴 2026 财年业绩公告（港交所）、Similarweb（经 Visual Nerd 转引）、Daraz 官网、百度百科 Accio 词条。</p>
+
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)})}),{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(lang){
+    sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.classList.add('active');
+    sw.setAttribute('data-current',lang);
+  }
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/, '$1/'+lang+'$2');
+  }
+  setActive('zh');
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(lang);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script>
+</body>
+</html>
