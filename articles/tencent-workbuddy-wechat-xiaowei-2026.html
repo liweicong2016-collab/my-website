@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腾讯的两张 AI 牌：WorkBuddy 抢桌面，小微守微信</title>
+<meta name="description" content="腾讯在 AI 上打出了两张牌。一张是 WorkBuddy，一个独立的桌面办公 Agent，七个月做到办公 Agent 月活第一。另一张是小微，一个长在微信里的原生 Agent，还在灰度，没有用户数，但背后是 14 亿月活的微信。前者抢新入口，后者守老入口。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans SC',-apple-system,sans-serif;background:#070b14;color:#e8eaf0;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:#38bdf8;text-decoration:none}a:hover{opacity:.8}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#38bdf8,#f59e0b,#f87171);z-index:999;width:0%;transition:width .1s}
+.t{position:sticky;top:0;z-index:100;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid #1e2d45;padding:0 40px}
+.t2{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.t3{font-size:15px;font-weight:800;color:#e8eaf0;display:flex;align-items:center;gap:8px;text-decoration:none}
+.dot{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.t4{display:flex;align-items:center;gap:6px;color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.t4:hover{color:#e8eaf0}
+
+/* ===== 语种切换 ===== */
+.lang-switch{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid #2d3f5e;border-radius:10px;padding:4px;margin-left:auto}
+.lang-btn{display:inline-block;background:transparent;border:1px solid transparent;color:#94a3b8;font-size:14px;font-weight:800;padding:7px 13px;border-radius:7px;cursor:pointer;transition:all .15s;font-family:inherit;min-width:42px;text-align:center;text-decoration:none;line-height:1.2;letter-spacing:.3px}
+.lang-btn:hover{color:#e8eaf0;background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-1px)}
+.lang-btn.active{color:#070b14;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 3px 10px rgba(245,158,11,.5);border-color:#f59e0b}
+.lang-btn:disabled{opacity:.4;cursor:not-allowed}
+.lang-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#f59e0b;color:#070b14;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lang-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:768px){.lang-switch{order:3;margin-left:0;margin-right:8px}.t4{display:none}}
+.c{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{position:relative;overflow:hidden;border-radius:16px;border:1px solid #1e2d45;margin:40px 0 0;background:#0d1321}
+.hero-img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:16px 16px 0 0;background:#070b14}
+.hero-overlay{position:absolute;top:0;left:0;right:0;aspect-ratio:16/9;background:linear-gradient(to bottom,rgba(7,11,20,0) 72%,rgba(7,11,20,.28));border-radius:16px 16px 0 0;pointer-events:none}
+.hero-body{padding:32px 36px 36px;position:relative;z-index:2}
+.hero .tag{display:inline-block;background:#f87171;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(24px,4.5vw,38px);font-weight:800;margin:0 0 14px;line-height:1.25;background:linear-gradient(135deg,#fff 60%,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:15px;color:#94a3b8;margin:0 0 20px;line-height:1.6}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero-meta span{font-size:12.5px;color:#94a3b8;display:flex;align-items:center;gap:5px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag-pill{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:#38bdf8;padding:4px 12px;border-radius:8px;font-size:11.5px;font-weight:600}
+.bis-section{background:#0d1321;border:1px solid #1e2d45;border-radius:14px;padding:28px 26px;margin:24px 0}
+.bis-section:hover{background:#111827}
+.bis-section h2{font-size:18px;font-weight:700;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid #1e2d45;color:#e8eaf0;display:flex;align-items:center;gap:12px}
+.bis-section h2 .num{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#38bdf8,#1d4ed8);color:#fff;width:30px;height:30px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.bis-section p{margin:0 0 14px;color:#e8eaf0}
+.bis-section p:last-child{margin-bottom:0}
+.bis-section strong{color:#fff}
+.bis-section ul,.bis-section ol{padding-left:22px;margin:10px 0}
+.bis-section li{margin-bottom:6px;color:#e8eaf0}
+.callout{background:rgba(239,68,68,.15);border-left:4px solid #f87171;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0;font-size:15px}
+.callout strong{color:#f87171}
+.signal{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:18px 20px;margin:18px 0}
+.signal h3{margin:0 0 12px;font-size:15px;color:#a78bfa;font-weight:700}
+.signal ul{margin:0;padding-left:18px;font-size:14px;color:#e8eaf0}
+.signal li{margin-bottom:5px}
+.punchline{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(245,158,11,.06));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:22px 24px;margin:20px 0}
+.punchline h3{font-size:15px;font-weight:700;color:#38bdf8;margin:0 0 14px;padding:0;border:0}
+.punchline ul{padding-left:20px;font-size:14px;margin:0;color:#e8eaf0}
+.punchline li{margin-bottom:7px}
+.punchline p{font-size:15.5px;line-height:1.7;margin:0;color:#e8eaf0}
+.quote{background:#111827;border-left:4px solid #38bdf8;padding:16px 20px;font-style:italic;font-size:14.5px;color:#94a3b8;border-radius:0 10px 10px 0;margin:18px 0;line-height:1.65}
+.bis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0}
+.bis-card{background:#111827;border:1px solid #1e2d45;border-radius:12px;padding:20px 16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.bis-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bis-card .val{font-size:28px;font-weight:800;color:#38bdf8;display:block;margin-bottom:8px}
+.bis-card .lab{font-size:12px;color:#94a3b8;display:block}
+.bis-card.red .val{color:#f87171}.bis-card.green .val{color:#34d399}.bis-card.purple .val{color:#a78bfa}.bis-card.orange .val{color:#fbbf24}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px;margin-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid #1e2d45}
+.tbl th{background:rgba(56,189,248,.08);font-weight:700;color:#38bdf8;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.tbl tr:hover td{background:rgba(56,189,248,.06)}
+.tbl td{color:#e8eaf0}
+.tg{padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:700;white-space:nowrap;display:inline-block}
+.tg-r{background:rgba(239,68,68,.15);color:#f87171}
+.tg-m{background:rgba(16,185,129,.15);color:#34d399}
+.tg-n{background:rgba(245,158,11,.15);color:#fbbf24}
+.tg-p{background:rgba(139,92,246,.15);color:#a78bfa}
+.key-takeaways{background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(245,158,11,.05));border:1px solid rgba(56,189,248,.2);border-radius:14px;padding:28px 26px;margin:32px 0}
+.key-takeaways h3{font-size:16px;font-weight:800;color:#38bdf8;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.key-takeaways ul{padding-left:20px;font-size:14.5px;margin:0;color:#e8eaf0}
+.key-takeaways li{margin-bottom:9px}
+.article-fig{margin:18px 0 6px}
+.article-fig img{width:100%;border-radius:12px;border:1px solid #1e2d45;display:block;background:#070b14}
+.article-fig figcaption{text-align:center;font-size:12.5px;color:#94a3b8;margin-top:10px;line-height:1.55}
+.article-body h2{font-size:clamp(18px,3.5vw,24px);font-weight:700;margin:40px 0 16px;color:#e8eaf0;padding-bottom:10px;border-bottom:1px solid #1e2d45}
+.article-body h3{font-size:18px;font-weight:600;margin:28px 0 12px;color:#e8eaf0}
+.article-body p{margin:0 0 15px;color:#e8eaf0;line-height:1.8}
+.article-body ul,.article-body ol{padding-left:24px;margin:0 0 16px}
+.article-body li{margin-bottom:7px;color:#e8eaf0}
+.article-body strong{color:#fff}
+.article-body em{color:#94a3b8}
+.article-body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;color:#7dd3fc;background:rgba(56,189,248,.08);padding:1px 6px;border-radius:5px}
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.ftrnote{background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px 18px;font-size:13px;color:#94a3b8;margin:24px 0}
+.ftrnote strong{color:#38bdf8}
+footer{border-top:1px solid #1e2d45;padding:40px 0;text-align:center;font-size:13px;color:#94a3b8}
+footer a{color:#38bdf8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:768px){.t{padding:0 20px}.c{padding:0 16px 60px}.hero-body{padding:24px 20px}.hero-img{height:auto}.bis-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.bis-grid{grid-template-columns:repeat(2,1fr)}}
+
+.article-body hr{border:0;border-top:1px solid #1e2d45;margin:36px 0}
+.article-body h2 .sec{color:#38bdf8;margin-right:6px}
+
+
+</style>
+<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<div class="t"><div class="t2"><a class="t3" href="../index.html"><span class="dot"></span>Livius's Tech Pulse</a>
+<div class="lang-switch" data-current="zh">
+  <a class="lang-btn active" data-lang="zh" href="#" aria-label="中文">中</a>
+  <a class="lang-btn" data-lang="en" href="#" aria-label="English">EN</a>
+  <a class="lang-btn" data-lang="ja" href="#" aria-label="日本語">日</a>
+  <a class="lang-btn" data-lang="vi" href="#" aria-label="Tiếng Việt">VI</a>
+</div>
+<a class="t4" href="../index.html">← Back</a></div></div>
+<div class="c">
+<div class="hero fade-up visible">
+  <div class="hero-body">
+    <span class="tag">腾讯 · WorkBuddy · 2026-10</span>
+    <h1>腾讯的两张 AI 牌：WorkBuddy 抢桌面，小微守微信</h1>
+    <p class="subtitle">Livius's Tech Pulse · AI · 算力 · 半导体 · 东南亚市场</p>
+    <div class="hero-meta">
+      <span>2026-10-28</span>
+      <span>约6 min read</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag-pill">腾讯</span><span class="tag-pill">WorkBuddy</span><span class="tag-pill">微信</span><span class="tag-pill">小微</span><span class="tag-pill">AI Agent</span><span class="tag-pill">办公AI</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+<p>腾讯在 AI 上打出了两张牌。一张是 WorkBuddy，一个独立的桌面办公 Agent，七个月做到办公 Agent 月活第一。另一张是小微，一个长在微信里的原生 Agent，还在灰度，没有用户数，但背后是 14 亿月活的微信。前者抢新入口，后者守老入口。</p>
+<h2>一、背景：腾讯系 App 用户盘</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>产品</th><th>市场</th><th>日活</th><th>月活</th><th>数据日期</th><th>来源</th><th>置信度</th></tr></thead><tbody><tr><td>微信及 WeChat（合并）</td><td>国内+海外</td><td>无公开数据</td><td>14.39 亿</td><td>2026-06-30</td><td><a href="https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf">腾讯 2Q26 财报</a></td><td>高</td></tr><tr><td>WeChat（仅海外）</td><td>海外</td><td>无公开数据</td><td>无公开数据</td><td>—</td><td>财报不拆分</td><td>—</td></tr><tr><td>QQ（移动端）</td><td>国内</td><td>无公开数据</td><td>5.20 亿</td><td>2026-06-30</td><td><a href="https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf">腾讯 2Q26 财报</a></td><td>高</td></tr><tr><td>元宝（App）</td><td>国内</td><td>2300 万以上</td><td>3733 万</td><td>2026-09</td><td>月活：<a href="https://finance.sina.com.cn/stock/relnews/hk/2026-10-20/doc-inivvxct6517780.shtml">QuestMobile（快科技转引）</a>；日活：<a href="https://www.10100.com/article/152900295">量子位智库（转引）</a></td><td>中（二手）</td></tr><tr><td>WorkBuddy（多端合计）</td><td>国内</td><td>无公开数据</td><td>3235.3 万</td><td>2026-09</td><td><a href="https://www.questmobile.com.cn/research/report/2112396781593624578/">QuestMobile 三季度报告</a></td><td>中</td></tr><tr><td>小微</td><td>国内（微信内）</td><td>无公开数据</td><td>无公开数据</td><td>灰度中</td><td>—</td><td>—</td></tr></tbody></table></div>
+<p>微信月活同比增长 2%，QQ 同比下降 2%（财报）。元宝在 AI 原生 App 中排第四，与豆包 4.19 亿、千问 1.58 亿不在一个量级（QuestMobile 2026-09，二手，置信度：中）。腾讯没有像字节、阿里那样的大体量海外 App 矩阵。WeChat 的海外月活不单独披露，所以这一节没有海外对比。</p>
+<h2>二、WorkBuddy：腾讯在 AI 上第一个跑出来的独立产品</h2>
+<p><strong>是什么。</strong> WorkBuddy 是腾讯云的 AI 原生桌面智能体工作台，覆盖办公、代码和创意场景。2026 年 3 月 13 日正式上线，基于开源 Agent 框架 OpenClaw 做了产品化（<a href="https://cloud.tencent.com/developer/article/2638331">腾讯云开发者社区，2026-03-13</a>，置信度：中）。国内版可以切换混元、DeepSeek、GLM、Kimi、MiniMax 等模型。</p>
+<p><strong>时间线。</strong></p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>日期</th><th>事件</th><th>来源</th></tr></thead><tbody><tr><td>2026-03-13</td><td>正式上线，下载送 5000 Credits</td><td><a href="https://cloud.tencent.com/developer/article/2638331">腾讯云社区</a></td></tr><tr><td>2026-05-15</td><td>企业版调价：旗舰版 78→198 元/人/月</td><td><a href="https://cloud.tencent.com/announce/detail/2270">腾讯云公告</a></td></tr><tr><td>2026-07-01</td><td>个人版改为标准/高级/旗舰三档</td><td><a href="https://www.workbuddy.cn/docs/workbuddy/Pricing">WorkBuddy 定价页</a></td></tr><tr><td>2026-07-20</td><td>QClaw 相关团队并入 WorkBuddy</td><td><a href="https://chinaaiwire.com/news/tencent-workbuddy-10m-mau-china-office-ai-race-2026">China AI Wire（二手）</a></td></tr><tr><td>2026-08-12</td><td>财报称 WorkBuddy 用户快速增长、留存健康</td><td><a href="https://www.tencent.com/wp-content/uploads/2026/08/%E8%85%BE%E8%AE%AF%E5%85%AC%E5%B8%83%E4%BA%8C%E9%9B%B6%E4%BA%8C%E5%85%AD%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%AD%A3%E4%B8%9A%E7%BB%A9.pdf">腾讯 2Q26 业绩公告</a></td></tr><tr><td>2026-10-14</td><td>与企业微信联合发布，员工可在通讯录或侧边栏调用</td><td><a href="https://news.qq.com/rain/a/20261021A04LNV00">腾讯新闻（二手）</a></td></tr></tbody></table></div>
+<p><strong>用户数据。</strong></p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>指标</th><th>数值</th><th>数据日期</th><th>来源</th><th>置信度</th></tr></thead><tbody><tr><td>PC 客户端月活</td><td>658.2 万</td><td>2026-07</td><td><a href="https://www.tmtpost.com/8124499.html">QuestMobile（钛媒体）</a></td><td>中（二手）</td></tr><tr><td>月活</td><td>1137 万</td><td>2026-08</td><td><a href="https://chinaaiwire.com/news/tencent-workbuddy-10m-mau-china-office-ai-race-2026">Xsignal（China AI Wire 转引）</a></td><td>中（二手）</td></tr><tr><td>多端合计月活</td><td>3235.3 万</td><td>2026-09</td><td><a href="https://www.questmobile.com.cn/research/report/2112396781593624578/">QuestMobile</a></td><td>中</td></tr><tr><td>桌面端月访问量</td><td>8534 万次</td><td>2026-09</td><td><a href="https://news.qq.com/rain/a/20261021A04LNV00">易观（腾讯新闻转引）</a></td><td>中（二手）</td></tr><tr><td>月人均使用时长</td><td>20.2 分钟</td><td>2026-08</td><td><a href="https://chinaaiwire.com/news/tencent-workbuddy-10m-mau-china-office-ai-race-2026">Xsignal（转引）</a></td><td>中（二手）</td></tr><tr><td>日活</td><td>无公开数据</td><td>—</td><td>—</td><td>—</td></tr><tr><td>付费用户数 / 收入</td><td>无公开数据</td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div>
+<figure class="article-fig fade-up visible"><img src="tencent_chart_workbuddy_mau.png" alt="WorkBuddy 月活趋势"></figure>
+<p>注意口径：7 月是 PC 端，8 月是另一家机构，9 月是 APP、网页和 PC 多端合计且未去重。所以“三个月约 5 倍”只能看方向，不能算精确增速。</p>
+<p><strong>竞争格局。</strong> 9 月办公 Agent 月活：WorkBuddy 3235.3 万，百度搭子 977 万，千问办公 790.5 万，腾讯 QClaw 317.3 万，豆包工作 204.9 万，TRAE Work 204.2 万（QuestMobile，二手，置信度：中）。WorkBuddy 约为第二名的 3.3 倍。但粘性还不算高：8 月月人均 20.2 分钟，低于扣子的 29.1 分钟（Xsignal，二手）。</p>
+<figure class="article-fig fade-up visible"><img src="tencent_chart_office_agents.png" alt="办公 Agent 月活对比"></figure>
+<p><strong>商业模式。</strong> 免费体验版拉新，积分订阅变现。个人版：标准 99 元/月、高级 199 元/月、旗舰 999 元/月，加量包 1000 积分 50 元。企业版：SaaS 企业版 198 元/人/月、专有云企业版 316 元/人/月，另有私有化版（<a href="https://www.workbuddy.cn/docs/workbuddy/Pricing">定价页</a>、<a href="https://cloud.tencent.com/document/product/1831/134333">腾讯云计费</a>，置信度：高）。WorkBuddy 和 CodeBuddy 积分共享。有报道称腾讯没有给 WorkBuddy 单独设商业化 KPI，回报主要走腾讯云（二手，置信度：低）。</p>
+<p><strong>我的判断。</strong> WorkBuddy 的优势不是模型，而是分发和接入：企业微信 PC 端 9 月月活 2030.2 万，高于钉钉 1256.8 万和飞书 193.5 万（QuestMobile，二手）。同时它也开放了钉钉、飞书机器人接入，不把自己锁在腾讯生态里。风险在于规模领先尚未转化为深度使用，且推理成本高。财报披露，剔除新 AI 产品后经营盈利同比增长 19%，含新 AI 产品则为 9%，说明这类产品目前仍在消耗利润。</p>
+<h2>三、微信小微：把 AI 做成微信的一层</h2>
+<p><strong>是什么。</strong> 小微是微信团队开发的原生 AI 助手，入口在主界面左上角，2026 年 6 月开始小范围灰度（<a href="https://news.qq.com/rain/a/20260623A096JV00">极客公园，2026-06-23</a>）。9 月电脑版也开始灰度（<a href="https://news.qq.com/rain/a/20260915A054OW00">新黄河，2026-09-15</a>）。</p>
+<p><strong>能力。</strong> 根据<a href="https://support.weixin.qq.com/cgi-bin/mmtemplatepage-bin/pages/agreement/hKsQa01yfqwOfEa5">官方使用条款</a>和媒体实测：</p>
+<ul><li>对话、搜索公众号和视频号、总结群聊和文件、生成图片；</li><li>代发消息、发起语音视频通话、查看朋友圈、修改设置、调起小程序；</li><li>一句话生成“小工具”，目前只能自己用，不能分享；</li><li>“小微 AI 社交”：你的小微可以先和好友的小微沟通，再交给本人决定（新黄河实测，9 月）。</li></ul>
+<p><strong>边界。</strong> 转账、红包、支付需要用户确认；删除聊天记录、输入验证码或密码等不支持代办。微信员工回应称，只有在用户主动唤起时才临时读取聊天上下文（<a href="https://cj.sina.com.cn/articles/view/7096020433/1a6f4add106801o8t0">新浪财经，2026-09-15</a>，二手）。</p>
+<p><strong>模型。</strong> 小微由微信自研的 WeLM 驱动，而不是集团的混元模型。WeLM-80B 总参数 800 亿、激活约 30 亿；更大的 WeLM-617B 正在研发；复杂问题由 DeepSeek 等外部模型兜底（新黄河、科技兽，二手，置信度：中）。</p>
+<p><strong>数据。</strong> 用户数、日活、调用量均无公开数据。可参考的侧面数据：微信 AI 应用类小程序半年增长近 40%，6.3 万个小程序参与大模型 Token 扶持计划（<a href="https://finance.sina.cn/stock/jdts/2026-08-12/detail-ininaezi3541809.d.html?vt=4">新浪财经，2026-08-12</a>，二手，置信度：中）。</p>
+<p><strong>战略意义。</strong> 腾讯在 2Q26 电话会上把小微定位为能感知上下文的 Agent，可以调用微信的社交关系、商户触达和支付能力，长期目标是用户、小程序和商家各有 Agent，相互交易（新黄河转述）。我的判断有三点：</p>
+<ol><li>小微不和豆包抢独立 App 入口，而是把 14 亿人已经在用的微信变成 Agent 平台。</li><li>它的护城河是个人上下文和小程序服务供给，难点也在这里：服务没接入，Agent 就办不成事。</li><li>腾讯刻意放慢了节奏，多步确认优先于全自动。这对 AI 社交、AI 代付这类功能来说是必要的。</li></ol>
+<h2>四、两张牌怎么配合</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>维度</th><th>WorkBuddy</th><th>小微</th></tr></thead><tbody><tr><td>场景</td><td>工作</td><td>生活</td></tr><tr><td>形态</td><td>独立桌面 Agent</td><td>微信内嵌 Agent</td></tr><tr><td>主力模型</td><td>多模型可选</td><td>WeLM 自研为主</td></tr><tr><td>变现</td><td>积分订阅 + 企业席位</td><td>无公开收费</td></tr><tr><td>用户规模</td><td>3235.3 万月活（9 月）</td><td>无公开数据</td></tr><tr><td>阶段</td><td>规模化 + 涨价</td><td>灰度</td></tr></tbody></table></div>
+<h2>结论</h2>
+<ol><li>WorkBuddy 已经验证了规模，下一关是粘性和单位经济。</li><li>小微还没有数据，但它决定的是微信下一个十年的形态。</li><li>腾讯的 AI 打法是：工作场景用独立产品抢速度，生活场景借微信求稳。</li></ol>
+<hr>
+<p><strong>口径说明</strong>：数据截至 2026-10-28。QuestMobile、Xsignal、易观口径不同，多端月活未去重，跨产品只比较量级。标注“二手”的数字转引自媒体报道。WorkBuddy 日活、付费数和收入，小微用户数，WeChat 海外月活，均无公开数据，本文不做估算。本文不构成任何投资建议。</p>
+
+<footer><p>© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a></p></footer>
+</div></div>
+<script>(function(){var pb=document.getElementById('progress-bar');window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;pb.style.width=(s/h*100)+'%'});var els=document.querySelectorAll('.fade-up');var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)})}),{threshold:0.05,rootMargin:'0px 0px -20px 0px'});els.forEach(function(el){obs.observe(el)})})();</script>
+<div class="lang-toast" id="langToast"></div>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch');
+  if(!sw)return;
+  var pageUrl=window.location.href;
+  function showToast(msg,dur){var t=document.getElementById('langToast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},dur);}
+  function setActive(lang){
+    sw.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.classList.add('active');
+    sw.setAttribute('data-current',lang);
+  }
+  function localizedUrl(lang){
+    if(lang==='zh'){return pageUrl.replace(/\/(en|vi|ja)\//,'/');}
+    return pageUrl.replace(/\/(en|vi|ja)\//,'/'+lang+'/').replace(/^(https?:\/\/[^\/]+)(\/(?!en\/|vi\/|ja\/))/, '$1/'+lang+'$2');
+  }
+  setActive('zh');
+  ['zh','en','vi','ja'].forEach(function(lang){
+    var btn=sw.querySelector('[data-lang="'+lang+'"]');
+    if(btn)btn.href=localizedUrl(lang);
+  });
+  sw.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var lang=this.getAttribute('data-lang');
+      setActive(lang);
+      if(lang==='zh' && this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('已是中文 / Already Chinese',1000);
+      } else if(this.getAttribute('href')==='#' || this.getAttribute('href')===pageUrl){
+        e.preventDefault();showToast('该语言版本尚未翻译 / Not translated yet',1400);
+      }
+    });
+  });
+})();
+</script>
+<script src="../main.js"></script>
+</body>
+</html>
