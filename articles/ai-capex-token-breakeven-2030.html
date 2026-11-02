@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Capex 要不亏本，得先卖出「饭钱级」Token？——热传算法核对 — Livius's Tech Pulse</title>
+<meta name="description" content="核对热传「5 万亿 Capex → 5.5 万亿营收」算法：BCA 压力测试把 13% 折旧率写成了税前 ROIC，美国食品开支对照也缩错了地理范围。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Serif SC','Songti SC',serif;background:#0a0a0f;color:#e8e6e0;line-height:2;font-size:18px;-webkit-font-smoothing:antialiased}
+a{color:#d4a853;text-decoration:none}
+.top{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid #222;padding:0 24px}
+.top-in{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.top a{font-size:14px;color:#999}.top a:hover{color:#fff}
+.banner{max-width:1100px;margin:0 auto;padding:24px 24px 0}
+.banner img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,168,83,.18);background:#eef3f8}
+.head{max-width:760px;margin:0 auto;padding:34px 24px 0;text-align:center}
+.head .kicker{color:#d4a853;font-size:13px;letter-spacing:4px;margin-bottom:14px}
+.head h1{font-size:clamp(28px,4.6vw,46px);font-weight:900;letter-spacing:1px;line-height:1.32}
+.head .sub{color:#b8b4a8;font-size:16px;margin-top:14px}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px 100px}
+.meta{color:#8a877c;font-size:15px;text-align:center;margin:26px 0 6px}
+h2{font-size:27px;font-weight:800;margin:62px 0 8px;letter-spacing:2px;text-align:center}
+h2::after{content:'';display:block;width:56px;height:2px;background:#d4a853;margin:18px auto 0}
+h3{font-size:20px;font-weight:700;margin:34px 0 8px;color:#f0e6d2}
+p{margin:14px 0;text-align:justify}
+ul,ol{margin:14px 0;padding-left:22px}
+li{margin:6px 0}
+blockquote{border-left:3px solid #d4a853;margin:28px 0;padding:6px 0 6px 22px;color:#b8b4a8;font-size:17px}
+strong{color:#f0e6d2}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+table{width:100%;border-collapse:collapse;margin:0;font-size:14.5px;line-height:1.6;min-width:680px}
+table th,table td{padding:10px 12px;border-bottom:1px solid rgba(212,168,83,.18);text-align:left;vertical-align:top}
+table th{color:#d4a853;font-weight:600;background:rgba(212,168,83,.05)}
+figure{margin:32px 0}
+figure img{width:100%;border-radius:8px;border:1px solid rgba(212,168,83,.15);background:#eef3f8}
+figcaption{color:#8a877c;font-size:14px;text-align:center;margin-top:10px}
+.note{background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.22);border-radius:10px;padding:16px 20px;margin:22px 0;font-size:16px}
+.note b{color:#d4a853}
+.end{text-align:center;color:#8a877c;margin-top:70px;font-size:15px;letter-spacing:2px}
+@media(max-width:640px){body{font-size:17px}.head h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in"><a href="../">← 全部文章</a><a href="../../">首页</a></div></div>
+
+<div class="banner"><img src="../images/chart_bca_ladder.png" alt="BCA 压力测试：从年 Capex 到所需 AI 营收"></div>
+
+<div class="head">
+  <div class="kicker">AI CAPEX · TOKEN 经济</div>
+  <h1>AI Capex 要不亏本，得先卖出「饭钱级」Token？</h1>
+  <div class="sub">热传算法核对：5 万亿 Capex、13% 口径，和那句「等于全美国人的饭钱」</div>
+</div>
+
+<div class="wrap">
+<div class="meta">2026-11-02 · Livius's Tech Pulse · AI · 算力 · 半导体 · 东南亚市场</div>
+
+<p>一条中文热帖把彭博系播客/访谈里的算法压成一句话：科技巨头未来 5 年砸 5 万亿美元建机房，每年折旧约 7800–7900 亿；要拿到 13% 税前资本回报，2030 年光卖算力就要收 2.75 万亿；再按 OpenAI/Anthropic 一层 50% 毛利率倒推，AI 总营收得冲到 5.5 万亿——约占 2030 年美国 GDP 的 14%–15%，「差不多等于今天全美国人买食物的总花销」。</p>
+<p>这句话有冲击力。问题是：<strong>链条里哪些是一手算法，哪些是压缩时写歪了。</strong> 本文先核数字，再把 Capex → 折旧 → 所需营收的逻辑拆开，最后落到 Token 经济：谁在付费、付的是什么。</p>
+<div class="note"><b>本文仅为信息整理与口径核对，不构成任何投资建议。</b></div>
+
+<h2>一、核心判断</h2>
+
+<div class="tbl-scroll">
+<table>
+<thead><tr><th>#</th><th>判断</th><th>来源</th><th>置信度</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「饭钱级营收」压力测试的一手出处更接近 <strong>BCA Research 的 Peter Berezin</strong>：稳态年 Capex 约 1 万亿时，全生态或需约 <strong>10 万亿/年</strong> AI 相关营收，对标的是<strong>全球</strong>食品/医疗开支量级</td><td><a href="https://finance.yahoo.com/video/10-trillion-magic-number-justify-141500984.html">Yahoo Finance 访谈</a>、<a href="https://www.bitget.com/news/detail/12560605717079">Bitget 转述 BCA 8 月报告</a></td><td>高（访谈原话）/ 中（报告细节二手）</td></tr>
+<tr><td>2</td><td>热传帖把 <strong>13% 折旧率</strong>写成了 <strong>13% 税前 ROIC</strong>；BCA 原文里 ROIC 假设是约 <strong>30% 税前</strong></td><td>同上</td><td>高（口径错误可复现）</td></tr>
+<tr><td>3</td><td>「5 年 5 万亿 Capex」与 <strong>J.P. Morgan</strong> 累计至 2030 约 <strong>5–5.5 万亿</strong>同量级，但不是 BCA 那条压力测试的同一套输入</td><td><a href="https://www.jpmorgan.com/insights/global-research/artificial-intelligence/ai-capex">J.P. Morgan AI Capex 展望</a>、<a href="https://news.bloomberglaw.com/texas-brief/jpmorgan-sees-ai-buildout-costs-totaling-5-5-trillion-by-2030">Bloomberg Law</a></td><td>中高</td></tr>
+<tr><td>4</td><td>「≈全美国人的饭钱」<strong>不成立</strong>：美国 2025 食品总开支约 <strong>2.51 万亿</strong>；热传 5.5 万亿大约是美国食品开支的 <strong>2 倍</strong>。BCA 对标的是全球食品约 10 万亿</td><td><a href="https://www.ers.usda.gov/data-products/charts-of-note/114212">USDA ERS</a></td><td>高</td></tr>
+<tr><td>5</td><td>算法真正要问的不是「会不会亏」，而是：<strong>利用率、折旧年限、利润率、需求是否全球而非仅美国</strong>——任一项松动，所需 Token/营收都会大幅下移</td><td>综合 BCA / Gartner / Bain</td><td>中（框架推断）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>二、数字核对表</h2>
+
+<div class="tbl-scroll">
+<table>
+<thead><tr><th>指标</th><th>热传帖</th><th>可核出处</th><th>判定</th><th>置信度</th></tr></thead>
+<tbody>
+<tr><td>累计 Capex</td><td>未来 5 年约 5 万亿美元</td><td>JPM：至 2030 累计约 5–5.5 万亿；BCA 压力测试用的是<strong>年</strong> Capex 约 1 万亿稳态</td><td>方向对，输入不完全同一套</td><td>中高</td></tr>
+<tr><td>年折旧</td><td>7800–7900 亿美元</td><td><strong>未见</strong>一手写死此数。相近噪声：Bain 称超大规模 2026 Capex 或近 <strong>7800 亿</strong>；Capital Gearing 估 2030 年折旧或在 <strong>0.5–1 万亿</strong></td><td>易与「年 Capex」混淆</td><td>低（热传此数）</td></tr>
+<tr><td>13%</td><td>税前资本回报率</td><td>BCA：设备综合<strong>折旧率约 13%</strong>；税前 ROIC 假设约 <strong>30%</strong></td><td><strong>口径错</strong></td><td>高</td></tr>
+<tr><td>算力层营收</td><td>2030 年 2.75 万亿</td><td>未见一手。BCA 链条里更接近：需 EBITDA 约 <strong>2.15 万亿</strong>（再除以利润率才得到营收）</td><td>未核到 / 可能把 EBITDA 与营收搅在一起</td><td>低</td></tr>
+<tr><td>AI 总营收</td><td>5.5 万亿（50% 毛利）</td><td>BCA：50% 利润率 → 超大规模约需 <strong>4.3 万亿</strong>营收；利润率 30% → 约 <strong>7.2 万亿</strong>；把 neo-cloud、中国厂商等并入 → 约 <strong>10 万亿</strong></td><td>量级接近 4.3T 一侧，但 5.5T 非一手</td><td>中</td></tr>
+<tr><td>美国 GDP 2030</td><td>约 39 万亿</td><td>IMF 现价 GDP 2030 约 <strong>38.6 万亿</strong>（约数）</td><td>大致成立</td><td>中</td></tr>
+<tr><td>占 GDP</td><td>14%–15%</td><td>5.5 / 39 ≈ 14%；但 WSJ 转述 Van Nieuwerburgh 的「饭钱」对照更接近 <strong>约 9% of GDP</strong> 的另一套算法</td><td>热传自洽，跨源不可直接等同</td><td>中</td></tr>
+<tr><td>食品开支对照</td><td>≈今天全美饭钱</td><td>USDA：2025 美国食品总开支 <strong>2.51 万亿</strong>；BCA 口头对标<strong>全球</strong>食品/医疗约 <strong>10 万亿</strong></td><td><strong>缩错地理范围</strong></td><td>高</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure>
+<img src="../images/chart_verify_table.png" alt="热传数字 vs 可核出处">
+<figcaption>热传数字对照可核出处。13% 是折旧率，不是税前回报；「全美饭钱」把全球食品开支缩到了美国。</figcaption>
+</figure>
+
+<h2>三、一条压力测试在算什么</h2>
+
+<p>热帖的情绪对，结构要对回 BCA 那条更干净的链（经 2026-08 报告与 Yahoo Finance 访谈转述）：</p>
+<ol>
+<li><strong>假设</strong>超大规模云把年 Capex 维持在约 <strong>1 万亿美元</strong>（多数与 AI 相关）。</li>
+<li>设备综合<strong>折旧率约 13%</strong> → 稳态资产原值约 <strong>7.7 万亿</strong>，净值约 <strong>3.85 万亿</strong>。</li>
+<li>若要求约 <strong>30% 税前 ROIC</strong> → 年 EBIT 约 <strong>1.15 万亿</strong>；加回折旧 → 年 EBITDA 约 <strong>2.15 万亿</strong>。</li>
+<li>若 EBITDA 利润率 <strong>50%</strong> → 需营收约 <strong>4.3 万亿</strong>；若利润率只有近年更常见的 <strong>30%</strong> → 需约 <strong>7.2 万亿</strong>。</li>
+<li>再把 neo-cloud、中国厂商、其他围着 AI 砸基建的玩家算进去 → Berezin 口头强调的量级是约 <strong>10 万亿/年</strong>，并说这「基本上等于全世界在食品或医疗上花的钱」。</li>
+</ol>
+
+<figure>
+<img src="../images/chart_bca_ladder.png" alt="BCA 压力测试阶梯">
+<figcaption>BCA 压力测试阶梯：年 Capex 约 1 万亿，走到全生态约 10 万亿营收。这是稳态假设，不是预测。</figcaption>
+</figure>
+
+<p>注意三件事：</p>
+<ul>
+<li>这是<strong>稳态压力测试</strong>，不是「明年 AI 收入预测」。</li>
+<li><strong>13% 是折旧速度</strong>，不是回报率；热帖把两者对调，后面的 2.75 / 5.5 就会漂。</li>
+<li>「卖算力」和「卖 Token / 应用」不是同一层：云厂商收的是机时与平台费，模型公司收的是 API Token 与订阅；热帖用 50% 毛利率把两层叠成一个数，需要标明是<strong>示意倒推</strong>。</li>
+</ul>
+
+<h2>四、哪些假设一松动，账就没那么吓人</h2>
+
+<div class="tbl-scroll">
+<table>
+<thead><tr><th>假设</th><th>更紧时</th><th>更松时</th><th>为什么重要</th></tr></thead>
+<tbody>
+<tr><td><strong>利用率</strong></td><td>训练空转、推理上座率低</td><td>机时打满、批处理/推理复用高</td><td>同样 Capex，Token 产出差一个数量级</td></tr>
+<tr><td><strong>折旧年限</strong></td><td>经济寿命 2–3 年</td><td>会计/经济寿命 5–6 年甚至更长</td><td>年折旧与所需毛利同向放大；Goldman 等讨论过寿命假设对累计成本的摆动</td></tr>
+<tr><td><strong>利润率</strong></td><td>Token 价格通缩、开源分流</td><td>高价值 Agent / 垂直场景保住溢价</td><td>BCA 里 50%→4.3T、30%→7.2T，差一倍</td></tr>
+<tr><td><strong>需求地理</strong></td><td>只看美国消费者掏钱</td><td>全球企业 + 消费 + 政府</td><td>热帖用美国 GDP 做分母，BCA 对标全球食品；分母选错，百分比会吓人</td></tr>
+<tr><td><strong>收入归属</strong></td><td>只算模型公司账单</td><td>云、广告、软件、行业方案都算「AI 拉动」</td><td>Gartner 强调：很多 AI 收入不会落在重资产机房所有者账上</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Gartner（2026-10-14）给出另一条平行压力测试：按已宣布 Capex、融资成本与 <strong>12% ROIC</strong>，至 2030 累计或需约 <strong>8.5 万亿</strong>营收，而其预测可归因营收上限约 <strong>3.6 万亿</strong>——结论方向与 BCA 同属「收入跟不上资产」，但<strong>输入与年化口径不同</strong>，不能和热帖的 5.5 万亿直接加减。</p>
+
+<h2>五、Token 经济：账最终要落到「谁按次付费」</h2>
+
+<p>Capex 账要闭环，终局几乎总是：<strong>单位 Token 价格 × Token 用量 × 能留存的毛利</strong>。</p>
+<p>近期可观察的旁证（不是全国份额）：</p>
+<ul>
+<li><strong>OpenRouter 等路由流量</strong>显示，开源/开放权重与低价 Flash 类模型在抢请求；单价往下走时，要填满同一条折旧曲线，需要用量更快上涨。</li>
+<li><strong>企业按量计费</strong>（credits、API）在抬 ARPU，但日活≠付费席位；微软等披露的是使用量指标，不等于 Token 账单已经盖过 Capex。</li>
+<li><strong>中国侧</strong>公开「全国日耗 Token」仍稀缺且口径打架；不能用单一路由榜或单家集群吞吐冒充「全国 / 全球变现能力」。</li>
+</ul>
+<p>对东南亚市场的含义更具体：本地推理、多语言配音、短剧与办公 Agent 会贡献 Token 用量，但客单价与广告/订阅结构不同于美国企业 API。用「美国饭钱」做全球叙事，会系统性高估单一市场的支付能力，也低估<strong>跨境、中低价模型</strong>对用量的拉动。</p>
+
+<figure>
+<img src="../images/chart_food_gdp.png" alt="营收门槛 vs 食品 / GDP">
+<figcaption>营收门槛对照食品开支与 GDP。美国食品约 2.51 万亿，全球食品约 10 万亿，两套分母不能混用。</figcaption>
+</figure>
+
+<h2>六、热帖可以保留的一句话，和应删的一句话</h2>
+
+<p><strong>可保留（改准之后）：</strong> 若超大规模云把年 AI Capex 维持在万亿级，并用偏紧的折旧与回报假设倒推，所需的年化 AI 相关营收会到<strong>数万亿美元</strong>量级；BCA 把全生态上沿说到约 <strong>10 万亿/年</strong>，与全球食品开支同量级——这是压力测试，不是明年指引。</p>
+<p><strong>应删或改写：</strong></p>
+<ul>
+<li>「13% 税前回报」→ 改回「约 13% 折旧率 + 约 30% 税前 ROIC（BCA）」。</li>
+<li>「2.75 万亿卖算力」→ 标明未见一手；勿与 EBITDA/营收混用。</li>
+<li>「等于全美国人的饭钱」→ 改为「BCA 对标全球食品约 10 万亿；美国食品 2025 约 2.51 万亿」。</li>
+<li>「7800–7900 亿折旧」→ 未核到；勿与 Bain 的 2026 Capex≈7800 亿混为一谈。</li>
+</ul>
+
+<h2>七、结论</h2>
+
+<ol>
+<li>热帖抓住的是真问题：<strong>重资产化的 AI 基建，要用极高的 Token/应用变现才能在会计与资本成本上打平。</strong></li>
+<li>具体数字链应以 <strong>BCA Berezin</strong> 的「年 Capex → 折旧率 → ROIC → 营收」为主轴核对；JPM 的 5–5.5 万亿是<strong>累计 Capex</strong>旁证，不是同一公式的分子。</li>
+<li>「美国饭钱」是传播时的地理缩写错误；更干净的对照是 <strong>全球食品 ≈ 10 万亿</strong>，或 USDA 的 <strong>美国食品 2.51 万亿</strong>单独标注。</li>
+<li>Token 经济视角下，真正的变量是利用率、寿命、单价与全球付费意愿——不是把 GDP 百分比喊得更大。</li>
+</ol>
+
+<p><em>Livius's Tech Pulse · 仅供信息整理，不构成投资建议。</em></p>
+</div>
+
+<div class="end">— 全文完 —</div>
+</body>
+</html>
