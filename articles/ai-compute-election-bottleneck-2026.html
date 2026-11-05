@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡住 AI 的，不是芯片，是选票 — Livius's Tech Pulse</title>
+<meta name="description" content="SemiAnalysis 测算：2028 年美国计划新增 62.2 GW 算力，93% 连土都没动。13 个州刚选完州长，得州一夜翻蓝。但同一份报告又说 2028 年底会过剩 10 GW。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Serif SC','Songti SC',serif;background:#0a0a0f;color:#e8e6e0;line-height:2;font-size:18px;-webkit-font-smoothing:antialiased}
+a{color:#d4a853;text-decoration:none}
+.top{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid #222;padding:0 24px}
+.top-in{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.top a{font-size:14px;color:#999}.top a:hover{color:#fff}
+.banner{max-width:1100px;margin:0 auto;padding:24px 24px 0}
+.banner img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,168,83,.18)}
+.head{max-width:760px;margin:0 auto;padding:34px 24px 0;text-align:center}
+.head .kicker{color:#d4a853;font-size:13px;letter-spacing:4px;margin-bottom:14px}
+.head h1{font-size:clamp(28px,4.6vw,46px);font-weight:900;letter-spacing:1px;line-height:1.32}
+.head .sub{color:#b8b4a8;font-size:16px;margin-top:14px}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px 100px}
+.meta{color:#8a877c;font-size:15px;text-align:center;margin:26px 0 6px}
+h2{font-size:27px;font-weight:800;margin:62px 0 8px;letter-spacing:2px;text-align:center}
+h2::after{content:'';display:block;width:56px;height:2px;background:#d4a853;margin:18px auto 0}
+h3{font-size:20px;font-weight:700;margin:34px 0 8px;color:#f0e6d2}
+p{margin:14px 0;text-align:justify}
+ul{margin:14px 0;padding-left:22px}
+li{margin:6px 0}
+blockquote{border-left:3px solid #d4a853;margin:28px 0;padding:6px 0 6px 22px;color:#b8b4a8;font-size:17px}
+strong{color:#f0e6d2}
+pre{background:#12121a;border:1px solid #26262f;border-radius:8px;padding:16px 18px;margin:20px 0;overflow-x:auto}
+code{font-family:'SF Mono',Menlo,monospace;font-size:14.5px;line-height:1.7;color:#d8d3c4;white-space:pre}
+figure{margin:32px 0}
+figure img{width:100%;border-radius:8px;border:1px solid rgba(212,168,83,.15)}
+figcaption{color:#8a877c;font-size:14px;text-align:center;margin-top:10px}
+.note{background:rgba(212,168,83,.06);border:1px solid rgba(212,168,83,.22);border-radius:10px;padding:16px 20px;margin:22px 0;font-size:16px}
+.note b{color:#d4a853}
+.end{text-align:center;color:#8a877c;margin-top:70px;font-size:15px;letter-spacing:2px}
+@media(max-width:640px){body{font-size:17px}.head h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in"><a href="../">← 全部文章</a><a href="../../">首页</a></div></div>
+
+<div class="banner"><img src="../images/cover-election-bottleneck.png" alt="卡住 AI 的，不是芯片，是选票 —— 2028 年 62.2 GW 计划新增中 93% 未动土"></div>
+
+<div class="head">
+  <div class="kicker">SEMIANALYSIS · 2026 中期选举之后</div>
+  <h1>卡住 AI 的，不是芯片，是选票</h1>
+  <div class="sub">2028 年 62.2 GW 计划新增中，93% 连土都没动。而 13 个州刚选完州长</div>
+</div>
+
+<div class="wrap">
+<div class="meta">2026-11-05</div>
+
+<blockquote><strong>未来两年最硬的约束，不在晶圆厂，在县议会的听证会。芯片是买来的，电是谈来的——买得到的东西，从来不是最难的那件事。</strong></blockquote>
+
+<p>这几年讨论 AI 的瓶颈，习惯性从芯片开始：制程、光刻、HBM、先进封装。</p>
+<p>11 月 3 日美国中期选举结束之后，我重新看了一遍 SemiAnalysis 那份关于数据中心许可的测算，感觉这个惯性该改一改了。</p>
+<p><strong>未来两年最硬的约束，不在晶圆厂，在县议会的听证会。</strong></p>
+
+<h2>一、先把两个年份分开看</h2>
+
+<p>SemiAnalysis 把美国的在建和规划项目逐项拆开，得到两个数字：</p>
+
+<pre><code>2027 年   前 20 个州计划交付 33.8 GW
+          其中约 75% 已经开工
+
+2028 年   全美计划净新增 62.2 GW
+          其中约 93% 连土都没动</code></pre>
+
+<p>这两个数字放在一起，2027 和 2028 就不是「同一件事的两个阶段」，而是<strong>两件性质完全不同的事</strong>。</p>
+
+<p>2027 的 75% 已经浇筑了水泥。桩打完了、变电站的接入方案批了、变压器订了。这种项目换个州长也拦不住——<strong>它们已经从「政治问题」变成了「施工问题」</strong>。</p>
+
+<p>2028 的 93% 还在纸上。地可能买了，环评可能刚开始，但<strong>审批权在州一级</strong>，而 2026 年 11 月正好有 13 个州改选州长。</p>
+
+<p><strong>62.2 GW 里，大约 70% 落在这 13 个州。</strong></p>
+
+<figure>
+  <img src="../images/election-bottleneck-infographic.png" alt="2027 与 2028 美国数据中心新增产能对比">
+  <figcaption>2027 的 75% 已开工，2028 的 93% 未动土</figcaption>
+</figure>
+
+<h2>二、得州：一个州压着全美近三成</h2>
+
+<p>得克萨斯占了美国 2028 年计划产能的近 30%，也就是 <strong>18.7 GW 左右</strong>，各州第一。</p>
+
+<p>然后是那个几乎是剧本写不出来的结果：11 月 3 日，民主党人 Gina Hinojosa 击败现任州长 Greg Abbott，终结了共和党在该州 30 年的连续执政。</p>
+
+<p>更关键的不是选举本身，是<strong>它落地的方式</strong>。得州的审批变更要走州议会立法，不是新州长签个字就生效。这意味着两件事同时发生：政策方向变了，但程序还要走完——</p>
+
+<p><strong>这段时间里，项目是停着的。业内普遍的估算是 8 到 12 个月。</strong></p>
+
+<p>对一个规划周期 18 个月的行业来说，这等于把整个 2028 交付窗口往后推了一格。</p>
+
+<h2>三、为什么外壳能建，电厂不能建</h2>
+
+<p>这是整件事里最荒诞、也最真实的一段。</p>
+
+<p>数据中心的<strong>壳</strong>和给它的<strong>电</strong>，走的是两条完全独立的审批线。</p>
+
+<p>外壳是建筑许可，县级就能批；电厂和并网是能源监管，跨部门、跨层级，还涉及电网公司排队（美国很多区域的并网排队已经排到 2030 年之后）。</p>
+
+<p>于是出现了一个荒谬但完全合法的组合：</p>
+
+<pre><code>机房建好了
+GPU 装进去了
+电没批下来</code></pre>
+
+<p>这不是段子。<strong>这是资本已经在账上、但无法产生任何收入的资产。</strong></p>
+
+<p>行业里管这个叫「stranded asset」（搁浅资产）。我更愿意叫它一个更直白的名字：<strong>一堆两亿美元的建筑，和里面一堆没法通电的卡。</strong></p>
+
+<h2>四、地方政府的算盘，一年之内翻了个面</h2>
+
+<p>2023 到 2025 年，美国地方政府对数据中心的态度基本是「求你来」：税收减免二十年、土地打折、水电配套全包。</p>
+
+<p>2026 年变了。</p>
+
+<p>变化的原因不复杂：<strong>电价涨了，噪音有了，水用了，但本地就业没增加几个。</strong>一个 300 MW 的园区，运营期可能只需要几百人，其中大部分还是外包。</p>
+
+<p>结果就是选民开始算自己的账。几个数字：</p>
+
+<pre><code>《华盛顿邮报》民调：三分之二美国人反对在本地新建 AI 数据中心
+耶鲁 / 乔治梅森 4 月民调：56% 反对，支持仅 15%
+地方反对横跨党派：自由派民主党选民约四分之三反对
+选举日当晚：33 项限制数据中心的地方公投通过</code></pre>
+
+<p>而据公开统计，已经有总额约 <strong>2,600 亿美元</strong>的数据中心规划项目因为地方反对被取消——注意，是取消，不是推迟。</p>
+
+<p><strong>推迟还有翻盘的可能，取消没有。</strong></p>
+
+<p>跨党派的共识已经形成了：<strong>不再给优惠，让它们自己出钱升级电网。</strong>这句话在政治上是稳赚不赔的——反正电总要有人出钱，出钱的不是选民最好。</p>
+
+<h2>五、反转：同一份报告说，2028 年底会过剩</h2>
+
+<p>写到这里，逻辑好像很顺：供给被卡住了，所以算力会荒。</p>
+
+<p>但 SemiAnalysis 在同一份报告里还有另一个判断，方向完全相反：</p>
+
+<blockquote>到 2028 年底，美国数据中心可能面临约 <strong>10 GW 的供给过剩</strong>风险。</blockquote>
+
+<p>同一份报告，一边说 57.8 GW 卡在审批上，一边说会过剩 10 GW。</p>
+
+<p>这两句话不矛盾，它们描述的是<strong>同一件事的两个切面</strong>：</p>
+
+<pre><code>2027   容量到位了，但需求还没铺开      → 局部闲置
+2028   需求起来了，但电批不下来        → 交付延迟
+2029   如果都批下来了，一起上线        → 集中过剩</code></pre>
+
+<p><strong>所以真正的问题不是「算力荒」，是「算力错配」。</strong></p>
+
+<p>供给不是不够，是<strong>来的时间不对</strong>。而时间不对的原因，既不是芯片，也不是资本，是<strong>审批流程的节奏和 AI 需求的节奏对不上</strong>。</p>
+
+<p>芯片可以提前两年下单，电力接入要排六到八年。<strong>这两个时钟从来就没同步过，只是以前没人注意到。</strong></p>
+
+<h2>六、三个可以盯着看的信号</h2>
+
+<p>判断这件事往哪走，我觉得盯三个东西比盯股价有用。</p>
+
+<h3>第一，得州的议会日程</h3>
+<p>如果 2027 年会期没有通过限制性立法，那 8–12 个月的停工估算就偏保守；如果通过了，18.7 GW 里有相当一部分要重排。</p>
+
+<h3>第二，并网排队的平均时长</h3>
+<p>这是最诚实的指标——它不撒谎，也不受公关影响。队列变短说明有实质性改革，变长说明所有政治承诺都是空话。</p>
+
+<h3>第三，地方公投的数量和通过率</h3>
+<p>33 项通过听起来很多，但没人公布总提案数。如果提了 200 项过了 33 项，那是另一回事；如果提了 40 项过了 33 项，那就是雪崩。</p>
+
+<h2>最后</h2>
+
+<p>我一直觉得，讨论 AI 的瓶颈最容易犯的错，是<strong>把工程问题当成全部</strong>。</p>
+
+<p>制程、HBM、封装、互联——这些当然重要，重要到今天还有人在为一张卡的内存来源发愁。</p>
+
+<p>但当资本开支从「几亿美元」变成「几千亿美元」的时候，约束就换了地方：<strong>从「能不能造出来」变成「能不能批下来」。</strong></p>
+
+<blockquote><strong>芯片是买来的，电是谈来的。买得到的东西，从来不是最难的那件事。</strong></blockquote>
+
+<div class="note">⚠️ 口径说明：2027 的数字是前 20 个州合计，2028 是全美净增，两者不可直接相减。得州占比按 30% 估算，四舍五入到 18.7 GW。62.2 GW 中指的数据中心负荷口径，与「总用电」不同。</div>
+
+<div class="end">— 完 —</div>
+
+</div>
+
+<div class="wrap" style="padding-top:0">
+<p style="color:#8a877c;font-size:15px;text-align:center">数据来源：SemiAnalysis 关于美国数据中心许可与州级政治影响的测算（2026 年 11 月）；2026 年美国中期选举结果（11 月 3 日）；《华盛顿邮报》民调、耶鲁/乔治梅森大学民调、NBC/CNBC 出口民调。</p>
+</div>
+
+<footer style="border-top:1px solid #222;margin-top:40px;padding:28px 24px;text-align:center;color:#666;font-size:14px">
+© 2026 Livius · AI · Compute · Southeast Asia · <a href="https://github.com/liweicong2016-collab/my-website">GitHub</a>
+</footer>
+</body>
+</html>
