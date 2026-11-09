@@ -160,7 +160,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
   opacity:0;pointer-events:none;transition:all .2s;z-index:90}
 .to-top.show{opacity:1;pointer-events:auto}
 .to-top:hover{border-color:var(--border-hi);color:var(--text)}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal{opacity:1;transition:opacity .55s ease,transform .55s ease}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:960px){
@@ -180,6 +180,11 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
   .band input{width:100%}
   .band .row{width:100%;flex-direction:column}
 }
+/* Editorial covers stay readable across desktop and mobile. */
+.featured .fv{position:relative;align-self:center;min-height:0;height:auto;aspect-ratio:16/9;padding:0}
+.featured .fv img,.card .cover img{display:block;width:100%;height:100%;object-fit:cover}
+.card .cover{width:100%;height:auto;max-height:none;aspect-ratio:16/9}
+.card .cover:has(img)::after,.featured .fv:has(img)::before{display:none}
 </style>
 </head>
 <body>
@@ -226,10 +231,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
     <h2 class="h2">Báo cáo nổi bật</h2>
     <p class="lead">Phân tích ngành chuyên sâu từ nghiên cứu thực địa</p>
     <a class="featured reveal" href="articles/optical-transceiver-us-restrictions-2026.html" style="display:grid">
-      <div class="fv">
-        <div class="fv-cap"><b>Module quang</b> · Hạn chế Mỹ 2026</div>
-        <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
+      <div class="fv"><img src="../images/covers/cover-optical-transceiver.jpg" alt="" fetchpriority="high"></div>
       <div class="fbody">
         <div class="tagrow"><span class="pill-tag">Kiểm soát xuất khẩu</span><span class="date">2026-10-02</span></div>
         <h3>Hiệp hai của module quang: từ hoảng loạn “cấm vận toàn diện” đến dịch chuyển lợi nhuận lên thượng nguồn</h3>
@@ -257,7 +259,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
 
 
       <article class="card reveal">
-        <div class="cover c1"></div>
+        <div class="cover c1"><img src="../images/covers/cover-token-maas.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">MaaS</span><span class="date">2026-06-02</span></div>
           <h3><a href="articles/domestic-maas-token-wars-2026.html">Đại chiến MaaS Trung Quốc 2026: Hai mặt trận của kinh tế Token</a></h3>
@@ -267,7 +269,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c2"></div>
+        <div class="cover c2"><img src="../images/covers/cover-ai-compute-panorama.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">Chip tăng tốc AI</span><span class="date">2026-06-02</span></div>
           <h3><a href="articles/domestic-ai-accelerator-ecosystem-2026.html">Quan sát thực địa hệ sinh thái chip tăng tốc AI nội địa</a></h3>
@@ -277,7 +279,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c3"></div>
+        <div class="cover c3"><img src="../images/covers/karpathy-cover.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">AI</span><span class="date">2026-05-28</span></div>
           <h3><a href="articles/andrej-karpathy-interviews.html">Andrej Karpathy: Tuyển tập phỏng vấn & bài nói đầy đủ</a></h3>
@@ -287,7 +289,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c4"></div>
+        <div class="cover c4"><img src="../images/covers/photo-1512453979798-5ea266f8880c.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">MENA</span><span class="date">2026-05-27</span></div>
           <h3><a href="articles/mena-companies-deep-report.html">Báo cáo chuyên sâu kỳ lân internet Trung Đông</a></h3>
@@ -297,7 +299,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c5"></div>
+        <div class="cover c5"><img src="../images/covers/photo-1547826039-bfc35e0f1ea8.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">Điện toán AI</span><span class="date">2026-05-23</span></div>
           <h3><a href="articles/middle-east-article.html">Vốn Trung Đông, điện toán Đông Nam Á</a></h3>
@@ -307,7 +309,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c6"></div>
+        <div class="cover c6"><img src="../images/covers/cover-token-maas.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">Kinh tế Token</span><span class="date">2026-05-23</span></div>
           <h3><a href="articles/token-economy-2026.html">Kinh tế Token 2026: Phải chăng ta đang chứng kiến một cuộc cách mạng định giá?</a></h3>
@@ -317,7 +319,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c7"></div>
+        <div class="cover c7"><img src="../images/covers/photo-1530026186672-2cd00ffc50fe.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">Chuyên sâu</span><span class="date">2026-06-04</span></div>
           <h3><a href="articles/china-internet-ai-capabilities-2025.html">Năng lực AI của các ông lớn internet Trung Quốc 2025: phân tích ba chiều</a></h3>

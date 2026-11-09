@@ -160,7 +160,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
   opacity:0;pointer-events:none;transition:all .2s;z-index:90}
 .to-top.show{opacity:1;pointer-events:auto}
 .to-top:hover{border-color:var(--border-hi);color:var(--text)}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal{opacity:1;transition:opacity .55s ease,transform .55s ease}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:960px){
@@ -180,6 +180,11 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
   .band input{width:100%}
   .band .row{width:100%;flex-direction:column}
 }
+/* Editorial covers stay readable across desktop and mobile. */
+.featured .fv{position:relative;align-self:center;min-height:0;height:auto;aspect-ratio:16/9;padding:0}
+.featured .fv img,.card .cover img{display:block;width:100%;height:100%;object-fit:cover}
+.card .cover{width:100%;height:auto;max-height:none;aspect-ratio:16/9}
+.card .cover:has(img)::after,.featured .fv:has(img)::before{display:none}
 </style>
 </head>
 <body>
@@ -226,10 +231,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
     <h2 class="h2">Featured Report</h2>
     <p class="lead">In-depth industry analysis from field research</p>
     <a class="featured reveal" href="articles/optical-transceiver-us-restrictions-2026.html" style="display:grid">
-      <div class="fv">
-        <div class="fv-cap"><b>Optical</b> · US Curbs 2026</div>
-        <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
+      <div class="fv"><img src="../images/covers/cover-optical-transceiver.jpg" alt="" fetchpriority="high"></div>
       <div class="fbody">
         <div class="tagrow"><span class="pill-tag">Export Controls</span><span class="date">2026-10-02</span></div>
         <h3>Optical Transceivers’ Second Half: From “Total Ban” Panic to Profit Shifting Upstream</h3>
@@ -257,7 +259,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
 
 
       <article class="card reveal">
-        <div class="cover c1"></div>
+        <div class="cover c1"><img src="../images/covers/cover-token-maas.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">MaaS</span><span class="date">2026-06-02</span></div>
           <h3><a href="articles/domestic-maas-token-wars-2026.html">China's MaaS Wars 2026: Two Fronts of the Token Economy</a></h3>
@@ -267,7 +269,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c2"></div>
+        <div class="cover c2"><img src="../images/covers/cover-ai-compute-panorama.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">AI Accelerators</span><span class="date">2026-06-02</span></div>
           <h3><a href="articles/domestic-ai-accelerator-ecosystem-2026.html">China's AI Accelerator Ecosystem: A Field Report</a></h3>
@@ -277,7 +279,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c3"></div>
+        <div class="cover c3"><img src="../images/covers/karpathy-cover.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">AI</span><span class="date">2026-05-28</span></div>
           <h3><a href="articles/andrej-karpathy-interviews.html">Andrej Karpathy: The Complete Interview Archive</a></h3>
@@ -287,7 +289,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c4"></div>
+        <div class="cover c4"><img src="../images/covers/photo-1512453979798-5ea266f8880c.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">MENA</span><span class="date">2026-05-27</span></div>
           <h3><a href="articles/mena-companies-deep-report.html">MENA Internet Unicorns: An In-Depth Report</a></h3>
@@ -297,7 +299,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c5"></div>
+        <div class="cover c5"><img src="../images/covers/photo-1547826039-bfc35e0f1ea8.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">AI Compute</span><span class="date">2026-05-23</span></div>
           <h3><a href="articles/middle-east-article.html">Middle Eastern Capital, Southeast Asian Compute</a></h3>
@@ -307,7 +309,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c6"></div>
+        <div class="cover c6"><img src="../images/covers/cover-token-maas.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">Token Economy</span><span class="date">2026-05-23</span></div>
           <h3><a href="articles/token-economy-2026.html">Token Economy 2026: Are We Witnessing a Pricing Revolution?</a></h3>
@@ -317,7 +319,7 @@ footer{margin-top:96px;border-top:1px solid var(--border);background:var(--bg2)}
       </article>
 
       <article class="card reveal">
-        <div class="cover c7"></div>
+        <div class="cover c7"><img src="../images/covers/photo-1530026186672-2cd00ffc50fe.jpg" alt="" loading="lazy"></div>
         <div class="cbody">
           <div class="tagrow"><span class="pill-tag">Deep Dive</span><span class="date">2026-06-04</span></div>
           <h3><a href="articles/china-internet-ai-capabilities-2025.html">China's Internet Giants and AI: A Three-Dimensional Review</a></h3>
